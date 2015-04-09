@@ -15,3 +15,9 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+//= require fullcalendar
+
+
+$(document).ready(function() {
+  $('#calendar').fullCalendar()
+});
