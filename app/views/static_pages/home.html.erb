@@ -1,6 +1,20 @@
 <% provide :title, "Home" %>
-<div class="center jumbotron">
-  <h1>Welcome to the Framgia Book Reviewing System</h1>
-  <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-</div>
-<%= 'admin : ' + current_user.name if current_user.is_admin? %>
+
+<% if user_signed_in? %>
+  <% @user ||= current_user %>
+  <div class="row">
+    <aside class="col-md-3">
+    </aside>
+    <div class="col-md-9">
+      <div class="col-md-6">
+        <div id='calendar'></div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1>Welcome to the Framgia Book Reviewing System</h1>
+    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>
