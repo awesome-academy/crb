@@ -1,16 +1,7 @@
 <% provide :title, "Home" %>
 
 <% if user_signed_in? %>
-  <div class="row">
-    <aside class="col-md-3">
-    </aside>
-    <div class="col-md-9">
-      <div class="col-md-6">
-        <div id='calendar'></div>
-      </div>
-      <div class="col-md-3"></div>
-    </div>
-  </div>
+  <div id='calendar'></div>
 <% else %>
   <div class="center jumbotron">
     <h1>Welcome to the Framgia Book Reviewing System</h1>

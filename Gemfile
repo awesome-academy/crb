@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 
-gem 'faker', '1.4.2'
 gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -39,6 +39,8 @@ gem 'fullcalendar-rails'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'faker', '1.4.2'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
