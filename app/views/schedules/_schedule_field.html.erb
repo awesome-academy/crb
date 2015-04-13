@@ -1,0 +1,32 @@
+<%= form_for @schedule do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="col-md-12 well">
+    <div class="col-md-12">
+      <%= f.label "Event name" %>
+      <%= f.text_field :event, placeholder: "Compose new title...", class: 'form-control' %>
+    </div>
+    <div class="col-md-12">
+      <%= f.label "Date" %>
+      <%= f.date_select :date, class: 'form-control' %>
+    </div>
+    <div class="col-md-12">
+      <%= f.label "Start time" %>
+      <%= f.time_select :start_time, class: 'form-control' %>
+    </div>
+    <div class="col-md-12">
+      <%= f.label "Finish time" %>
+      <%= f.time_select :finish_time, class: 'form-control' %>
+    </div>
+    <div class="col-md-12">
+      <%= f.label "Location" %>
+      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, class: 'form-control' %>
+    </div>
+    <div class="col-md-12">
+      <%= f.label "Description" %>
+    <%= f.text_area :description, placeholder: "Compose description...", class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-md-12 well">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

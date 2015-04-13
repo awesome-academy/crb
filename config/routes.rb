@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
   end
+
+  resource :schedules, only: [:new, :create]
 end
