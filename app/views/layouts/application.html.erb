@@ -29,6 +29,9 @@
 
         <div class="col-md-2">
           <h3>Schedules</h3>
+          <% if user_signed_in? %>
+            <%= render @feed_items %>
+          <% end %>
         </div>
       </div>
     </div>
