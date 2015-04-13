@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
 
   resource :schedules, only: [:new, :create, :edit, :update]
+
 end

@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!
+  before_action :get_schedule_to_day, only: [:new]
 
   def new
     @schedule = Schedule.new
@@ -38,5 +39,9 @@ class SchedulesController < ApplicationController
   def schedule_params
     params.require(:schedule).permit :event, :date, :start_time, :finish_time,
                                       :description, :room_id
+  end
+
+  def get_schedule_to_day
+    @feed_items = Schedule.today_schedule
   end
 end
