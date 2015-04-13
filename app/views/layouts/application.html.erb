@@ -11,12 +11,7 @@
     <%= render 'shared/header' %>
 
     <div class="main-container">
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
+      <%= render partial: "shared/flash_messages", flash: flash %>
 
       <div class="row">
         <aside class="col-md-2">
