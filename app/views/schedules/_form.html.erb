@@ -7,15 +7,15 @@
     </div>
     <div class="col-md-12">
       <%= f.label "Date" %>
-      <%= f.date_select :date, class: 'form-control' %>
+      <%= f.text_field :date, id: 'datepicker', class: 'form-control' %>
     </div>
     <div class="col-md-12">
       <%= f.label "Start time" %>
-      <%= f.time_select :start_time, class: 'form-control' %>
+      <%= f.time_select :start_time, minute_step: 15, class: 'form-control' %>
     </div>
     <div class="col-md-12">
       <%= f.label "Finish time" %>
-      <%= f.time_select :finish_time, class: 'form-control' %>
+      <%= f.time_select :finish_time, minute_step: 15, class: 'form-control' %>
     </div>
     <div class="col-md-12">
       <%= f.label "Location" %>

@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_schedule_to_day, only: [:new]
+  before_action :get_schedule_to_day, only: [:new, :edit]
 
   def new
     @schedule = Schedule.new

@@ -32,6 +32,8 @@ gem 'momentjs-rails'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
+gem 'bootstrap-datepicker-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
