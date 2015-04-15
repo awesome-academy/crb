@@ -19,7 +19,8 @@
         start_hour: 8,
         start_minute: 0,
         end_hour: 17,
-        end_minute: 0
+        end_minute: 0,
+        class: 'select2'
       %>
     </div>
     <div class="col-md-12">
@@ -30,12 +31,13 @@
         start_hour: 8,
         start_minute: 0,
         end_hour: 17,
-        end_minute: 0
+        end_minute: 0,
+        class: 'select2'
       %>
     </div>
     <div class="col-md-12">
-      <%= f.label "Location" %>
-      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, class: 'form-control' %>
+      <%= f.label "Room" %>
+      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, class: 'select2 form-control' %>
     </div>
     <div class="col-md-12">
       <%= f.label "Description" %>
