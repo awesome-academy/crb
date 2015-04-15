@@ -22,7 +22,14 @@
 $(document).ready(function() {
   $('#calendar').fullCalendar({
     weekends: false,
-    height: $(window).height() - 180
+    height: $(window).height() - 180,
+    editable: true,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    defaultView: 'month',
   });
 
   $('#datepicker').datepicker({
