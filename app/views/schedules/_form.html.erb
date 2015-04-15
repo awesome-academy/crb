@@ -11,11 +11,27 @@
     </div>
     <div class="col-md-12">
       <%= f.label "Start time" %>
-      <%= f.time_select :start_time, minute_step: 15, class: 'form-control' %>
+      <%= f.time_select :start_time,
+        combined: true,
+        default: Time.now.change(hour: 8, min: 00),
+        minute_interval: 15,
+        time_separator: "",
+        start_hour: 8,
+        start_minute: 0,
+        end_hour: 17,
+        end_minute: 0
+      %>
     </div>
     <div class="col-md-12">
       <%= f.label "Finish time" %>
-      <%= f.time_select :finish_time, minute_step: 15, class: 'form-control' %>
+      <%= f.time_select :finish_time,
+        combined: true,
+        time_separator: "",
+        start_hour: 8,
+        start_minute: 0,
+        end_hour: 17,
+        end_minute: 0
+      %>
     </div>
     <div class="col-md-12">
       <%= f.label "Location" %>
