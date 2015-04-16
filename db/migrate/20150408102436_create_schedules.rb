@@ -1,11 +1,10 @@
 class CreateSchedules < ActiveRecord::Migration
   def change
     create_table :schedules do |t|
-      t.string :event
+      t.string :title
       t.text :description
-      t.date :date
-      t.time :start_time
-      t.time :finish_time
+      t.datetime :start_time
+      t.datetime :finish_time
       t.string :state
       t.references :user, index: true
       t.references :room, index: true

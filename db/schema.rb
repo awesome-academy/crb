@@ -20,11 +20,10 @@ ActiveRecord::Schema.define(version: 20150408102436) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "event",       limit: 255
+    t.string   "title",       limit: 255
     t.text     "description", limit: 65535
-    t.date     "date"
-    t.time     "start_time"
-    t.time     "finish_time"
+    t.datetime "start_time"
+    t.datetime "finish_time"
     t.string   "state",       limit: 255
     t.integer  "user_id",     limit: 4
     t.integer  "room_id",     limit: 4
