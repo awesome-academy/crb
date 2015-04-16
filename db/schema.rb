@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 20150408102436) do
     t.text     "description", limit: 65535
     t.datetime "start_time"
     t.datetime "finish_time"
-    t.string   "state",       limit: 255
+    t.string   "state",       limit: 255,   default: "pending"
     t.integer  "user_id",     limit: 4
     t.integer  "room_id",     limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "schedules", ["room_id"], name: "index_schedules_on_room_id", using: :btree

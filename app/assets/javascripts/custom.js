@@ -36,7 +36,11 @@ $(document).ready(function() {
           callback(events);
         }
       });
-    }
+    },
+
+    dayClick: function(date, jsEvent, view) {
+      $(".modal").modal('show');
+    },
   });
 
   $(".datepicker").datetimepicker({
