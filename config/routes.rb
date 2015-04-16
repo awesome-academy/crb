@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     resources :schedules, only: [:index]
   end
 
-  resources :schedules, only: [:new, :create, :edit, :update]
+  resources :schedules, except: [:destroy, :show]
 
 end

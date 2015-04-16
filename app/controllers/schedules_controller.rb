@@ -1,6 +1,12 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   before_action :get_schedule_to_day, only: [:new, :edit]
+
+  def index
+    @schedules = Schedule.all
+
+    render json: {schedules: @schedules.as_json}
+  end
 
   def new
     @schedule = Schedule.new

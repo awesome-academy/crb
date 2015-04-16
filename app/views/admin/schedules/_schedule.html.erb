@@ -3,10 +3,13 @@
     <div class="col-md-12"><%= schedule.title %></div>
   </td>
   <td>
-    <div class="col-md-12"><%= schedule.start_time %></div>
+    <div class="col-md-12"><%= schedule.start_time.to_date.to_s %></div>
   </td>
   <td>
-    <div class="col-md-12"><%= schedule.finish_time %></div>
+    <div class="col-md-12"><%= schedule.start_time.strftime('%H:%M') %></div>
+  </td>
+  <td>
+    <div class="col-md-12"><%= schedule.finish_time.strftime('%H:%M') %></div>
   </td>
   <td>
     <div class="col-md-12"><%= schedule.user.name %></div>
@@ -14,5 +17,5 @@
   <td>
     <div class="col-md-12"><%= schedule.room.name %></div>
   </td>
-  <td></td>
+  <td><div class="col-md-12"><%= schedule.state %></div></td>
 </tr>

@@ -15,9 +15,8 @@
 
       <div class="row">
         <aside class="col-md-2">
-          <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path,
+          <%= link_to_if((can?(:create, Schedule) && user_signed_in?), "Create", new_schedule_path,
                       type: "button", class: "btn btn-primary"){} %>
-         
         </aside>
 
         <div class="col-md-8">
