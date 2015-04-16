@@ -1,4 +1,3 @@
-<% require 'json' %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +15,9 @@
 
       <div class="row">
         <aside class="col-md-2">
-          <%= link_to "Create", new_schedule_path, type: "submit", class: "btn btn-primary" %>
+          <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path,
+                      type: "button", class: "btn btn-primary"){} %>
+         
         </aside>
 
         <div class="col-md-8">
