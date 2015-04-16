@@ -36,6 +36,28 @@ $(document).ready(function() {
     minTime: "08:00:00",
     maxTime: "17:00:00",
     allDaySlot: false,
+    editable: true,
+    eventLimit: true,
+    events: function(start, end, timezone, callback) {
+      $.ajax({
+        url: '/schedules',
+        type: 'GET',
+        success: function(doc) {
+          var events = [];
+          if(doc.schedules){
+            $.map(doc.schedules, function(schedule) {
+              events.push({
+                id: schedule.id,
+                title: schedule.title,
+                start: schedule.start_time,
+                end: schedule.finish_time
+              });
+            });
+          }
+          callback(events);
+        }
+      });
+    }
   });
 
   $('#datepicker').datepicker({
@@ -48,4 +70,3 @@ $(document).ready(function() {
     startDate: 'Beginning of time'
   });
 });
-
