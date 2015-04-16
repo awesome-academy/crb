@@ -138,6 +138,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+      json (~> 1.4)
     redis (3.2.1)
     redis-objects (1.1.0)
       redis (>= 3.0.2)
