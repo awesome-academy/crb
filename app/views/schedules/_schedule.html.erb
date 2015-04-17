@@ -1,9 +1,9 @@
-<ul>
-  <div><b><%= schedule.title %></b>  by: <%= schedule.user.name %></div>
-  <div>Location: <%= schedule.room.name %></div>
+<li>
+  <div><b><%= schedule.title %></b></div>
+  <p><small>Created by: <%= schedule.user.name %></small></p>
+  <p>Phong: <%= schedule.room.name %></p>
   <div>
     From : <%= schedule.start_time.strftime('%H:%M') %>
     to : <%= schedule.finish_time.strftime('%H:%M') %>
   </div>
-  <div>Day: <%= schedule.start_time.to_date.to_s %></div>
-</ul>
+</li>
