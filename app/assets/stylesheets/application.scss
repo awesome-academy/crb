@@ -11,10 +11,12 @@
  * file per style scope.
  *
  *= require fullcalendar
+ *= require select2
+ *= require select2-bootstrap
  *= require custom
  *= require_self
- *= require bootstrap-datepicker
  */
 
 @import "bootstrap-sprockets";
-@import "bootstrap";
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';

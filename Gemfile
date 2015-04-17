@@ -28,11 +28,12 @@ gem 'devise'
 
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'select2-rails'
 
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
-gem 'bootstrap-datepicker-rails'
 gem 'jquery-turbolinks'
 gem 'combined_time_select', '~> 1.0.1'
 
