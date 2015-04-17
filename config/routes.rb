@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'help' => 'pages#help'
 
   namespace :admin do
-    resources :schedules, only: [:index]
+    resources :schedules, only: [:index, :update]
   end
 
   resources :schedules, except: [:destroy, :show]
