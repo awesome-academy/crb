@@ -17,7 +17,7 @@ $(document).ready(function() {
     allDaySlot: false,
     editable: true,
     eventLimit: true,
-    keepOpen: false,
+    keepOpen: false,   
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: '/schedules.json',

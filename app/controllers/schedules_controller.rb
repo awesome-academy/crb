@@ -46,7 +46,7 @@ class SchedulesController < ApplicationController
   def schedule_params
     params[:schedule][:start_time] = convert_time(params[:schedule][:start_time])
     params[:schedule][:finish_time] = convert_time(params[:schedule][:finish_time])
-
+    
     params.require(:schedule).permit :title, :start_time, :finish_time,
       :description, :room_id
   end
