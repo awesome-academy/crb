@@ -3,6 +3,7 @@ class Schedule < ActiveRecord::Base
   belongs_to :room
 
   validates :title, presence: true, length: {maximum: 150}
+  validates :description, presence: true, length: {maximum: 450}  
   validates :start_time, presence: true
   validates :finish_time, presence: true
   validates :room, presence: true
