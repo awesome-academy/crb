@@ -12,11 +12,12 @@ $(document).ready(function() {
     eventLimit: true,
     weekends: false,
     height: $(window).height() - $("header").height() - $("footer").height() - 100,
-    minTime: "08:00:00",
-    maxTime: "17:00:00",
+    minTime: "07:00:00",
+    maxTime: "22:00:00",
     allDaySlot: false,
     editable: true,
     eventLimit: true,
+    keepOpen: false,
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: '/schedules.json',

@@ -38,18 +38,24 @@ class SchedulesController < ApplicationController
       flash[:success] = "Event was updated!"
       redirect_to root_path
     else
-      flash.now[:danger] = "Update event false!"
       render :edit
     end
   end
 
   private
   def schedule_params
+    params[:schedule][:start_time] = convert_time(params[:schedule][:start_time])
+    params[:schedule][:finish_time] = convert_time(params[:schedule][:finish_time])
+
     params.require(:schedule).permit :title, :start_time, :finish_time,
       :description, :room_id
   end
 
   def get_schedule_to_day
     @feed_items = Schedule.today_schedule
+  end
+
+  def convert_time str
+    DateTime.strptime(str, "%m/%d/%Y %H:%M %p")
   end
 end
