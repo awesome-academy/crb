@@ -3,40 +3,18 @@
   <div class="col-md-12 well">
     <div class="col-md-12">
       <%= f.label "Event name" %>
-      <%= f.text_field :event, placeholder: "Compose new title...", class: 'form-control' %>
+      <%= f.text_field :title, placeholder: "Event's title...", class: 'form-control' %>
     </div>
     <div class="col-md-12">
-      <%= f.label "Date" %>
-      <%= f.text_field :date, id: 'datepicker', class: 'form-control' %>
+      <%= f.label :start_time %>
+      <%= f.text_field :start_time, class: 'form-control datepicker' %>
     </div>
     <div class="col-md-12">
-      <%= f.label "Start time" %>
-      <%= f.time_select :start_time,
-        combined: true,
-        default: Time.now.change(hour: 8, min: 00),
-        minute_interval: 15,
-        time_separator: "",
-        start_hour: 8,
-        start_minute: 0,
-        end_hour: 17,
-        end_minute: 0,
-        class: 'select2'
-      %>
+      <%= f.label :finish_time %>
+      <%= f.text_field :finish_time, class: 'form-control datepicker' %>
     </div>
     <div class="col-md-12">
-      <%= f.label "Finish time" %>
-      <%= f.time_select :finish_time,
-        combined: true,
-        time_separator: "",
-        start_hour: 8,
-        start_minute: 0,
-        end_hour: 17,
-        end_minute: 0,
-        class: 'select2'
-      %>
-    </div>
-    <div class="col-md-12">
-      <%= f.label "Room" %>
+      <%= f.label "Room" %><br/>
       <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, class: 'select2 form-control' %>
     </div>
     <div class="col-md-12">

@@ -8,3 +8,12 @@
     <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
+
+<% content_for :right do %>
+  <% if user_signed_in? %>
+    <h3>Schedules</h3>
+    <ul>
+      <%= render @schedules %>
+    </ul>
+  <% end %>
+<% end %>

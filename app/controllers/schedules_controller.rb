@@ -4,8 +4,10 @@ class SchedulesController < ApplicationController
 
   def index
     @schedules = Schedule.all
-
-    render json: {schedules: @schedules.as_json}
+    respond_to do |format|
+      format.html
+      format.json {render json: {schedules: @schedules.as_json}}
+    end
   end
 
   def new
@@ -43,8 +45,8 @@ class SchedulesController < ApplicationController
 
   private
   def schedule_params
-    params.require(:schedule).permit :event, :date, :start_time, :finish_time,
-                                      :description, :room_id
+    params.require(:schedule).permit :title, :start_time, :finish_time,
+      :description, :room_id
   end
 
   def get_schedule_to_day
