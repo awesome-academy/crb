@@ -19,7 +19,7 @@ $(document).ready(function() {
     eventLimit: true,
     events: function(start, end, timezone, callback) {
       $.ajax({
-        url: '/schedules',
+        url: '/schedules.json',
         type: 'GET',
         success: function(doc) {
           var events = [];
@@ -39,10 +39,13 @@ $(document).ready(function() {
     }
   });
 
-  $('#datepicker').datetimepicker({
-    format: 'LLL',
+  $(".datepicker").datetimepicker({
+    sideBySide: true,
     daysOfWeekDisabled: [0, 6],
     dayViewHeaderFormat: 'DD - MM - YYYY'
   });
-  $('.select2').select2();
+
+  $('#schedule_room_id').select2({
+    width: 300
+  });
 });

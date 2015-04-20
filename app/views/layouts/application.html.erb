@@ -25,10 +25,7 @@
         </div>
 
         <div class="col-md-2">
-          <% if user_signed_in? %>
-            <h3>Schedules</h3>
-            <%= render @feed_items %>
-          <% end %>
+          <%= yield :right %>
         </div>
       </div>
     </div>
