@@ -28,15 +28,12 @@ gem 'devise'
 
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'select2-rails'
 
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
 gem 'jquery-turbolinks'
-gem 'combined_time_select', '~> 1.0.1'
-
 gem 'websocket-rails'
 
 gem 'cancancan', '~> 1.10.1'
@@ -60,4 +57,6 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'rspec-rails', '~> 3.0'
 end

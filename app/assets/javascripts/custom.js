@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   $('#calendar').fullCalendar({
     header: {
@@ -43,13 +42,39 @@ $(document).ready(function() {
     },
   });
 
-  $(".datepicker").datetimepicker({
-    sideBySide: true,
-    daysOfWeekDisabled: [0, 6],
-    dayViewHeaderFormat: 'DD - MM - YYYY'
+  $('#start-time').datetimepicker({
+    format: 'mm/dd/yyyy hh:ii',
+    autoclose: true,
+    pickerPosition: "bottom-left",
+    maxView: 9,
+    minuteStep: 15,
+    startDate: new Date()
+  }).on("changeDate", function (e) {
+    var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
+    // $('#schedule_start_time').datetimepicker('setStartDate', TimeZoned);
+    $('#start-time').datetimepicker('setDate', TimeZoned);
   });
 
-  $('#schedule_room_id').select2({
+  $('#finish-time').datetimepicker({
+    format: 'mm/dd/yyyy hh:ii',
+    autoclose: true,
+    pickerPosition: "bottom-left",
+    maxView: 9,
+    minuteStep: 15,
+    startDate: new Date()
+  }).on("changeDate", function (e) {
+    var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
+    // $('#finish-time').datetimepicker('setEndDate', TimeZoned);
+    // $('#schedule_finish_time').datetimepicker('setDate', TimeZoned);
+    $('#finish-time').datetimepicker('setDate', TimeZoned);
+  });
+
+
+  $('.select-room').select2({
     width: 300
+  });
+
+  $('.select-members').select2({
+    width: "100%"
   });
 });
