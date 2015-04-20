@@ -115,3 +115,30 @@ aside {
   margin-top: 80px;
   padding: 0 15px;
 }
+
+.containers {
+  display: flex;
+  overflow: hidden;
+  height: 88vh;
+  margin-top: -100px;
+  padding-top: 100px;
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: overflow;
+}
+.right {
+  overflow: auto;
+  height: auto;
+  padding: .1rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  width: 25.5rem;
+  background-color: #E8E8E8;
+}
+ul {
+  padding-left: 20px;
+}
+h3 {
+  padding-left: 20px;
+}
