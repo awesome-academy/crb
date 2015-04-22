@@ -11,13 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-datetimepicker
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
 //= require moment
 //= require fullcalendar
-//= require bootstrap-datetimepicker
 //= require websocket_rails/main
 //= require select2
 //= require custom

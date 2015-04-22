@@ -1,5 +1,9 @@
 @import "variables";
 
+html, body {
+  position: relative;
+}
+
 header {
   #logo {
     float: left;
@@ -84,33 +88,6 @@ aside {
   }
 }
 
-aside {
-  section.user_info {
-    margin-top: 20px;
-  }
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-
-
 .main-container {
   margin-top: 80px;
   padding: 0 15px;
@@ -127,6 +104,7 @@ aside {
   backface-visibility: hidden;
   will-change: overflow;
 }
+
 .right {
   overflow: auto;
   height: auto;
@@ -136,9 +114,11 @@ aside {
   width: 25.5rem;
   background-color: #E8E8E8;
 }
+
 ul {
   padding-left: 20px;
 }
+
 h3 {
   padding-left: 20px;
 }
@@ -151,4 +131,22 @@ h3 {
 .rejected-event {
   font-weight: bold;
   color: #780000;
+}
+
+#new_schedule {
+  .finish-date {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .start-date {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .date {
+    input:hover {
+      cursor:pointer;
+    }
+  }
 }

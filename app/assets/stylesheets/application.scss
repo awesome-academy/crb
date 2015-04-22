@@ -10,13 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require_self
+ *= require bootstrap-datetimepicker
  *= require fullcalendar
  *= require select2
  *= require select2-bootstrap
  *= require custom
- *= require_self
  */
 
 @import "bootstrap-sprockets";
 @import 'bootstrap';
-@import 'bootstrap-datetimepicker';

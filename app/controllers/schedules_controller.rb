@@ -15,6 +15,7 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    # byebug
     @schedule = Schedule.new schedule_params
     @schedule.user = current_user
 
@@ -44,8 +45,8 @@ class SchedulesController < ApplicationController
 
   private
   def schedule_params
-    params[:schedule][:start_time] = convert_time(params[:schedule][:start_time])
-    params[:schedule][:finish_time] = convert_time(params[:schedule][:finish_time])
+    params[:schedule][:start_time] = convert_time params[:schedule][:start_time]
+    params[:schedule][:finish_time] = convert_time params[:schedule][:finish_time]
 
     params.require(:schedule).permit :title, :start_time, :finish_time,
       :description, :room_id
@@ -56,6 +57,6 @@ class SchedulesController < ApplicationController
   end
 
   def convert_time str
-    DateTime.strptime(str, "%m/%d/%Y %H:%M %p")
+    DateTime.strptime str, "%m/%d/%Y %H:%M"
   end
 end

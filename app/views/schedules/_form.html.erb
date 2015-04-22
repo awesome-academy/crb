@@ -5,18 +5,44 @@
       <%= f.label "Event name" %>
       <%= f.text_field :title, placeholder: "Event's title...", class: 'form-control' %>
     </div>
-    <div class="col-md-12">
-      <%= f.label :start_time %>
-      <%= f.text_field :start_time, class: 'form-control datepicker' %>
+    <div class="col-md-12 select-date">
+      <div class="col-md-4 start-date" >
+        <%= f.label :start_time %>
+        <div class='input-group date' id="start-time">
+          <%= f.text_field :start_time, class: 'form-control', readonly: true, placeholder: "Start time"  %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-remove"></span>
+          </span>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4 finish-date">
+        <%= f.label :finish_time %>
+        <div class="input-group date" id="finish-time">
+          <%= f.text_field :finish_time, class: 'form-control', readonly: true, placeholder: "Finish time" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-remove"></span>
+          </span>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="col-md-12">
-      <%= f.label :finish_time %>
-      <%= f.text_field :finish_time, class: 'form-control datepicker' %>
-    </div>
+
     <div class="col-md-12">
       <%= f.label "Room" %><br/>
-      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, class: 'select2 form-control' %>
+      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {}, {class: 'select-room form-control'} %>
     </div>
+
+    <div class="col-md-12">
+      <%= f.label "Members" %><br/>
+      <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {}, {class: 'select-members form-control', multiple: :multiple} %>
+    </div>
+
     <div class="col-md-12">
       <%= f.label "Description" %>
     <%= f.text_area :description, placeholder: "Compose description...", class: 'form-control' %>
