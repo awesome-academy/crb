@@ -15,10 +15,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    # byebug
     @schedule = Schedule.new schedule_params
     @schedule.user = current_user
-
     if @schedule.save
       flash[:success] = "Create new event successfuly!"
       redirect_to root_path
