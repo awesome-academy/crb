@@ -38,8 +38,16 @@ $(document).ready(function() {
       });
     },
     dayClick: function(date, jsEvent, view) {
-      $(".modal").modal('show');
+      $("#modal-form").modal('show');
+      var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
+
+      $('#start-time').datetimepicker('setDate', TimeZoned);
     },
+  });
+
+  $("#modal-form").on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+    $(".select-members").select2("val", "");
   });
 
   $('#start-time').datetimepicker({
