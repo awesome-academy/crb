@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @schedules = Schedule.today_schedule
+    @today_schedules = Schedule.today_schedule
     @schedule = Schedule.new
   end
 
