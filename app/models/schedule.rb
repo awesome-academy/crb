@@ -2,7 +2,7 @@ class Schedule < ActiveRecord::Base
   belongs_to :user
   belongs_to :room
   has_many :schedule_users
-  has_many :members, class_name: "Schedule", 
+  has_many :members, class_name: "User",
     through: :schedule_users,  foreign_key: :schedule_id
 
   validates :title, presence: true, length: {maximum: 150}
@@ -13,12 +13,14 @@ class Schedule < ActiveRecord::Base
   validates :user, presence: true
   validate  :valid_room, :valid_time
 
-  scope :today_schedule, -> {where("start_time LIKE ?", "#{Time.now.to_date.to_s}%")}
   scope :with_room, ->room {where("room_id = ?", room)}
-  query = "(start_time <= :start_time AND finish_time >= :finish_time) 
-          OR (start_time > :start_time AND start_time < :finish_time) 
+  query = "(start_time <= :start_time AND finish_time >= :finish_time)
+          OR (start_time > :start_time AND start_time < :finish_time)
           OR (finish_time > :start_time AND finish_time < :finish_time)"
   scope :filte_timer, ->(start, finish) {where(query, start_time: start, finish_time: finish)}
+  scope :today_schedule, -> {where("start_time LIKE ?", "%#{Time.now.to_date.to_s}%")}
+
+  accepts_nested_attributes_for :members
 
   private
   def valid_room

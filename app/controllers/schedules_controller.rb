@@ -1,6 +1,5 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :get_schedule_to_day, only: [:new, :edit]
 
   def index
     @schedules = Schedule.all
@@ -17,6 +16,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new schedule_params
     @schedule.user = current_user
+
     if @schedule.save
       flash[:success] = "Create new event successfuly!"
       redirect_to root_path
@@ -46,12 +46,7 @@ class SchedulesController < ApplicationController
     params[:schedule][:start_time] = convert_time params[:schedule][:start_time]
     params[:schedule][:finish_time] = convert_time params[:schedule][:finish_time]
 
-    params.require(:schedule).permit :title, :start_time, :finish_time,
-      :description, :room_id
-  end
-
-  def get_schedule_to_day
-    @feed_items = Schedule.today_schedule
+    params.require(:schedule).permit :title, :start_time, :finish_time, :description, :room_id, member_ids: []
   end
 
   def convert_time str
