@@ -35,7 +35,7 @@
 
     <div class="col-md-12">
       <%= f.label "Room" %><br/>
-      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {}, {class: 'select-room form-control'} %>
+      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {class: 'select-room form-control'} %>
     </div>
 
     <div class="col-md-12">
