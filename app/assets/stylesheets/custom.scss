@@ -146,7 +146,15 @@ h3 {
 
   .date {
     input:hover {
-      cursor:pointer;
+      cursor: pointer;
     }
   }
+}
+
+.fc-row {
+  overflow: visible !important;
+}
+
+.fc-rigid {
+  overflow: visible !important; 
 }

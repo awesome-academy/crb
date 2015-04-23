@@ -37,10 +37,25 @@ $(document).ready(function() {
         }
       });
     },
+    eventRender: function (event, element) {
+      if (!event.url) {
+        time_start = "From: " + event.start.format() + "<br/>",
+        time_end = "To: " + event.end.format(),
+        element.popover({
+          placement: 'top',
+          html:true,                        
+          title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end,
+          content: "<a href='schedules/"+event.id+"/edit'>Edit</a>",
+        });
+        $('body').on('click', function (e) {
+          if (!element.is(e.target) && element.has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
+          element.popover('hide');
+        });
+      }           
+    },
     dayClick: function(date, jsEvent, view) {
       $("#modal-form").modal('show');
       var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
-
       $('#start-time').datetimepicker('setDate', TimeZoned);
     },
   });
@@ -59,7 +74,6 @@ $(document).ready(function() {
     startDate: new Date()
   }).on("changeDate", function (e) {
     var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
-    // $('#schedule_start_time').datetimepicker('setStartDate', TimeZoned);
     $('#start-time').datetimepicker('setDate', TimeZoned);
   });
 
@@ -72,11 +86,8 @@ $(document).ready(function() {
     startDate: new Date()
   }).on("changeDate", function (e) {
     var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
-    // $('#finish-time').datetimepicker('setEndDate', TimeZoned);
-    // $('#schedule_finish_time').datetimepicker('setDate', TimeZoned);
     $('#finish-time').datetimepicker('setDate', TimeZoned);
   });
-
 
   $('.select-room').select2({
     width: 300
