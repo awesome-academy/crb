@@ -39,25 +39,38 @@ $(document).ready(function() {
     },
     eventRender: function (event, element) {
       if (!event.url) {
-        time_start = "From: " + event.start.format() + "<br/>",
-        time_end = "To: " + event.end.format(),
+        time_start = "From: " + event.start.format('HH:mm') + "<br/>",
+        time_end = "To: " + event.end.format('HH:mm'),
         element.popover({
           placement: 'top',
           html:true,                        
           title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end,
-          content: "<a href='schedules/"+event.id+"/edit'>Edit</a>",
+          content: "<a href='schedules/" + event.id + "/edit'>Edit</a>" +
+          "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>",
         });
         $('body').on('click', function (e) {
           if (!element.is(e.target) && element.has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
           element.popover('hide');
         });
-      }           
+      } 
+
+
+
+      // element.append( "<span class='closeon'>Delete</span>" );
+      //       element.find(".closeon").click(function() {
+      //          $('#calendar').fullCalendar('removeEvents',event._id);
+      //          cal.fullCalendar("refetchEvents");
+      //       });          
     },
     dayClick: function(date, jsEvent, view) {
       $("#modal-form").modal('show');
       var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
       $('#start-time').datetimepicker('setDate', TimeZoned);
     },
+
+    // eventDestroy: function( event, element, view ) { 
+    //   element.remove();
+    // }
   });
 
   $("#modal-form").on('hidden.bs.modal', function(){

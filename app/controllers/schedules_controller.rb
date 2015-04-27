@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :correct_user, only: [:edit, :update, :destroy]  
 
   def index
     @schedules = Schedule.all
@@ -41,6 +42,12 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def destroy
+    Schedule.find(params[:id]).destroy
+    flash[:success] = "Schedule deleted"
+    redirect_to root_path
+  end  
+
   private
   def schedule_params
     params[:schedule][:start_time] = convert_time params[:schedule][:start_time]
@@ -52,4 +59,10 @@ class SchedulesController < ApplicationController
   def convert_time str
     DateTime.strptime str, "%m/%d/%Y %H:%M"
   end
+
+  def correct_user
+    @schedule = Schedule.find params[:id]
+    @user = @schedule.user
+    redirect_to root_url unless (@user == current_user)
+  end  
 end
