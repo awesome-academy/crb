@@ -14,13 +14,18 @@
       <%= render partial: "shared/flash_messages", flash: flash %>
 
       <div class="row">
-        <aside class="col-md-2">
-          <% if user_signed_in? %>
-            <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path,class: "btn btn-primary") %>
-          <% end %>
+        <aside class="col-md-3">
+          <div class="col-md-12">
+            <div class="right_menu">
+              <%= yield :left_menu %>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <%= yield :today_schedules %>
+          </div>
         </aside>
 
-        <div class="col-md-8">
+        <div class="col-md-9">
           <%= yield %>
         </div>
 

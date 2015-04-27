@@ -1,5 +1,24 @@
 <% provide :title, "Home" %>
 
+<% content_for :left_menu do %>
+  <% if user_signed_in? %>
+    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path,class: "btn btn-primary") %>
+  <% end %>
+<% end %>
+
+<% content_for :today_schedules do %>
+  <% if user_signed_in? %>
+    <div class="containers">
+      <div class="today_schedules">
+        <h3>Schedules</h3>
+        <ul>
+          <%= render @today_schedules %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 <% if user_signed_in? %>
   <div id='calendar'></div>
 <% else %>
@@ -7,13 +26,4 @@
     <h1>Welcome to the Framgia Book Reviewing System</h1>
     <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
-<% end %>
-
-<% content_for :right do %>
-  <% if user_signed_in? %>
-    <h3>Schedules</h3>
-    <ul>
-      <%= render @today_schedules %>
-    </ul>
-  <% end %>
 <% end %>

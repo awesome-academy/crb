@@ -96,16 +96,15 @@ aside {
 .containers {
   display: flex;
   overflow: hidden;
-  height: 88vh;
-  margin-top: -100px;
-  padding-top: 100px;
+  height: 495px;
+  padding-top: 18px;
   position: relative;
   width: 100%;
   backface-visibility: hidden;
   will-change: overflow;
 }
 
-.right {
+.today_schedules {
   overflow: auto;
   height: auto;
   padding: .1rem;
