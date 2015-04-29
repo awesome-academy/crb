@@ -1,8 +1,8 @@
 <% provide :title, "Home" %>
 
-<% content_for :left_menu do %>
-  <% if user_signed_in? %>
-    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path,class: "btn btn-primary") %>
+<% if user_signed_in? %>
+  <% content_for :btn_new_schedule do %>
+    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path, class: "btn btn-primary") %>
   <% end %>
 <% end %>
 

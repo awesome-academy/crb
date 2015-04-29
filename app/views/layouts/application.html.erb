@@ -15,30 +15,16 @@
 
       <div class="row">
         <aside class="col-md-3">
-          <div class="col-md-12">
-            <div class="right_menu">
-              <%= yield :left_menu %>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <%= yield :today_schedules %>
-          </div>
+          <%= yield :btn_new_schedule %>
+
+          <%= yield :today_schedules %>
         </aside>
 
         <div class="col-md-9">
           <%= yield %>
         </div>
-
-        <div class="col-md-2">
-          <div class="containers">
-            <div class="right">
-              <%= yield :right %>
-            </div>  
-          </div>  
-        </div>
       </div>
     </div>
-    <%= render 'shared/footer' %>
     <%= render 'shared/modal_form' if current_user %>
   </body>
 </html>

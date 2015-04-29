@@ -32,40 +32,30 @@ header {
   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
 }
 
-footer {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: $light-gray;
-  position:fixed;
-  left:0px;
-  bottom:0px;
-  width: 100%;
-  min-width: 100%;
-  a {
-    color: #555;
-    &:hover {
-      color: #222;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
-}
-
 aside {
   section.user_info {
     margin-top: 20px;
   }
+
+  .containers {
+    display: flex;
+    overflow: hidden;
+    height: 495px;
+    padding-top: 18px;
+    position: relative;
+    width: 100%;
+    backface-visibility: hidden;
+    will-change: overflow;
+  }
+
+  .today_schedules {
+    overflow: auto;
+    height: auto;
+    padding: .1rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+  }
+
   section {
     padding: 10px 0;
     margin-top: 20px;
@@ -91,27 +81,6 @@ aside {
 .main-container {
   margin-top: 80px;
   padding: 0 15px;
-}
-
-.containers {
-  display: flex;
-  overflow: hidden;
-  height: 495px;
-  padding-top: 18px;
-  position: relative;
-  width: 100%;
-  backface-visibility: hidden;
-  will-change: overflow;
-}
-
-.today_schedules {
-  overflow: auto;
-  height: auto;
-  padding: .1rem;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  width: 25.5rem;
-  background-color: #E8E8E8;
 }
 
 ul {
@@ -155,5 +124,5 @@ h3 {
 }
 
 .fc-rigid {
-  overflow: visible !important; 
+  overflow: visible !important;
 }
