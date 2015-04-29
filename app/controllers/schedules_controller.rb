@@ -11,6 +11,7 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = Schedule.new
+    @today_schedules = Schedule.today_schedule
   end
 
   def create
