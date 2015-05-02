@@ -9,6 +9,7 @@ class Admin::SchedulesController < Admin::BaseController
 
   def update
     @schedule = Schedule.find params[:id]
+    @schedule.skip_room_on_time_validation = true
     @schedule.update_attributes state: params[:state]
   end
 
