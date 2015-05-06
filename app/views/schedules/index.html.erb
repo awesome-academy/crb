@@ -1,0 +1,35 @@
+<% provide :title, "My events" %>
+<% if user_signed_in? %>
+  <% content_for :btn_new_schedule do %>
+    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path, class: "btn btn-primary") %>
+  <% end %>
+<% end %>
+
+<% content_for :today_schedules do %>
+  <% if user_signed_in? %>
+    <div class="containers">
+      <div class="today_schedules">
+        <h3>Schedules</h3>
+        <ul>
+          <%= render @today_schedules %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<h2>Listing your events</h2>
+
+<table class="table table-striped">
+  <tr>
+    <th><div class="col-md-12">Title</div></th>
+    <th><div class="col-md-12">Room</div></th>
+    <th><div class="col-md-12">Date</div></th>
+    <th><div class="col-md-12">Start</div></th>
+    <th><div class="col-md-12">Finish</div></th>
+    <th><div class="col-md-12">State</div></th>
+  </tr>
+  <%= render 'list_schedules' %>
+</table>
+
+<%= will_paginate @schedules %>

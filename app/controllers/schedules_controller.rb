@@ -3,7 +3,16 @@ class SchedulesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]  
 
   def index
-    @schedules = Schedule.all
+    @today_schedules = Schedule.today_schedule
+    @schedule = Schedule.new
+    
+    if params[:user_id].nil?
+      @schedules = Schedule.all
+    else
+      @user = User.find params[:user_id]
+      @schedules = @user.schedules.paginate page: params[:page], per_page: 10
+    end
+
     respond_to do |format|
       format.html
       format.json {render json: {schedules: @schedules.as_json}}
