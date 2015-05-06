@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  var current_user_id = $('body').data('current-user-id');
   $('#calendar').fullCalendar({
     header: {
       left: 'prev,next today',
@@ -29,7 +30,9 @@ $(document).ready(function() {
                 id: schedule.id,
                 title: schedule.title,
                 start: schedule.start_time,
-                end: schedule.finish_time
+                end: schedule.finish_time,
+                user: schedule.user_id,
+                room: schedule.room_id,
               });
             });
           }
@@ -38,14 +41,22 @@ $(document).ready(function() {
       });
     },
     eventRender: function (event, element) {
+      time_start = "From: " + event.start.format('HH:mm') + "<br/>";
+      time_end = "To: " + event.end.format('HH:mm');
+      if(event.user == current_user_id) {
+        btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
+        btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>"; 
+      }else {
+        btn_edit = "";
+        btn_delete = "";
+      };
+
       if (!event.url) {
-        time_start = "From: " + event.start.format() + "<br/>",
-        time_end = "To: " + event.end.format(),
         element.popover({
           placement: 'top',
           html:true,                        
-          title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end,
-          content: "<a href='schedules/"+event.id+"/edit'>Edit</a>",
+          title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
+          content: "<table><tr><th>" + btn_edit + "</th><th>" + btn_delete + "</th></tr></table>",
         });
         $('body').on('click', function (e) {
           if (!element.is(e.target) && element.has(e.target).length === 0 && $('.popover').has(e.target).length === 0)

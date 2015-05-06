@@ -7,7 +7,7 @@
     <%= csrf_meta_tags %>
     <%= render 'shared/shim' %>
   </head>
-  <body>
+  <body data-current-user-id="<%= current_user.try :id %>">
     <%= render 'shared/header' %>
 
     <div class="main-container">
