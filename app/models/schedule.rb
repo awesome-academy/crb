@@ -1,4 +1,6 @@
 class Schedule < ActiveRecord::Base
+  attr_accessor :skip_room_on_time_validation
+
   belongs_to :user
   belongs_to :room
   has_many :schedule_users
@@ -11,7 +13,7 @@ class Schedule < ActiveRecord::Base
   validates :description, presence: true, length: {maximum: 450}
   validates :room, presence: true
   validates :user, presence: true
-  validate  :valid_room, :valid_time
+  validate  :valid_room, :valid_time, unless: :skip_room_on_time_validation
 
   scope :with_room, ->room {where("room_id = ?", room)}
   query = "(start_time <= :start_time AND finish_time >= :finish_time)
