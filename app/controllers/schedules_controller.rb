@@ -1,6 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :correct_user, only: [:edit, :update, :destroy]  
+  before_action :authenticate_user!, except: [:index]  
 
   def index
     @today_schedules = Schedule.today_schedule
@@ -39,10 +38,12 @@ class SchedulesController < ApplicationController
 
   def edit
     @schedule = Schedule.find params[:id]
+    authorize! :update, @schedule
   end
 
   def update
     @schedule = Schedule.find params[:id]
+    authorize! :update, @schedule
 
     if @schedule.update_attributes schedule_params
       flash[:success] = "Event was updated!"
@@ -70,10 +71,6 @@ class SchedulesController < ApplicationController
     DateTime.strptime str, "%m/%d/%Y %H:%M"
   end
 
-  def correct_user
-    @schedule = Schedule.find params[:id]
-    @user = @schedule.user
-    flash[:notice] = "You can't edit this event."
-    redirect_to root_url unless (@user == current_user)
-  end
 end
+
+
