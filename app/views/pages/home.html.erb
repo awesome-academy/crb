@@ -2,7 +2,7 @@
 
 <% if user_signed_in? %>
   <% content_for :btn_new_schedule do %>
-    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path, class: "btn btn-primary") %>
+    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path, class: "btn btn-primary"){} %>
   <% end %>
 <% end %>
 
