@@ -81,7 +81,7 @@ $(document).ready(function() {
   });
 
   $('#start-time').datetimepicker({
-    format: 'mm/dd/yyyy hh:ii',
+    format: 'yyyy-mm-dd hh:ii',
     autoclose: true,
     pickerPosition: "bottom-left",
     maxView: 9,
@@ -93,7 +93,7 @@ $(document).ready(function() {
   });
 
   $('#finish-time').datetimepicker({
-    format: 'mm/dd/yyyy hh:ii',
+    format: 'yyyy-mm-dd hh:ii',
     autoclose: true,
     pickerPosition: "bottom-left",
     maxView: 9,

@@ -55,8 +55,10 @@ class SchedulesController < ApplicationController
 
   def destroy
     Schedule.find(params[:id]).destroy
-    flash[:success] = "Schedule deleted"
-    redirect_to root_path
+    unless params[:user_id]
+      flash[:success] = "Schedule deleted"
+      redirect_to root_path
+    end
   end  
 
   private
@@ -68,9 +70,6 @@ class SchedulesController < ApplicationController
   end
 
   def convert_time str
-    DateTime.strptime str, "%m/%d/%Y %H:%M"
+    DateTime.strptime(str, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d %H:%M")
   end
-
 end
-
-
