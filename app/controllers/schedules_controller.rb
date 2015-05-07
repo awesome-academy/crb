@@ -3,7 +3,6 @@ class SchedulesController < ApplicationController
 
   def index
     @today_schedules = Schedule.today_schedule
-    @schedule = Schedule.new
     
     if params[:user_id].nil?
       @schedules = Schedule.all
