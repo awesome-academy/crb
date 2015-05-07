@@ -43,21 +43,25 @@ $(document).ready(function() {
     eventRender: function (event, element) {
       time_start = "From: " + event.start.format('HH:mm') + "<br/>";
       time_end = "To: " + event.end.format('HH:mm');
-      if(event.user == current_user_id) {
-        btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
-        btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>"; 
-      }else {
-        btn_edit = "";
-        btn_delete = "";
-      };
+      
+      btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
+      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>"; 
 
       if (!event.url) {
-        element.popover({
-          placement: 'top',
-          html:true,                        
-          title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-          content: "<table><tr><th>" + btn_edit + "</th><th>" + btn_delete + "</th></tr></table>",
-        });
+        if(event.user == current_user_id) {
+          element.popover({
+            placement: 'top',
+            html:true,                        
+            title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
+            content: "<table style='border-style:hidden;'><tr><th>" + btn_edit + "</th><th>" + btn_delete + "</th></tr></table>",
+          });
+        }else {
+          element.popover({
+            placement: 'top',
+            html:true,                        
+            title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
+          });
+        };
         $('body').on('click', function (e) {
           if (!element.is(e.target) && element.has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
           element.popover('hide');
