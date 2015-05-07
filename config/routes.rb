@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :schedules, only: [:index, :update]
   end
 
-  resources :schedules, except: [:show]
+  resources :schedules
   
   resources :users do
     resources :schedules, except: [:new, :create, :show]
