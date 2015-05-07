@@ -6,7 +6,7 @@
       <%= f.text_field :title, placeholder: "Event's title...", class: 'form-control' %>
     </div>
     <div class="col-md-12 select-date">
-      <div class="col-md-4 start-date" >
+      <div class="col-md-5 start-date" >
         <%= f.label :start_time %>
         <div class='input-group date' id="start-time">
           <%= f.text_field :start_time, class: 'form-control', readonly: true, placeholder: "Start time"  %>
@@ -18,8 +18,8 @@
           </span>
         </div>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-md-4 finish-date">
+      <div class="col-md-2"></div>
+      <div class="col-md-5 finish-date">
         <%= f.label :finish_time %>
         <div class="input-group date" id="finish-time">
           <%= f.text_field :finish_time, class: 'form-control', readonly: true, placeholder: "Finish time" %>
