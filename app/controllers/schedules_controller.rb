@@ -46,7 +46,7 @@ class SchedulesController < ApplicationController
     authorize! :update, @schedule
 
     if @schedule.update_attributes schedule_params
-      flash[:success] = "Event was updated!"
+      flash[:success] = "Event was updated."
       redirect_to root_path
     else
       render :edit
@@ -54,9 +54,10 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
-    Schedule.find(params[:id]).destroy
+    @schedule = Schedule.find params[:id]
+    @schedule.destroy
     unless params[:user_id]
-      flash[:success] = "Schedule deleted"
+      flash[:success] = "Event was deleted."
       redirect_to root_path
     end
   end  
