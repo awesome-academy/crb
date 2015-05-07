@@ -36,6 +36,10 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def show
+    @schedule = Schedule.find params[:id]
+  end
+
   def edit
     @schedule = Schedule.find params[:id]
     authorize! :update, @schedule
