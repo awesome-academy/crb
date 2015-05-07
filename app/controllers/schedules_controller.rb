@@ -24,6 +24,7 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    @today_schedules = Schedule.today_schedule
     @schedule = Schedule.new schedule_params
     @schedule.user = current_user
 
@@ -31,7 +32,6 @@ class SchedulesController < ApplicationController
       flash[:success] = "Create new event successfuly!"
       redirect_to root_path
     else
-      flash.now[:danger] = "Create new event false!"
       render :new
     end
   end

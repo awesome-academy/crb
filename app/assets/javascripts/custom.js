@@ -4,7 +4,14 @@ $(document).ready(function() {
     header: {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'month,agendaWeek,agendaFourDay,agendaDay'
+    },
+    views: {
+      agendaFourDay: {
+        type: 'agenda',
+        duration: { days: 4 },
+        buttonText: '4 day'
+      }
     },
     defaultView: 'month',
     defaultDate: new Date(),
@@ -86,7 +93,8 @@ $(document).ready(function() {
     pickerPosition: "bottom-left",
     maxView: 9,
     minuteStep: 15,
-    startDate: new Date()
+    startDate: new Date(),
+    daysOfWeekDisabled: '0,6'
   }).on("changeDate", function (e) {
     var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
     $('#start-time').datetimepicker('setDate', TimeZoned);
@@ -98,7 +106,8 @@ $(document).ready(function() {
     pickerPosition: "bottom-left",
     maxView: 9,
     minuteStep: 15,
-    startDate: new Date()
+    startDate: new Date(),
+    daysOfWeekDisabled: '0,6'
   }).on("changeDate", function (e) {
     var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
     $('#finish-time').datetimepicker('setDate', TimeZoned);
