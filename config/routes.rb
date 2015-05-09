@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   get 'help' => 'pages#help'
 
   namespace :admin do
+    root "dashboard#home"
     resources :schedules, only: [:index, :update]
   end
 
   resources :schedules
-  
+
   resources :users do
     resources :schedules, except: [:new, :create, :show]
   end
