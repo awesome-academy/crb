@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'registrations'}
 
   root 'pages#home'
-  get 'help' => 'pages#help'
 
   namespace :admin do
     root "dashboard#home"
