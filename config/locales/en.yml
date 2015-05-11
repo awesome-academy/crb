@@ -20,4 +20,59 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  success_flash: Create new event successfuly!
+  update_flash: Event was updated!
+  delete_flash: Event was deleted!
+
+  btn_edit: Edit
+  btn_delete: Delete
+  btn_back: Back
+  are_you_sure: Are you sure?
+  btn_detail: Detail
+  create_by: Create by
+  btn_home: Home
+  btn_list_events: List events
+  btn_my_events: My events
+  btn_settings: Settings
+  btn_logout: Log out
+  btn_login: Login
+  btn_account: Account
+
+  pages:
+    home:
+      title: Home
+      create_event: Create event
+      schedules_today: Today events
+      welcome_framgia: Welcome to the Framgia Book Reviewing System
+      sign_up_now: Sign_up_now!
+  
+  schedules:
+    form:
+      event_name: Event name
+      event_title: Event's title...
+      start_time: Start time
+      finish_time: Finish time
+      room: Room
+      members: Members
+      description: Description
+      compose_description: Compose description...
+      submit: Submit
+
+    edit_event_title: Edit event
+
+    index:
+      title: My events!
+      listing:
+        title: Title
+        room: Room
+        date: Date
+        start: Start
+        finish: Finish
+        state: State
+        action: Action
+
+    new:
+      title: New event!    
+
+  shared:
+    book_room: Book room    

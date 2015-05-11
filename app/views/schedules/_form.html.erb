@@ -2,14 +2,14 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="col-md-12 well">
     <div class="col-md-12">
-      <%= f.label "Event name" %>
-      <%= f.text_field :title, placeholder: "Event's title...", class: 'form-control' %>
+      <%= f.label t('schedules.form.event_name') %>
+      <%= f.text_field :title, placeholder: t('schedules.form.event_title'), class: 'form-control' %>
     </div>
     <div class="col-md-12 select-date">
       <div class="col-md-5 start-date" >
-        <%= f.label :start_time %>
+        <%= f.label t('schedules.form.start_time') %>
         <div class='input-group date' id="start-time">
-          <%= f.text_field :start_time, class: 'form-control', readonly: true, placeholder: "Start time"  %>
+          <%= f.text_field :start_time, class: 'form-control', readonly: true, placeholder: t('schedules.form.start_time')  %>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-remove"></span>
           </span>
@@ -20,9 +20,9 @@
       </div>
       <div class="col-md-2"></div>
       <div class="col-md-5 finish-date">
-        <%= f.label :finish_time %>
+        <%= f.label t('schedules.form.finish_time') %>
         <div class="input-group date" id="finish-time">
-          <%= f.text_field :finish_time, class: 'form-control', readonly: true, placeholder: "Finish time" %>
+          <%= f.text_field :finish_time, class: 'form-control', readonly: true, placeholder: t('schedules.form.finish_time') %>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-remove"></span>
           </span>
@@ -34,22 +34,22 @@
     </div>
 
     <div class="col-md-12">
-      <%= f.label "Room" %><br/>
+      <%= f.label t('schedules.form.room') %><br/>
       <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {}, {class: 'select-room form-control'} %>
     </div>
 
     <div class="col-md-12">
-      <%= f.label "Members" %><br/>
+      <%= f.label t('schedules.form.members') %><br/>
       <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {}, {class: 'select-members form-control', multiple: :multiple} %>
     </div>
 
     <div class="col-md-12">
-      <%= f.label "Description" %>
-    <%= f.text_area :description, placeholder: "Compose description...", class: 'form-control' %>
+      <%= f.label t('schedules.form.description') %>
+    <%= f.text_area :description, placeholder: t('schedules.form.compose_description'), class: 'form-control' %>
     </div>
   </div>
   <div class="col-md-12 well">
-    <%= f.submit "Submit", class: "btn btn-primary" %>
-    <%= link_to "Back", :back, class: "btn btn-primary"  %>
+    <%= f.submit t('schedules.form.submit'), class: "btn btn-primary" %>
+    <%= link_to t('btn_back'), :back, class: "btn btn-primary"  %>
   </div>
 <% end %>

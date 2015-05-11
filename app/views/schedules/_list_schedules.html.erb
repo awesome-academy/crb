@@ -8,8 +8,8 @@
     <td><div class="<%= schedule.state %>-event"><%= schedule.state %></div></td>
     <td>
       <div class="col-md-12">
-        <%= link_to "Edit", edit_user_schedule_path(current_user, schedule), class: "btn btn-success" %>
-        <%= link_to "Xóa", user_schedule_path(current_user, schedule), method: :delete, class: "btn btn-danger", remote: true, data: {confirm: "Are you sure?"} %>
+        <%= link_to t('btn_edit'), edit_user_schedule_path(current_user, schedule), class: "btn btn-success" %>
+        <%= link_to t('btn_delete'), user_schedule_path(current_user, schedule), method: :delete, class: "btn btn-danger", remote: true, data: {confirm: t('are_you_sure')} %>
       </div>
     </td>
   </tr>
