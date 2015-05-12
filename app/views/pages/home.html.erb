@@ -1,8 +1,8 @@
-<% provide :title, "Home" %>
+<% provide :title, t('pages.home.title') %>
 
 <% if user_signed_in? %>
   <% content_for :btn_new_schedule do %>
-    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path, class: "btn btn-primary"){} %>
+    <%= link_to_if(can?(:create, Schedule), t('pages.home.create_event'), new_schedule_path, class: "btn btn-primary"){} %>
   <% end %>
 <% end %>
 
@@ -10,7 +10,7 @@
   <% if user_signed_in? %>
     <div class="containers">
       <div class="today_schedules">
-        <h3>Schedules</h3>
+        <h3><%= t('pages.home.schedules_today') %></h3>
         <ul>
           <%= render @today_schedules %>
         </ul>
@@ -23,8 +23,8 @@
   <div id='calendar'></div>
 <% else %>
   <div class="center jumbotron">
-    <h1>Welcome to the Framgia Book Reviewing System</h1>
-    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+    <h1><%= t('pages.home.welcome_framgia') %></h1>
+    <%= link_to t('pages.home.sign_up_now'), new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
 

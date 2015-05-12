@@ -1,7 +1,7 @@
-<% provide :title, "My events" %>
+<% provide :title, t('schedules.index.title') %>
 <% if user_signed_in? %>
   <% content_for :btn_new_schedule do %>
-    <%= link_to_if(can?(:create, Schedule), "Create", new_schedule_path, class: "btn btn-primary") %>
+    <%= link_to_if(can?(:create, Schedule), t('pages.home.create_event'), new_schedule_path, class: "btn btn-primary") %>
   <% end %>
 <% end %>
 
@@ -18,17 +18,17 @@
   <% end %>
 <% end %>
 
-<h2>Listing your events</h2>
+<h2><%= t('schedules.index.title') %></h2>
 
 <table class="table table-striped">
   <tr>
-    <th><div class="col-md-12">Title</div></th>
-    <th><div class="col-md-12">Room</div></th>
-    <th><div class="col-md-12">Date</div></th>
-    <th><div class="col-md-12">Start</div></th>
-    <th><div class="col-md-12">Finish</div></th>
-    <th><div class="col-md-12">State</div></th>
-    <th><div class="col-md-12">Action</div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.title') %></div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.room') %></div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.date') %></div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.start') %></div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.finish') %></div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.state') %></div></th>
+    <th><div class="col-md-12"><%= t('schedules.index.listing.action') %></div></th>
   </tr>
   <%= render 'list_schedules' %>
 </table>

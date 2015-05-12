@@ -1,0 +1,57 @@
+vi:
+  success_flash: Ban da tao event thanh cong!
+  update_flash: Event da update thanh cong!
+  delete_flash: Event da bi xoa!
+
+  btn_edit: Chinh sua
+  btn_delete: Xoa
+  btn_back: Quay lai
+  are_you_sure: Ban co chac chan khong?
+  btn_detail: Chi tiet
+  create_by: Tao boi
+  btn_home: Trang chu
+  btn_list_events: Danh sach events
+  btn_my_events: Events cua toi
+  btn_settings: Cai dat
+  btn_logout: Thoat
+  btn_login: Dang nhap
+  btn_account: Tai khoan
+
+  pages:
+    home:
+      title: Trang chu
+      create_event: Tao event
+      schedules_today: Su kien hom nay
+      welcome_framgia: Chao mung ban den Framgia book conference
+      sign_up_now: Dang nhap ngay!
+
+  schedules:
+    form:
+      event_name: Ten event
+      event_title: Tieu de cua event
+      start_time: Thoi gian bat dau
+      finish_time: Thoi gian ket thuc
+      room: Phong
+      members: Thanh vien
+      description: Noi dung
+      compose_description: Dien noi dung cua event
+      submit: Chap nhan
+
+    edit_event_title: Chinh sua event
+    
+    index:
+      title: Danh sach event cua ban! 
+      listing:
+        title: Tieu de
+        room: Phong
+        date: Ngay
+        start: Bat dau
+        finish: Ket thuc
+        state: Trang thai
+        action: Hanh dong
+
+    new:
+      title: Event moi    
+
+  shared:
+    book_room: Dat phong       

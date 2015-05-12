@@ -1,10 +1,10 @@
-<% provide :title, "New event" %>
+<% provide :title, t('schedules.new.title') %>
 
 <% content_for :today_schedules do %>
   <% if user_signed_in? %>
     <div class="containers">
       <div class="today_schedules">
-        <h3>Schedules</h3>
+        <h3><%= t('pages.home.schedules_today') %></h3>
         <ul>
           <%= render @today_schedules %>
         </ul>
@@ -13,5 +13,5 @@
   <% end %>
 <% end %>
 
-<h1>New event</h1>
+<h1><%= t('schedules.new.title') %></h1>
 <%= render 'form' %>
