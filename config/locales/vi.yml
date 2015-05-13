@@ -13,6 +13,7 @@ vi:
   btn_list_events: Danh sach events
   btn_my_events: Events cua toi
   btn_settings: Cai dat
+  btn_admin: Quan tri
   btn_logout: Thoat
   btn_login: Dang nhap
   btn_account: Tai khoan
@@ -55,3 +56,8 @@ vi:
 
   shared:
     book_room: Dat phong       
+
+  admin:
+    dashboards:
+      home:
+        title: Tong hop

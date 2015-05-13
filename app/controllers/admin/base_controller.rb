@@ -1,8 +1,6 @@
 class Admin::BaseController < ActionController::Base
   before_action :authenticate_user!, :authorized_admin!
 
-  layout 'application'
-
   private
   def authorized_admin!
     unless current_user.is_admin?
