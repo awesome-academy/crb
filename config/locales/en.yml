@@ -44,7 +44,7 @@ en:
       create_event: Create event
       schedules_today: Today events
       welcome_framgia: Welcome to the Framgia Book Reviewing System
-      sign_up_now: Sign_up_now!
+      sign_up_now: Sign up now!
   
   schedules:
     form:

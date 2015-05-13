@@ -1,6 +1,6 @@
 <tr id="schedule_<%= schedule.id %>">
   <td>
-    <div class="col-md-12"><%= schedule.title %></div>
+    <div class="col-md-12"><%= link_to schedule.title, schedule_path(schedule) %></div>
   </td>
   <td>
     <div class="col-md-12"><%= schedule.start_time.to_date.to_s %></div>
