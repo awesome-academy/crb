@@ -13,7 +13,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json {render json: {schedules: @schedules.as_json}}
+      format.json {render json: {schedules: @schedules.map(&:min_json)}}
     end
   end
 

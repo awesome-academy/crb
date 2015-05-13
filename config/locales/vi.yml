@@ -2,6 +2,9 @@ vi:
   success_flash: Ban da tao event thanh cong!
   update_flash: Event da update thanh cong!
   delete_flash: Event da bi xoa!
+  alert_flash: Ban khong duoc phep vao trang nay!
+  valid_room: Ton tai event vao luc nay!
+  valid_time: Thoi gian bat dau nen nho hon thoi gian ket thuc!
 
   btn_edit: Chinh sua
   btn_delete: Xoa

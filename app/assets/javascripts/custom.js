@@ -39,7 +39,7 @@ $(document).ready(function() {
                 start: schedule.start_time,
                 end: schedule.finish_time,
                 user: schedule.user_id,
-                room: schedule.room_id,
+                room: schedule.room_name,
               });
             });
           }
@@ -48,7 +48,7 @@ $(document).ready(function() {
       });
     },
     eventRender: function (event, element) {
-      time_start = "From: " + event.start.format('HH:mm') + "<br/>";
+      time_start = "From: " + event.start.format('HH:mm') + "-";
       time_end = "To: " + event.end.format('HH:mm');
       
       btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
@@ -60,14 +60,14 @@ $(document).ready(function() {
             placement: 'top',
             html:true,                        
             title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: "<table style='border-style:hidden;'><tr><th>" + btn_detail + "</th><th>" + btn_edit + "</th><th>" + btn_delete + "</th></tr></table>",
+            content: "<table style='border-style:hidden;'><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
           });
         }else {
           element.popover({
             placement: 'top',
             html:true,                        
             title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: "<table style='border-style:hidden;'><tr><th>" + btn_detail + "</th></tr></table>",
+            content: "<table style='border-style:hidden;'><tr><td>" + btn_detail + "</td></tr></table>",
           });
         };
         $('body').on('click', function (e) {
@@ -77,9 +77,11 @@ $(document).ready(function() {
       }           
     },
     dayClick: function(date, jsEvent, view) {
-      $("#modal-form").modal('show');
-      var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
-      $('#start-time').datetimepicker('setDate', TimeZoned);
+      if(date.format() >= (new Date()).toISOString().slice(0, 10)) {
+        $("#modal-form").modal('show');
+        var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
+        $('#start-time').datetimepicker('setDate', TimeZoned);
+      }
     },
   });
 
