@@ -1,1 +1,23 @@
-base.html.erb
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title yield(:title) %></title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'shared/shim' %>
+  </head>
+  <body data-current-user-id="<%= current_user.try :id %>">
+    <%= render 'shared/header' %>
+
+    <div class="main-container">
+      <%= render partial: "shared/flash_messages", flash: flash %>
+
+      <div class="row">
+        <div class="col-md-12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

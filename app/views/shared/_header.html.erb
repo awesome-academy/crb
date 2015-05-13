@@ -21,6 +21,9 @@
             <%= t('btn_account') %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
+            <% if current_user.is_admin? %>
+              <li><%= link_to t('btn_admin'), admin_root_path %></li>
+            <% end %>
             <li><%= link_to t('btn_settings'), edit_user_registration_path(current_user) %></li>
             <li class="divider"></li>
             <li>

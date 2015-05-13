@@ -34,6 +34,7 @@ en:
   btn_list_events: List events
   btn_my_events: My events
   btn_settings: Settings
+  btn_admin: Admin
   btn_logout: Log out
   btn_login: Login
   btn_account: Account
@@ -76,3 +77,8 @@ en:
 
   shared:
     book_room: Book room    
+
+  admin:
+    dashboards:
+      home:
+        title: Dashboard
