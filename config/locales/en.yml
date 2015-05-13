@@ -23,6 +23,9 @@ en:
   success_flash: Create new event successfuly!
   update_flash: Event was updated!
   delete_flash: Event was deleted!
+  alert_flash: You are not authorized to view that page!
+  valid_room: There are any event with same your time!
+  valid_time: Start time must be less than finish time!
 
   btn_edit: Edit
   btn_delete: Delete

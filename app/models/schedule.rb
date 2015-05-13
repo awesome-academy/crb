@@ -22,16 +22,29 @@ class Schedule < ActiveRecord::Base
 
   accepts_nested_attributes_for :members
 
+  delegate :name, to: :room, prefix: true
+
+  def min_json
+    {
+      id: id,
+      title: title,
+      start_time: start_time,
+      finish_time: finish_time,
+      user_id: user_id,
+      room_name: room_name
+    }
+  end
+
   private
   def valid_room
     if Schedule.with_room(room_id).filte_timer(start_time, finish_time).count > 0
-      errors.add :room, " have any event with same your time!"
+      errors.add :room, t(:valid_room)
     end
   end
 
   def valid_time
     if start_time >= finish_time
-      errors.add :start_time, " must be less than finish time!"
+      errors.add :start_time, t(:valid_time)
     end
   end
 end
