@@ -5,9 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :schedules, dependent: :destroy
-
   has_many :schedule_users
-  has_many :events, class_name: "Schedule", through: :schedule_users,  foreign_key: :user_id
+  has_many :events, class_name: "Schedule", through: :schedule_users, foreign_key: :user_id
 
   validates :name, presence: true, length: {maximum: 100}
   validates :role, presence: true, length: {maximum: 50}
