@@ -1,9 +1,10 @@
 <% provide :title, @schedule.title %>
 <div>   
-  <h1><%= t('schedules.index.listing.title') %> <%= @schedule.title %></h1>
-  <p><%= t('schedules.form.description') %> <%= @schedule.description %></p>
-  <p><%= t('schedules.index.listing.start') %> <%= @schedule.start_time %> <%= t('schedules.index.listing.finish') %> <%= @schedule.finish_time %></p>
-  <p><%= t('create_by') %> <%= @schedule.user.name %></p>
+  <h1><%= t('schedules.index.listing.title') %>: <%= @schedule.title %></h1>
+  <p><%= t('schedules.form.description') %>: <%= @schedule.description %></p>
+  <p><%= t('schedules.index.listing.start') %>: <%= @schedule.start_time.strftime("%Y-%m-%d %H:%M") %> - <%= t('schedules.index.listing.finish') %>: <%= @schedule.finish_time.strftime("%Y-%m-%d %H:%M") %></p>
+  <p><%= t('schedules.form.room') %>: <%= @schedule.room.name %></p>
+  <p><%= t('create_by') %>: <%= @schedule.user.name %></p>
   <p>Member:
     <% @schedule.members.each do |member| %>
       <%= member.name %>,
@@ -11,7 +12,7 @@
   </p>     
 </div>
 <div class="form-actions">
-  <%= link_to t('btn_back'), root_url, class: "btn btn-primary" %>
+  <%= link_to t('btn_back'), :back, class: "btn btn-primary" %>
   <% if can? :edit, @schedule %>
     <%= link_to t('btn_edit'), edit_schedule_path(@schedule), class: "btn btn-primary" %>
   <% end %>  
