@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]  
+  before_action :authenticate_user! 
 
   def index
     @today_schedules = Schedule.today_schedule
