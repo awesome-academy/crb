@@ -43,8 +43,10 @@ class Schedule < ActiveRecord::Base
   end
 
   def valid_time
-    if start_time >= finish_time
-      errors.add :start_time, t(:valid_time)
+    unless start_time.blank? && finish_time.blank?
+      if start_time >= finish_time
+        errors.add :start_time, t(:valid_time)
+      end
     end
   end
 end
