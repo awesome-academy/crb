@@ -88,6 +88,7 @@ $(document).ready(function() {
   $("#modal-form").on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
     $(".select-members").select2("val", "");
+    $("#error_explanation").remove();
   });
 
   $('#start-time').datetimepicker({
