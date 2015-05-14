@@ -1,0 +1,6 @@
+<% if @schedule.errors.any? %>
+  $('#error_message').html("<%= j(render 'shared/error_messages', object: @schedule) %>");
+<% else %>
+  $("#modal-form").modal('hide');
+  $('#calendar').fullCalendar( 'refetchEvents' );
+<% end %>

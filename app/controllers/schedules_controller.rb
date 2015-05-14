@@ -28,10 +28,15 @@ class SchedulesController < ApplicationController
     @schedule.user = current_user
 
     if @schedule.save
-      flash[:success] = t(:success_flash)
-      redirect_to root_path
+      respond_to do |format|
+        format.html {redirect_to root_path}
+        format.js
+      end  
     else
-      render :new
+      respond_to do |format|
+        format.html {render :new}
+        format.js
+      end      
     end
   end
 
