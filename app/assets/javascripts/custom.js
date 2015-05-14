@@ -1,5 +1,8 @@
 $(document).ready(function() {
   var current_user_id = $('body').data('current-user-id');
+  setTimeout(function() {
+    $('.hide-flash').fadeOut('normal');
+  }, 4000);
   $('#calendar').fullCalendar({
     header: {
       left: 'prev,next today',

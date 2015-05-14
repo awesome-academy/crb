@@ -12,7 +12,6 @@
   </p>     
 </div>
 <div class="form-actions">
-  <%= link_to t('btn_back'), :back, class: "btn btn-primary" %>
   <% if can? :edit, @schedule %>
     <%= link_to t('btn_edit'), edit_schedule_path(@schedule), class: "btn btn-primary" %>
   <% end %>  
