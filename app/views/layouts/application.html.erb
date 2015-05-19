@@ -14,13 +14,13 @@
       <%= render partial: "shared/flash_messages", flash: flash %>
 
       <div class="row">
-        <aside class="col-md-3">
+        <aside class="col-md-2">
           <%= yield :btn_new_schedule %>
 
-          <%= yield :today_schedules %>
+          <%= yield :mini_calendar %>
         </aside>
 
-        <div class="col-md-9">
+        <div class="col-md-10">
           <%= yield %>
         </div>
       </div>

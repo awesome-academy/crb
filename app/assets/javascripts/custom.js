@@ -145,4 +145,15 @@ $(document).ready(function() {
   $('.select-members').select2({
     width: "100%"
   });
+
+  $('#mini-calendar').datepicker({
+    inline: true,
+    sideBySide: true,
+    todayHighlight: true,
+    showButtonPanel: true
+  }).on('changeDate', function(ev){
+    $('#calendar').fullCalendar('gotoDate', new Date(Date.parse(ev.date)));
+    $('#calendar').fullCalendar('changeView','month');
+    $('#calendar').fullCalendar('changeView','agendaDay');
+  });
 });
