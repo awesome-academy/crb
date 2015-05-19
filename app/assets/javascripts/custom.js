@@ -28,6 +28,8 @@ $(document).ready(function() {
     editable: true,
     eventLimit: true,
     keepOpen: false,
+    selectable: true,
+    selectHelper: true,
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: '/schedules.json',
@@ -49,6 +51,13 @@ $(document).ready(function() {
           callback(events);
         }
       });
+    },
+    select: function (start, end, jsEvent, view) {
+      if((view.type != 'month') && (start._d >= (new Date()))) {
+        $("#modal-form").modal('show');
+        $('#start-time').datetimepicker('setDate', start._d);
+        $('#finish-time').datetimepicker('setDate', end._d); 
+      }  
     },
     eventRender: function (event, element) {
       time_start = "From: " + event.start.format('HH:mm') + "-";
@@ -80,7 +89,7 @@ $(document).ready(function() {
       }           
     },
     dayClick: function(date, jsEvent, view) {
-      if(date.format() >= (new Date()).toISOString().slice(0, 10)) {
+      if((view.type == 'month' && date.format() >= (new Date()).toISOString().slice(0, 10)) || date._d >= (new Date())) {
         $("#modal-form").modal('show');
         var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
         $('#start-time').datetimepicker('setDate', TimeZoned);
