@@ -1,8 +1,11 @@
 $(document).ready(function() {
-  var current_user_id = $('body').data('current-user-id');
   setTimeout(function() {
     $('.hide-flash').fadeOut('normal');
   }, 4000);
+
+  var current_user_id = $('body').data('current-user-id');
+  var view_type = localStorage.getItem("view_type");
+
   $('#calendar').fullCalendar({
     header: {
       left: 'prev,next today',
@@ -12,11 +15,11 @@ $(document).ready(function() {
     views: {
       agendaFourDay: {
         type: 'agenda',
-        duration: { days: 4 },
-        buttonText: '4 day'
+        duration: {days: 4},
+        buttonText: '4 days'
       }
     },
-    defaultView: 'month',
+    defaultView: view_type == "undefined" ? "month" : view_type,
     defaultDate: new Date(),
     editable: true,
     eventLimit: true,
@@ -43,7 +46,7 @@ $(document).ready(function() {
                 title: schedule.title,
                 start: schedule.start_time,
                 end: schedule.finish_time,
-                user: schedule.user_id,
+                user_id: schedule.user_id,
                 room: schedule.room_name,
               });
             });
@@ -56,7 +59,10 @@ $(document).ready(function() {
       if((view.type != 'month') && (start._d >= (new Date()))) {
         $("#modal-form").modal('show');
         $('#start-time').datetimepicker('setDate', start._d);
-        $('#finish-time').datetimepicker('setDate', end._d); 
+        $('#finish-time').datetimepicker('setDate', end._d);
+      }
+      else {
+        $('#calendar').fullCalendar('unselect');
       }  
     },
     eventRender: function (event, element) {
@@ -67,7 +73,7 @@ $(document).ready(function() {
       btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>"; 
       btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
       if (!event.url) {
-        if(event.user == current_user_id) {
+        if(event.user_id == current_user_id) {
           element.popover({
             placement: 'top',
             html:true,                        
@@ -95,6 +101,9 @@ $(document).ready(function() {
         $('#start-time').datetimepicker('setDate', TimeZoned);
       }
     },
+    viewRender: function(view, element) { 
+      localStorage.setItem("view_type", view.type);
+    }
   });
 
   $("#modal-form").on('hidden.bs.modal', function(){
