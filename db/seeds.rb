@@ -3,12 +3,12 @@ User.create!(name:  "Conference Room Booking System", email: "admin@crb.com", pa
 
 puts "Create 50 user"
 50.times do
-  User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: 123456, password_confirmation: 123456)
+  User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: 123456, password_confirmation: 123456, role: "normal")
 end
 
 puts "Create 5 room"
-["Australia 1", "Australia 2", "Pacific", "Atlatic"].each do |name|
-  Room.create! name: name
+[["Australia 1",'#D87093'], ["Australia 2", '#20BA22a'], ["Pacific", '#008080'], ["Atlatic", '#456321']].each do |name, color|
+  Room.create!(name: name, color: color)
 end
 
 puts "Create 20 schedules"

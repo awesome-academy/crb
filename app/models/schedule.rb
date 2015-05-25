@@ -23,6 +23,7 @@ class Schedule < ActiveRecord::Base
   accepts_nested_attributes_for :members
 
   delegate :name, to: :room, prefix: true
+  delegate :color, to: :room, prefix: true
 
   after_create :notification_users
 
@@ -33,7 +34,8 @@ class Schedule < ActiveRecord::Base
       start_time: start_time,
       finish_time: finish_time,
       user_id: user_id,
-      room_name: room_name
+      room_name: room_name,
+      room_color: room_color
     }
   end
 

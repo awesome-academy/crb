@@ -48,6 +48,7 @@ $(document).ready(function() {
                 end: schedule.finish_time,
                 user_id: schedule.user_id,
                 room: schedule.room_name,
+                color: schedule.room_color
               });
             });
           }
