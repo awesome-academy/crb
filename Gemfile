@@ -49,6 +49,8 @@ gem 'cancancan', '~> 1.10.1'
 group :development, :test do
   gem 'faker', '1.4.2'
 
+  gem "letter_opener"
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
