@@ -24,6 +24,8 @@ class Schedule < ActiveRecord::Base
 
   delegate :name, to: :room, prefix: true
 
+  after_create :notification_users
+
   def min_json
     {
       id: id,
@@ -46,5 +48,9 @@ class Schedule < ActiveRecord::Base
     if !start_time.blank? && !finish_time.blank? && start_time >= finish_time
       errors.add :start_time, t(:valid_time)
     end
+  end
+
+  def notification_users
+    members.each {|member| UserMailer.invite_email(member, self).deliver_now}
   end
 end
