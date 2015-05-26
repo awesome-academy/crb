@@ -4,6 +4,7 @@
   <% content_for :btn_new_schedule do %>
     <%= link_to_if(can?(:create, Schedule), t('pages.home.create_event'), new_schedule_path, class: "btn btn-primary"){} %>
   <% end %>
+  <%= render 'shared/filter_room' %>
 <% end %>
 
 <% content_for :mini_calendar do %>

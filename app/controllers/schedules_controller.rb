@@ -5,10 +5,10 @@ class SchedulesController < ApplicationController
     @today_schedules = Schedule.today_schedule
     
     if params[:user_id].nil?
-      @schedules = Schedule.all
+      @schedules = Schedule.filter_by_room params[:room_id]
     else
       @user = User.find params[:user_id]
-      @schedules = @user.schedules.paginate page: params[:page], per_page: 10
+      @schedules = @user.schedules.filter_by_room params[:room_id]
     end
 
     respond_to do |format|

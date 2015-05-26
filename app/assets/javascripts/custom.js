@@ -1,10 +1,18 @@
 $(document).ready(function() {
+  var schedule_query_url = '/schedules.json';
+
   setTimeout(function() {
     $('.hide-flash').fadeOut('normal');
   }, 4000);
 
   var current_user_id = $('body').data('current-user-id');
   var view_type = localStorage.getItem("view_type");
+
+  $("#room_selector").change(function(){
+    room_id = $(this).val();
+    schedule_query_url = '/schedules.json?room_id=' + room_id;    
+    $('#calendar').fullCalendar('refetchEvents');    
+  });
 
   $('#calendar').fullCalendar({
     header: {
@@ -35,7 +43,7 @@ $(document).ready(function() {
     selectHelper: true,
     events: function(start, end, timezone, callback) {
       $.ajax({
-        url: '/schedules.json',
+        url: schedule_query_url,
         type: 'GET',
         success: function(doc) {
           var events = [];
@@ -104,6 +112,9 @@ $(document).ready(function() {
     },
     viewRender: function(view, element) { 
       localStorage.setItem("view_type", view.type);
+    },
+    eventAfterAllRender: function (view, element) {
+      $("#calendar").find('.fc-left').append($("#room_selector"));     
     }
   });
 
