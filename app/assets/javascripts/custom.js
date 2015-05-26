@@ -64,6 +64,9 @@ $(document).ready(function() {
         }
       });
     },
+    selectOverlap: function(event) {
+        return event.rendering == 'background';
+    },
     select: function (start, end, jsEvent, view) {
       if((view.type != 'month') && (start._d >= (new Date()))) {
         $("#modal-form").modal('show');
@@ -162,10 +165,25 @@ $(document).ready(function() {
     inline: true,
     sideBySide: true,
     todayHighlight: true,
-    showButtonPanel: true
+    showButtonPanel: true,
   }).on('changeDate', function(ev){
     $('#calendar').fullCalendar('gotoDate', new Date(Date.parse(ev.date)));
     $('#calendar').fullCalendar('changeView','month');
     $('#calendar').fullCalendar('changeView','agendaDay');
+  });
+
+  $('.fc-prev-button').click(function() {
+    moment = $('#calendar').fullCalendar('getDate');
+    $('#mini-calendar').datepicker('update', moment._d);
+  });
+
+  $('.fc-next-button').click(function() {
+    moment = $('#calendar').fullCalendar('getDate');
+    $('#mini-calendar').datepicker('update', moment._d);
+  });
+
+  $('.fc-today-button').click(function() {
+    moment = $('#calendar').fullCalendar('getDate');
+    $('#mini-calendar').datepicker('update', moment._d);
   });
 });
