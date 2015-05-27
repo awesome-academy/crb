@@ -8,6 +8,40 @@ $(document).ready(function() {
   var current_user_id = $('body').data('current-user-id');
   var view_type = localStorage.getItem("view_type");
 
+  function startChange() {
+    var startDate = start.value(),
+    endDate = finish.value();
+
+    if (startDate) {
+      startDate = new Date(startDate);
+      startDate.setDate(startDate.getDate());
+      finish.min(startDate);
+    } else if (endDate) {
+      start.max(new Date(endDate));
+    } else {
+      endDate = new Date();
+      start.max(endDate);
+      finish.min(endDate);
+    }
+  }
+
+  function endChange() {
+    var endDate = finish.value(),
+    startDate = start.value();
+
+    if (endDate) {
+      endDate = new Date(endDate);
+      endDate.setDate(endDate.getDate());
+      start.max(endDate);
+    } else if (startDate) {
+      finish.min(new Date(startDate));
+    } else {
+      endDate = new Date();
+      start.max(endDate);
+      finish.min(endDate);
+    }
+  }
+
   $("#room_selector").change(function(){
     room_id = $(this).val();
     schedule_query_url = '/schedules.json?room_id=' + room_id;    
@@ -127,31 +161,26 @@ $(document).ready(function() {
     $("#error_explanation").remove();
   });
 
-  $('#start-time').datetimepicker({
-    format: 'yyyy-mm-dd hh:ii',
-    autoclose: true,
-    pickerPosition: "bottom-left",
-    maxView: 9,
-    minuteStep: 15,
-    startDate: new Date(),
-    daysOfWeekDisabled: '0,6'
-  }).on("changeDate", function (e) {
-    var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
-    $('#start-time').datetimepicker('setDate', TimeZoned);
-  });
+  var start = $("#schedule_start_time").kendoDateTimePicker({
+    value: new Date(),
+    min: new Date(),
+    change: startChange,
+    parseFormats: ["MM/dd/yyyy"],
+    format: "yyyy-MM-dd HH:mm",
+    timeFormat: "HH:mm",
+    open: function() { $('.k-weekend a').bind('click', function() { return false; }); },
+  }).data("kendoDateTimePicker");
 
-  $('#finish-time').datetimepicker({
-    format: 'yyyy-mm-dd hh:ii',
-    autoclose: true,
-    pickerPosition: "bottom-left",
-    maxView: 9,
-    minuteStep: 15,
-    startDate: new Date(),
-    daysOfWeekDisabled: '0,6'
-  }).on("changeDate", function (e) {
-    var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
-    $('#finish-time').datetimepicker('setDate', TimeZoned);
-  });
+  var finish = $("#schedule_finish_time").kendoDateTimePicker({
+    change: endChange,
+    parseFormats: ["MM/dd/yyyy"],
+    format: "yyyy-MM-dd HH:mm",
+    timeFormat: "HH:mm",
+    open: function() { $('.k-weekend a').bind('click', function() { return false; }); },
+  }).data("kendoDateTimePicker");
+
+  start.max(finish.value());
+  finish.min(start.value());
 
   $('.select-room').select2({
     width: 300

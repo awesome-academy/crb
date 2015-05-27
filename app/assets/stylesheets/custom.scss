@@ -1,9 +1,5 @@
 @import "variables";
 
-html, body {
-  position: relative;
-}
-
 header {
   #logo {
     float: left;
@@ -148,3 +144,13 @@ h3 {
 #mini-calendar {
   width: 100%;
 }
+
+.k-weekend{
+      display: block;
+      overflow: hidden;
+      min-height: 22px;
+      line-height: 22px;
+      padding: 0 .45em 0 .1em;
+      cursor:default;
+      opacity: 0.5;
+    }

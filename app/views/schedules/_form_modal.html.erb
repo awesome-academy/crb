@@ -5,30 +5,19 @@
       <%= f.label t('schedules.form.event_name') %>
       <%= f.text_field :title, placeholder: t('schedules.form.event_title'), class: 'form-control' %>
     </div>
+
     <div class="col-md-12 select-date">
       <div class="col-md-5 start-date" >
         <%= f.label t('schedules.form.start_time') %>
-        <div class='input-group date' id="start-time">
-          <%= f.text_field :start_time, class: 'form-control', readonly: true, placeholder: t('schedules.form.start_time')  %>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-remove"></span>
-          </span>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
+        <div class='input-group date'>
+          <%= f.text_field :start_time, placeholder: t('schedules.form.start_time'), style: 'width: 200px' %>
         </div>
       </div>
       <div class="col-md-2"></div>
       <div class="col-md-5 finish-date">
         <%= f.label t('schedules.form.finish_time') %>
-        <div class="input-group date" id="finish-time">
-          <%= f.text_field :finish_time, class: 'form-control', readonly: true, placeholder: t('schedules.form.finish_time') %>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-remove"></span>
-          </span>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
+        <div class="input-group date">
+          <%= f.text_field :finish_time, placeholder: t('schedules.form.finish_time'), style: 'width: 200px' %>
         </div>
       </div>
     </div>
