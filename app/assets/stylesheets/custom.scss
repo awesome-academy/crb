@@ -43,7 +43,7 @@ aside {
     height: 495px;
     padding-top: 18px;
     position: relative;
-    width: 100%;
+    width: 115%;
     backface-visibility: hidden;
     will-change: overflow;
   }
@@ -137,7 +137,8 @@ h3 {
 }
 
 .table-condensed {
-  font-size: 63%;
+  font-size: 60%;
+  width: 200px;
 }
 
 #room_selector {
