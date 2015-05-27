@@ -1,16 +1,64 @@
-<% provide :title, @schedule.title %>
-<div>   
-  <h1><%= t('schedules.index.listing.title') %>: <%= @schedule.title %></h1>
-  <p><%= t('schedules.form.description') %>: <%= @schedule.description %></p>
-  <p><%= t('schedules.index.listing.start') %>: <%= @schedule.start_time.strftime("%Y-%m-%d %H:%M") %> - <%= t('schedules.index.listing.finish') %>: <%= @schedule.finish_time.strftime("%Y-%m-%d %H:%M") %></p>
-  <p><%= t('schedules.form.room') %>: <%= @schedule.room.name %></p>
-  <p><%= t('create_by') %>: <%= @schedule.user.name %></p>
-  <p>Member:
-    <% @schedule.members.each do |member| %>
-      <%= member.name %>,
-    <% end %> 
-  </p>     
+<% provide :title, t('schedules.show.title') %>
+
+<div class="col-md-12 well">
+  <div class="col-md-12" style="padding-bottom: 20px">
+    <label class="col-md-2"><%= t('schedules.form.event_title') %></label>
+    <div class="col-md-10">
+      <div class="form-control"><b><%= @schedule.title %></b></div>
+    </div>
+  </div>
+
+  <div class="col-md-12" style="padding-bottom: 20px">
+    <label class="col-md-2"><%= t('schedules.form.start_time') %></label>
+    <div class="col-md-2">
+      <div class="form-control"><%= @schedule.start_time.strftime('%d/%m/%Y') %></div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-control"><%= @schedule.start_time.strftime('%H:%M') %></div>
+    </div>
+      <label class="col-md-2"><%= t('schedules.form.finish_time') %></label>
+    <div class="col-md-2">
+      <div class="form-control"><%= @schedule.finish_time.strftime('%d/%m/%Y') %></div>
+    </div>
+      <div class="col-md-2">
+      <div class="form-control"><%= @schedule.finish_time.strftime('%H:%M') %></div>
+    </div>
+  </div>
+  
+  <div class="col-md-12" style="padding-bottom: 20px">
+    <label class="col-md-2"><%= t('schedules.form.room') %></label>
+    <div class="col-md-10">
+      <div class="form-control"><%= @schedule.room.name %></div>
+    </div>
+  </div>
+
+  <div class="col-md-12" style="padding-bottom: 20px">
+    <label class="col-md-2"><%= t('schedules.form.create_by') %></label>
+    <div class="col-md-10">
+      <div class="form-control"><%= @schedule.user.name %></div>
+    </div>
+  </div>
+
+  <div class="col-md-12" style="padding-bottom: 20px">
+    <label class="col-md-2"><%= t('schedules.form.description') %></label>
+    <div class="col-md-10">
+      <div class="form-control"><%= @schedule.description %></div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <label class="col-md-2"><%= t('schedules.form.members') %></label>
+    <div class="col-md-10">
+      <% @schedule.members.each do |member| %>
+        <div class="col-md-6" style="padding-bottom: 5px">
+          <%= image_tag "default-user.png", size: "20x20", alt: "Member", class: "img-rounded" %>
+          <%= member.name %>
+        </div>  
+      <% end %>
+    </div>
+  </div>
 </div>
+
 <div class="form-actions">
   <% if can? :edit, @schedule %>
     <%= link_to t('btn_edit'), edit_schedule_path(@schedule), class: "btn btn-primary" %>
