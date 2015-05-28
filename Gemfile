@@ -37,6 +37,8 @@ gem 'jquery-turbolinks'
 gem 'websocket-rails'
 
 gem 'cancancan', '~> 1.10.1'
+
+gem 'kendoui-rails', '~> 0.1.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
