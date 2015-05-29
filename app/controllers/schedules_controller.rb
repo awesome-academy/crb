@@ -28,10 +28,12 @@ class SchedulesController < ApplicationController
     @schedule.user = current_user
 
     if @schedule.save
+      repeat_type = params[:repeat]
+      RepeatWorker.perform_async(@schedule.id, repeat_type) if repeat_type.present?
       respond_to do |format|
         format.html {redirect_to root_path}
         format.js
-      end  
+      end
     else
       respond_to do |format|
         format.html {render :new}
@@ -51,8 +53,7 @@ class SchedulesController < ApplicationController
 
   def update
     @schedule = Schedule.find params[:id]
-    authorize! :update, @schedule
-
+    authorize! :update, @schedule 
     if @schedule.update_attributes schedule_params
       flash[:success] = t(:update_flash)
       redirect_to root_path

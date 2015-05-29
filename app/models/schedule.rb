@@ -1,9 +1,10 @@
 class Schedule < ActiveRecord::Base
   belongs_to :user
   belongs_to :room
+  belongs_to :repeat
   has_many :schedule_users
   has_many :members, class_name: "User",
-    through: :schedule_users,  foreign_key: :schedule_id
+    through: :schedule_users, foreign_key: :schedule_id
 
   validates :title, presence: true, length: {maximum: 150}
   validates :start_time, presence: true
