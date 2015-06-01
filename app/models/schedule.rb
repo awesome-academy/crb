@@ -11,9 +11,9 @@ class Schedule < ActiveRecord::Base
   validates :description, presence: true, length: {maximum: 450}
   validates :room, presence: true
   validates :user, presence: true
-  validate  :valid_room, :valid_time
+  validate :valid_time, :valid_room
 
-  scope :with_room, ->room{where room: room}
+  scope :with_room, ->(room, id){where(room: room).where.not id: id}
   query = "(start_time <= :start_time AND finish_time >= :finish_time)
           OR (start_time > :start_time AND start_time < :finish_time)
           OR (finish_time > :start_time AND finish_time < :finish_time)"
@@ -42,14 +42,14 @@ class Schedule < ActiveRecord::Base
 
   private
   def valid_room
-    if Schedule.with_room(room_id).filte_timer(start_time, finish_time).count > 0
-      errors.add :room, t(:valid_room)
+    if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0
+      errors.add :room, I18n.t('valid_room')
     end
   end
 
   def valid_time
     if !start_time.blank? && !finish_time.blank? && start_time >= finish_time
-      errors.add :start_time, t(:valid_time)
+      errors.add :start_time, I18n.t('valid_time')
     end
   end
 
