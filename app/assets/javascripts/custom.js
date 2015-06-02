@@ -133,16 +133,18 @@ $(document).ready(function() {
         if(event.user_id == current_user_id) {
           element.popover({
             placement: 'top',
-            html:true,                        
-            title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: "<table style='border-style:hidden;'><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
+            html: true,
+            container: '.fc-body',                        
+            title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
+            content: "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
           });
         }else {
           element.popover({
             placement: 'top',
-            html:true,                        
-            title: "<b>Title: " + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: "<table style='border-style:hidden;'><tr><td>" + btn_detail + "</td></tr></table>",
+            html: true,
+            container: '.fc-body',                        
+            title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
+            content: "<table><tr><td>" + btn_detail + "</td></tr></table>",
           });
         };
         $('body').on('click', function (e) {
