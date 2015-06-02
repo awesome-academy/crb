@@ -39,7 +39,7 @@ aside {
     height: 495px;
     padding-top: 18px;
     position: relative;
-    width: 115%;
+    width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
   }
@@ -76,7 +76,7 @@ aside {
 
 .main-container {
   margin-top: 80px;
-  padding: 0 15px;
+  padding: 10px;
 }
 
 ul {
@@ -134,11 +134,12 @@ h3 {
 
 .table-condensed {
   font-size: 60%;
-  width: 200px;
+  width: 100%;
 }
 
 #room_selector {
   height: 30px;
+  width: 38%;
 }
 
 #mini-calendar {
@@ -153,4 +154,27 @@ h3 {
   padding: 0 .45em 0 .1em;
   cursor:default;
   opacity: 0.5;
+}
+
+.datepicker-inline {
+  width: 100%;
+}
+
+.col-md-2 {
+  padding-right: 2px;  
+}
+
+.col-md-10 {
+  padding-left: 2px;
+}
+
+.popover-content table {
+  border-style: hidden;
+  td {
+    text-align: center;
+  }
+}
+
+.btn.btn-primary {
+  margin-left: 8px;
 }
