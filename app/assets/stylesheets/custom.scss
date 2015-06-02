@@ -132,18 +132,16 @@ h3 {
   text-align: center;
 }
 
-.table-condensed {
-  font-size: 60%;
-  width: 100%;
-}
-
 #room_selector {
-  height: 30px;
-  width: 38%;
+  height: 2.1em;
+  border-radius: 4px;
 }
 
 #mini-calendar {
   width: 100%;
+  .table-condensed {
+    width: 100%;
+  }
 }
 
 .k-weekend{
@@ -161,7 +159,7 @@ h3 {
 }
 
 .col-md-2 {
-  padding-right: 2px;  
+  padding-right: 2px;
 }
 
 .col-md-10 {
