@@ -50,7 +50,14 @@ en:
       schedules_today: Today events
       welcome_framgia: Welcome to the Framgia Book Reviewing System
       sign_up_now: Sign up now!
-  
+      my_calendar: My Calendar
+      shared_calendar: Shared Calendar
+
+    form:
+      room: Room
+      from: From
+      to: to
+
   schedules:
     form:
       event_name: Event name

@@ -23,4 +23,8 @@ module ApplicationHelper
       flash_type.to_s
     end
   end
+
+  def paginate collection, params = {}
+    will_paginate collection, params.merge(renderer: RemoteLinkPaginationHelper::LinkRenderer)
+  end
 end
