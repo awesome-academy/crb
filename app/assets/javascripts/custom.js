@@ -52,17 +52,23 @@ $(document).ready(function() {
 
   MyCalendar.fullCalendar({
     header: {
-      left: "prev,next today",
-      center: "title",
-      right: "month,agendaWeek,agendaFourDay,agendaDay,agendaList"
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaFourDay,agendaDay,list'
     },
+    
     views: {
       agendaFourDay: {
         type: "agenda",
         duration: {days: 4},
         buttonText: "4 days"
+      },
+      list:{
+        type: 'basic',
+        buttonText: 'Agenda'
       }
     },
+
     defaultView: view_type == "undefined" ? "month" : view_type,
     defaultDate: new Date(),
     editable: true,
@@ -77,6 +83,8 @@ $(document).ready(function() {
     keepOpen: false,
     selectable: true,
     selectHelper: true,
+
+
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: schedule_query_url,
@@ -185,9 +193,23 @@ $(document).ready(function() {
 
         kendo_finish.min(kendo_start.value());
       }
+
+      $('.fc-view').show();
+      $('.fc-next-button').show();
+      $('.fc-prev-button').show();
+      $('.fc-today-button').css('visibility','visible');
+      $('#room_selector').css('visibility','visible');
+      $('.agenda-list').css('visibility', 'hidden');
     },
+
     viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
+      $('.fc-view').show();
+      $('.fc-next-button').show();
+      $('.fc-prev-button').show();
+      $('.fc-today-button').css('visibility','visible');
+      $('#room_selector').css('visibility','visible');
+      $('.agenda-list').css('visibility', 'hidden');
     },
     eventAfterAllRender: function (view, element) {
       MyCalendar.find(".fc-left").append($("#room_selector"));
@@ -197,7 +219,7 @@ $(document).ready(function() {
   $("#modal-form").on("hidden.bs.modal", function(){
     $(this).find("form")[0].reset();
     $(".select-members").select2("val", "");
-    $("#error_explanation").remove();
+    $("#error_explan  ation").remove();
   });
 
   var kendo_start = $("#schedule_start_time").kendoDateTimePicker({
@@ -261,4 +283,26 @@ $(document).ready(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
   });
-});
+
+  $('.fc-list-button').click(function(){
+    $('.fc-view').hide();
+    $('.agenda-list').css('visibility', 'visible'); 
+
+    $('.fc-next-button').hide();
+    $('.fc-prev-button').hide();
+    $('.fc-today-button').css('visibility','hidden');
+    $('#room_selector').css('visibility','hidden');   
+  });
+  
+  $('.plus').click(function(){
+    $("#event-" + $(this).data("event-id")).slideToggle();
+  });
+
+  $('.expand').click(function(){
+    $('.s-detail').slideDown();
+  });
+
+  $('.coll').click(function(){
+    $('.s-detail').slideUp();
+  })
+}); 

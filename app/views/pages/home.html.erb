@@ -27,3 +27,9 @@
 <% content_for :modal_form do %>
   <%= render 'shared/modal_form' if current_user %>
 <% end %>
+
+<% if user_signed_in? %>
+  <div class="agenda-list" >
+    <%= render 'shared/agenda_list' %>
+  </div>
+<% end %>

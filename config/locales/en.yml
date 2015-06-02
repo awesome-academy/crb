@@ -41,6 +41,8 @@ en:
   btn_logout: Log out
   btn_login: Login
   btn_account: Account
+  expand_all: Expand All
+  collapse_all: Collapse All
 
   pages:
     home:
