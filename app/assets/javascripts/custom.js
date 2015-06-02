@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  $(window).trigger("resize");
+
   var schedule_query_url = '/schedules.json';
 
   setTimeout(function() {
@@ -44,8 +46,8 @@ $(document).ready(function() {
 
   $("#room_selector").change(function(){
     room_id = $(this).val();
-    schedule_query_url = '/schedules.json?room_id=' + room_id;    
-    $('#calendar').fullCalendar('refetchEvents');    
+    schedule_query_url = '/schedules.json?room_id=' + room_id;
+    $('#calendar').fullCalendar('refetchEvents');
   });
 
   $('#calendar').fullCalendar({
@@ -120,21 +122,21 @@ $(document).ready(function() {
       }
       else {
         $('#calendar').fullCalendar('unselect');
-      }  
+      }
     },
     eventRender: function (event, element) {
       time_start = "From: " + event.start.format('HH:mm') + "-";
       time_end = "To: " + event.end.format('HH:mm');
-      
+
       btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
-      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>"; 
+      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>";
       btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
       if (!event.url) {
         if(event.user_id == current_user_id) {
           element.popover({
             placement: 'top',
             html: true,
-            container: '.fc-body',                        
+            container: '.fc-body',
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
             content: "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
           });
@@ -142,7 +144,7 @@ $(document).ready(function() {
           element.popover({
             placement: 'top',
             html: true,
-            container: '.fc-body',                        
+            container: '.fc-body',
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
             content: "<table><tr><td>" + btn_detail + "</td></tr></table>",
           });
@@ -151,7 +153,7 @@ $(document).ready(function() {
           if (!element.is(e.target) && element.has(e.target).length == 0 && $('.popover').has(e.target).length == 0)
           element.popover('hide');
         });
-      }           
+      }
     },
     dayClick: function(date, jsEvent, view) {
       if((view.type == 'month' && date.format() >= (new Date()).toISOString().slice(0, 10)) || date._d >= (new Date())) {
@@ -210,11 +212,11 @@ $(document).ready(function() {
         }
       }
     },
-    viewRender: function(view, element) { 
+    viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
     },
     eventAfterAllRender: function (view, element) {
-      $("#calendar").find('.fc-left').append($("#room_selector"));     
+      $("#calendar").find('.fc-left').append($("#room_selector"));
     }
   });
 
