@@ -49,7 +49,7 @@ en:
       schedules_today: Today events
       welcome_framgia: Welcome to the Framgia Book Reviewing System
       sign_up_now: Sign up now!
-  
+
   schedules:
     form:
       event_name: Event name
@@ -90,3 +90,5 @@ en:
     dashboards:
       home:
         title: Dashboard
+  repeat:
+    confirmation: "Overlap Time Days: %{daylist} \nDo you want to continue ?"
