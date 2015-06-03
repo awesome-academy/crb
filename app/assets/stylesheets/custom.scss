@@ -76,7 +76,10 @@ aside {
 
 .main-container {
   margin-top: 80px;
-  padding: 10px;
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
 }
 
 ul {
@@ -156,14 +159,6 @@ h3 {
 
 .datepicker-inline {
   width: 100%;
-}
-
-.col-md-2 {
-  padding-right: 2px;
-}
-
-.col-md-10 {
-  padding-left: 2px;
 }
 
 .popover-content table {
