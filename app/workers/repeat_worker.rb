@@ -5,7 +5,7 @@ class RepeatWorker
     repeat = Repeat.create repeat_type: repeat_type
 
     schedule = Schedule.find schedule_id
-    schedule.update_attributes :repeat_id, repeat.id
+    schedule.update_attributes repeat_id: repeat.id
 
     number_of_schedules = schedule.start_time.send("end_of_#{repeat_type}").day -
       schedule.start_time.day
