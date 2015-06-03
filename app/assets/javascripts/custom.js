@@ -117,8 +117,6 @@ $(document).ready(function() {
           format: "yyyy-MM-dd HH:mm",
           timeFormat: "HH:mm",
         }).data("kendoDateTimePicker");
-        $("#schedule_start_time").data("kendoDateTimePicker").readonly();
-        $("#schedule_finish_time").data("kendoDateTimePicker").readonly();
       }
       else {
         $('#calendar').fullCalendar('unselect');
