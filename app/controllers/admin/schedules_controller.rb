@@ -8,7 +8,7 @@ class Admin::SchedulesController < Admin::BaseController
 
   def update
     @schedule = Schedule.find params[:id]
-    @schedule.update_attribute :state, params[:state]
+    @schedule.update_attributes state: params[:state]
   end
 
   private
