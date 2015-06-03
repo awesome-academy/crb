@@ -92,7 +92,8 @@ $(document).ready(function() {
                 end: schedule.finish_time,
                 user_id: schedule.user_id,
                 room: schedule.room_name,
-                color: schedule.room_color
+                color: schedule.room_color,
+                repeat_id: schedule.repeat_id
               });
             });
           }
@@ -126,17 +127,25 @@ $(document).ready(function() {
       time_start = "From: " + event.start.format("HH:mm") + "-";
       time_end = "To: " + event.end.format("HH:mm");
 
-      btn_edit = "<a href=\"schedules/\" + event.id + \"/edit\">Edit</a>";
-      btn_delete = "<a href=\"schedules/\" + event.id + \"data-method=\"delete\" data-confirm=\"You sure?\">Delete</a>";
-      btn_detail = "<a href=\"schedules/\" + event.id + \">Detail</a>"
+      btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
+      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>";
+      btn_delete_repeat = "<a href='repeats/" + event.repeat_id + "' data-method='delete' data-confirm='You sure?'>Delete all repeat</a>";
+      btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
+
       if (!event.url) {
         if(event.user_id == current_user_id) {
+          var content = "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete;
+          if (event.repeat_id != null) {
+              content += "</td><td>" + btn_delete_repeat + "</td></tr></table>";
+          }else {
+            content += "</td></tr></table>";
+          }
           element.popover({
             placement: "top",
             html: true,
             container: ".fc-body",
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
+            content: content,
           });
         } else {
           element.popover({

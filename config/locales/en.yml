@@ -29,6 +29,7 @@ en:
 
   btn_edit: Edit
   btn_delete: Delete
+  btn_delete_repeat: Delete all repeat
   btn_back: Back
   are_you_sure: Are you sure?
   btn_detail: Detail
