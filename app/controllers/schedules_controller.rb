@@ -55,6 +55,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find params[:id]
     authorize! :update, @schedule 
     if @schedule.update_attributes schedule_params
+      EditRepeatWorker.perform_async(@schedule.id) if params[:edit_repeat].present?
       flash[:success] = t(:update_flash)
       redirect_to root_path
     else
