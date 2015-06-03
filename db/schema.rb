@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421070828) do
+ActiveRecord::Schema.define(version: 20150601031619) do
+
+  create_table "repeats", force: :cascade do |t|
+    t.integer  "repeat_type", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -37,6 +43,8 @@ ActiveRecord::Schema.define(version: 20150421070828) do
     t.integer  "room_id",     limit: 4
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
+    t.integer  "setting_id",  limit: 4
+    t.integer  "repeat_id",   limit: 4
   end
 
   add_index "schedules", ["room_id"], name: "index_schedules_on_room_id", using: :btree

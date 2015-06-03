@@ -39,6 +39,9 @@ gem 'websocket-rails'
 gem 'cancancan', '~> 1.10.1'
 
 gem 'kendoui-rails', '~> 0.1.1'
+gem 'redis-rails'
+gem 'sidekiq', '~> 3.3.4'
+gem "rails_config"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

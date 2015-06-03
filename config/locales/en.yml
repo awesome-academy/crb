@@ -57,11 +57,13 @@ en:
       start_time: Start time
       finish_time: Finish time
       room: Room
+      repeat: Repeat
       members: Members
       description: Description
       compose_description: Compose description...
       submit: Submit
       create_by: Create by
+      edit_repeat: Edit all repeat
 
     edit_event_title: Edit event
 
