@@ -15,7 +15,7 @@ class RepeatWorker
       @new_schedule = Schedule.new schedule.attributes.except "id"
       @new_schedule.start_time = start_time + (num + 1).days
       @new_schedule.finish_time = finish_time + (num + 1).days
-  
+
       @new_schedule.save if @new_schedule.valid?
     end
   end

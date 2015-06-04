@@ -9,7 +9,7 @@ class Ability
     else
       can :read, :all
     end
-    
+
     can :create, Schedule
     can [:edit, :update, :destroy], Schedule, user_id: user.id
   end
