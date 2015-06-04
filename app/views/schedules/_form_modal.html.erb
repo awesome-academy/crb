@@ -10,7 +10,7 @@
       <div class="col-md-5 start-date" >
         <%= f.label t('schedules.form.start_time') %>
         <div class='input-group date'>
-          <%= f.text_field :start_time, placeholder: t('schedules.form.start_time'), 
+          <%= f.text_field :start_time, placeholder: t('schedules.form.start_time'),
             style: 'width: 200px' %>
         </div>
       </div>
@@ -18,7 +18,7 @@
       <div class="col-md-5 finish-date">
         <%= f.label t('schedules.form.finish_time') %>
         <div class="input-group date">
-          <%= f.text_field :finish_time, placeholder: t('schedules.form.finish_time'), 
+          <%= f.text_field :finish_time, placeholder: t('schedules.form.finish_time'),
             style: 'width: 200px' %>
         </div>
       </div>
@@ -34,19 +34,19 @@
 
     <div class="col-md-12">
       <%= f.label t('schedules.form.room') %><br/>
-      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {}, 
+      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {},
         {class: 'select-room form-control'} %>
     </div>
 
     <div class="col-md-12">
       <%= f.label t('schedules.form.members') %><br/>
-      <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {},  
+      <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {},
         {class: 'select-members form-control', multiple: :multiple} %>
     </div>
 
     <div class="col-md-12">
       <%= f.label t('schedules.form.description') %>
-      <%= f.text_area :description, placeholder: t('schedules.form.compose_description'), 
+      <%= f.text_area :description, placeholder: t('schedules.form.compose_description'),
         class: 'form-control' %>
     </div>
   </div>

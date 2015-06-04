@@ -10,7 +10,7 @@ class RepeatsController < ApplicationController
 
       if start_time && finish_time
         number_of_schedules = start_time.send("end_of_#{repeat_type}").day - start_time.day + 1
-  
+
         number_of_schedules.times do |num|
           if num > 0
             schedule.start_time = start_time + num.days
@@ -22,7 +22,7 @@ class RepeatsController < ApplicationController
       end
 
       render json: {overlap_time_days: daylist}, status: :ok
-    else 
+    else
       redirect_to root_url
     end
   end
