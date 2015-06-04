@@ -1,18 +1,19 @@
 $(document).ready(function() {
   $(window).trigger("resize");
 
-  var schedule_query_url = '/schedules.json';
+  var schedule_query_url = "/schedules.json";
+  var MyCalendar = $("#calendar");
+  var MyMiniCalendar = $("#mini-calendar");
 
   setTimeout(function() {
-    $('.hide-flash').fadeOut('normal');
+    $(".hide-flash").fadeOut("normal");
   }, 4000);
 
-  var current_user_id = $('body').data('current-user-id');
+  var current_user_id = $("body").data("current-user-id");
   var view_type = localStorage.getItem("view_type");
 
   function startChange() {
-    var startDate = kendo_start.value(),
-    endDate = kendo_finish.value();
+    var startDate = kendo_start.value(), endDate = kendo_finish.value();
 
     if (startDate) {
       startDate = new Date(startDate);
@@ -28,8 +29,7 @@ $(document).ready(function() {
   }
 
   function endChange() {
-    var endDate = kendo_finish.value(),
-    startDate = kendo_start.value();
+    var endDate = kendo_finish.value(), startDate = kendo_start.value();
 
     if (endDate) {
       endDate = new Date(endDate);
@@ -46,21 +46,21 @@ $(document).ready(function() {
 
   $("#room_selector").change(function(){
     room_id = $(this).val();
-    schedule_query_url = '/schedules.json?room_id=' + room_id;
-    $('#calendar').fullCalendar('refetchEvents');
+    schedule_query_url = "/schedules.json?room_id=" + room_id;
+    MyCalendar.fullCalendar("refetchEvents");
   });
 
-  $('#calendar').fullCalendar({
+  MyCalendar.fullCalendar({
     header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaFourDay,agendaDay'
+      left: "prev,next today",
+      center: "title",
+      right: "month,agendaWeek,agendaFourDay,agendaDay,agendaList"
     },
     views: {
       agendaFourDay: {
-        type: 'agenda',
+        type: "agenda",
         duration: {days: 4},
-        buttonText: '4 days'
+        buttonText: "4 days"
       }
     },
     defaultView: view_type == "undefined" ? "month" : view_type,
@@ -80,7 +80,7 @@ $(document).ready(function() {
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: schedule_query_url,
-        type: 'GET',
+        type: "GET",
         success: function(doc) {
           var events = [];
           if(doc.schedules){
@@ -101,8 +101,8 @@ $(document).ready(function() {
       });
     },
     select: function (start, end, jsEvent, view) {
-      if((view.type != 'month') && (start._d >= (new Date()))) {
-        $("#modal-form").modal('show');
+      if((view.type != "month") && (start._d >= (new Date()))) {
+        $("#modal-form").modal("show");
         var start_event = new Date(start._d.setTime(start._d.getTime() + (start._d.getTimezoneOffset() * 60000)));
         var finish_event = new Date(end._d.setTime(end._d.getTime() + (end._d.getTimezoneOffset() * 60000)));
         $("#schedule_start_time").kendoDateTimePicker({
@@ -119,107 +119,83 @@ $(document).ready(function() {
         }).data("kendoDateTimePicker");
       }
       else {
-        $('#calendar').fullCalendar('unselect');
+        MyCalendar.fullCalendar("unselect");
       }
     },
     eventRender: function (event, element) {
-      time_start = "From: " + event.start.format('HH:mm') + "-";
-      time_end = "To: " + event.end.format('HH:mm');
+      time_start = "From: " + event.start.format("HH:mm") + "-";
+      time_end = "To: " + event.end.format("HH:mm");
 
-      btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
-      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>";
-      btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
+      btn_edit = "<a href=\"schedules/\" + event.id + \"/edit\">Edit</a>";
+      btn_delete = "<a href=\"schedules/\" + event.id + \"data-method=\"delete\" data-confirm=\"You sure?\">Delete</a>";
+      btn_detail = "<a href=\"schedules/\" + event.id + \">Detail</a>"
       if (!event.url) {
         if(event.user_id == current_user_id) {
           element.popover({
-            placement: 'top',
+            placement: "top",
             html: true,
-            container: '.fc-body',
+            container: ".fc-body",
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
             content: "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
           });
-        }else {
+        } else {
           element.popover({
-            placement: 'top',
+            placement: "top",
             html: true,
-            container: '.fc-body',
+            container: ".fc-body",
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
             content: "<table><tr><td>" + btn_detail + "</td></tr></table>",
           });
         };
-        $('body').on('click', function (e) {
-          if (!element.is(e.target) && element.has(e.target).length == 0 && $('.popover').has(e.target).length == 0)
-          element.popover('hide');
+        $("body").on("click", function (e) {
+          if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
+          element.popover("hide");
         });
       }
     },
     dayClick: function(date, jsEvent, view) {
-      if((view.type == 'month' && date.format() >= (new Date()).toISOString().slice(0, 10)) || date._d >= (new Date())) {
-        $("#modal-form").modal('show');
+      if((view.type == "month" && date.format() >= (new Date()).toISOString().slice(0, 10)) || date._d >= (new Date())) {
+        $("#modal-form").modal("show");
         var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
         var kendo_start = $("#schedule_start_time").kendoDateTimePicker({
           value: TimeZoned,
           min: new Date(),
-          change: startChange,
+          change: MyCalendar.fullCalendar.trigger("startChange"),
           parseFormats: ["MM/dd/yyyy"],
           format: "yyyy-MM-dd HH:mm",
           timeFormat: "HH:mm",
-          open: function() { $('.k-weekend a').bind('click', function() { return false; }); },
+          open: function() {
+            $(".k-weekend a").bind("click", function() {
+              return false;
+            });
+          },
         }).data("kendoDateTimePicker");
         var kendo_finish = $("#schedule_finish_time").kendoDateTimePicker({
           value: TimeZoned,
-          change: endChange,
+          change: MyCalendar.fullCalendar.trigger("endChange"),
           parseFormats: ["MM/dd/yyyy"],
           format: "yyyy-MM-dd HH:mm",
           timeFormat: "HH:mm",
-          open: function() { $('.k-weekend a').bind('click', function() { return false; }); },
+          open: function() {
+            $(".k-weekend a").bind("click", function() {
+              return false;
+            });
+          },
         }).data("kendoDateTimePicker");
 
         kendo_finish.min(kendo_start.value());
-      }
-      function startChange() {
-        var startDate = kendo_start.value(),
-        endDate = kendo_finish.value();
-
-        if (startDate) {
-          startDate = new Date(startDate);
-          startDate.setDate(startDate.getDate());
-          kendo_finish.min(startDate);
-        } else if (endDate) {
-          kendo_start.max(new Date(endDate));
-        } else {
-          endDate = new Date();
-          kendo_start.max(endDate);
-          kendo_finish.min(endDate);
-        }
-      }
-      function endChange() {
-        var endDate = kendo_finish.value(),
-        startDate = kendo_start.value();
-
-        if (endDate) {
-          endDate = new Date(endDate);
-          endDate.setDate(endDate.getDate());
-          kendo_start.max(endDate);
-        } else if (startDate) {
-          kendo_finish.min(new Date(startDate));
-        } else {
-          endDate = new Date();
-          kendo_start.max(endDate);
-          kendo_finish.min(endDate);
-        }
       }
     },
     viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
     },
     eventAfterAllRender: function (view, element) {
-      $("#calendar").find('.fc-left').append($("#room_selector"));
+      MyCalendar.find(".fc-left").append($("#room_selector"));
     }
   });
 
-  $("#modal-form").on('hidden.bs.modal', function(){
-    $(this).find('form')[0].reset();
+  $("#modal-form").on("hidden.bs.modal", function(){
+    $(this).find("form")[0].reset();
     $(".select-members").select2("val", "");
     $("#error_explanation").remove();
   });
@@ -230,7 +206,11 @@ $(document).ready(function() {
     parseFormats: ["MM/dd/yyyy"],
     format: "yyyy-MM-dd HH:mm",
     timeFormat: "HH:mm",
-    open: function() { $('.k-weekend a').bind('click', function() { return false; }); },
+    open: function() {
+      $(".k-weekend a").bind("click", function() {
+        return false;
+      });
+    },
   }).data("kendoDateTimePicker");
 
   var kendo_finish = $("#schedule_finish_time").kendoDateTimePicker({
@@ -238,43 +218,47 @@ $(document).ready(function() {
     parseFormats: ["MM/dd/yyyy"],
     format: "yyyy-MM-dd HH:mm",
     timeFormat: "HH:mm",
-    open: function() { $('.k-weekend a').bind('click', function() { return false; }); },
+    open: function() {
+      $(".k-weekend a").bind("click", function() {
+        return false;
+      });
+    },
   }).data("kendoDateTimePicker");
 
   kendo_start.max(kendo_finish.value());
   kendo_finish.min(kendo_start.value());
 
-  $('.select-room').select2({
+  $(".select-room").select2({
     width: 300
   });
 
-  $('.select-members').select2({
+  $(".select-members").select2({
     width: "100%"
   });
 
-  $('#mini-calendar').datepicker({
+  MyMiniCalendar.datepicker({
     inline: true,
     sideBySide: true,
     todayHighlight: true,
     showButtonPanel: true,
-  }).on('changeDate', function(ev){
-    $('#calendar').fullCalendar('gotoDate', new Date(Date.parse(ev.date)));
-    $('#calendar').fullCalendar('changeView','month');
-    $('#calendar').fullCalendar('changeView','agendaDay');
+  }).on("changeDate", function(ev){
+    MyCalendar.fullCalendar("gotoDate", new Date(Date.parse(ev.date)));
+    MyCalendar.fullCalendar("changeView","month");
+    MyCalendar.fullCalendar("changeView","agendaDay");
   });
 
-  $('.fc-prev-button').click(function() {
-    moment = $('#calendar').fullCalendar('getDate');
-    $('#mini-calendar').datepicker('update', moment._d);
+  $(".fc-prev-button").click(function() {
+    moment = MyCalendar.fullCalendar("getDate");
+    MyMiniCalendar.datepicker("update", moment._d);
   });
 
-  $('.fc-next-button').click(function() {
-    moment = $('#calendar').fullCalendar('getDate');
-    $('#mini-calendar').datepicker('update', moment._d);
+  $(".fc-next-button").click(function() {
+    moment = MyCalendar.fullCalendar("getDate");
+    MyMiniCalendar.datepicker("update", moment._d);
   });
 
-  $('.fc-today-button').click(function() {
-    moment = $('#calendar').fullCalendar('getDate');
-    $('#mini-calendar').datepicker('update', moment._d);
+  $(".fc-today-button").click(function() {
+    moment = MyCalendar.fullCalendar("getDate");
+    MyMiniCalendar.datepicker("update", moment._d);
   });
 });
