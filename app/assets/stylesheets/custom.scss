@@ -123,23 +123,6 @@ h3 {
   }
 }
 
-.fc-row {
-  overflow: visible !important;
-}
-
-.fc-rigid {
-  overflow: visible !important;
-}
-
-.table-col th {
-  text-align: center;
-}
-
-#room_selector {
-  height: 2.1em;
-  border-radius: 4px;
-}
-
 #mini-calendar {
   width: 100%;
   .table-condensed {
@@ -170,4 +153,28 @@ h3 {
 
 .btn.btn-primary {
   margin-left: 8px;
+}
+
+#calendar {
+  .fc-event {
+    border: none;
+    border-radius: 0;
+  }
+
+  .fc-row {
+    overflow: visible !important;
+  }
+
+  .fc-rigid {
+    overflow: visible !important;
+  }
+
+  .table-col th {
+    text-align: center;
+  }
+
+  #room_selector {
+    height: 2.1em;
+    border-radius: 4px;
+  }
 }

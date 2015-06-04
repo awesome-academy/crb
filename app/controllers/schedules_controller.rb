@@ -1,9 +1,9 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user! 
+  before_action :authenticate_user!
 
   def index
     @today_schedules = Schedule.today_schedule
-    
+
     if params[:user_id].nil?
       @schedules = Schedule.filter_by_room params[:room_id]
     else
@@ -31,12 +31,12 @@ class SchedulesController < ApplicationController
       respond_to do |format|
         format.html {redirect_to root_path}
         format.js
-      end  
+      end
     else
       respond_to do |format|
         format.html {render :new}
         format.js
-      end      
+      end
     end
   end
 
@@ -68,7 +68,7 @@ class SchedulesController < ApplicationController
       flash[:success] = t(:delete_flash)
       redirect_to root_path
     end
-  end  
+  end
 
   private
   def schedule_params

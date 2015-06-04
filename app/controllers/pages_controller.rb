@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @today_schedules = Schedule.today_schedule
+    @rooms = Room.select(:id, :name).collect {|r| [r.name, r.id]}
     @schedule = Schedule.new
   end
 end

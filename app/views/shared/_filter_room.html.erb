@@ -1,2 +1,2 @@
-<%= select("room", "selector", Room.all.collect {|r| [r.name, r.id]}, {include_blank: 'All'}, {autocomplete: false}) %>
+<%= select("room", "selector", @rooms, {include_blank: 'All'}, {autocomplete: false}) %>
 
