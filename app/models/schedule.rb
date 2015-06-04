@@ -37,7 +37,8 @@ class Schedule < ActiveRecord::Base
       finish_time: finish_time,
       user_id: user_id,
       room_name: room_name,
-      room_color: room_color
+      room_color: room_color,
+      repeat_id: repeat_id
     }
   end
 

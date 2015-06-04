@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
 
   get 'repeats/confirm'
+  resources :repeats, only: [:destroy]
 end

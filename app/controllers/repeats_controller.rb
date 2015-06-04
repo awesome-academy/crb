@@ -27,6 +27,20 @@ class RepeatsController < ApplicationController
     end
   end
 
+  def destroy
+    @repeat = Repeat.find params[:id]
+    @repeat.destroy
+    if params[:_method]
+      flash[:success] = t(:delete_flash)
+      redirect_to root_path
+    else
+      respond_to do |format|
+        format.html {redirect_to user_schedules_path(current_user)}
+        format.js
+      end
+    end
+  end
+
   private
   def schedule_params
     params.require(:schedule).permit :start_time, :finish_time, :room_id
