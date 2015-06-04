@@ -136,7 +136,7 @@ $(document).ready(function() {
           element.popover({
             placement: "top",
             html: true,
-            container: ".fc-body",
+            container: "body",
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
             content: "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete + "</td></tr></table>",
           });
@@ -144,7 +144,7 @@ $(document).ready(function() {
           element.popover({
             placement: "top",
             html: true,
-            container: ".fc-body",
+            container: "body",
             title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
             content: "<table><tr><td>" + btn_detail + "</td></tr></table>",
           });
