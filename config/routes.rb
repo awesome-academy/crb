@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :schedules, except: [:new, :create, :show]
   end
+
+  get 'repeats/confirm'
 end

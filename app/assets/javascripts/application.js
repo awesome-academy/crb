@@ -22,4 +22,4 @@
 //= require select2
 //= require kendo.web.min
 //= require custom
-
+//= require repeats
