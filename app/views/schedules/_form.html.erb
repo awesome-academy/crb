@@ -60,6 +60,8 @@
         <%= f.label t('schedules.form.edit_repeat'), class: "col-md-2" %>
         <%= check_box_tag :edit_repeat, true, false, class: "col-md-1" %>
       </div>
+
+      <%= hidden_field_tag :schedule_id, @schedule.id %>
     <% end %>
   </div>
   <div class="col-md-12 well">
