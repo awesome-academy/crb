@@ -63,6 +63,7 @@ $(document).ready(function() {
         buttonText: "4 days"
       }
     },
+
     defaultView: view_type == "undefined" ? "month" : view_type,
     defaultDate: new Date(),
     editable: true,
@@ -77,6 +78,7 @@ $(document).ready(function() {
     keepOpen: false,
     selectable: true,
     selectHelper: true,
+
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: schedule_query_url,
@@ -101,6 +103,15 @@ $(document).ready(function() {
         }
       });
     },
+
+    eventResize: function(event, delta, revertFunc) {
+      revertFunc();
+    },
+
+    eventDrop: function (event, dayta, revertFunc) {  
+      revertFunc(); 
+    },
+
     select: function (start, end, jsEvent, view) {
       if((view.type != "month") && (start._d >= (new Date()))) {
         $("#modal-form").modal("show");
