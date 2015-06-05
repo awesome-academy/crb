@@ -1,0 +1,50 @@
+<hr>
+<div>
+  <span class="expand"><%= t('expand_all') %></span>
+  <span class="coll"><%= t('collapse_all') %></span>
+</div>
+<hr>
+<div class="s-agenda">
+  <ul>
+    <% @schedule_days.each do |schedule_day, schedules| %>
+      <li>
+        <span class="s-day"> 
+          <%= schedule_day.strftime("%A, %b %d") %>  
+        </span>
+
+        <ul><% schedules.each do |schedule| %>
+          <li>
+            <span class="s-hour">
+              <%= schedule.start_time.strftime("%I:%M")%> - 
+              <%= schedule.finish_time.strftime("%I:%M") %> 
+            </span>
+            <span data-event-id="<%=schedule.id%>" class="plus s-title">
+              <%= image_tag "plus.png", size: "10x10", alt: "plus", class: "img-rounded" %>
+              <%= schedule.title %>
+            </span>
+
+            <div class="s-detail" id="event-<%= schedule.id %>">
+              <span class="s-description">
+                Description: &nbsp;&nbsp;&nbsp;<%= schedule.description %>
+              </span>
+              <hr>
+              <span class="s-v-detail">
+                <%= link_to t('btn_detail'), schedule_path(schedule) %>
+              </span><br>
+              <% if schedule.user_id == current_user.id %>
+                <span class="s-edit">
+                  <%= link_to t('btn_edit'), edit_user_schedule_path(current_user, schedule) %>
+                </span>
+                <span class="s-delete">
+                  <%= link_to t('btn_delete'), user_schedule_path(current_user, schedule), method: :delete, remote: true, 
+                    data: {confirm: t('are_you_sure')} %> 
+                </span>
+              <% end %>
+            </div>
+          </li><% end %>
+        </ul>
+        <hr>
+      </li>
+    <% end %>
+  </ul>
+</div>
