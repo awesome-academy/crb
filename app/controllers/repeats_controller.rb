@@ -1,4 +1,6 @@
 class RepeatsController < ApplicationController
+  load_and_authorize_resource only: :destroy
+
   def confirm
     if schedule_params
       daylist = []
@@ -42,8 +44,8 @@ class RepeatsController < ApplicationController
   end
 
   def destroy
-    @repeat = Repeat.find params[:id]
     @repeat.destroy
+
     unless params[:_method]
       respond_to do |format|
         format.html {redirect_to user_schedules_path(current_user)}

@@ -8,14 +8,22 @@
     <td><div class="<%= schedule.state %>-event"><%= schedule.state %></div></td>
     <td>
       <div class="col-md-12">
-        <%= link_to t('btn_edit'), edit_user_schedule_path(current_user, schedule),
-          class: "btn btn-success" %>
-        <%= link_to t('btn_delete'), user_schedule_path(current_user, schedule),
-          method: :delete, class: "btn btn-danger", remote: true,
-          data: {confirm: t('are_you_sure')} %>
+        <% if can? :update, schedule %>
+          <%= link_to t('btn_edit'), edit_user_schedule_path(current_user, schedule),
+            class: "btn btn-success" %>
+        <% end %>
+
+        <% if can? :destroy, schedule %>
+          <%= link_to t('btn_delete'), user_schedule_path(current_user, schedule),
+            method: :delete, class: "btn btn-danger", remote: true,
+            data: {confirm: t('are_you_sure')} %>
+        <% end %>
+
         <% if schedule.repeat_id.present? %>
-          <%= link_to t('btn_delete_repeat'), repeat_path(schedule.repeat_id),
-            method: :delete, class: "btn btn-danger", remote: true, data: {confirm: t('are_you_sure')} %>
+          <% if can? :destroy, schedule.repeat %>
+            <%= link_to t('btn_delete_repeat'), repeat_path(schedule.repeat_id),
+              method: :delete, class: "btn btn-danger", remote: true %>
+          <% end %>
         <% end %>
       </div>
     </td>

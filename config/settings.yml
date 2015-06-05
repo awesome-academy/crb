@@ -4,3 +4,6 @@ repeat_types:
 date: "%d/%m/%Y"
 time: "%H:%M"
 per_page: 2
+user_roles:
+  admin: "admin"
+  normal: "normal"
