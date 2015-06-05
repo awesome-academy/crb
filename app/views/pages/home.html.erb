@@ -1,5 +1,4 @@
 <% provide :title, t('pages.home.title') %>
-
 <% if user_signed_in? %>
   <% content_for :btn_new_schedule do %>
     <%= link_to_if(can?(:create, Schedule), t('pages.home.create_event'), new_schedule_path, class: "btn btn-primary"){} %>
@@ -12,6 +11,12 @@
     <div class="containers">
       <div id='mini-calendar'></div>
     </div>
+
+    <b><li id="my_calendar"><%= t("pages.home.my_calendar") %></li></b>
+    <ul class="menu_my_calendar" id="my_schedules"></ul>
+
+    <b><li id="shared_calendar"><%= t("pages.home.shared_calendar") %></li></b>
+    <ul class="menu_shared_calendar" id="shared_schedules"></ul>
   <% end %>
 <% end %>
 

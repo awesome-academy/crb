@@ -23,3 +23,4 @@
 //= require kendo.web.min
 //= require custom
 //= require repeats
+//= require schedules

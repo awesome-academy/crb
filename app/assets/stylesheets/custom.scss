@@ -36,7 +36,7 @@ aside {
   .containers {
     display: flex;
     overflow: hidden;
-    height: 495px;
+    height: 200px;
     padding-top: 18px;
     position: relative;
     width: 100%;
@@ -177,4 +177,8 @@ h3 {
     height: 2.1em;
     border-radius: 4px;
   }
+}
+.shared_schedules a:hover, .shared_schedules a:focus {
+  text-decoration: none;
+  color: black;
 }

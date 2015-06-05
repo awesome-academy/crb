@@ -16,4 +16,9 @@ Rails.application.routes.draw do
 
   get 'repeats/confirm'
   resources :repeats, only: [:destroy]
+
+  namespace :api do
+    resources :my_schedules, only: :index
+    resources :shared_schedules, only: :index
+  end
 end
