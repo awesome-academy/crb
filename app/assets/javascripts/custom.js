@@ -108,8 +108,8 @@ $(document).ready(function() {
       revertFunc();
     },
 
-    eventDrop: function (event, dayta, revertFunc) {  
-      revertFunc(); 
+    eventDrop: function (event, dayta, revertFunc) {
+      revertFunc();
     },
 
     select: function (start, end, jsEvent, view) {
@@ -139,7 +139,7 @@ $(document).ready(function() {
       time_end = "To: " + event.end.format("HH:mm");
 
       btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
-      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>";
+      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-remote='true' data-confirm='You sure?'>Delete</a>";
       btn_delete_repeat = "<a href='repeats/" + event.repeat_id + "' data-method='delete' data-remote='true' data-confirm='You sure?'>Delete all repeat</a>";
       btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
 

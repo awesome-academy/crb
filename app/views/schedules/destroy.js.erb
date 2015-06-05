@@ -1,1 +1,3 @@
 $('#event_user_<%= @schedule.id %>').remove();
+$("#calendar").fullCalendar("refetchEvents");
+$(".popover").remove();

@@ -53,7 +53,7 @@ class SchedulesController < ApplicationController
 
   def update
     @schedule = Schedule.find params[:id]
-    authorize! :update, @schedule 
+    authorize! :update, @schedule
     if @schedule.update_attributes schedule_params
       EditRepeatWorker.perform_async(@schedule.id) if params[:edit_repeat].present?
       flash[:success] = t(:update_flash)
@@ -67,8 +67,10 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find params[:id]
     @schedule.destroy
     unless params[:user_id]
-      flash[:success] = t(:delete_flash)
-      redirect_to root_path
+      respond_to do |format|
+        format.html {redirect_to root_path}
+        format.js
+      end
     end
   end
 

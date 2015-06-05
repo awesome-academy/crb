@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20150605035012) do
     t.integer  "room_id",     limit: 4
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
-    t.integer  "setting_id",  limit: 4
     t.integer  "repeat_id",   limit: 4
   end
 
