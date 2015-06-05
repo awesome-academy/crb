@@ -1,23 +1,37 @@
 class RepeatsController < ApplicationController
   def confirm
-    repeat_type = params[:repeat]
-
-    if repeat_type.present?
+    if schedule_params
       daylist = []
       schedule = Schedule.new schedule_params
       start_time = schedule.start_time
       finish_time = schedule.finish_time
 
       if start_time && finish_time
-        number_of_schedules = start_time.send("end_of_#{repeat_type}").day - start_time.day + 1
+        if repeat_type = params[:repeat]
+          number_of_schedules = start_time.send("end_of_#{repeat_type}").day - start_time.day + 1
 
-        number_of_schedules.times do |num|
-          if num > 0
-            schedule.start_time = start_time + num.days
-            schedule.finish_time = finish_time + num.days
+          number_of_schedules.times do |num|
+            if num > 0
+              schedule.start_time = start_time + num.days
+              schedule.finish_time = finish_time + num.days
+            end
+
+            daylist << schedule.start_time.day if check_overlap_time_of schedule
           end
+        end
 
-          daylist << schedule.start_time.day if check_overlap_time_of schedule
+        if params[:edit_repeat]
+          sample_schedule = Schedule.find params[:schedule_id]
+          repeat = Repeat.find sample_schedule.repeat_id
+          schedules = repeat.schedules
+
+          schedules.each do |repeated_schedule|
+            repeated_day = repeated_schedule.start_time.day
+            repeated_schedule.start_time = schedule.start_time.change day: repeated_day
+            repeated_schedule.finish_time = schedule.finish_time.change day: repeated_day
+            repeated_schedule.room_id = schedule.room_id
+            daylist << repeated_day if check_overlap_time_of repeated_schedule
+          end
         end
       end
 

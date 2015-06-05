@@ -16,7 +16,6 @@ $(document).ready ->
           if overlap_time_days.length > 0
             retVal = confirm "Overlap Time Days: #{overlap_time_days} \nDo you want to continue ?"
             if retVal is true
-              alert "confirm"
               $("[class *=schedule]").submit()
             else
               return false
