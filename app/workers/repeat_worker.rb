@@ -1,8 +1,8 @@
 class RepeatWorker
   include Sidekiq::Worker
 
-  def perform schedule_id, repeat_type
-    repeat = Repeat.create repeat_type: repeat_type
+  def perform schedule_id, repeat_type, current_user_id
+    repeat = Repeat.create repeat_type: repeat_type, user_id: current_user_id
 
     schedule = Schedule.find schedule_id
     schedule.update_attributes repeat_id: repeat.id

@@ -15,7 +15,7 @@
           data: {confirm: t('are_you_sure')} %>
         <% if schedule.repeat_id.present? %>
           <%= link_to t('btn_delete_repeat'), repeat_path(schedule.repeat_id),
-            method: :delete, class: "btn btn-danger", remote: true %>
+            method: :delete, class: "btn btn-danger", remote: true, data: {confirm: t('are_you_sure')} %>
         <% end %>
       </div>
     </td>

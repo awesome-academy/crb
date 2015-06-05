@@ -30,12 +30,14 @@ class RepeatsController < ApplicationController
   def destroy
     @repeat = Repeat.find params[:id]
     @repeat.destroy
-    if params[:_method]
-      flash[:success] = t(:delete_flash)
-      redirect_to root_path
-    else
+    unless params[:_method]
       respond_to do |format|
         format.html {redirect_to user_schedules_path(current_user)}
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to root_path}
         format.js
       end
     end

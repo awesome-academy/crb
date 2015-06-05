@@ -129,7 +129,7 @@ $(document).ready(function() {
 
       btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
       btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-confirm='You sure?'>Delete</a>";
-      btn_delete_repeat = "<a href='repeats/" + event.repeat_id + "' data-method='delete' data-confirm='You sure?'>Delete all repeat</a>";
+      btn_delete_repeat = "<a href='repeats/" + event.repeat_id + "' data-method='delete' data-remote='true' data-confirm='You sure?'>Delete all repeat</a>";
       btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
 
       if (!event.url) {
