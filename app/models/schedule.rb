@@ -1,4 +1,6 @@
 class Schedule < ActiveRecord::Base
+  include ScheduleJson
+
   belongs_to :user
   belongs_to :room
   belongs_to :repeat
@@ -31,19 +33,6 @@ class Schedule < ActiveRecord::Base
   delegate :color, to: :room, prefix: true
 
   after_create :notification_users
-
-  def min_json
-    {
-      id: id,
-      title: title,
-      start_time: start_time,
-      finish_time: finish_time,
-      user_id: user_id,
-      room_name: room_name,
-      room_color: room_color,
-      repeat_id: repeat_id
-    }
-  end
 
   private
   def valid_room
