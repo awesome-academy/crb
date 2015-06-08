@@ -1,8 +1,8 @@
 repeat_types:
   week: "Weekly"
   month: "Monthly"
-date: "%d/%m/%Y"
-time: "%H:%M"
+date_format: "%d/%m/%Y"
+time_format: "%H:%M"
 per_page: 2
 user_roles:
   admin: "admin"

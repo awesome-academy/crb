@@ -1,10 +1,10 @@
 $(document).ready(function() {
   $("#my_calendar").click(function(){
-    $(".menu_my_calendar").slideToggle();
+    changeState($("#my_schedules"));
   });
 
   $("#shared_calendar").click(function(){
-    $(".menu_shared_calendar").slideToggle();
+    changeState($("#shared_schedules"));
   });
 
   $.get( "/api/shared_schedules", function(data) {
@@ -15,3 +15,18 @@ $(document).ready(function() {
     $("#my_schedules").html(data);
   });
 });
+
+function changeState(element) {
+  element.slideToggle();
+  var icon = element.parent().find("span.glyphicon");
+
+  if (element.attr("class") == "expand") {
+    element.attr("class", "collapse");
+    icon.removeClass("glyphicon-chevron-down");
+    icon.addClass("glyphicon-chevron-right")
+  } else {
+    element.attr("class", "expand");
+    icon.removeClass("glyphicon-chevron-right");
+    icon.addClass("glyphicon-chevron-down")
+  }
+};
