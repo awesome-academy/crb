@@ -135,6 +135,7 @@ $(document).ready(function() {
       }
     },
     eventRender: function (event, element) {
+      $(".popover").hide();
       time_start = "From: " + event.start.format("HH:mm");
       time_end = "To: " + event.end.format("HH:mm");
       room = "Room: " + event.room
