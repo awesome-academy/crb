@@ -135,36 +135,53 @@ $(document).ready(function() {
       }
     },
     eventRender: function (event, element) {
-      time_start = "From: " + event.start.format("HH:mm") + "-";
+      time_start = "From: " + event.start.format("HH:mm");
       time_end = "To: " + event.end.format("HH:mm");
+      room = "Room: " + event.room
+      detail = "schedules/" + event.id
+      edit = "schedules/" + event.id + "/edit"
+      deleteRepeat = "repeats/" + event.repeat_id
 
-      btn_edit = "<a href='schedules/" + event.id + "/edit'>Edit</a>";
-      btn_delete = "<a href='schedules/" + event.id + "' data-method='delete' data-remote='true' data-confirm='You sure?'>Delete</a>";
-      btn_delete_repeat = "<a href='repeats/" + event.repeat_id + "' data-method='delete' data-remote='true' data-confirm='You sure?'>Delete all repeat</a>";
-      btn_detail = "<a href='schedules/" + event.id + "'>Detail</a>"
+      $(".title-popover").text(event.title);
+      $(".start-time-popover").text(time_start);
+      $(".finish-time-popover").text(time_end);
+      $(".room-popover").text(room);
+      $("#detail-schedule-popover").attr("href", detail);
 
       if (!event.url) {
         if(event.user_id == current_user_id) {
-          var content = "<table><tr><td>" + btn_detail + "</td><td>" + btn_edit + "</td><td>" + btn_delete;
-          if (event.repeat_id != null) {
-              content += "</td><td>" + btn_delete_repeat + "</td></tr></table>";
-          }else {
-            content += "</td></tr></table>";
+          if(event.repeat_id == null) {
+            $("#delete-repeat-popover").attr("href", null);
+            $("#delete-repeat-popover").text("");
+          } else {
+            $("#delete-repeat-popover").attr("href", deleteRepeat);
+            $("#delete-repeat-popover").text("Delete all repeat");
           }
+
+          $("#edit-schedule-popover").attr("href", edit);
+          $("#edit-schedule-popover").text("Edit");
+          $("#delete-schedule-popover").attr("href", detail);
+          $("#delete-schedule-popover").text("Delete");
+
           element.popover({
             placement: "top",
             html: true,
             container: "body",
-            title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: content,
+            content: $(".form-popover").html(),
           });
         } else {
+          $("#edit-schedule-popover").attr("href", null);
+          $("#edit-schedule-popover").text("");
+          $("#delete-schedule-popover").attr("href", null);
+          $("#delete-schedule-popover").text("");
+          $("#delete-repeat-popover").attr("href", null);
+          $("#delete-repeat-popover").text("");
+
           element.popover({
             placement: "top",
             html: true,
             container: "body",
-            title: "<b>" + event.title + "</b><br/><br/>" + time_start + time_end + "</br>Room: " + event.room,
-            content: "<table><tr><td>" + btn_detail + "</td></tr></table>",
+            content: $(".form-popover").html(),
           });
         };
         $("body").on("click", function (e) {
