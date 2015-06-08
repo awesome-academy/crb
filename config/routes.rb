@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :my_schedules, only: :index
     resources :shared_schedules, only: :index
+    resources :schedules, only: :index
   end
 end
