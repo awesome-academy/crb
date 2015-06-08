@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(window).trigger("resize");
 
-  var schedule_query_url = "/schedules.json";
+  var schedule_query_url = "/api/schedules.json";
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
   $("#room_selector").change(function(){
     room_id = $(this).val();
-    schedule_query_url = "/schedules.json?room_id=" + room_id;
+    schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
   });
 

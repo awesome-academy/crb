@@ -4,17 +4,8 @@ class SchedulesController < ApplicationController
   def index
     @today_schedules = Schedule.today_schedule
 
-    if params[:user_id].nil?
-      @schedules = Schedule.filter_by_room params[:room_id]
-    else
-      @user = User.find params[:user_id]
-      @schedules = @user.schedules.filter_by_room params[:room_id]
-    end
-
-    respond_to do |format|
-      format.html
-      format.json {render json: {schedules: @schedules.map(&:min_json)}}
-    end
+    @user = User.find params[:user_id]
+    @schedules = @user.schedules.filter_by_room params[:room_id]
   end
 
   def new
