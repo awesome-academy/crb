@@ -3,14 +3,15 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    if user.is_admin?
-      can :manager, :all
-      can :destroy, User
-    else
-      can :read, :all
-    end
 
-    can :create, Schedule
-    can [:edit, :update, :destroy], Schedule, user_id: user.id
+    case
+    when user.admin?
+      can :manage, :all
+    when user.normal?
+      can [:read, :update], User, id: user.id
+      can [:create, :read], Schedule
+      can [:update, :destroy], Schedule, user_id: user.id
+      can :destroy, Repeat, user_id: user.id
+    end
   end
 end

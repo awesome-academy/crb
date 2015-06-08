@@ -10,9 +10,10 @@ class User < ActiveRecord::Base
   has_many :repeats, dependent: :destroy
 
   validates :name, presence: true, length: {maximum: 100}
-  validates :role, presence: true, length: {maximum: 50}
 
-  def is_admin?
-    role == "admin"
+  before_create{self.role ||= Settings.user_roles[:normal]}
+
+  Settings.user_roles.each do |_, user_role|
+    define_method("#{user_role}?") {user_role == role}
   end
 end

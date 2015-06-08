@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :authenticate_user!
+  load_and_authorize_resource
 
   def index
     @today_schedules = Schedule.today_schedule
@@ -18,13 +18,11 @@ class SchedulesController < ApplicationController
   end
 
   def new
-    @schedule = Schedule.new
     @today_schedules = Schedule.today_schedule
   end
 
   def create
     @today_schedules = Schedule.today_schedule
-    @schedule = Schedule.new schedule_params
     @schedule.user = current_user
 
     if @schedule.save
@@ -43,17 +41,12 @@ class SchedulesController < ApplicationController
   end
 
   def show
-    @schedule = Schedule.find params[:id]
   end
 
   def edit
-    @schedule = Schedule.find params[:id]
-    authorize! :update, @schedule
   end
 
   def update
-    @schedule = Schedule.find params[:id]
-    authorize! :update, @schedule
     if @schedule.update_attributes schedule_params
       EditRepeatWorker.perform_async(@schedule.id) if params[:edit_repeat].present?
       flash[:success] = t(:update_flash)
@@ -64,8 +57,8 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
-    @schedule = Schedule.find params[:id]
     @schedule.destroy
+
     unless params[:user_id]
       respond_to do |format|
         format.html {redirect_to root_path}

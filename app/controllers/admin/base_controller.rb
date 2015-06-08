@@ -3,7 +3,7 @@ class Admin::BaseController < ActionController::Base
 
   private
   def authorized_admin!
-    unless current_user.is_admin?
+    unless current_user.admin?
       flash[:alert] = t(:alert_flash)
       redirect_to root_path
     end

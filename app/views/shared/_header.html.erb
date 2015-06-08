@@ -9,7 +9,7 @@
             Events <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <% if current_user.is_admin? %>
+            <% if current_user.admin? %>
               <li><%= link_to t('btn_list_events'), admin_schedules_path %></li>
             <% end %>
             <li><%= link_to t('btn_my_events'), user_schedules_path(current_user) %></li>
@@ -21,7 +21,7 @@
             <%= t('btn_account') %> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <% if current_user.is_admin? %>
+            <% if current_user.admin? %>
               <li><%= link_to t('btn_admin'), admin_root_path %></li>
             <% end %>
             <li><%= link_to t('btn_settings'), edit_user_registration_path(current_user) %></li>
