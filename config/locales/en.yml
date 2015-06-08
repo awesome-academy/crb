@@ -55,7 +55,7 @@ en:
 
     form:
       room: Room
-      from: From
+      from: from
       to: to
 
   schedules:

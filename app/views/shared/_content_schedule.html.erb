@@ -1,9 +1,10 @@
-<li>
-  <div><b><%= link_to schedule.title, schedule %></b></div>
-  <p><%= t("pages.form.room") %>: <%= schedule.room.name %></p>
-  <div>
-    <%= schedule.start_time.strftime Settings.date %>
-    <%= t("pages.form.from") %>: <%= schedule.start_time.strftime Settings.time %>
-    <%= t("pages.form.to") %>: <%= schedule.finish_time.strftime Settings.time %>
+<div>
+  <div class="title">
+    <span class="glyphicon glyphicon-pencil"></span>
+    <b><%= link_to schedule.title, schedule %></b>
   </div>
-</li>
+  <%= schedule.start_time.strftime Settings.date_format %>
+  <%= t("pages.form.from") %>: <%= schedule.start_time.strftime Settings.time_format %>
+  <%= t("pages.form.to") %>: <%= schedule.finish_time.strftime Settings.time_format %></br>
+  <%= t("pages.form.room") %>: <%= schedule.room.name %>
+</div>

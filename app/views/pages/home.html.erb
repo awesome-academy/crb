@@ -12,11 +12,23 @@
       <div id='mini-calendar'></div>
     </div>
 
-    <b><li id="my_calendar"><%= t("pages.home.my_calendar") %></li></b>
-    <ul class="menu_my_calendar" id="my_schedules"></ul>
+    <div id="my_calendar">
+      <div class="title">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <%= t("pages.home.my_calendar") %>
+      </div>
 
-    <b><li id="shared_calendar"><%= t("pages.home.shared_calendar") %></li></b>
-    <ul class="menu_shared_calendar" id="shared_schedules"></ul>
+      <div class="expand" id="my_schedules"></div>
+    </div>
+
+    <div id="shared_calendar">
+      <div class="title">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <%= t("pages.home.shared_calendar") %>
+      </div>
+
+      <div class="expand" id="shared_schedules"></div>
+    </div>
   <% end %>
 <% end %>
 

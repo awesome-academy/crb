@@ -1,5 +1,6 @@
 @import "variables";
 
+$gray-medium-light: #E0E0D6;
 header {
   #logo {
     float: left;
@@ -36,7 +37,7 @@ aside {
   .containers {
     display: flex;
     overflow: hidden;
-    height: 200px;
+    height: 270px;
     padding-top: 18px;
     position: relative;
     width: 100%;
@@ -185,4 +186,22 @@ h3 {
 
 table.table-popover a {
   padding: 0px 5px;
+}
+
+#my_calendar {
+  #my-schedule-content {
+    margin-left: 20px;
+  }
+}
+
+#shared_calendar {
+  #shared-schedule-content {
+    margin-left: 20px;
+  }
+}
+
+.title {
+  &:hover {
+    background-color: $gray-medium-light;
+  }
 }
