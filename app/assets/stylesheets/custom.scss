@@ -184,8 +184,16 @@ h3 {
   color: black;
 }
 
-table.table-popover a {
-  padding: 0px 5px;
+table.table-popover{
+  width: 100%;
+  font-size: 12px;
+  a {
+    padding: 0px 5px;
+  }
+
+  .detail {
+    text-align: left;
+  }
 }
 
 #my_calendar {
