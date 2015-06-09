@@ -3,4 +3,7 @@
 <% else %>
   $("#modal-form").modal('hide');
   $('#calendar').fullCalendar( 'refetchEvents' );
+  $.get( "/api/my_schedules", function(data) {
+    $("#my_schedules").html(data);
+  });
 <% end %>

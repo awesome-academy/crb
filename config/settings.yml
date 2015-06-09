@@ -7,3 +7,4 @@ per_page: 2
 user_roles:
   admin: "admin"
   normal: "normal"
+number_of_schedules: 8
