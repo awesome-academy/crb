@@ -1,6 +1,5 @@
 $(document).ready(function() {
   $(window).trigger("resize");
-
   var schedule_query_url = "/api/schedules.json";
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
@@ -73,9 +72,8 @@ $(document).ready(function() {
     minTime: "07:00:00",
     maxTime: "22:00:00",
     allDaySlot: false,
-    editable: true,
-    eventLimit: true,
     keepOpen: false,
+    unselectAuto: false,
     selectable: true,
     selectHelper: true,
 
@@ -111,7 +109,6 @@ $(document).ready(function() {
     eventDrop: function (event, dayta, revertFunc) {
       revertFunc();
     },
-
     select: function (start, end, jsEvent, view) {
       if((view.type != "month") && (start._d >= (new Date()))) {
         $("#modal-form").modal("show");
@@ -236,6 +233,7 @@ $(document).ready(function() {
     $(this).find("form")[0].reset();
     $(".select-members").select2("val", "");
     $("#error_explanation").remove();
+    MyCalendar.fullCalendar("unselect");
   });
 
   var kendo_start = $("#schedule_start_time").kendoDateTimePicker({
