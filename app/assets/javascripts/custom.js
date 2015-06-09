@@ -4,6 +4,7 @@ $(document).ready(function() {
   var schedule_query_url = "/api/schedules.json";
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
+  var clock = 5*60;
 
   setTimeout(function() {
     $(".hide-flash").fadeOut("normal");
@@ -226,6 +227,11 @@ $(document).ready(function() {
     },
     viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
+
+      try {
+        setTimeLine();
+        setInterval(function(){ setTimeLine() }, clock*1000);
+      } catch (err) {}
     },
     eventAfterAllRender: function (view, element) {
       MyCalendar.find(".fc-left").append($("#room_selector"));
