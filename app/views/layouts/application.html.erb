@@ -10,7 +10,7 @@
   <body data-current-user-id="<%= current_user.try :id %>">
     <%= render 'shared/header' %>
 
-    <div class="main-container">
+    <div class="main-container container-fluid">
       <%= render partial: "shared/flash_messages", flash: flash %>
       <%= yield %>
     </div>
