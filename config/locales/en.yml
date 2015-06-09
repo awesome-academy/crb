@@ -42,6 +42,7 @@ en:
   btn_logout: Log out
   btn_login: Login
   btn_account: Account
+  btn_more: More...
 
   pages:
     home:

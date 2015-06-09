@@ -1,3 +1,5 @@
 <div class="my_schedules" id="my_schedule_pagination_links">
   <%= paginate schedules, param_name: params_page, page_links: false %>
+  &emsp;&emsp;
+  <a href="/users/<%= current_user.id %>/schedules" id="see-my-event" class="center"><%= t("btn_more") %></a>
 </div>
