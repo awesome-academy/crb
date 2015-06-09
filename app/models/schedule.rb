@@ -25,7 +25,8 @@ class Schedule < ActiveRecord::Base
   scope :today_schedule, ->{where("start_time LIKE ?", "%#{Time.now.to_date.to_s}%")}
   scope :filter_by_room, ->(room_id){where room_id: room_id if room_id.present? && room_id != "all"}
   scope :my_schedule, ->user_id{where(" ? <= start_time AND user_id = ?", Time.zone.now, user_id)}
-  scope :shared_schedule, ->user_id{joins(:schedule_users).where("schedule_users.user_id = ?", user_id)}
+  scope :shared_schedule, ->user_id{joins(:schedule_users)
+                            .where(" ? <= start_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}
 
   accepts_nested_attributes_for :members
 
