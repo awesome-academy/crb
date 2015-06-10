@@ -22,6 +22,7 @@
 //= require select2
 //= require kendo.web.min
 //= require setTimeLine
+//= require server_time
 //= require kendo.custom
 //= require calendar/custom
 //= require repeats

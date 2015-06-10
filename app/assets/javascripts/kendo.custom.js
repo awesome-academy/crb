@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  var now_in_milisec = window.server_time.getTime();
+  var interval = 15;
+  var interval_in_milisec= interval * 60 * 1000;
+  var min_in_milisec = (parseInt(now_in_milisec / interval_in_milisec) + 1) * interval_in_milisec
+
   var startChange = function startChange() {
     var startDate = schedule_start_time.value();
     var endDate = schedule_finish_time.value();
@@ -34,7 +39,8 @@ $(document).ready(function() {
   }
 
   schedule_start_time = $("#schedule_start_time").kendoDateTimePicker({
-    min: new Date(),
+    min: new Date(min_in_milisec),
+    interval: interval,
     change: startChange,
     parseFormats: ["MM/dd/yyyy"],
     format: "yyyy-MM-dd HH:mm",
@@ -57,6 +63,8 @@ $(document).ready(function() {
   }).data("kendoDateTimePicker");
 
   schedule_finish_time = $("#schedule_finish_time").kendoDateTimePicker({
+    min: new Date(min_in_milisec + interval_in_milisec),
+    interval: interval,
     change: endChange,
     parseFormats: ["MM/dd/yyyy"],
     format: "yyyy-MM-dd HH:mm",
