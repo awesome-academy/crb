@@ -21,7 +21,6 @@
 //= require websocket_rails/main
 //= require select2
 //= require kendo.web.min
-//= require setTimeLine
 //= require custom
 //= require repeats
 //= require schedules
