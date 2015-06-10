@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   def index
     @schedules = current_user.schedules.filter_by_room params[:room_id]
     @search = Schedule.ransack params[:search_form]
-    @schedules = @search.result(distinct: true).filter_by_user current_user
+    @schedules = @search.result.includes(:room).filter_by_user current_user
   end
 
   def new

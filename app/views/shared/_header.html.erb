@@ -1,25 +1,18 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <%= link_to "Room Book System", root_path, id: "logo" %>
-  <div class="search-box"><%= render "shared/search_box" %></div>
-  <nav>
-    <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to t('btn_home'), root_path %></li>
+<header class="navbar navbar-fixed-top">
+  <div class="child-header">
+    <%= link_to "Room Book System", root_path, id: "logo" %>
+    <% if user_signed_in? %>
+      <div class="search-box"><%= render "shared/search_box" %></div>
+    <% end %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <li><%= link_to t("btn_list_events"), admin_schedules_path %></li>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Events <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <% if current_user.admin? %>
-              <li><%= link_to t('btn_list_events'), admin_schedules_path %></li>
-            <% end %>
-            <li><%= link_to t('btn_my_events'), user_schedules_path(current_user) %></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= t('btn_account') %> <b class="caret"></b>
+            <%= current_user.name %><b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <% if current_user.admin? %>
@@ -35,6 +28,7 @@
       <% else %>
         <li><%= link_to t('btn_login'), new_user_session_path %></li>
       <% end %>
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  </div>
 </header>

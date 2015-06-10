@@ -2,18 +2,24 @@
 
 $gray-medium-light: #E0E0D6;
 header {
+  background-color: #f1f1f1;
+  height: 60px;
+  .child-header{
+    position: relative;
+    top: 8%;
+  }
   #logo {
     float: left;
     margin-right: 10px;
     font-size: 1.7em;
-    color: #fff;
+    color: #428bca;
     text-transform: uppercase;
     letter-spacing: -1px;
     padding-top: 9px;
     font-weight: bold;
     margin-left: 15px;
     &:hover {
-      color: #fff;
+      color: #428bca;
       text-decoration: none;
     }
   }
@@ -22,9 +28,17 @@ header {
     margin: 12px 0px 0px 55px;
     float: left;
 
-    #search_form_title_cont {
+    #search_form_title_or_room_name_cont {
       padding-left: 5px;
       width: 350px;
+    }
+
+    .button {
+      background-color: #428bca;
+      color: #fff;
+      border: none;
+      padding: 3px;
+      width: 80px;
     }
   }
 
