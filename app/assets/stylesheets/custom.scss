@@ -165,9 +165,17 @@ h3 {
 }
 
 #calendar {
-  .fc-event {
-    border: none;
+  a.fc-event {
     border-radius: 0;
+    border-bottom: 1em;
+    border-left: none;
+    border-right: none;
+    border-color: #ddd !important;
+    border-collapse: collapse;
+
+    &:last-child {
+      border-bottom: none !important;
+    }
   }
 
   .fc-row {
@@ -223,6 +231,7 @@ table.table-popover{
 }
 
 .title {
+  cursor: pointer;
   &:hover {
     background-color: $gray-medium-light;
   }

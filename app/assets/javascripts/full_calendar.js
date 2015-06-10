@@ -9,7 +9,7 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+//= require_self
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
@@ -22,6 +22,9 @@
 //= require select2
 //= require kendo.web.min
 //= require setTimeLine
-//= require custom
+//= require kendo.custom
+//= require calendar/custom
 //= require repeats
 //= require schedules
+
+var schedule_start_time, schedule_finish_time;
