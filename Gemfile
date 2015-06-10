@@ -42,7 +42,12 @@ gem "kendoui-rails", "~> 0.1.1"
 gem "redis-rails"
 gem "sidekiq", "~> 3.3.4"
 gem "rails_config"
+
 gem "ransack"
+
+gem "carrierwave"
+gem "mini_magick"
+
 # Use ActiveModel has_secure_password
 # gem "bcrypt", "~> 3.1.7"
 
