@@ -1,5 +1,6 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <%= link_to "Room Book System", root_path, id: "logo" %>
+  <div class="search-box"><%= render "shared/search_box" %></div>
   <nav>
     <ul class="nav navbar-nav navbar-right">
       <li><%= link_to t('btn_home'), root_path %></li>

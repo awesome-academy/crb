@@ -18,6 +18,16 @@ header {
     }
   }
 
+  .search-box {
+    margin: 12px 0px 0px 55px;
+    float: left;
+
+    #search_form_title_cont {
+      padding-left: 5px;
+      width: 350px;
+    }
+  }
+
   ul.nav {
     margin-right: 15px !important;
   }

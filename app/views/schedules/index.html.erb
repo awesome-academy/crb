@@ -5,19 +5,6 @@
   <% end %>
 <% end %>
 
-<% content_for :today_schedules do %>
-  <% if user_signed_in? %>
-    <div class="containers">
-      <div class="today_schedules">
-        <h3>Schedules</h3>
-        <ul>
-          <%= render @today_schedules %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
 <h2><%= t('schedules.index.title') %></h2>
 
 <table class="table table-striped">

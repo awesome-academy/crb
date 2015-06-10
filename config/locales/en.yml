@@ -43,6 +43,7 @@ en:
   btn_login: Login
   btn_account: Account
   btn_more: More...
+  btn_search: Search
 
   pages:
     home:

@@ -2,10 +2,9 @@ class SchedulesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @today_schedules = Schedule.today_schedule
-
-    @user = User.find params[:user_id]
-    @schedules = @user.schedules.filter_by_room params[:room_id]
+    @schedules = current_user.schedules.filter_by_room params[:room_id]
+    @search = Schedule.ransack params[:search_form]
+    @schedules = @search.result(distinct: true).filter_by_user current_user
   end
 
   def new
