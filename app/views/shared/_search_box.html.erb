@@ -1,0 +1,5 @@
+<%= form_for :search_form, url: {controller: "schedules", action: "index"}, method: :GET do |f| %>
+  <%= f.text_field :title_cont, placeholder: "Schedule title" %>
+  <%= f.submit t("btn_search"), class: "radius-right button" %>
+<% end %>
+

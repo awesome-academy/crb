@@ -27,6 +27,7 @@ class Schedule < ActiveRecord::Base
   scope :my_schedule, ->user_id{where(" ? <= start_time AND user_id = ?", Time.zone.now, user_id)}
   scope :shared_schedule, ->user_id{joins(:schedule_users)
                             .where(" ? <= start_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}
+  scope :filter_by_user, ->user_id{where(user: user_id)}
 
   accepts_nested_attributes_for :members
 
