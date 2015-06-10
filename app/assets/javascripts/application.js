@@ -21,5 +21,6 @@
 //= require kendo.web.min
 //= require kendo.custom
 //= require custom
+//= require validate-avatar
 
 var schedule_start_time, schedule_finish_time;

@@ -44,6 +44,7 @@ en:
   btn_account: Account
   btn_more: More...
   btn_search: Search
+  error_avatar: "should be less than %{max_avatar_file_size}MB"
 
   pages:
     home:
@@ -94,7 +95,7 @@ en:
       title: Event detail
 
   shared:
-    book_room: Book room    
+    book_room: Book room
 
   admin:
     dashboards:

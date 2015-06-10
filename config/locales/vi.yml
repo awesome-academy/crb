@@ -21,6 +21,7 @@ vi:
   btn_login: Dang nhap
   btn_account: Tai khoan
 
+
   pages:
     home:
       title: Trang chu
@@ -43,9 +44,9 @@ vi:
       create_by: Nguoi tao
 
     edit_event_title: Chinh sua event
-    
+
     index:
-      title: Danh sach event cua ban! 
+      title: Danh sach event cua ban!
       listing:
         title: Tieu de
         room: Phong
@@ -56,12 +57,12 @@ vi:
         action: Hanh dong
 
     new:
-      title: Event moi    
+      title: Event moi
     show:
       title: Chi tiet event
 
   shared:
-    book_room: Dat phong       
+    book_room: Dat phong
 
   admin:
     dashboards:
