@@ -184,6 +184,10 @@ $(document).ready(function() {
     MyCalendar.fullCalendar("unselect");
   });
 
+  $("#modal-form").on("show.bs.modal", function(){
+    $(".popover").hide();
+  });
+
   $(".select-room").select2({
     width: 300
   });
