@@ -3,6 +3,7 @@ repeat_types:
   month: "Monthly"
 date_format: "%d/%m/%Y"
 time_format: "%H:%M"
+hour_start_time: 7
 per_page: 2
 user_roles:
   admin: "admin"
@@ -11,3 +12,12 @@ number_of_schedules: 8
 avatar: [150, 150]
 max_avatar_file_size: 5
 avatar_extension_white_list: ["jpg", "jpeg", "gif", "png"]
+rooms:
+  - name: "Australia 1"
+    color: "#D87093"
+  - name: "Australia 2"
+    color: "#20BA22a"
+  - name: "Pacific"
+    color: "#008080"
+  - name: "Atlatic"
+    color: "#456321"
