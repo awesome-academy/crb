@@ -146,15 +146,16 @@ $(document).ready(function() {
           });
         };
         $("body").on("click", function (e) {
-          if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
-          element.popover("hide");
+          if (!element.is(e.target) && element.has(e.target).length === 0 && $(".popover").has(e.target).length === 0)
+            element.popover("hide");
         });
+
       }
     },
     dayClick: function(date, jsEvent, view) {
       if((view.type == "month" && date.format() >= (new Date()).toISOString().slice(0, 10)) || date._d >= (new Date())) {
         $("#modal-form").modal("show");
-
+        $(".popover").hide();
         var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
 
         schedule_start_time.value(TimeZoned);
@@ -187,6 +188,7 @@ $(document).ready(function() {
   $("#modal-form").on("show.bs.modal", function(){
     $(".popover").hide();
   });
+
 
   $(".select-room").select2({
     width: 300

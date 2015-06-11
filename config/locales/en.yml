@@ -82,6 +82,7 @@ en:
       title: Events
       title_my_events: My events!
       title_share_events: My shared events!
+      title_search_events: Search results
       listing:
         title: Title
         room: Room

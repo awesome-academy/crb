@@ -21,11 +21,12 @@
 //= require websocket_rails/main
 //= require select2
 //= require kendo.web.min
-//= require setTimeLine
+//= require marcus_bains_line
 //= require server_time
 //= require kendo.custom
 //= require calendar/custom
 //= require repeats
 //= require schedules
+//= require search_schedules
 
 var schedule_start_time, schedule_finish_time;

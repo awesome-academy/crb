@@ -3,7 +3,8 @@ repeat_types:
   month: "Monthly"
 date_format: "%d/%m/%Y"
 time_format: "%H:%M"
-hour_start_time: 7
+hour_begin_schedule: 7
+hour_end_schedule: 22
 per_page: 2
 user_roles:
   admin: "admin"
