@@ -79,7 +79,9 @@ en:
     edit_event_title: Edit event
 
     index:
-      title: My events!
+      title: Events
+      title_my_events: My events!
+      title_share_events: My shared events!
       listing:
         title: Title
         room: Room

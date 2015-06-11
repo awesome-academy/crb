@@ -5,7 +5,7 @@
   <% end %>
 <% end %>
 
-<h2><%= t('schedules.index.title') %></h2>
+<h2><%= params[:share_schedules] ? t("schedules.index.title_share_events") : t("schedules.index.title_my_events") %></h2>
 
 <table class="table table-striped">
   <tr>

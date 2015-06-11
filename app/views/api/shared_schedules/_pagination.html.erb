@@ -1,3 +1,5 @@
 <div class="my_schedules" id="page_links">
   <%= paginate schedules, param_name: params_page, page_links: false %>
+  &emsp;&emsp;
+  <%= link_to_if(@show_more, t("btn_more"), user_schedules_path(current_user, share_schedules: true)){} %>
 </div>
