@@ -76,6 +76,7 @@ en:
       submit: Submit
       create_by: Create by
       edit_repeat: Edit all repeat
+      announced_before: Announce members before
 
     edit_event_title: Edit event
 
@@ -97,6 +98,8 @@ en:
       title: New event!
     show:
       title: Event detail
+
+    announce_upcoming_event: Upcoming Event Announcement
 
   shared:
     book_room: Book room

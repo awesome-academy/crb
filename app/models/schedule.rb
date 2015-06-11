@@ -39,6 +39,7 @@ class Schedule < ActiveRecord::Base
   delegate :color, to: :room, prefix: true
 
   after_create :notification_users
+  after_create :announce_upcoming_event
 
   def self.search options, user_id
     start_date = options[:start_date].to_date
@@ -67,5 +68,11 @@ class Schedule < ActiveRecord::Base
 
   def notification_users
     members.each {|member| UserMailer.invite_email(member, self).deliver_now}
+  end
+
+  def announce_upcoming_event
+    now = Time.zone.now
+    announced_at = start_time.ago announced_before
+    AnnounceWorker.perform_at(announced_at, id) if now < announced_at
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610071524) do
+ActiveRecord::Schema.define(version: 20150611032136) do
 
   create_table "repeats", force: :cascade do |t|
     t.integer  "repeat_type", limit: 4
@@ -35,16 +35,17 @@ ActiveRecord::Schema.define(version: 20150610071524) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
+    t.string   "title",            limit: 255
+    t.text     "description",      limit: 65535
     t.datetime "start_time"
     t.datetime "finish_time"
-    t.string   "state",       limit: 255,   default: "pending"
-    t.integer  "user_id",     limit: 4
-    t.integer  "room_id",     limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.integer  "repeat_id",   limit: 4
+    t.string   "state",            limit: 255,   default: "pending"
+    t.integer  "user_id",          limit: 4
+    t.integer  "room_id",          limit: 4
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "repeat_id",        limit: 4
+    t.integer  "announced_before", limit: 4
   end
 
   add_index "schedules", ["room_id"], name: "index_schedules_on_room_id", using: :btree
