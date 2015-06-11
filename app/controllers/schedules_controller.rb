@@ -2,9 +2,12 @@ class SchedulesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @schedules = current_user.schedules.filter_by_room params[:room_id]
-    @search = Schedule.ransack params[:search_form]
-    @schedules = @search.result.includes(:room).filter_by_user current_user
+    if params[:share_schedules]
+      @schedules = Schedule.shared_schedules current_user.id
+    else
+      @search = Schedule.ransack params[:search_form]
+      @schedules = @search.result.includes(:room).filter_by_user current_user
+    end
   end
 
   def new

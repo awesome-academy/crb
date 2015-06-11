@@ -4,3 +4,6 @@ $(".popover").remove();
 $.get( "/api/my_schedules", function(data) {
     $("#my_schedules").html(data);
 });
+$.get( "/api/shared_schedules", function(data) {
+  $("#shared_schedules").html(data);
+});

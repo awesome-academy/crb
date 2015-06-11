@@ -3,9 +3,8 @@ class Api::MySchedulesController < ApplicationController
     @schedules = Schedule.my_schedule(current_user.id).order_start_time
                   .paginate page:params[:my_page], per_page: Settings.per_page
 
-    if @show_more = @schedules.total_entries > Settings.number_of_schedules
-      @schedules.total_entries = Settings.number_of_schedules
-    end
+    @show_more = @schedules.total_entries > Settings.number_of_schedules
+    @schedules.total_entries = Settings.number_of_schedules if @show_more
 
     if params[:my_page]
       respond_to do |format|
