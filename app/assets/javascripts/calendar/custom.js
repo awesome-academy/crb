@@ -26,7 +26,7 @@ $(document).ready(function() {
     header: {
       left: "prev,next today",
       center: "title",
-      right: "month,agendaWeek,agendaFourDay,agendaDay,agendaList"
+      right: "month,agendaWeek,agendaFourDay,agendaDay"
     },
     views: {
       agendaFourDay: {
@@ -174,6 +174,7 @@ $(document).ready(function() {
     },
     eventAfterAllRender: function (view, element) {
       MyCalendar.find(".fc-left").append($("#room_selector"));
+      MyCalendar.find(".fc-right").append($("#other_selector"));
     }
   });
 
@@ -220,5 +221,19 @@ $(document).ready(function() {
   $(".fc-today-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
+  });
+
+  $("#other_selector").click(function(){
+    if ($("#other_selector").val() == "Refresh") {
+      $.get( "/api/my_schedules", function(data) {
+        $("#my_schedules").html(data);
+      });
+
+      $.get( "/api/shared_schedules", function(data) {
+       $("#shared_schedules").html(data);
+      });
+
+      $("#calendar").fullCalendar("refetchEvents");
+    }
   });
 });

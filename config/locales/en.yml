@@ -55,6 +55,7 @@ en:
       sign_up_now: Sign up now!
       my_calendar: My Calendar
       shared_calendar: Shared Calendar
+      other: "Other"
 
     form:
       room: Room
