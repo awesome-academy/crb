@@ -22,3 +22,6 @@ rooms:
     color: "#008080"
   - name: "Atlatic"
     color: "#456321"
+options:
+  - "Calendar"
+  - "Refresh"
