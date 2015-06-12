@@ -46,7 +46,12 @@ class SchedulesController < ApplicationController
 
   def update
     if @schedule.update_attributes schedule_params
-      EditRepeatWorker.perform_async(@schedule.id) if params[:edit_repeat].present?
+      if params[:edit_repeat].present?
+        EditRepeatWorker.perform_async(@schedule.id)
+      else
+        UpdatedEventAnnouncementWorker.perform_async(@schedule.id) if @schedule.have_important_changes
+      end
+
       flash[:success] = t(:update_flash)
       redirect_to root_path
     else
