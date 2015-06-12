@@ -5,7 +5,15 @@
   <% end %>
 <% end %>
 
-<h2><%= params[:share_schedules] ? t("schedules.index.title_share_events") : t("schedules.index.title_my_events") %></h2>
+<h2>
+  <% if params[:share_schedules] %>
+    <%= t("schedules.index.title_share_events") %>
+  <% elsif params[:search_form] %>
+    <%= t("schedules.index.title_search_events") %>
+  <% else %>
+    <%= t("schedules.index.title_my_events") %>
+  <% end %>
+</h2>
 
 <table class="table table-striped">
   <tr>

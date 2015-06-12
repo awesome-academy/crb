@@ -4,9 +4,10 @@ class SchedulesController < ApplicationController
   def index
     if params[:share_schedules]
       @schedules = Schedule.shared_schedules current_user.id
+    elsif params[:search_form]
+      @schedules = Schedule.search params[:search_form], current_user.id
     else
-      @search = Schedule.ransack params[:search_form]
-      @schedules = @search.result.includes(:room).filter_by_user current_user
+      @schedules = Schedule.filter_by_user current_user
     end
   end
 

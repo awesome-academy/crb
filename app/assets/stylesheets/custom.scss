@@ -17,28 +17,10 @@ header {
     letter-spacing: -1px;
     padding-top: 9px;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 35px;
     &:hover {
       color: #428bca;
       text-decoration: none;
-    }
-  }
-
-  .search-box {
-    margin: 12px 0px 0px 55px;
-    float: left;
-
-    #search_form_title_or_room_name_cont {
-      padding-left: 5px;
-      width: 350px;
-    }
-
-    .button {
-      background-color: #428bca;
-      color: #fff;
-      border: none;
-      padding: 3px;
-      width: 80px;
     }
   }
 
