@@ -25,3 +25,6 @@ rooms:
 options:
   - "Calendar"
   - "Refresh"
+announced_before:
+  "30 minutes": <%= 30.minutes %>
+  "1 hour":  <%= 1.hour %>
