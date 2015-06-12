@@ -26,13 +26,17 @@ $(document).ready(function() {
     header: {
       left: "prev,next today",
       center: "title",
-      right: "month,agendaWeek,agendaFourDay,agendaDay"
+      right: "month,agendaWeek,agendaFourDay,agendaDay, timeTable"
     },
     views: {
       agendaFourDay: {
         type: "agenda",
         duration: {days: 4},
         buttonText: "4 days"
+      },
+      timeTable: {
+        type: "custom",
+        buttonText: "Time Table"
       }
     },
     defaultView: view_type == "undefined" ? "month" : view_type,

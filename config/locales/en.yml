@@ -26,7 +26,6 @@ en:
   alert_flash: You are not authorized to view that page!
   valid_room: There are any event with same your time!
   valid_time: Start time must be less than finish time!
-
   btn_edit: Edit
   btn_delete: Delete
   btn_delete_repeat: Delete all repeat
@@ -45,7 +44,6 @@ en:
   btn_more: More...
   btn_search: Search
   error_avatar: "should be less than %{max_avatar_file_size}MB"
-
   pages:
     home:
       title: Home
@@ -56,12 +54,10 @@ en:
       my_calendar: My Calendar
       shared_calendar: Shared Calendar
       other: "Other"
-
     form:
       room: Room
       from: from
       to: to
-
   schedules:
     form:
       event_name: Event name
@@ -77,9 +73,7 @@ en:
       create_by: Create by
       edit_repeat: Edit all repeat
       announced_before: Announce members before
-
     edit_event_title: Edit event
-
     index:
       title: Events
       title_my_events: My events!
@@ -93,18 +87,17 @@ en:
         finish: Finish
         state: State
         action: Action
-
     new:
       title: New event!
     show:
       title: Event detail
-
     announce_upcoming_event: Upcoming Event Announcement
-
   shared:
     book_room: Book room
-
   admin:
     dashboards:
       home:
         title: Dashboard
+  calendar:
+    expand_all: Expand all
+    collapse_all: Collapse all
