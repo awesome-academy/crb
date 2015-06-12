@@ -1,5 +1,28 @@
 <%= form_for :search_form, url: {controller: "schedules", action: "index"}, method: :GET do |f| %>
-  <%= f.text_field :title_or_room_name_cont, placeholder: "Schedule title" %>
-  <%= f.submit t("btn_search"), class: "button" %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group" id="adv-search">
+        <%= f.text_field :title_cont, class: "form-control", placeholder: "Search schedules" %>
+        <div class="input-group-btn">
+          <div class="btn-group" role="group">
+            <div>
+              <button type="button" class="btn btn-default dropdown-toggle" id="btn-setting">
+                <span class="caret"></span>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" role="menu"></div>
+            </div>
+            <%= f.submit t("btn_search"), class: "btn btn-primary" %>
+          </div>
+        </div>
+
+        <div id="search-setting">
+          <%= f.label :filter %><br/>
+          <%= f.text_field :start_date, class: "datepicker", placeholder: "click to show datepicker", id: "start_date" %>
+          <%= f.label :and %>
+          <%= f.text_field :end_date, class: "datepicker", placeholder: "click to show datepicker", id: "end_date" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 

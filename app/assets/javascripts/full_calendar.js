@@ -26,5 +26,6 @@
 //= require calendar/custom
 //= require repeats
 //= require schedules
+//= require search_schedules
 
 var schedule_start_time, schedule_finish_time;

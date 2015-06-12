@@ -18,6 +18,7 @@
 //= require bootstrap-datepicker
 //= require websocket_rails/main
 //= require select2
+//= require search_schedules
 //= require kendo.web.min
 //= require kendo.custom
 //= require custom

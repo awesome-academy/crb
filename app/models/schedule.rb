@@ -29,6 +29,9 @@ class Schedule < ActiveRecord::Base
                             .where(" ? <= start_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}
   scope :shared_schedules, ->user_id{joins(:schedule_users).where(" schedule_users.user_id = ?", user_id)}
   scope :filter_by_user, ->user_id{where(user: user_id)}
+  scope :between_time, ->(start_date, end_date){where(" start_time BETWEEN ? AND ? ", start_date, end_date)}
+  scope :shared_and_my_schedules, ->user_id{joins("LEFT JOIN schedule_users ON schedules.id = schedule_users.schedule_id")
+                                      .where(" schedules.user_id = ? OR schedule_users.user_id = ?", user_id, user_id)}
 
   accepts_nested_attributes_for :members
 
@@ -36,6 +39,18 @@ class Schedule < ActiveRecord::Base
   delegate :color, to: :room, prefix: true
 
   after_create :notification_users
+
+  def self.search options, user_id
+    start_date = options[:start_date].to_date
+    end_date = options[:end_date].to_date
+    if start_date.present? && end_date.present?
+      @search = Schedule.shared_and_my_schedules(user_id).ransack options
+      @schedules = @search.result.between_time start_date, end_date
+    else
+      @search = Schedule.shared_and_my_schedules(user_id).ransack options
+      @schedules = @search.result
+    end
+  end
 
   private
   def valid_room
