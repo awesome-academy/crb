@@ -3,7 +3,7 @@ function setTimeLine() {
 
   if ($(".timeline").length === 0) {
     timeline = $("<hr>").addClass("timeline");
-    $(".fc-slats").prepend(timeline);
+    $(".fc-time-grid-container").append(timeline);
   } else {
     timeline = $(".timeline");
   }

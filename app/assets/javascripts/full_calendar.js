@@ -21,7 +21,7 @@
 //= require websocket_rails/main
 //= require select2
 //= require kendo.web.min
-//= require setTimeLine
+//= require marcus_bains_line
 //= require server_time
 //= require kendo.custom
 //= require calendar/custom
