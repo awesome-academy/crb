@@ -79,8 +79,13 @@ $(document).ready(function() {
       revertFunc();
     },
     select: function (start, end, jsEvent, view) {
-      if((view.type != "month") && (start._d >= (new Date()))) {
-        $("#modal-form").modal("show");
+      var date = new Date();
+      if((view.type != "month") && (start._d >= date)) {
+        if((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))){
+          $("#modal-form").modal("show");
+        }else{
+          MyCalendar.fullCalendar("unselect");
+        }
 
         var start_event = getTime(start._d);
         var finish_event = getTime(end._d);
@@ -148,6 +153,7 @@ $(document).ready(function() {
         $("body").on("click", function (e) {
           if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
             element.popover("hide");
+
           if($(".fc-popover").length == 1){
             $(".fc-icon-x").click(function(){
               element.popover("hide");
@@ -156,12 +162,10 @@ $(document).ready(function() {
           $(".popover").click(function(){
             $(this).hide();
           });
-        });
-
       }
     },
     dayClick: function(date, jsEvent, view) {
-      if((view.type == "month" && date.format() >= (new Date()).toISOString().slice(0, 10)) || date._d >= (new Date())) {
+      if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
         $("#modal-form").modal("show");
         $(".popover").hide();
         var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
