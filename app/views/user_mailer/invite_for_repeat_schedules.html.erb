@@ -1,0 +1,21 @@
+<h1><%= @subject %></h1>
+<p>Hi, <%= @member.name %></p>
+<% schedule_sample = @schedules.first %>
+<p>
+  This is invitation take part to evssent from: <%= schedule_sample.user.name %>
+</p>
+
+<p>
+  Event's title: <%= schedule_sample.title %></br>
+  Room: <%= schedule_sample.room.name %></br>
+  Start time: <%= schedule_sample.start_time.strftime("%H:%M") %></br>
+  Finish time: <%= schedule_sample.finish_time.strftime("%H:%M") %></br>
+  Description: <%= schedule_sample.description %></br>
+  On:
+  <% @schedules.each do |schedule| %>
+    <%= schedule.start_time.strftime("%d") + " " %>
+  <% end %>
+  <%= "/" + schedule_sample.start_time.strftime("%m/%Y") %>
+</p>
+
+<p>Thanks for joining and have a great day!</p>

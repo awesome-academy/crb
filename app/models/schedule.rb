@@ -38,7 +38,6 @@ class Schedule < ActiveRecord::Base
   delegate :name, to: :room, prefix: true
   delegate :color, to: :room, prefix: true
 
-  after_create :notification_users
   after_create :announce_upcoming_event
 
   def self.search options, user_id
@@ -53,6 +52,10 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def notify_users
+    members.each {|member| UserMailer.invite_email(member, self).deliver_now}
+  end
+
   private
   def valid_room
     if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0
@@ -64,10 +67,6 @@ class Schedule < ActiveRecord::Base
     if !start_time.blank? && !finish_time.blank? && start_time >= finish_time
       errors.add :start_time, I18n.t('valid_time')
     end
-  end
-
-  def notification_users
-    members.each {|member| UserMailer.invite_email(member, self).deliver_now}
   end
 
   def announce_upcoming_event
