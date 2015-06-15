@@ -15,8 +15,11 @@ class RepeatWorker
       @new_schedule = schedule.deep_clone include: :schedule_users
       @new_schedule.start_time = start_time + (num + 1).days
       @new_schedule.finish_time = finish_time + (num + 1).days
-
       @new_schedule.save if @new_schedule.valid?
     end
+
+    schedules = repeat.schedules
+    members = schedule.members
+    members.each {|member| UserMailer.invite_for_repeat_schedules(member, schedules).deliver_now}
   end
 end

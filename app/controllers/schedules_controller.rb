@@ -21,7 +21,11 @@ class SchedulesController < ApplicationController
 
     if @schedule.save
       repeat_type = params[:repeat]
-      RepeatWorker.perform_async(@schedule.id, repeat_type, current_user.id) if repeat_type.present?
+      if repeat_type.present?
+        RepeatWorker.perform_async @schedule.id, repeat_type, current_user.id
+      else
+        @schedule.notify_users
+      end
       respond_to do |format|
         format.html {redirect_to root_path}
         format.js
