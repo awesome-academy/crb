@@ -189,6 +189,13 @@ $(document).ready(function() {
     eventAfterAllRender: function (view, element) {
       MyCalendar.find(".fc-left").append($("#room_selector"));
       MyCalendar.find(".fc-right").append($("#other_selector"));
+    },
+    loading: function(isLoading, view){
+      if (isLoading) {
+        $("label.loading").show();
+      }else {
+        $("label.loading").hide();
+      }
     }
   });
 
@@ -239,15 +246,15 @@ $(document).ready(function() {
 
   $("#other_selector").click(function(){
     if ($("#other_selector").val() == "Refresh") {
-      $.get( "/api/my_schedules", function(data) {
+      $("#calendar").fullCalendar("refetchEvents");
+
+      $.get("/api/my_schedules", function(data) {
         $("#my_schedules").html(data);
       });
 
-      $.get( "/api/shared_schedules", function(data) {
-       $("#shared_schedules").html(data);
+      $.get("/api/shared_schedules", function(data) {
+        $("#shared_schedules").html(data);
       });
-
-      $("#calendar").fullCalendar("refetchEvents");
     }
   });
 });

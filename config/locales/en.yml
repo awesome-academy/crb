@@ -108,3 +108,5 @@ en:
     dashboards:
       home:
         title: Dashboard
+  header:
+    loading: Loading...

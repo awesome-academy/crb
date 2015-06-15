@@ -27,6 +27,15 @@ header {
   ul.nav {
     margin-right: 15px !important;
   }
+
+  .loading {
+    position: absolute;
+    right: 20px;
+    top: -2px;
+    background-color: red;
+    color: white;
+    z-index: 5;
+  }
 }
 
 /* For ie6*/
