@@ -146,8 +146,16 @@ $(document).ready(function() {
           });
         };
         $("body").on("click", function (e) {
-          if (!element.is(e.target) && element.has(e.target).length === 0 && $(".popover").has(e.target).length === 0)
+          if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
             element.popover("hide");
+          if($(".fc-popover").length == 1){
+            $(".fc-icon-x").click(function(){
+              element.popover("hide");
+            });
+          }
+          $(".popover").click(function(){
+            $(this).hide();
+          });
         });
 
       }
@@ -164,6 +172,7 @@ $(document).ready(function() {
         schedule_start_time.max(schedule_finish_time.value());
         schedule_finish_time.min(schedule_start_time.value());
       }
+      $(".popover").hide();
     },
     viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
