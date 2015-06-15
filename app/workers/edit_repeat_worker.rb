@@ -12,6 +12,7 @@ class EditRepeatWorker
       schedule.finish_time = schedule_sample.finish_time.change day: day
 
       schedule.attributes = schedule_sample.attributes.except "id", "start_time", "finish_time"
+      schedule.members = schedule_sample.members
       schedule.save if schedule.valid?
     end
   end

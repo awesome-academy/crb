@@ -12,7 +12,7 @@ class RepeatWorker
     start_time, finish_time = schedule.start_time, schedule.finish_time
 
     number_of_schedules.times do |num|
-      @new_schedule = Schedule.new schedule.attributes.except "id"
+      @new_schedule = schedule.deep_clone include: :schedule_users
       @new_schedule.start_time = start_time + (num + 1).days
       @new_schedule.finish_time = finish_time + (num + 1).days
 
