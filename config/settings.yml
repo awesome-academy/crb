@@ -4,7 +4,7 @@ repeat_types:
 date_format: "%d/%m/%Y"
 time_format: "%H:%M"
 hour_begin_schedule: 7
-hour_end_schedule: 22
+hour_end_schedule: 21
 per_page: 2
 user_roles:
   admin: "admin"

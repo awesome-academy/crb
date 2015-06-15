@@ -2,8 +2,7 @@ FactoryGirl.define do
   factory :schedule do
     title {Faker::Lorem.sentence}
     description {Faker::Lorem.sentence}
-    # start_time {Schedule.last.present? ?  (Schedule.last.finish_time + 2.hours) : Time.now
-                                                                       # .change({hour: Settings.hour_begin_schedule})}
+    announced_before {Settings.announced_before.to_h.values.sample}
     finish_time {start_time + 1.hours}
     member_ids {User.ids.sample(2)}
     association :user, factory: :user
