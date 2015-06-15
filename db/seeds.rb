@@ -12,10 +12,15 @@ users = []
 Settings.users.each {|user| users << FactoryGirl.create(:user, name: user.name, email: user.email)}
 
 Room.all.each_with_index do |room, i|
-  start_time_day = (DateTime.now + i.days).change({hour: Settings.hour_begin_schedule})
-  5.times do |n|
-    start_time = start_time_day + n.hours
-    schedule = FactoryGirl.create :schedule, user: users.sample, start_time: start_time
-    start_time_day = schedule.finish_time
+  date_time = DateTime.now + i.days
+  start_time_day = date_time.change({hour: Settings.hour_begin_schedule})
+  end_time_day = date_time.change({hour: Settings.hour_end_schedule})
+
+  hour, n = start_time_day, 0
+
+  while (hour < end_time_day && n < 10) do
+    schedule = FactoryGirl.create :schedule, user: users.sample, start_time: hour
+
+    hour, n = schedule.finish_time, n + 1
   end
 end
