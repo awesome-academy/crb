@@ -24,7 +24,9 @@
 //= require marcus_bains_line
 //= require server_time
 //= require kendo.custom
+//= require calendar/calendar-timetable
 //= require calendar/custom
+//= require calendar/time-table
 //= require repeats
 //= require schedules
 //= require search_schedules
