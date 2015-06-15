@@ -45,6 +45,17 @@
     </div>
 
     <div class="col-md-12">
+      <br/>
+      <%= f.label t("schedules.form.announced_before") %>
+
+      <%= f.select :announced_before do %>
+        <% Settings.announced_before.each do |key, value| %>
+          <%= content_tag :option, key, value: value %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="col-md-12">
       <%= f.label t('schedules.form.description') %>
       <%= f.text_area :description, placeholder: t('schedules.form.compose_description'),
         class: 'form-control' %>
