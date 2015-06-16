@@ -25,7 +25,9 @@ en:
   delete_flash: Event was deleted!
   alert_flash: You are not authorized to view that page!
   valid_room: There are any event with same your time!
-  valid_time: Start time must be less than finish time!
+  invalid_start_time: Start time must be less than finish time!
+  invalid_time: Time for schedule is too short or too long!
+  invalid_day: You can not create schedule for Saturday or Sunday!
 
   btn_edit: Edit
   btn_delete: Delete
