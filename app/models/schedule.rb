@@ -56,6 +56,10 @@ class Schedule < ActiveRecord::Base
     members.each {|member| UserMailer.invite_email(member, self).deliver_now}
   end
 
+  def have_important_changes
+    (Settings.important_atrributes & self.previous_changes.keys).present?
+  end
+
   private
   def valid_room
     if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0

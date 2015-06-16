@@ -104,6 +104,7 @@ en:
     announce_upcoming_event: Upcoming Event Announcement
     repeat_schedule_notice_mail: "You are member for events"
     schedule_notice_mail: "You are member for an event"
+    announce_updated_event: Updated Event Announcement
 
   shared:
     book_room: Book room
