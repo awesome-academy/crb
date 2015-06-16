@@ -8,8 +8,8 @@ function setTimeLine() {
     timeline = $(".timeline");
   }
 
-  now = moment();
-  hour = now.hours();
+  now = new Date();
+  hour = now.getHours();
   minHour = 7;
   maxHour = 22;
 
@@ -17,7 +17,7 @@ function setTimeLine() {
     timeline.hide();
   } else {
     height = $(".fc-slats").height();
-    height_ratio = ((hour - minHour) * 3600 + now.minutes() * 60 + now.seconds()) / (maxHour - minHour) / 3600;
+    height_ratio = ((hour - minHour) * 3600 + now.getMinutes() * 60 + now.getSeconds()) / (maxHour - minHour) / 3600;
     width = $(".fc-today").outerWidth();
     left = $(".fc-today").position().left;
     top = height_ratio * height;
