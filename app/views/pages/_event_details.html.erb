@@ -1,0 +1,18 @@
+<div class="s-detail" id="event-<%= schedule.id %>">
+  <span class="s-description"><%= schedule.description %></span>
+  <span class="s-actions">
+    <%= link_to schedule_path(schedule), title: t("btn_detail") do %>
+      <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+    <% end %>
+    <% if schedule.user_id == current_user.id %>
+      &nbsp;
+      <%= link_to edit_user_schedule_path(current_user, schedule), title: t("btn_edit") do %>
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      <% end %>
+      &nbsp;
+      <%= link_to user_schedule_path(current_user, schedule), method: :delete, remote: true, data: {confirm: t("are_you_sure")}, title: t("btn_delete") do %>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      <% end %>
+    <% end %>
+  </span>
+</div>

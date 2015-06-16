@@ -31,23 +31,7 @@
                 <% end %>
               </div>
 
-              <div class="s-detail" id="event-<%= schedule.id %>">
-                <span class="s-description">
-                  Description: &nbsp;&nbsp;&nbsp;<%= schedule.description %>
-                </span>
-                <span class="s-v-detail">
-                  <%= link_to t("btn_detail"), schedule_path(schedule) %>
-                </span>
-                <% if schedule.user_id == current_user.id %>
-                  <span class="s-edit">
-                    <%= link_to t("btn_edit"), edit_user_schedule_path(current_user, schedule) %>
-                  </span>
-                  <span class="s-delete">
-                    <%= link_to t("btn_delete"), user_schedule_path(current_user, schedule), method: :delete, remote: true,
-                      data: {confirm: t("are_you_sure")} %>
-                  </span>
-                <% end %>
-              </div>
+              <%= render "event_details", schedule: schedule %>
             </td>
           </tr>
         <% end %>

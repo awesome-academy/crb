@@ -34,7 +34,12 @@
     border-right: none;
     border-bottom: 1px solid #ccc;
   }
-  .s-detail{
+
+  .s-detail {
     display: none;
+    .s-actions {
+      float: right;
+      margin-right: 10px;
+    }
   }
 }
