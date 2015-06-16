@@ -85,12 +85,23 @@ $(document).ready(function() {
     select: function (start, end, jsEvent, view) {
       var date = new Date();
 
-      if((view.type != "month") && (start._d >= date)) {
-        if((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))){
+      if((view.type != "month") && (start.date() == date.getDate())) {
+        if((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))) {
           $("#modal-form").modal("show");
-        }else{
+        } else {
           MyCalendar.fullCalendar("unselect");
         }
+
+        var start_event = getTime(start._d);
+        var finish_event = getTime(end._d);
+
+        schedule_start_time.max(finish_event);
+        schedule_finish_time.min(start_event);
+
+        schedule_start_time.value(start_event);
+        schedule_finish_time.value(finish_event);
+      } else if((view.type != "month") && (start._d > date)) {
+        $("#modal-form").modal("show");
 
         var start_event = getTime(start._d);
         var finish_event = getTime(end._d);
