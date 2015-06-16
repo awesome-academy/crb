@@ -22,9 +22,6 @@ rooms:
     color: "#008080"
   - name: "Atlatic"
     color: "#456321"
-options:
-  - "Calendar"
-  - "Refresh"
 announced_before:
   "30 minutes": <%= 30.minutes %>
   "1 hour":  <%= 1.hour %>

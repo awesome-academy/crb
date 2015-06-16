@@ -110,3 +110,9 @@ en:
         title: Dashboard
   header:
     loading: Loading...
+  dropdown:
+    title:
+      other: "other"
+    options:
+      print: "Print"
+      refresh: "Refresh"

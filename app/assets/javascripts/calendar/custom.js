@@ -188,13 +188,13 @@ $(document).ready(function() {
     },
     eventAfterAllRender: function (view, element) {
       MyCalendar.find(".fc-left").append($("#room_selector"));
-      MyCalendar.find(".fc-right").append($("#other_selector"));
+      MyCalendar.find(".fc-right").append($("#other_dropdown"));
     },
     loading: function(isLoading, view){
       if (isLoading) {
-        $("label.loading").show();
+        $("label.loading").removeClass("hidden");
       }else {
-        $("label.loading").hide();
+        $("label.loading").addClass("hidden");
       }
     }
   });
@@ -244,17 +244,15 @@ $(document).ready(function() {
     MyMiniCalendar.datepicker("update", moment._d);
   });
 
-  $("#other_selector").click(function(){
-    if ($("#other_selector").val() == "Refresh") {
-      $("#calendar").fullCalendar("refetchEvents");
+  $("#refresh").click(function(){
+    $("#calendar").fullCalendar("refetchEvents");
 
-      $.get("/api/my_schedules", function(data) {
-        $("#my_schedules").html(data);
-      });
+    $.get("/api/my_schedules", function(data) {
+      $("#my_schedules").html(data);
+    });
 
-      $.get("/api/shared_schedules", function(data) {
-        $("#shared_schedules").html(data);
-      });
-    }
+    $.get("/api/shared_schedules", function(data) {
+      $("#shared_schedules").html(data);
+    });
   });
 });
