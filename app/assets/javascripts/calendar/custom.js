@@ -171,7 +171,7 @@ $(document).ready(function() {
         };
         $("body").on("click", function (e) {
           if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
-            element.popover("hide");
+          element.popover("hide");
           if($(".fc-popover").length == 1){
             $(".fc-icon-x").click(function(){
               element.popover("hide");
@@ -180,6 +180,9 @@ $(document).ready(function() {
           $(".popover").click(function(){
             $(this).hide();
           });
+        });
+        $('.fc-content').click(function(){
+          $(".popover").hide();
         });
       }
     },

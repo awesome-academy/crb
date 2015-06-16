@@ -1,4 +1,5 @@
 $(function() {
+  var icon = $(".plus").parent().find("span.glyphicon:first");
   $(document).on("click",".plus", function(){
     class_name = $(this).parent().find("span.glyphicon:first").attr("class");
     if(class_name == "glyphicon glyphicon-plus-sign") {
@@ -10,14 +11,14 @@ $(function() {
   });
 
   $(document).on("click", ".expand", function() {
-    $('.glyphicon').removeClass("glyphicon-plus-sign");
-    $('.glyphicon').addClass("glyphicon-minus-sign");
+    icon.removeClass("glyphicon-plus-sign");
+    icon.addClass("glyphicon-minus-sign");
     $(".s-detail").slideDown();
   });
 
   $(document).on("click", ".coll", function() {
-    $('.glyphicon').addClass("glyphicon-plus-sign");
-    $('.glyphicon').removeClass("glyphicon-minus-sign");
+    icon.addClass("glyphicon-plus-sign");
+    icon.removeClass("glyphicon-minus-sign");
     $(".s-detail").slideUp();
   });
 });
