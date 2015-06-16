@@ -210,9 +210,17 @@ h3 {
     border-radius: 4px;
   }
 
-  #other_selector {
+  .dropdown-toggle {
+    padding-top: 4px;
     height: 2.1em;
-    border-radius: 4px;
+    font-size: 1em;
+    background-color: #f5f5f5;
+  }
+  .dropdown-menu{
+    min-width: 80px;
+    li {
+      padding-left: 10px;
+    }
   }
 }
 .shared_schedules a:hover, .shared_schedules a:focus {

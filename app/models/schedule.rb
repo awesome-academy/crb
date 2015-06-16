@@ -17,7 +17,7 @@ class Schedule < ActiveRecord::Base
   validate :valid_time, :valid_room
 
   scope :with_room, ->(room, id){where(room: room).where.not id: id}
-  scope :order_start_time, ->{order start_time: :desc}
+  scope :order_start_time, ->{order start_time: :asc}
   query = "(start_time <= :start_time AND finish_time >= :finish_time)
           OR (start_time > :start_time AND start_time < :finish_time)
           OR (finish_time > :start_time AND finish_time < :finish_time)"
