@@ -32,6 +32,7 @@ header {
     position: absolute;
     right: 20px;
     top: -2px;
+    font-size: 11px;
     background-color: red;
     color: white;
     z-index: 5;
@@ -218,6 +219,7 @@ h3 {
   }
   .dropdown-menu{
     min-width: 80px;
+    left: -9px;
     li {
       padding-left: 10px;
     }
