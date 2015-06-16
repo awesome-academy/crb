@@ -121,3 +121,6 @@ en:
     options:
       print: "Print"
       refresh: "Refresh"
+  calendar:
+    expand_all: Expand all
+    collapse_all: Collapse all
