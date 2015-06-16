@@ -11,11 +11,13 @@
   Start time: <%= schedule_sample.start_time.strftime("%H:%M") %></br>
   Finish time: <%= schedule_sample.finish_time.strftime("%H:%M") %></br>
   Description: <%= schedule_sample.description %></br>
-  On:
+  On:</br>
   <% @schedules.each do |schedule| %>
-    <%= schedule.start_time.strftime("%d") + " " %>
+    Day <%= schedule.start_time.strftime("%d") + ": " %>
+    <%= link_to "For detail", schedule %></br>
   <% end %>
-  <%= "/" + schedule_sample.start_time.strftime("%m/%Y") %>
+  In:</br>
+  <b><%= schedule_sample.start_time.strftime("%m/%Y") %></b>
 </p>
 
 <p>Thanks for joining and have a great day!</p>
