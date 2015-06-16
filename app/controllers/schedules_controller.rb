@@ -46,10 +46,11 @@ class SchedulesController < ApplicationController
 
   def update
     if @schedule.update_attributes schedule_params
+      announce = @schedule.have_important_changes
       if params[:edit_repeat].present?
-        EditRepeatWorker.perform_async(@schedule.id)
+        EditRepeatWorker.perform_async @schedule.id, announce
       else
-        UpdatedEventAnnouncementWorker.perform_async(@schedule.id) if @schedule.have_important_changes
+        UpdatedEventAnnouncementWorker.perform_async(@schedule.id) if announce
       end
 
       flash[:success] = t(:update_flash)
