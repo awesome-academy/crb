@@ -264,3 +264,11 @@ table.table-popover{
     background-color: $gray-medium-light;
   }
 }
+
+.fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time span {
+  display: inline;
+}
+
+.fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time:before {
+  content: normal;
+}
