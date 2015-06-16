@@ -79,6 +79,10 @@ class Schedule < ActiveRecord::Base
     if start_time.wday == Settings.validate_saturday || start_time.wday == Settings.validate_sunday
       errors.add :start_time, I18n.t("invalid_day")
     end
+
+    if start_time < Time.zone.now
+      errors.add :start_time, I18n.t("invalid_create_in_past")
+    end
   end
 
   def announce_upcoming_event
