@@ -52,10 +52,6 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  def notify_users
-    members.each {|member| UserMailer.invite_email(member, self).deliver_now}
-  end
-
   def have_important_changes
     (Settings.important_atrributes & self.previous_changes.keys).present?
   end

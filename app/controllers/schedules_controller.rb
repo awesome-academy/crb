@@ -21,11 +21,14 @@ class SchedulesController < ApplicationController
 
     if @schedule.save
       repeat_type = params[:repeat]
+
       if repeat_type.present?
         RepeatWorker.perform_async @schedule.id, repeat_type, current_user.id
       else
-        @schedule.notify_users
+        added_member_ids = @schedule.member_ids
+        MembersInvitationWorker.perform_async added_member_ids, [@schedule.id]
       end
+
       respond_to do |format|
         format.html {redirect_to root_path}
         format.js
@@ -45,12 +48,18 @@ class SchedulesController < ApplicationController
   end
 
   def update
+    old_member_ids = @schedule.member_ids
+
     if @schedule.update_attributes schedule_params
+      new_member_ids = @schedule.member_ids
+      added_member_ids = @schedule.member_ids - old_member_ids
+
       announce = @schedule.have_important_changes
       if params[:edit_repeat].present?
-        EditRepeatWorker.perform_async @schedule.id, announce
+        EditRepeatWorker.perform_async added_member_ids, @schedule.id, announce
       else
         UpdatedEventAnnouncementWorker.perform_async(@schedule.id) if announce
+        MembersInvitationWorker.perform_async added_member_ids, [@schedule.id]
       end
 
       flash[:success] = t(:update_flash)
