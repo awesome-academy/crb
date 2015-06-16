@@ -60,6 +60,9 @@ $(document).ready(function() {
           var events = [];
           if(doc.schedules){
             $.map(doc.schedules, function(schedule) {
+              var time_now = new Date();
+              var end_time = new Date(schedule.finish_time);
+              color = end_time < time_now ? "#B4B4CD" : schedule.room_color;
               events.push({
                 id: schedule.id,
                 title: schedule.title,
@@ -67,7 +70,7 @@ $(document).ready(function() {
                 end: schedule.finish_time,
                 user_id: schedule.user_id,
                 room: schedule.room_name,
-                color: schedule.room_color,
+                color: color,
                 repeat_id: schedule.repeat_id
               });
             });
