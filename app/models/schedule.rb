@@ -1,5 +1,6 @@
 class Schedule < ActiveRecord::Base
   include ScheduleJson
+  include RailsAdminSchedule
 
   belongs_to :user
   belongs_to :room
