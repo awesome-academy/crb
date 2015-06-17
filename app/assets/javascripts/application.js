@@ -24,5 +24,6 @@
 //= require kendo.custom
 //= require custom
 //= require validate-avatar
+//= require repeats
 
 var schedule_start_time, schedule_finish_time;
