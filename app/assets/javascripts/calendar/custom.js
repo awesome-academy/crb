@@ -254,11 +254,13 @@ $(document).ready(function() {
   $(".fc-prev-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
+    $(".popover").hide();
   });
 
   $(".fc-next-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
+    $(".popover").hide();
   });
 
   $(".fc-today-button").click(function() {
