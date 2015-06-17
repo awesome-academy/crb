@@ -12,4 +12,3 @@
 //= require_self
 //= require share/custom
 //= require validate-avatar
-

@@ -65,6 +65,7 @@ $(document).ready(function() {
               events.push({
                 id: schedule.id,
                 title: schedule.title,
+                description: schedule.description,
                 start: schedule.start_time,
                 end: schedule.finish_time,
                 user_id: schedule.user_id,
@@ -226,7 +227,7 @@ $(document).ready(function() {
     loading: function(isLoading, view){
       if (isLoading) {
         $("label.loading").removeClass("hidden");
-      }else {
+      } else {
         $("label.loading").addClass("hidden");
       }
     }

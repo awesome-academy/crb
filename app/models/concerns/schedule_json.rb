@@ -5,6 +5,7 @@ module ScheduleJson
       title: title,
       start_time: start_time,
       finish_time: finish_time,
+      description: description,
       user_id: user_id,
       room_name: room_name,
       room_color: room_color,

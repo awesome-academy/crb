@@ -5,6 +5,5 @@ class PagesController < ApplicationController
   def home
     @rooms = Room.select :id, :name, :color
     @schedule = Schedule.new
-    @schedule_days = Schedule.all.group_by{|schedule| schedule.start_time.beginning_of_day}
   end
 end

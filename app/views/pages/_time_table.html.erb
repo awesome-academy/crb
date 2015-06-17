@@ -1,41 +1,8 @@
-<div>
+<div class="header">
   <span>
     <%= link_to t("calendar.expand_all"), "javascript:void(0)",  class: "expand" %>
   </span>
   <span>
     <%= link_to t("calendar.collapse_all"), "javascript:void(0)", class: "coll" %>
   </span>
-</div>
-<div class="timetable">
-  <table class="listv" cellspacing="0">
-    <tbody>
-      <% @schedule_days.each do |schedule_day, schedules| %>
-        <% schedules.each_with_index do |schedule, index| %>
-          <tr class="lv-row">
-            <% if index == 0 %>
-              <th class="lv-datecell" rowspan="<%= schedules.count %>">
-                <%= schedule_day.strftime("%A, %b %d") %>
-              </th>
-            <% end %>
-            <td class="lv-eventcell lv-time<% "last" if index == schedules.count %> event-<%= schedule.id %>">
-              <%= schedule.start_time.strftime("%I:%M")%> -
-              <%= schedule.finish_time.strftime("%I:%M") %>
-            </td>
-            <td class="lv-eventcell lv-title<% "last" if index == schedules.count %> event-<%= schedule.id %>">
-              <div class="s-title">
-                <%= link_to "javascript:void(0)" do %>
-                  <span data-event-id="<%=schedule.id%>" class="plus">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                    <%= schedule.title %>
-                  </span>
-                <% end %>
-              </div>
-
-              <%= render "event_details", schedule: schedule %>
-            </td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
 </div>
