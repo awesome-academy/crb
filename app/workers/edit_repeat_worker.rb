@@ -1,7 +1,7 @@
 class EditRepeatWorker
   include Sidekiq::Worker
 
-  def perform added_member_ids, schedule_id, announce
+  def perform added_member_ids, removed_member_ids, schedule_id, announce
     schedule_sample = Schedule.find schedule_id
     repeat = Repeat.find schedule_sample.repeat_id
     schedules = repeat.schedules
@@ -27,5 +27,6 @@ class EditRepeatWorker
     end
 
     MembersInvitationWorker.perform_async added_member_ids, repeated_schedule_ids
+    RemovedMembersAnnouncementWorker.perform_async removed_member_ids, repeated_schedule_ids
   end
 end

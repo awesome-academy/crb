@@ -106,6 +106,8 @@ en:
     repeat_schedule_notice_mail: "You are member for events"
     schedule_notice_mail: "You are member for an event"
     announce_updated_event: Updated Event Announcement
+    announce_members_removed_from_event: You were removed from an event
+    announce_members_removed_from_repeat_events: You were removed from repeat events
 
   shared:
     book_room: Book room

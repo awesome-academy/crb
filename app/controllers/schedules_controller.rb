@@ -52,14 +52,17 @@ class SchedulesController < ApplicationController
 
     if @schedule.update_attributes schedule_params
       new_member_ids = @schedule.member_ids
-      added_member_ids = @schedule.member_ids - old_member_ids
-
+      added_member_ids = new_member_ids - old_member_ids
+      removed_member_ids = old_member_ids - new_member_ids
+      schedule_id = @schedule.id
       announce = @schedule.have_important_changes
+
       if params[:edit_repeat].present?
-        EditRepeatWorker.perform_async added_member_ids, @schedule.id, announce
+        EditRepeatWorker.perform_async added_member_ids, removed_member_ids, schedule_id, announce
       else
         UpdatedEventAnnouncementWorker.perform_async(@schedule.id) if announce
-        MembersInvitationWorker.perform_async added_member_ids, [@schedule.id]
+        MembersInvitationWorker.perform_async added_member_ids, [schedule_id]
+        RemovedMembersAnnouncementWorker.perform_async removed_member_ids, [schedule_id]
       end
 
       flash[:success] = t(:update_flash)
