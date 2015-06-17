@@ -82,17 +82,6 @@ class SchedulesController < ApplicationController
 
   private
   def schedule_params
-    unless params[:schedule][:start_time].blank?
-      params[:schedule][:start_time] = convert_time params[:schedule][:start_time]
-    end
-    unless params[:schedule][:finish_time].blank?
-      params[:schedule][:finish_time] = convert_time params[:schedule][:finish_time]
-    end
-
     params.require(:schedule).permit :title, :start_time, :finish_time, :description, :room_id, :announced_before, member_ids: []
-  end
-
-  def convert_time str
-    DateTime.strptime(str, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d %H:%M")
   end
 end
