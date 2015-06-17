@@ -1,5 +1,6 @@
 <div class="my_schedules" id="my_schedule_pagination_links">
-  <%= paginate schedules, param_name: params_page, page_links: false %>
+  <%= paginate schedules, param_name: params_page, total_pages: Settings.kaminari.total_pages,
+                          window: Settings.kaminari.window, remote: true %>
   &emsp;&emsp;
   <%= link_to_if(@show_more, t("btn_more"), user_schedules_path(current_user)){} %>
 </div>
