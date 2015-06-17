@@ -1,0 +1,8 @@
+<h1><%= @subject %></h1>
+<p>Hi, <%= @member.name %></p>
+
+<p>
+  This is announcement of removing you from an event created by: <%= @schedule.user.name %><br>
+</p>
+
+<%= render "event", event: @schedule %>
