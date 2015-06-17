@@ -29,7 +29,6 @@ en:
   invalid_time: Time for schedule is too short or too long!
   invalid_day: You can not create schedule for Saturday or Sunday!
   invalid_create_in_past: You can not create schedule with time in the past!
-
   btn_edit: Edit
   btn_delete: Delete
   btn_delete_repeat: Delete all repeat
@@ -48,7 +47,6 @@ en:
   btn_more: More...
   btn_search: Search
   error_avatar: "should be less than %{max_avatar_file_size}MB"
-
   pages:
     home:
       title: Home
@@ -58,13 +56,12 @@ en:
       sign_up_now: Sign up now!
       my_calendar: My Calendar
       shared_calendar: Shared Calendar
-      other: "Other"
-
+      other: Other
     form:
+      date: Date
       room: Room
-      from: from
-      to: to
-
+      from: From
+      to: To
   schedules:
     form:
       event_name: Event name
@@ -80,9 +77,7 @@ en:
       create_by: Create by
       edit_repeat: Edit all repeat
       announced_before: Announce members before
-
     edit_event_title: Edit event
-
     index:
       title: Events
       title_my_events: My events!
@@ -96,22 +91,18 @@ en:
         finish: Finish
         state: State
         action: Action
-
     new:
       title: New event!
     show:
       title: Event detail
-
     announce_upcoming_event: Upcoming Event Announcement
     repeat_schedule_notice_mail: "You are member for events"
     schedule_notice_mail: "You are member for an event"
     announce_updated_event: Updated Event Announcement
     announce_members_removed_from_event: You were removed from an event
     announce_members_removed_from_repeat_events: You were removed from repeat events
-
   shared:
     book_room: Book room
-
   admin:
     dashboards:
       home:

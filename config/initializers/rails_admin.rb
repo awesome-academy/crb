@@ -9,12 +9,15 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard
     index
-    new
+    new do
+      except [Repeat]
+    end
     export
     bulk_delete
     show
-    edit
+    edit do
+      except [Repeat]
+    end
     delete
-    show_in_app
   end
 end
