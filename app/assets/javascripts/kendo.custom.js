@@ -88,4 +88,7 @@ $(document).ready(function() {
 
   schedule_start_time.max(schedule_finish_time.value());
   schedule_finish_time.min(schedule_start_time.value());
+
+  $("#schedule_start_time").attr("readonly", "readonly");
+  $("#schedule_finish_time").attr("readonly", "readonly");
 })
