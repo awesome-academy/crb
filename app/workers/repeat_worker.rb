@@ -18,8 +18,8 @@ class RepeatWorker
       @new_schedule.save if @new_schedule.valid?
     end
 
-    schedules = repeat.schedules
-    members = schedule.members
-    members.each {|member| UserMailer.invite_for_repeat_schedules(member, schedules).deliver_now}
+    added_member_ids = schedule.member_ids
+    schedule_ids = repeat.schedule_ids
+    MembersInvitationWorker.perform_async added_member_ids, schedule_ids
   end
 end
