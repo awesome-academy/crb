@@ -18,8 +18,11 @@ $(document).ready(function() {
 
   $("#room_selector").change(function(){
     room_id = $(this).val();
+    room_name = $(this).find("option:selected").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
+    $("option[value="+room_id+"]").attr("selected", "selected");
+    $("#select2-chosen-1").html(room_name);
   });
 
   MyCalendar.fullCalendar({
