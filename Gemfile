@@ -27,6 +27,7 @@ gem "mini_magick"
 gem "deep_cloneable", "~> 2.1.1"
 gem "kaminari"
 gem "kaminari-bootstrap"
+gem "rails_admin", github: "sferik/rails_admin"
 
 group :development, :test do
   gem "faker", "1.4.2"
