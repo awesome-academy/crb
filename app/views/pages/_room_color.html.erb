@@ -1,0 +1,13 @@
+<div class="room_color">
+  <br/>
+  <table>
+    <tr>
+    <% @rooms.each do |room| %>
+      <td>
+        <div class="square" style="background-color:<%= room.color %>;"></div>
+      </td>
+      <td><b><%= room.name %></b></td>
+    <% end %>
+    </tr>
+  </table>
+</div>

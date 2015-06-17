@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
 
   def home
-    @rooms = Room.pluck :name, :id
+    @rooms = Room.select :id, :name, :color
     @schedule = Schedule.new
     @schedule_days = Schedule.all.group_by{|schedule| schedule.start_time.beginning_of_day}
   end
