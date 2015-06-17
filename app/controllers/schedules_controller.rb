@@ -60,7 +60,8 @@ class SchedulesController < ApplicationController
       if params[:edit_repeat].present?
         EditRepeatWorker.perform_async added_member_ids, removed_member_ids, schedule_id, announce
       else
-        UpdatedEventAnnouncementWorker.perform_async(@schedule.id) if announce
+        shared_member_ids = new_member_ids & old_member_ids
+        UpdatedEventsAnnouncementWorker.perform_async(shared_member_ids, [schedule_id]) if announce
         MembersInvitationWorker.perform_async added_member_ids, [schedule_id]
         RemovedMembersAnnouncementWorker.perform_async removed_member_ids, [schedule_id]
       end
