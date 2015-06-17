@@ -26,4 +26,11 @@ class UserMailer < ApplicationMailer
     @subject = I18n.t "schedules.announce_updated_event"
     mail to: @user.email, subject: @subject
   end
+
+  def updated_repeat_event_announcement member, schedules
+    @member = member
+    @schedules = schedules
+    @subject = I18n.t "schedules.announce_updated_event"
+    mail to: @member.email, subject: @subject
+  end
 end
