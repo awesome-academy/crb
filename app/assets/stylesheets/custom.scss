@@ -104,6 +104,10 @@ aside {
   .row {
     margin-right: 0px;
     margin-left: 0px;
+
+    .col-md-10 {
+      padding-left: 0px;
+    }
   }
 }
 
@@ -249,6 +253,14 @@ table.table-popover{
   .my_schedules {
     margin-left: 20px;
   }
+
+  p {
+    margin-bottom: 0px;
+    font-size: 13px;
+    &.last {
+      margin-bottom: 5px;
+    }
+  }
 }
 
 #shared_calendar {
@@ -258,6 +270,14 @@ table.table-popover{
   .my_schedules{
     margin-left: 20px;
   }
+
+  p {
+    margin-bottom: 0px;
+    font-size: 13px;
+    &.last {
+      margin-bottom: 5px;
+    }
+  }
 }
 
 .title {
@@ -265,6 +285,17 @@ table.table-popover{
   &:hover {
     background-color: $gray-medium-light;
   }
+
+  .small {
+    font-size: 60%;
+  }
+}
+
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time span {

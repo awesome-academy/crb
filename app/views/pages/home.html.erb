@@ -1,7 +1,7 @@
 <% provide :title, t("pages.home.title") %>
 <% if user_signed_in? %>
   <% content_for :btn_new_schedule do %>
-    <%= link_to_if(can?(:create, Schedule), t("pages.home.create_event"), new_schedule_path, class: "btn btn-primary"){} %>
+    <%= link_to_if(can?(:create, Schedule), t("pages.home.create_event"), new_schedule_path, class: "btn btn-danger"){} %>
   <% end %>
   <%= render "shared/filter_room" %>
   <%= render "shared/other_option" %>
