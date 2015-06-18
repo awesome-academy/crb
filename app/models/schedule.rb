@@ -12,7 +12,7 @@ class Schedule < ActiveRecord::Base
 
   has_many :members, class_name: "User", through: :schedule_users, foreign_key: :schedule_id
   has_many :schedule_users
-  
+
   validates :description, presence: true, length: {maximum: 450}
   validates :finish_time, presence: true
   validates :room, presence: true
@@ -24,7 +24,7 @@ class Schedule < ActiveRecord::Base
   after_create :announce_upcoming_event
 
   scope :with_room, ->(room, id){where(room: room).where.not id: id}
-  scope :order_start_time, ->{order start_time: :asc}  
+  scope :order_start_time, ->{order start_time: :asc}
   scope :filte_timer, ->(start, finish){where(QUERY, start_time: start, finish_time: finish)}
   scope :today_schedule, ->{where("start_time LIKE ?", "%#{Time.now.to_date.to_s}%")}
   scope :filter_by_room, ->(room_id){where room_id: room_id if room_id.present? && room_id != "all"}
