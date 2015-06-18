@@ -38,11 +38,7 @@ class Schedule < ActiveRecord::Base
   scope :shared_and_my_schedules, ->user_id{joins("LEFT JOIN schedule_users ON schedules.id = schedule_users.schedule_id")
                                       .where(" schedules.user_id = ? OR schedule_users.user_id = ?", user_id, user_id)}
 
-  accepts_nested_attributes_for :members
-
-  delegate :color, to: :room, prefix: true
-
-  delegate :name, to: :room, prefix: true
+  delegate :color, :name, to: :room, prefix: true
 
   after_create :announce_upcoming_event
   after_commit :announce_upcoming_event, :delete_job_after_update, on: :update
