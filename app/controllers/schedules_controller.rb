@@ -11,6 +11,9 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def new
     @today_schedules = Schedule.today_schedule
   end
@@ -39,10 +42,7 @@ class SchedulesController < ApplicationController
         format.js
       end
     end
-  end
-
-  def show
-  end
+  end  
 
   def edit
   end

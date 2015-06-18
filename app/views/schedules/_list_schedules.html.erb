@@ -21,8 +21,9 @@
 
         <% if schedule.repeat_id.present? %>
           <% if can? :destroy, schedule.repeat %>
-            <%= link_to t('btn_delete_repeat'), repeat_path(schedule.repeat_id),
-              method: :delete, class: "btn btn-danger", remote: true %>
+            <%= link_to t("btn_delete_repeat"), repeat_path(schedule.repeat_id),
+              method: :delete, class: "btn btn-danger", remote: true,
+              data: {confirm: t("are_you_sure")} %>
           <% end %>
         <% end %>
       </div>
