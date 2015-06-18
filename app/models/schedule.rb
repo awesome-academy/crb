@@ -1,6 +1,7 @@
 class Schedule < ActiveRecord::Base
   include ScheduleJson
   include RailsAdminSchedule
+  require "sidekiq/api"
 
   QUERY = "(start_time <= :start_time AND finish_time >= :finish_time)
             OR (start_time > :start_time AND start_time < :finish_time)
@@ -40,7 +41,11 @@ class Schedule < ActiveRecord::Base
   accepts_nested_attributes_for :members
 
   delegate :color, to: :room, prefix: true
+
   delegate :name, to: :room, prefix: true
+
+  after_create :announce_upcoming_event
+  after_commit :announce_upcoming_event, :delete_job_after_update, on: :update
 
   def self.search options, user_id
     start_date = options[:start_date].to_date
@@ -89,5 +94,13 @@ class Schedule < ActiveRecord::Base
     now = Time.zone.now
     announced_at = start_time.ago announced_before
     AnnounceWorker.perform_at(announced_at, id) if now < announced_at
+  end
+
+  def delete_job_after_update
+    scheduled_jobs = Sidekiq::ScheduledSet.new
+    jobs = scheduled_jobs.select do |job|
+      job.klass == "AnnounceWorker" && job.args[0] == id
+    end
+    jobs.delete_all
   end
 end
