@@ -11,6 +11,23 @@ module RailsAdminSchedule
         field :finish_time
         field :created_at
       end
+
+      edit do
+        field :title
+        field :state
+        field :description
+        field :start_time
+        field :finish_time
+        field :user
+        field :room
+        field :members
+        field :announced_before, :enum do
+          enum do
+            Settings.announced_before.to_h.values
+          end
+        end
+        field :repeat
+      end
     end
   end
 end

@@ -12,10 +12,13 @@ module RailsAdminUser
       end
 
       edit do
-        field :id
         field :name
         field :email
-        field :role
+        field :role, :enum do
+          enum do
+            Settings.user_roles.to_h.values
+          end
+        end
         field :avatar
       end
     end

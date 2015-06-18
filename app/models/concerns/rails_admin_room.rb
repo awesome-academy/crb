@@ -9,6 +9,11 @@ module RailsAdminRoom
         field :color
         field :created_at
       end
+
+      edit do
+        field :name
+        field :color
+      end
     end
   end
 end
