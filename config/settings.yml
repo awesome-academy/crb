@@ -10,7 +10,6 @@ per_page_list_schedule: 10
 user_roles:
   admin: "admin"
   normal: "normal"
-number_of_schedules: 8
 avatar: [150, 150]
 max_avatar_file_size: 5
 avatar_extension_white_list: ["jpg", "jpeg", "gif", "png"]
@@ -18,7 +17,7 @@ rooms:
   - name: "Australia 1"
     color: "#D87093"
   - name: "Australia 2"
-    color: "#20BA22a"
+    color: "#20BA22"
   - name: "Pacific"
     color: "#008080"
   - name: "Atlatic"
