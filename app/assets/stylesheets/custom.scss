@@ -213,6 +213,8 @@ h3 {
   #room_selector {
     height: 2.1em;
     border-radius: 4px;
+    background-color: #F5F5F5;
+    border-color: #E0E0E0;
   }
 
   .dropdown-toggle {
@@ -315,6 +317,25 @@ table.table-popover{
    margin-left: 20px;
    margin-right:10px;
   }
+
+  .past-events {
+    background-color: #B4B4CD;
+  }
+}
+
+.fc-button {
+  background-image: none !important;
+  box-shadow: none !important;
+  &:active {
+    background-color: #808080 !important;
+  }
+  &:hover {
+    background-color: #E6E6E6 !important;
+  }
+}
+
+.dropdown-toggle {
+  border-color: #E0E0E0 !important;
 }
 
 .next_prev_pagination {
