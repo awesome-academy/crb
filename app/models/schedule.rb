@@ -97,6 +97,6 @@ class Schedule < ActiveRecord::Base
     jobs = scheduled_jobs.select do |job|
       job.klass == "AnnounceWorker" && job.args[0] == id
     end
-    jobs.delete_all
+    jobs.each(&:delete)
   end
 end
