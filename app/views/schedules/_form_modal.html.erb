@@ -2,30 +2,30 @@
   <div class="col-md-12 well">
     <div id="error_message"></div>
     <div class="col-md-12">
-      <%= f.label t('schedules.form.event_name') %>
-      <%= f.text_field :title, placeholder: t('schedules.form.event_title'), class: 'form-control' %>
+      <%= f.label t("schedules.form.event_name") %>
+      <%= f.text_field :title, placeholder: t("schedules.form.event_title"), class: "form-control" %>
     </div>
 
     <div class="col-md-12 select-date">
       <div class="col-md-5 start-date" >
-        <%= f.label t('schedules.form.start_time') %>
-        <div class='input-group date'>
-          <%= f.text_field :start_time, placeholder: t('schedules.form.start_time'),
-            style: 'width: 200px' %>
+        <%= f.label t("schedules.form.start_time") %>
+        <div class="input-group date">
+          <%= f.text_field :start_time, placeholder: t("schedules.form.start_time"),
+            style: "width: 200px" %>
         </div>
       </div>
       <div class="col-md-2"></div>
       <div class="col-md-5 finish-date">
-        <%= f.label t('schedules.form.finish_time') %>
+        <%= f.label t("schedules.form.finish_time") %>
         <div class="input-group date">
-          <%= f.text_field :finish_time, placeholder: t('schedules.form.finish_time'),
-            style: 'width: 200px' %>
+          <%= f.text_field :finish_time, placeholder: t("schedules.form.finish_time"),
+            style: "width: 200px" %>
         </div>
       </div>
     </div>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.repeat') %><br/>
+      <%= f.label t("schedules.form.repeat") %><br/>
       <% Settings.repeat_types.each do |k, v| %>
         <div class="col-md-2"><%= label_tag v %></div>
         <div class="col-md-2"><%= radio_button_tag :repeat, k %></div>
@@ -33,15 +33,15 @@
     </div>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.room') %><br/>
+      <%= f.label t("schedules.form.room") %><br/>
       <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {},
-        {class: 'select-room form-control'} %>
+        {class: "select-room form-control"} %>
     </div>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.members') %><br/>
+      <%= f.label t("schedules.form.members") %><br/>
       <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {},
-        {class: 'select-members form-control', multiple: :multiple} %>
+        {class: "select-members form-control", multiple: :multiple} %>
     </div>
 
     <div class="col-md-12">
@@ -56,12 +56,12 @@
     </div>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.description') %>
-      <%= f.text_area :description, placeholder: t('schedules.form.compose_description'),
-        class: 'form-control' %>
+      <%= f.label t("schedules.form.description") %>
+      <%= f.text_area :description, placeholder: t("schedules.form.compose_description"),
+        class: "form-control" %>
     </div>
   </div>
   <div class="col-md-12 well">
-    <%= f.submit t('schedules.form.submit'), class: "btn btn-primary" %>
+    <%= f.submit t("schedules.form.submit"), class: "btn btn-primary" %>
   </div>
 <% end %>

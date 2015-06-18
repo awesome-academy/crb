@@ -1,32 +1,32 @@
 <%= form_for @schedule do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+  <%= render "shared/error_messages", object: f.object %>
   <div class="col-md-12 well">
     <div class="col-md-12">
-      <%= f.label t('schedules.form.event_name') %>
-      <%= f.text_field :title, placeholder: t('schedules.form.event_title'),
-        class: 'form-control' %>
+      <%= f.label t("schedules.form.event_name") %>
+      <%= f.text_field :title, placeholder: t("schedules.form.event_title"),
+        class: "form-control" %>
     </div>
     <div class="col-md-12">
       <div class="col-md-5" >
-        <%= f.label t('schedules.form.start_time') %>
+        <%= f.label t("schedules.form.start_time") %>
         <div>
           <%= f.text_field :start_time, value: @schedule.start_time,
-            placeholder: t('schedules.form.start_time'), style: 'width: 300px' %>
+            placeholder: t("schedules.form.start_time"), style: "width: 300px" %>
         </div>
       </div>
       <div class="col-md-2"></div>
       <div class="col-md-5">
-        <%= f.label t('schedules.form.finish_time') %>
+        <%= f.label t("schedules.form.finish_time") %>
         <div class="input-group date">
           <%= f.text_field :finish_time, value: @schedule.finish_time,
-            placeholder: t('schedules.form.finish_time'), style: 'width: 300px' %>
+            placeholder: t("schedules.form.finish_time"), style: "width: 300px" %>
         </div>
       </div>
     </div>
 
     <% if @schedule.id.nil? %>
       <div class="col-md-12">
-        <%= f.label t('schedules.form.repeat') %><br/>
+        <%= f.label t("schedules.form.repeat") %><br/>
         <% Settings.repeat_types.each do |k, v| %>
           <div class="col-md-1"><%= label_tag v %></div>
           <div class="col-md-1">
@@ -37,15 +37,15 @@
     <% end %>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.room') %><br/>
+      <%= f.label t("schedules.form.room") %><br/>
       <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {},
-        {class: 'select-room form-control'} %>
+        {class: "select-room form-control"} %>
     </div>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.members') %><br/>
+      <%= f.label t("schedules.form.members") %><br/>
       <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {},
-        {class: 'select-members form-control', multiple: :multiple} %>
+        {class: "select-members form-control", multiple: :multiple} %>
     </div>
 
     <div class="col-md-12">
@@ -60,15 +60,15 @@
     </div>
 
     <div class="col-md-12">
-      <%= f.label t('schedules.form.description') %>
-      <%= f.text_area :description, placeholder: t('schedules.form.compose_description'),
-        class: 'form-control' %>
+      <%= f.label t("schedules.form.description") %>
+      <%= f.text_area :description, placeholder: t("schedules.form.compose_description"),
+        class: "form-control" %>
     </div>
 
     <% if @schedule.id.present? && @schedule.repeat_id.present? %>
       <div class="col-md-7 row">
         <br/>
-        <%= f.label t('schedules.form.edit_repeat'), class: "col-md-2" %>
+        <%= f.label t("schedules.form.edit_repeat"), class: "col-md-2" %>
         <%= check_box_tag :edit_repeat, true, false, class: "col-md-1" %>
       </div>
 
@@ -76,6 +76,6 @@
     <% end %>
   </div>
   <div class="col-md-12 well">
-    <%= f.submit t('schedules.form.submit'), class: "btn btn-primary" %>
+    <%= f.submit t("schedules.form.submit"), class: "btn btn-primary" %>
   </div>
 <% end %>

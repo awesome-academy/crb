@@ -1,10 +1,11 @@
 <li>
+  <% debugger %>
   <div><b><%= schedule.title %></b></div>
-  <p><small>Created by: <%= schedule.user.name %></small></p>
-  <p>Phong: <%= schedule.room.name %></p>
+  <p><small><%= t("schedules.form.create_by") %>: <%= schedule.user.name %></small></p>
+  <p><%= t("schedules.form.room") %>: <%= schedule.room.name %></p>
   <div>
-    From : <%= schedule.start_time.strftime('%H:%M') %>
-    to : <%= schedule.finish_time.strftime('%H:%M') %>
+    <%= t("pages.form.from") %>: <%= schedule.start_time.strftime("%H:%M") %>
+    <%= t("pages.form.to") %>: <%= schedule.finish_time.strftime("%H:%M") %>
   </div>
-  <%= link_to t('btn_detail'), schedule %>
+  <%= link_to t("btn_detail"), schedule %>
 </li>

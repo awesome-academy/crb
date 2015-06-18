@@ -2,21 +2,21 @@
   <tr id="event_user_<%= schedule.id %>" <%= "class=repeat-#{schedule.repeat_id}" if schedule.repeat_id.present? %>>
     <td><div class="col-md-12"><%= link_to schedule.title, schedule_path(schedule) %></div></td>
     <td><div class="col-md-12"><%= schedule.room.name %></div></td>
-    <td><div class="col-md-12"><%= schedule.start_time.strftime('%d/%m/%Y') %></div></td>
-    <td><div class="col-md-12"><%= schedule.start_time.strftime('%H:%M') %></div></td>
-    <td><div class="col-md-12"><%= schedule.finish_time.strftime('%H:%M') %></div></td>
+    <td><div class="col-md-12"><%= schedule.start_time.strftime("%d/%m/%Y") %></div></td>
+    <td><div class="col-md-12"><%= schedule.start_time.strftime("%H:%M") %></div></td>
+    <td><div class="col-md-12"><%= schedule.finish_time.strftime("%H:%M") %></div></td>
     <td><div class="<%= schedule.state %>-event"><%= schedule.state %></div></td>
     <td>
       <div class="col-md-12">
         <% if can? :update, schedule %>
-          <%= link_to t('btn_edit'), edit_user_schedule_path(current_user, schedule),
+          <%= link_to t("btn_edit"), edit_user_schedule_path(current_user, schedule),
             class: "btn btn-success" %>
         <% end %>
 
         <% if can? :destroy, schedule %>
-          <%= link_to t('btn_delete'), user_schedule_path(current_user, schedule),
+          <%= link_to t("btn_delete"), user_schedule_path(current_user, schedule),
             method: :delete, class: "btn btn-danger", remote: true,
-            data: {confirm: t('are_you_sure')} %>
+            data: {confirm: t("are_you_sure")} %>
         <% end %>
 
         <% if schedule.repeat_id.present? %>
