@@ -58,7 +58,7 @@ class SchedulesController < ApplicationController
       announce = @schedule.have_important_changes
 
       if params[:edit_repeat].present?
-        EditRepeatWorker.perform_async added_member_ids, removed_member_ids, schedule_id, announce
+        EditRepeatWorker.perform_async schedule_id, announce, added_member_ids, removed_member_ids
       else
         shared_member_ids = new_member_ids & old_member_ids
         UpdatedEventsAnnouncementWorker.perform_async(shared_member_ids, [schedule_id]) if announce

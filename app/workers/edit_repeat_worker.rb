@@ -1,13 +1,18 @@
 class EditRepeatWorker
   include Sidekiq::Worker
 
-  def perform added_member_ids, removed_member_ids, schedule_id, announce
-    schedule_sample = Schedule.find schedule_id
+  def perform sample_schedule_id, announce, sample_added_member_ids, sample_removed_member_ids
+    schedule_sample = Schedule.find sample_schedule_id
     repeat = Repeat.find schedule_sample.repeat_id
     schedules = repeat.schedules
-    repeated_schedule_ids = Array.new
-    shared_member_ids = schedule_sample.member_ids - added_member_ids
+    sample_shared_member_ids = schedule_sample.member_ids - sample_added_member_ids
+
+    added_list = removed_list = shared_list = Hash.new {|hash, key| hash[key] = Array.new}
+
     schedules.each do |schedule|
+      schedule_id = schedule.id
+      old_member_ids = schedule.member_ids unless sample_schedule_id == schedule_id
+
       day = schedule.start_time.day
       schedule.start_time = schedule_sample.start_time.change day: day
       schedule.finish_time = schedule_sample.finish_time.change day: day
@@ -17,12 +22,34 @@ class EditRepeatWorker
 
       if schedule.valid?
         schedule.save
-        repeated_schedule_ids << schedule.id
+
+        unless sample_schedule_id == schedule_id
+          new_member_ids = schedule.member_ids
+          added_member_ids = new_member_ids - old_member_ids
+          removed_member_ids = old_member_ids - new_member_ids
+          shared_member_ids = new_member_ids & old_member_ids
+        else
+          added_member_ids = sample_added_member_ids
+          removed_member_ids = sample_removed_member_ids
+          shared_member_ids = sample_shared_member_ids
+        end
+
+        added_member_ids.each{|member_id| added_list[member_id] << schedule_id}
+        removed_member_ids.each{|member_id| removed_list[member_id] << schedule_id}
+        shared_member_ids.each{|member_id| shared_list[member_id] << schedule_id}
       end
     end
 
-    UpdatedEventsAnnouncementWorker.perform_async(shared_member_ids, repeated_schedule_ids) if announce
-    MembersInvitationWorker.perform_async added_member_ids, repeated_schedule_ids
-    RemovedMembersAnnouncementWorker.perform_async removed_member_ids, repeated_schedule_ids
+    added_list.each do |member_id, repeated_schedule_ids|
+      MembersInvitationWorker.perform_async [member_id], repeated_schedule_ids
+    end
+
+    removed_list.each do |member_id, repeated_schedule_ids|
+      RemovedMembersAnnouncementWorker.perform_async [member_id], repeated_schedule_ids
+    end
+
+    shared_list.each do |member_id, repeated_schedule_ids|
+      UpdatedEventsAnnouncementWorker.perform_async([member_id], repeated_schedule_ids) if announce
+    end
   end
 end
