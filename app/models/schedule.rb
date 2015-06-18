@@ -42,6 +42,7 @@ class Schedule < ActiveRecord::Base
 
   after_create :announce_upcoming_event
   after_commit :announce_upcoming_event, :delete_job_after_update, on: :update
+  after_commit :delete_job_after_update, on: :destroy
 
   def self.search options, user_id
     start_date = options[:start_date].to_date
