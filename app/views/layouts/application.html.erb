@@ -5,10 +5,10 @@
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
-    <%= render 'shared/shim' %>
+    <%= render "shared/shim" %>
   </head>
   <body data-current-user-id="<%= current_user.try :id %>">
-    <%= render 'shared/header' %>
+    <%= render "shared/header" %>
 
     <div class="main-container container-fluid">
       <%= render partial: "shared/flash_messages", flash: flash %>
