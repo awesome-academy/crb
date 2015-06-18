@@ -3,8 +3,6 @@ class Api::MySchedulesController < ApplicationController
     @schedules = Schedule.my_schedule(current_user.id).order_start_time
                   .page(params[:my_page]).per Settings.per_page
 
-    @show_more = @schedules.total_count > Settings.number_of_schedules
-
     if params[:my_page]
       respond_to do |format|
         format.js

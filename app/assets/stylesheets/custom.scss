@@ -316,3 +316,21 @@ table.table-popover{
    margin-right:10px;
   }
 }
+
+.next_prev_pagination {
+  .pager li > span {
+    padding: 0px 6px;
+  }
+
+  #next_pagination {
+    float: right;
+    padding: 0px 3px;
+    font-size: 12px
+  }
+
+  #prev_pagination {
+    float: left;
+    padding: 0px 3px;
+    font-size: 12px
+  }
+}
