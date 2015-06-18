@@ -7,9 +7,4 @@ Kaminari.configure do |config|
   # config.right = 0
   # config.page_method_name = :page
   # config.param_name = :page
-  Kaminari::Helpers::Tag.class_eval do
-    def to_s(locals = {})
-        @template.render :partial => "../views/kaminari/#{@theme}#{self.class.name.demodulize.underscore}", :locals => @options.merge(locals)
-    end
-  end
 end
