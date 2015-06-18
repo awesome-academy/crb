@@ -14,11 +14,13 @@ class Schedule < ActiveRecord::Base
   has_many :members, class_name: "User", through: :schedule_users, foreign_key: :schedule_id
   has_many :schedule_users
 
-  validates :description, presence: true, length: {maximum: 450}
+  validates :description, presence: true,
+    length: {maximum: Settings.schedule.description.maximum}
   validates :finish_time, presence: true
   validates :room, presence: true
   validates :start_time, presence: true
-  validates :title, presence: true, length: {maximum: 150}
+  validates :title, presence: true,
+    length: {maximum: Settings.schedule.title.maximum}
   validates :user, presence: true
   validate :valid_time, :valid_room
 
@@ -34,7 +36,7 @@ class Schedule < ActiveRecord::Base
                                       .where(" ? <= start_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}
   scope :shared_schedules, ->user_id{joins(:schedule_users).where(" schedule_users.user_id = ?", user_id)}
   scope :filter_by_user, ->user_id{where(user: user_id)}
-  scope :between_time, ->(start_date, end_date){where(" start_time BETWEEN ? AND ? ", start_date, end_date)}
+  scope :between_time, ->(_start, _end){where(" start_time BETWEEN ? AND ? ", _start, _end) if _start.present? && _end.present?}
   scope :shared_and_my_schedules, ->user_id{joins("LEFT JOIN schedule_users ON schedules.id = schedule_users.schedule_id")
                                       .where(" schedules.user_id = ? OR schedule_users.user_id = ?", user_id, user_id)}
 
@@ -44,16 +46,11 @@ class Schedule < ActiveRecord::Base
   after_commit :announce_upcoming_event, :delete_job_after_update, on: :update
   after_commit :delete_job_after_update, on: :destroy
 
-  def self.search options, user_id
-    start_date = options[:start_date].to_date
-    end_date = options[:end_date].to_date
-    if start_date.present? && end_date.present?
-      @search = Schedule.shared_and_my_schedules(user_id).ransack options
-      @schedules = @search.result.between_time start_date, end_date
-    else
-      @search = Schedule.shared_and_my_schedules(user_id).ransack options
-      @schedules = @search.result
-    end
+  def self.search options = {}, user_id
+    _start, _end = options[:start_date].to_date, options[:end_date].to_date
+    search = Schedule.shared_and_my_schedules(user_id).ransack options
+
+    search.result.between_time(_start, _end).uniq
   end
 
   def have_important_changes
@@ -88,16 +85,12 @@ class Schedule < ActiveRecord::Base
   end
 
   def announce_upcoming_event
-    now = Time.zone.now
     announced_at = start_time.ago announced_before
-    AnnounceWorker.perform_at(announced_at, id) if now < announced_at
+    AnnounceWorker.perform_at(announced_at, id) if Time.zone.now < announced_at
   end
 
   def delete_job_after_update
-    scheduled_jobs = Sidekiq::ScheduledSet.new
-    jobs = scheduled_jobs.select do |job|
-      job.klass == "AnnounceWorker" && job.args[0] == id
-    end
-    jobs.each(&:delete)
+    jobs = Sidekiq::ScheduledSet.new
+    jobs.each{|job| job.delete if job.klass == "AnnounceWorker" && job.args[0] == id}
   end
 end

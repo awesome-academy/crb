@@ -32,3 +32,11 @@ important_atrributes: <%= %w(room_id  description start_time finish_time) %>
 kaminari:
   total_pages: 4
   window: 0
+room:
+  name:
+    maximum: 150
+schedule:
+  title:
+    maximum: 150
+  description:
+    maximum: 450
