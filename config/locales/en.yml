@@ -54,6 +54,9 @@ en:
       print: "Print"
       refresh: "Refresh"
 
+  footer:
+    past_events: Past Events
+
   flash:
     alert: You are not authorized to view that page!
     delete: Event was deleted!
