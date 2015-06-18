@@ -136,20 +136,32 @@ $(document).ready(function() {
       $(".room-popover").text(room);
       $("#detail-schedule-popover").attr("href", detail);
 
+      delete_repeat = $("#delete-repeat-popover");
+      edit_schedule = $("#edit-schedule-popover");
+      delete_schedule = $("#delete-schedule-popover");
+
       if (!event.url) {
         if(event.user_id == current_user_id) {
           if(event.repeat_id == null) {
-            $("#delete-repeat-popover").attr("href", null);
-            $("#delete-repeat-popover").text("");
+            delete_repeat.attr("href", null);
+            delete_repeat.text("");
           } else {
-            $("#delete-repeat-popover").attr("href", deleteRepeat);
-            $("#delete-repeat-popover").text("Delete all repeat");
+            delete_repeat.attr("href", deleteRepeat);
+            delete_repeat.text("Delete all repeat");
           }
 
-          $("#edit-schedule-popover").attr("href", edit);
-          $("#edit-schedule-popover").text("Edit");
-          $("#delete-schedule-popover").attr("href", detail);
-          $("#delete-schedule-popover").text("Delete");
+          var time_now = new Date();
+          var end_time = new Date(event.end);
+          if(time_now > end_time) {
+            edit_schedule.attr("href", null);
+            edit_schedule.text("");
+          }else {
+            edit_schedule.attr("href", edit);
+            edit_schedule.text("Edit");
+          }
+
+          delete_schedule.attr("href", detail);
+          delete_schedule.text("Delete");
 
           element.popover({
             placement: "top",
@@ -158,12 +170,12 @@ $(document).ready(function() {
             content: $(".form-popover").html(),
           });
         } else {
-          $("#edit-schedule-popover").attr("href", null);
-          $("#edit-schedule-popover").text("");
-          $("#delete-schedule-popover").attr("href", null);
-          $("#delete-schedule-popover").text("");
-          $("#delete-repeat-popover").attr("href", null);
-          $("#delete-repeat-popover").text("");
+          edit_schedule.attr("href", null);
+          edit_schedule.text("");
+          delete_schedule.attr("href", null);
+          delete_schedule.text("");
+          delete_repeat.attr("href", null);
+          delete_repeat.text("");
 
           element.popover({
             placement: "top",
