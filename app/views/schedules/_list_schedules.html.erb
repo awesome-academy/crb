@@ -9,21 +9,21 @@
     <td>
       <div class="col-md-12">
         <% if can? :update, schedule %>
-          <%= link_to t("btn_edit"), edit_user_schedule_path(current_user, schedule),
+          <%= link_to t("button.edit"), edit_user_schedule_path(current_user, schedule),
             class: "btn btn-success" %>
         <% end %>
 
         <% if can? :destroy, schedule %>
-          <%= link_to t("btn_delete"), user_schedule_path(current_user, schedule),
+          <%= link_to t("button.delete"), user_schedule_path(current_user, schedule),
             method: :delete, class: "btn btn-danger", remote: true,
-            data: {confirm: t("are_you_sure")} %>
+            data: {confirm: t("button.confirm")} %>
         <% end %>
 
         <% if schedule.repeat_id.present? %>
           <% if can? :destroy, schedule.repeat %>
-            <%= link_to t("btn_delete_repeat"), repeat_path(schedule.repeat_id),
+            <%= link_to t("button.delete_repeat"), repeat_path(schedule.repeat_id),
               method: :delete, class: "btn btn-danger", remote: true,
-              data: {confirm: t("are_you_sure")} %>
+              data: {confirm: t("button.confirm")} %>
           <% end %>
         <% end %>
       </div>

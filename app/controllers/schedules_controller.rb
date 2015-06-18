@@ -66,7 +66,7 @@ class SchedulesController < ApplicationController
         RemovedMembersAnnouncementWorker.perform_async removed_member_ids, [schedule_id]
       end
 
-      flash[:success] = t(:update_flash)
+      flash[:success] = t("flash.update")
       redirect_to root_path
     else
       render :edit

@@ -62,26 +62,26 @@ class Schedule < ActiveRecord::Base
   private
   def valid_room
     if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0
-      errors.add :room, I18n.t("valid_room")
+      errors.add :room, I18n.t("valid.room")
     end
   end
 
   def valid_time
     unless start_time.blank? || finish_time.blank?
       if start_time >= finish_time
-        errors.add :start_time, I18n.t("invalid_start_time")
+        errors.add :start_time, I18n.t("invalid.start_time")
       end
 
       if (start_time.day != finish_time.day) || (finish_time - start_time < Settings.min_time_schedule)
-        errors.add :finish_time, I18n.t("invalid_time")
+        errors.add :finish_time, I18n.t("invalid.time")
       end
 
       if start_time.wday == Settings.validate_saturday || start_time.wday == Settings.validate_sunday
-        errors.add :start_time, I18n.t("invalid_day")
+        errors.add :start_time, I18n.t("invalid.day")
       end
 
       if start_time < Time.zone.now
-        errors.add :start_time, I18n.t("invalid_create_in_past")
+        errors.add :start_time, I18n.t("invalid.create_in_past")
       end
     end
   end

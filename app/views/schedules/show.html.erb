@@ -61,9 +61,9 @@
 
 <div class="form-actions">
   <% if can? :edit, @schedule %>
-    <%= link_to t("btn_edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
+    <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
   <% end %>
   <% if can? :destroy, @schedule %>
-    <%= link_to t("btn_delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("are_you_sure")}, class: "btn btn-danger" %>
+    <%= link_to t("button.delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("button.confirm")}, class: "btn btn-danger" %>
   <% end %>
 </div>

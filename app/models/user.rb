@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   private
   def avatar_size
     if avatar.size > Settings.max_avatar_file_size.megabytes
-      errors.add :avatar, I18n.t("error_avatar", max_avatar_file_size: Settings.max_avatar_file_size)
+      errors.add :avatar, I18n.t("invalid.avatar", max_avatar_file_size: Settings.max_avatar_file_size)
     end
   end
 end
