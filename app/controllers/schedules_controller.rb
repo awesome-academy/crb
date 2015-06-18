@@ -42,7 +42,7 @@ class SchedulesController < ApplicationController
         format.js
       end
     end
-  end  
+  end
 
   def edit
   end
