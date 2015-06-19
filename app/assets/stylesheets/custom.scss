@@ -1,6 +1,5 @@
 @import "variables";
 
-$gray-medium-light: #E0E0D6;
 header {
   background-color: #f1f1f1;
   height: 60px;
@@ -46,6 +45,12 @@ header {
 }
 
 aside {
+  .btn-new-schedule {
+    height: 2.1em;
+    margin-bottom: 1.275em;
+    padding: 3px 12px;
+  }
+
   section.user_info {
     margin-top: 20px;
   }
@@ -53,20 +58,78 @@ aside {
   .containers {
     display: flex;
     overflow: hidden;
-    height: 270px;
-    padding-top: 18px;
     position: relative;
     width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
   }
 
-  .today_schedules {
-    overflow: auto;
-    height: auto;
-    padding: .1rem;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
+  #mini-calendar {
+    width: 100%;
+    table.table-condensed {
+      width: 100%;
+      td {
+        padding: 0px;
+      }
+    }
+
+    .table-condensed > thead > tr > th, .table-condensed > thead > tr > td,
+    .table-condensed > tbody > tr > th, .table-condensed > tbody > tr > td,
+    .table-condensed > tfoot > tr > th, .table-condensed > tfoot > tr > td {
+      padding: 0px;
+    }
+  }
+
+  #my_calendar {
+    #my-schedule-content {
+      margin-left: 20px;
+    }
+    .my_schedules {
+      margin-left: 20px;
+    }
+
+    p {
+      margin-bottom: 0px;
+      font-size: 13px;
+      &.last {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  #shared_calendar {
+    #shared-schedule-content {
+      margin-left: 20px;
+    }
+    .my_schedules{
+      margin-left: 20px;
+    }
+
+    p {
+      margin-bottom: 0px;
+      font-size: 13px;
+      &.last {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .title {
+    cursor: pointer;
+    &:hover {
+      background-color: #DCDEE3;
+    }
+
+    .small {
+      font-size: 60%;
+    }
+  }
+
+  .truncate {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   section {
@@ -152,13 +215,6 @@ h3 {
   }
 }
 
-#mini-calendar {
-  width: 100%;
-  .table-condensed {
-    width: 100%;
-  }
-}
-
 .k-weekend{
   display: block;
   overflow: hidden;
@@ -231,12 +287,13 @@ h3 {
     }
   }
 }
+
 .shared_schedules a:hover, .shared_schedules a:focus {
   text-decoration: none;
   color: black;
 }
 
-table.table-popover{
+table.table-popover {
   width: 100%;
   font-size: 12px;
   a {
@@ -248,58 +305,6 @@ table.table-popover{
   }
 }
 
-#my_calendar {
-  #my-schedule-content {
-    margin-left: 20px;
-  }
-  .my_schedules {
-    margin-left: 20px;
-  }
-
-  p {
-    margin-bottom: 0px;
-    font-size: 13px;
-    &.last {
-      margin-bottom: 5px;
-    }
-  }
-}
-
-#shared_calendar {
-  #shared-schedule-content {
-    margin-left: 20px;
-  }
-  .my_schedules{
-    margin-left: 20px;
-  }
-
-  p {
-    margin-bottom: 0px;
-    font-size: 13px;
-    &.last {
-      margin-bottom: 5px;
-    }
-  }
-}
-
-.title {
-  cursor: pointer;
-  &:hover {
-    background-color: #DCDEE3;
-  }
-
-  .small {
-    font-size: 60%;
-  }
-}
-
-.truncate {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time span {
   display: inline;
 }
@@ -308,18 +313,20 @@ table.table-popover{
   content: normal;
 }
 
-.footer_for_fullcalendar {
-  text-align: -webkit-center;
-  margin-bottom:10px;
-  .square {
-   width: 35px;
-   height: 20px;
-   margin-left: 20px;
-   margin-right:10px;
-  }
+footer {
+  .footer_for_fullcalendar {
+    text-align: -webkit-center;
+    margin-top: 10px;
+    .square {
+      width: 20px;
+      height: 15px;
+      margin-left: 20px;
+      margin-right:10px;
+    }
 
-  .past-events {
-    background-color: #B4B4CD;
+    .past-events {
+      background-color: #B4B4CD;
+    }
   }
 }
 

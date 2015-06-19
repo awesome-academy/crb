@@ -6,6 +6,7 @@ module RailsAdminUser
       list do
         field :id
         field :name
+        field :role
         field :email
         field :avatar
         field :created_at
