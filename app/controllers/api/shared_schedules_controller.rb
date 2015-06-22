@@ -3,12 +3,9 @@ class Api::SharedSchedulesController < ApplicationController
     @schedules = Schedule.shared_schedules_future(current_user.id).order_start_time
                   .page(params[:shared_page]).per Settings.per_page
 
-    if params[:shared_page]
-      respond_to do |format|
-        format.js
-      end
-    else
-      render partial: "schedule", locals: {schedules: @schedules}
+    respond_to do |format|
+      format.html {render partial: "schedule", locals: {schedules: @schedules}}
+      format.js
     end
   end
 end
