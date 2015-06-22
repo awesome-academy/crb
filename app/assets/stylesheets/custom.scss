@@ -322,6 +322,9 @@ footer {
   .footer_for_fullcalendar {
     text-align: -webkit-center;
     margin-top: 10px;
+    table {
+      margin: 0 auto;
+    }
     .square {
       width: 20px;
       height: 15px;
@@ -385,10 +388,10 @@ footer {
 }
 
 .calendar-fixed {
-  margin: 0px 20px 10px 240px;
+  margin: 0px 15px 10px 230px;
 }
 
-.btn, .form-control, .pager li > a, .pager li > span {
+.btn, .form-control, .pager li > a, .pager li > span, .select2-choice, .select2-choices, .modal-content, .well, .alert {
   border-radius: 0px !important;
 }
 
@@ -398,4 +401,10 @@ footer {
 
 .room-selector {
   width: auto;
+  float: left;
+  margin-left: 10px;
+}
+
+.left-label {
+  float: left;
 }

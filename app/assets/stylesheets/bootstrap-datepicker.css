@@ -305,8 +305,7 @@
 .datepicker table tr td.active:hover[disabled],
 .datepicker table tr td.active.disabled[disabled],
 .datepicker table tr td.active.disabled:hover[disabled] {
-  background-color: whitesmoke;
-  border: solid 1px #6687E7;
+  background-color: #6687E7;
 }
 .datepicker table tr td.active:active,
 .datepicker table tr td.active:hover:active,
