@@ -282,4 +282,20 @@ $(document).ready(function() {
       $("#shared_schedules").html(data);
     });
   });
+
+  setInterval(function(){
+    var events = MyCalendar.fullCalendar("clientEvents");
+
+    $.each(events, function (index, event){
+      var time_now = new Date();
+      var end_time = event.end._d;
+      if (end_time < time_now) {
+        event.color = "#B4B4CD"
+      }
+    });
+
+    MyCalendar.fullCalendar("removeEvents");
+    MyCalendar.fullCalendar("addEventSource", events);
+    MyCalendar.fullCalendar("rerenderEvents");
+  }, 900000);
 });
