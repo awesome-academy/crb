@@ -285,6 +285,10 @@ h3 {
     left: -9px;
     li {
       padding-left: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: #DCDEE3;
+      }
     }
   }
 }
