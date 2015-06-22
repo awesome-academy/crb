@@ -51,12 +51,7 @@
     <div class="col-md-12">
       <br/>
       <%= f.label t("schedules.form.announced_before") %>
-
-      <%= f.select :announced_before do %>
-        <% Settings.announced_before.each do |key, value| %>
-          <%= content_tag :option, key, value: value %>
-        <% end %>
-      <% end %>
+      <%= f.select :announced_before, Settings.announced_before.to_a %>
     </div>
 
     <div class="col-md-12">
