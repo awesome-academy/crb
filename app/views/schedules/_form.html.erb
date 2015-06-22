@@ -27,10 +27,10 @@
     <% if @schedule.id.nil? %>
       <div class="col-md-12">
         <%= f.label t("schedules.form.repeat") %><br/>
-        <% Settings.repeat_types.each do |k, v| %>
-          <div class="col-md-1"><%= label_tag v %></div>
+        <% Settings.repeat_types.each do |key, value| %>
+          <div class="col-md-1"><%= label_tag value %></div>
           <div class="col-md-1">
-            <%= radio_button_tag :repeat, k %>
+            <%= check_box_tag :repeat, key %>
           </div>
         <% end %>
       </div>
