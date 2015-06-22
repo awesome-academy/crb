@@ -1,2 +1,1 @@
-<%= select("room", "selector", @rooms.collect {|r| [r.name, r.id]}, {include_blank: "All"}, {autocomplete: false}) %>
-
+<%= select("room", "selector", @rooms.collect {|r| [r.name, r.id]}, {include_blank: "All"}, {autocomplete: false, class: "form-control room-selector"}) %>

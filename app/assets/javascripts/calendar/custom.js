@@ -17,8 +17,10 @@ $(document).ready(function() {
     room_name = $(this).find("option:selected").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
-    $("option[value="+room_id+"]").attr("selected", "selected");
-    $("#select2-chosen-1").html(room_name);
+    if(room_id != null){
+      $("option[value="+room_id+"]").attr("selected", "selected");
+      $("#select2-chosen-1").html(room_name);
+    }
   });
 
   MyCalendar.fullCalendar({
@@ -43,7 +45,7 @@ $(document).ready(function() {
     editable: true,
     eventLimit: true,
     weekends: false,
-    height: $(window).height() - $("header").height() - $("footer").height() - 40,
+    height: $(window).height() - $("header").height() - $("footer").height() - 50,
     minTime: "07:00:00",
     maxTime: "22:00:00",
     allDaySlot: false,
@@ -65,6 +67,7 @@ $(document).ready(function() {
               events.push({
                 id: schedule.id,
                 title: schedule.title,
+                description: schedule.description,
                 start: schedule.start_time,
                 end: schedule.finish_time,
                 user_id: schedule.user_id,
@@ -226,7 +229,7 @@ $(document).ready(function() {
     loading: function(isLoading, view){
       if (isLoading) {
         $("label.loading").removeClass("hidden");
-      }else {
+      } else {
         $("label.loading").addClass("hidden");
       }
     }
@@ -282,4 +285,20 @@ $(document).ready(function() {
       $("#shared_schedules").html(data);
     });
   });
+
+  setInterval(function(){
+    var events = MyCalendar.fullCalendar("clientEvents");
+
+    $.each(events, function (index, event){
+      var time_now = new Date();
+      var end_time = event.end._d;
+      if (end_time < time_now) {
+        event.color = "#B4B4CD"
+      }
+    });
+
+    MyCalendar.fullCalendar("removeEvents");
+    MyCalendar.fullCalendar("addEventSource", events);
+    MyCalendar.fullCalendar("rerenderEvents");
+  }, 900000);
 });

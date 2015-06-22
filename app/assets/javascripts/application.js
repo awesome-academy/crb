@@ -13,4 +13,3 @@
 //= require share/custom
 //= require share/countdown_time
 //= require validate-avatar
-
