@@ -12,15 +12,13 @@
 
     <div class="full-calendar-container">
       <%= render partial: "shared/flash_messages", flash: flash %>
-
       <div class="row">
-        <aside class="col-md-2">
+        <aside class="col-md-2 aside-fixed">
           <%= yield :btn_new_schedule %>
 
           <%= yield :mini_calendar %>
         </aside>
-
-        <div class="col-md-10">
+        <div class="calendar-fixed">
           <%= yield %>
         </div>
       </div>
