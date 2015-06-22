@@ -5,10 +5,6 @@ $(document).ready(function() {
   var MyMiniCalendar = $("#mini-calendar");
   var clock = 5*60;
 
-  setTimeout(function() {
-    $(".hide-flash").fadeOut("normal");
-  }, 4000);
-
   var current_user_id = $("body").data("current-user-id");
   var view_type = localStorage.getItem("view_type");
 
@@ -245,14 +241,6 @@ $(document).ready(function() {
 
   $("#modal-form").on("show.bs.modal", function(){
     $(".popover").hide();
-  });
-
-  $(".select-room").select2({
-    width: 300
-  });
-
-  $(".select-members").select2({
-    width: "100%"
   });
 
   MyMiniCalendar.datepicker({

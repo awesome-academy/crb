@@ -10,25 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //= require_self
-//= require jquery
-//= require jquery.turbolinks
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
-//= require bootstrap-datepicker
+//= require share/custom
 //= require moment
 //= require fullcalendar
-//= require websocket_rails/main
-//= require select2
-//= require kendo.web.min
 //= require marcus_bains_line
-//= require server_time
-//= require kendo.custom
 //= require calendar/calendar-timetable
 //= require calendar/custom
 //= require calendar/time-table
-//= require repeats
 //= require schedules
-//= require search_schedules
-
-var schedule_start_time, schedule_finish_time;
