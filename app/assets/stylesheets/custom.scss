@@ -384,6 +384,14 @@ footer {
   margin: 0px 20px 10px 240px;
 }
 
-.btn, .form-control {
+.btn, .form-control, .pager li > a, .pager li > span {
   border-radius: 0px !important;
+}
+
+.dropdown-menu li:hover {
+  background-color: #E6E6E6;
+}
+
+.room-selector {
+  width: auto;
 }

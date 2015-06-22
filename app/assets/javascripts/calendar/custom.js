@@ -17,8 +17,10 @@ $(document).ready(function() {
     room_name = $(this).find("option:selected").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
-    $("option[value="+room_id+"]").attr("selected", "selected");
-    $("#select2-chosen-1").html(room_name);
+    if(room_id != null){
+      $("option[value="+room_id+"]").attr("selected", "selected");
+      $("#select2-chosen-1").html(room_name);
+    }
   });
 
   MyCalendar.fullCalendar({
@@ -43,7 +45,7 @@ $(document).ready(function() {
     editable: true,
     eventLimit: true,
     weekends: false,
-    height: $(window).height() - $("header").height() - $("footer").height() - 40,
+    height: $(window).height() - $("header").height() - $("footer").height() - 50,
     minTime: "07:00:00",
     maxTime: "22:00:00",
     allDaySlot: false,
