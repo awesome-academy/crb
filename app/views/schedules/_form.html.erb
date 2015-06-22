@@ -50,8 +50,8 @@
 
     <div class="col-md-12">
       <br/>
-      <%= f.label t("schedules.form.announced_before") %>
-      <%= f.select :announced_before, Settings.announced_before.to_a %>
+      <%= f.label t("schedules.form.announced_before"), class: "left-label" %>
+      <%= f.select :announced_before, Settings.announced_before.to_a, {}, class: "room-selector form-control" %>
     </div>
 
     <div class="col-md-12">

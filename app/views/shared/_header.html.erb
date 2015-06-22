@@ -1,5 +1,5 @@
 <header class="navbar navbar-fixed-top row">
-  <div class="child-header">
+  <div class="child-header" data-no-turbolink="true">
     <%= link_to "Room Book System", root_path, id: "logo" %>
     <% if user_signed_in? %>
       <div class="search-box"><%= render "shared/search_box" %></div>
