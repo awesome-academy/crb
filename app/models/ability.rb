@@ -6,6 +6,8 @@ class Ability
 
     case
     when user.admin?
+      can :access, :rails_admin
+      can :dashboard
       can :manage, User
       can [:create, :read, :destroy], Schedule
       can [:update], Schedule do |schedule|
