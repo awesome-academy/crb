@@ -164,6 +164,7 @@ aside {
 
 .full-calendar-container {
   margin-top: 80px;
+  position: relative;
   .row {
     margin-right: 0px;
     margin-left: 0px;
@@ -331,6 +332,7 @@ footer {
 }
 
 .fc-button {
+  border-radius: 0px !important;
   background-image: none !important;
   box-shadow: none !important;
   &:active {
@@ -370,4 +372,18 @@ footer {
       text-decoration: none;
     }
   }
+}
+
+.aside-fixed {
+  width: 230px;
+  float: left;
+  position: absolute;
+}
+
+.calendar-fixed {
+  margin: 0px 20px 10px 240px;
+}
+
+.btn, .form-control {
+  border-radius: 0px !important;
 }
