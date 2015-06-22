@@ -60,7 +60,7 @@
 </div>
 
 <div class="form-actions">
-  <% if can? :edit, @schedule %>
+  <% if can? :update, @schedule %>
     <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
   <% end %>
   <% if can? :destroy, @schedule %>
