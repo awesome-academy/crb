@@ -47,7 +47,7 @@ $(document).ready(function() {
     editable: true,
     eventLimit: true,
     weekends: false,
-    height: $(window).height() - $("header").height() - $("footer").height() - 100,
+    height: $(window).height() - $("header").height() - $("footer").height() - 40,
     minTime: "07:00:00",
     maxTime: "22:00:00",
     allDaySlot: false,
