@@ -1,1 +1,17 @@
-<%= select("room", "selector", @rooms.collect {|r| [r.name, r.id]}, {include_blank: "All"}, {autocomplete: false, class: "form-control room-selector"}) %>
+<div class="dropdown" id="room_selector">
+  <div class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+    <span id="room_dropdown"><%= t("dropdown.all_room") %></span>&nbsp;<b class="caret"></b>
+  </div>
+  <ul class="dropdown-menu">
+    <li>
+      <div class="color-selector" style="background-color: transparent;"></div>
+      <span><%= t("dropdown.all_room") %></span>
+    </li>
+    <% @rooms.each do |room| %>
+      <li value="<%= room.id %>">
+        <div class="color-selector" style="background-color:<%= room.color %>;"></div>
+        <span><%= room.name %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>

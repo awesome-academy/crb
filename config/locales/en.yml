@@ -48,11 +48,12 @@ en:
     expand_all: Expand all
 
   dropdown:
+    all_room: All room
     title:
-      other: "other"
+      other: Other
     options:
-      print: "Print"
-      refresh: "Refresh"
+      print: Print
+      refresh: Refresh
 
   footer:
     past_events: Past Events
