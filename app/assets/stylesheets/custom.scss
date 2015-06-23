@@ -1,7 +1,7 @@
 @import "variables";
 
 header {
-  background-color: #f1f1f1;
+  background-color: $lightest-gray;
   height: 60px;
   .child-header{
     position: relative;
@@ -11,14 +11,14 @@ header {
     float: left;
     margin-right: 10px;
     font-size: 1.7em;
-    color: #428bca;
+    color: $light-blue;
     text-transform: uppercase;
     letter-spacing: -1px;
     padding-top: 9px;
     font-weight: bold;
     margin-left: 35px;
     &:hover {
-      color: #428bca;
+      color: $light-blue;
       text-decoration: none;
     }
   }
@@ -118,7 +118,7 @@ aside {
     cursor: pointer;
     font-size: 13px;
     &:hover {
-      background-color: #DCDEE3;
+      background-color: $lighter-blue-gray;
     }
 
     .small {
@@ -216,17 +216,17 @@ h3 {
 
 .pending-event {
   font-weight: bold;
-  color: #0000FF;
+  color: $blue;
 }
 
 .accepted-event {
   font-weight: bold;
-  color: #006633;
+  color: $dark-green;
 }
 
 .rejected-event {
   font-weight: bold;
-  color: #780000;
+  color: $dark-red;
 }
 
 .finish-date, .start-date {
@@ -272,7 +272,7 @@ h3 {
     border-bottom: 1em;
     border-left: none;
     border-right: none;
-    border-color: #ddd !important;
+    border-color: $opalescent !important;
     border-collapse: collapse;
 
     &:last-child {
@@ -295,15 +295,15 @@ h3 {
   #room_selector {
     height: 2.1em;
     border-radius: 4px;
-    background-color: #F5F5F5;
-    border-color: #E0E0E0;
+    background-color: $lighter-gray;
+    border-color: $gray;
   }
 
   .dropdown-toggle {
     padding-top: 4px;
     height: 2.1em;
     font-size: 1em;
-    background-color: #f5f5f5;
+    background-color: $lighter-gray;
   }
   .dropdown-menu{
     min-width: 80px;
@@ -312,7 +312,7 @@ h3 {
       padding-left: 10px;
       cursor: pointer;
       &:hover {
-        background-color: #DCDEE3;
+        background-color: $lighter-blue-gray;
       }
     }
   }
@@ -358,7 +358,7 @@ footer {
     }
 
     .past-events {
-      background-color: #B4B4CD;
+      background-color: $light-blue-gray;
     }
   }
 }
@@ -368,15 +368,15 @@ footer {
   background-image: none !important;
   box-shadow: none !important;
   &:active {
-    background-color: #808080 !important;
+    background-color: $dark-gray !important;
   }
   &:hover {
-    background-color: #E6E6E6 !important;
+    background-color: $lightest-blue-gray !important;
   }
 }
 
 .dropdown-toggle {
-  border-color: #E0E0E0 !important;
+  border-color: $gray !important;
 }
 
 .aside-fixed {
@@ -394,7 +394,7 @@ footer {
 }
 
 .dropdown-menu li:hover {
-  background-color: #E6E6E6;
+  background-color: $lightest-blue-gray;
 }
 
 .room-selector {
