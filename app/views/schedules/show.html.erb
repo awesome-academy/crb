@@ -71,7 +71,7 @@
   </div>
 </div>
 
-<div class="form-actions">
+<div class="form-actions" data-no-turbolink="true">
   <% if can? :update, @schedule %>
     <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
   <% end %>
