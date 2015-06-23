@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validate :avatar_size
 
   scope :with_ids, ->ids{where id: ids}
+  scope :without_user, ->user_id{where.not id: user_id}
 
   before_create{self.role ||= Settings.user_roles[:normal]}
 

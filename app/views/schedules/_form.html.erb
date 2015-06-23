@@ -46,7 +46,7 @@
     <div class="col-md-12">
       <br/>
       <%= f.label t("schedules.form.members") %><br/>
-      <%= f.select :member_ids, User.all.collect{|s| [s.name, s.id]}, {},
+      <%= f.select :member_ids, @users, {},
         {class: "select-members form-control", multiple: :multiple} %>
     </div>
 
