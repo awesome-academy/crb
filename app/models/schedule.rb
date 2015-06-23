@@ -24,8 +24,6 @@ class Schedule < ActiveRecord::Base
   validates :user, presence: true
   validate :valid_time, :valid_room
 
-  after_create :announce_upcoming_event
-
   scope :with_room, ->(room, id){where(room: room).where.not id: id}
   scope :order_start_time, ->{order start_time: :asc}
   scope :filte_timer, ->(start, finish){where(QUERY, start_time: start, finish_time: finish)}
@@ -42,9 +40,9 @@ class Schedule < ActiveRecord::Base
 
   delegate :color, :name, to: :room, prefix: true
 
-  after_create :announce_upcoming_event
-  after_commit :announce_upcoming_event, :delete_job_after_update, on: :update
-  after_commit :delete_job_after_update, on: :destroy
+  after_commit :announce_upcoming_event, on: :create
+  after_commit :announce_event_after_update, on: :update
+  after_commit :delete_job, on: :destroy
 
   def self.search options = {}, user_id
     _start, _end = options[:start_date].to_date, options[:end_date].to_date
@@ -89,8 +87,13 @@ class Schedule < ActiveRecord::Base
     AnnounceWorker.perform_at(announced_at, id) if Time.zone.now < announced_at
   end
 
-  def delete_job_after_update
+  def delete_job
     jobs = Sidekiq::ScheduledSet.new
     jobs.each{|job| job.delete if job.klass == "AnnounceWorker" && job.args[0] == id}
+  end
+
+  def announce_event_after_update
+    delete_job
+    announce_upcoming_event
   end
 end
