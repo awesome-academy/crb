@@ -21,11 +21,11 @@
     <label class="col-md-2"><%= t("schedules.form.start_time") %></label>
     <div class="col-md-2">
       <div class="form-control"><%= @schedule.start_time.strftime("%d/%m/%Y") %></div>
-      <%= hidden_field_tag 'date_time_event', @schedule.start_time.strftime("%m/%d/%Y") %>
+      <%= hidden_field_tag 'date_time_event', @schedule.start_time.strftime("%m/%d/%Y") %> 
     </div>
     <div class="col-md-2">
       <div class="form-control"><%= @schedule.start_time.strftime("%H:%M") %>
-      <%= hidden_field_tag 'start_time_event', @schedule.start_time.strftime("%H:%M") %>
+      <%= hidden_field_tag 'start_time_event', @schedule.start_time.strftime("%H:%M") %> 
     </div>
     </div>
       <label class="col-md-2"><%= t("schedules.form.finish_time") %></label>
