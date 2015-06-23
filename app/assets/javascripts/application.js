@@ -9,7 +9,13 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require_self
 //= require share/custom
 //= require share/countdown_time.js
+//= require_self
 //= require validate-avatar
+
+$(document).ready(function() {
+  setTimeout(function() {
+    $(".hide-flash").fadeOut("normal");
+  }, 3000);
+});

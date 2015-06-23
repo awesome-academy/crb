@@ -27,10 +27,6 @@
 var schedule_start_time, schedule_finish_time;
 
 $(document).ready(function() {
-  setTimeout(function() {
-    $(".hide-flash").fadeOut("normal");
-  }, 4000);
-
   $(".select-room").select2({
     width: 300
   });
