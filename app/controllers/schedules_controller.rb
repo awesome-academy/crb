@@ -26,7 +26,7 @@ class SchedulesController < ApplicationController
       repeat_type = params[:repeat]
 
       if repeat_type.present?
-        RepeatWorker.perform_async @schedule.id, repeat_type, current_user.id
+        RepeatWorker.perform_async @schedule.id, repeat_type
       else
         added_member_ids = @schedule.member_ids
         MembersInvitationWorker.perform_async added_member_ids, [@schedule.id]
