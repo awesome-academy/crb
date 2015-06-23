@@ -7,7 +7,7 @@
     <td><div class="col-md-12"><%= schedule.finish_time.strftime("%H:%M") %></div></td>
     <td><div class="<%= schedule.state %>-event"><%= schedule.state %></div></td>
     <td>
-      <div class="col-md-12">
+      <div class="col-md-12" data-no-turbolink="true">
         <% if can? :update, schedule %>
           <%= link_to t("button.edit"), edit_user_schedule_path(current_user, schedule),
             class: "btn btn-success" %>

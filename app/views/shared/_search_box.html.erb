@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="input-group" id="adv-search">
-        <%= f.text_field :title_cont, class: "form-control", placeholder: "Search schedules" %>
+        <%= f.text_field :title_cont, class: "form-control", placeholder: t("placeholder.search_schedules") %>
         <div class="input-group-btn">
           <div class="btn-group" role="group">
             <div>
@@ -15,10 +15,19 @@
           </div>
         </div>
 
-        <div id="search-setting">
-          <%= f.text_field :start_date, class: "datepicker", placeholder: "Start date", id: "start_date" %>
-          <%= f.label :and %>
-          <%= f.text_field :end_date, class: "datepicker", placeholder: "End date", id: "end_date" %>
+        <div id="search-setting" class="col-md-12">
+          <div class="row">
+            <div class="col-md-5">
+              <%= f.text_field :start_date, class: "datepicker form-control", placeholder: t("placeholder.start_date"), id: "start_date" %>
+            </div>
+            <div class="col-md-1">
+              <br/>
+              <%= f.label t("pages.form.to") %>
+            </div>
+            <div class="col-md-5 finish-date">
+              <%= f.text_field :end_date, class: "datepicker form-control", placeholder: t("placeholder.end_date"), id: "end_date" %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

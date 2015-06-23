@@ -229,17 +229,11 @@ h3 {
   color: #780000;
 }
 
+.finish-date, .start-date {
+  padding: 0px;
+}
+
 #new_schedule {
-  .finish-date {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-  .start-date {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
   .date {
     input:hover {
       cursor: pointer;
@@ -411,4 +405,12 @@ footer {
 
 .left-label {
   float: left;
+}
+
+.submit-button {
+  margin-left: 15px !important;
+}
+
+#search-setting {
+  height: 100px !important;
 }
