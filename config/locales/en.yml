@@ -89,6 +89,11 @@ en:
       room: Room
       to: To
 
+  placeholder:
+    start_date: Start date
+    end_date: End date
+    search_schedules: Search schedules
+
   schedules:
     announce_members_removed_from_event: You were removed from an event
     announce_members_removed_from_repeat_events: You were removed from repeat events
