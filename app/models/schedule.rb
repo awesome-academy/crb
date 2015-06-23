@@ -37,6 +37,8 @@ class Schedule < ActiveRecord::Base
   scope :between_time, ->(_start, _end){where(" start_time BETWEEN ? AND ? ", _start, _end) if _start.present? && _end.present?}
   scope :shared_and_my_schedules, ->user_id{joins("LEFT JOIN schedule_users ON schedules.id = schedule_users.schedule_id")
                                       .where(" schedules.user_id = ? OR schedule_users.user_id = ?", user_id, user_id)}
+  scope :filter_by_repeat, ->repeat_id{where repeat: repeat_id}
+  scope :with_ids, ->ids{where id: ids}
 
   delegate :color, :name, to: :room, prefix: true
 

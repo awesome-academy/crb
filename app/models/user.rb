@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 100}
   validate :avatar_size
 
+  scope :with_ids, ->ids{where id: ids}
+
   before_create{self.role ||= Settings.user_roles[:normal]}
 
   devise :database_authenticatable, :registerable,
