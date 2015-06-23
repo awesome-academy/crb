@@ -201,6 +201,7 @@ $(document).ready(function() {
       }
     },
     dayClick: function(date, jsEvent, view) {
+      $("#search-setting").hide();
       if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
         $("#modal-form").modal("show");
 
