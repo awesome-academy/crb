@@ -426,8 +426,18 @@ footer {
   margin-left: 15px !important;
 }
 
-#search-setting {
-  height: 100px !important;
+.index-btn-edit, .index-btn-delete, .index-btn-delete-repeat {
+  margin-right: 15px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.index-btn-delete-repeat {
+  img {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .color-selector {
