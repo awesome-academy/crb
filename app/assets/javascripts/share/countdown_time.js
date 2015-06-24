@@ -24,7 +24,8 @@ function showRemaining() {
   var minutes = Math.floor((distance % _hour) / _minute);
   var seconds = Math.floor((distance % _minute) / _second);
 
-  dayString = days > 0 ? days + " day " : "";
+  ds = days > 1 ? " days, " : " day, ";
+  dayString = days > 0 ? days + ds : "";
   hoursString = hours > 0 ? hours + " hour " : "";
   minuteString = minutes > 0 ? minutes + " minute " : "";
 

@@ -27,4 +27,3 @@ $(document).on("click", ".coll", function() {
   icon.removeClass("glyphicon-minus-sign");
   $(".s-detail").slideUp();
 });
-
