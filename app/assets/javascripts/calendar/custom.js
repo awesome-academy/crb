@@ -213,6 +213,9 @@ $(document).ready(function() {
         $('.fc-content').click(function(){
           $(".popover").hide();
         });
+        $(".datepicker").click(function(){
+          $(".popover").hide();
+        });
       }
     },
     dayClick: function(date, jsEvent, view) {

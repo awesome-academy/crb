@@ -27,3 +27,7 @@ $(document).on("click", ".coll", function() {
   icon.removeClass("glyphicon-minus-sign");
   $(".s-detail").slideUp();
 });
+
+$(document).on("click", ".fc-timetable-button", function() {
+  $(".popover").hide();
+});
