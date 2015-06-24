@@ -297,6 +297,17 @@ h3 {
     border-radius: 4px;
     background-color: $lighter-gray;
     border-color: $gray;
+    .dropdown-menu {
+      min-width: 80px;
+      li {
+        cursor: pointer;
+        display: block;
+        padding: 5px 5px 0px 5px;
+      }
+    }
+    div.dropdown-toggle {
+      min-width: 100px;
+    }
   }
 
   .dropdown-toggle {
@@ -305,7 +316,7 @@ h3 {
     font-size: 1em;
     background-color: $lighter-gray;
   }
-  .dropdown-menu{
+  #other_dropdown .dropdown-menu{
     min-width: 80px;
     left: -9px;
     li {
@@ -417,4 +428,11 @@ footer {
 
 #search-setting {
   height: 100px !important;
+}
+
+.color-selector {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  float: left;
 }

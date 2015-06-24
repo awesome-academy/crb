@@ -12,11 +12,15 @@ $(document).ready(function() {
    return new Date(arg.setTime(arg.getTime() + (arg.getTimezoneOffset() * 60000)))
   }
 
-  $("#room_selector").change(function(){
+  $("#room_selector ul.dropdown-menu li").click(function(e) {
     room_id = $(this).val();
-    room_name = $(this).find("option:selected").text();
+    if(room_id == 0){
+      room_id = "";
+    }
+    room_name = $(this).find("span").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
+    $("#room_dropdown").html(room_name);
     if(room_id != ""){
       $("#schedule_room_id option").removeAttr("selected");
       $("#schedule_room_id option[value="+room_id+"]").attr("selected", "selected");
@@ -46,7 +50,7 @@ $(document).ready(function() {
     editable: true,
     eventLimit: true,
     weekends: false,
-    height: $(window).height() - $("header").height() - $("footer").height() - 50,
+    height: $(window).height() - $("header").height() - 50,
     minTime: "07:00:00",
     maxTime: "22:00:00",
     allDaySlot: false,
@@ -185,6 +189,14 @@ $(document).ready(function() {
           });
         };
         $("body").on("click", function (e) {
+          if($(".fc-more-popover").length == 1){
+            localStorage.setItem("flag", true);
+          }
+          if($(".fc-more-popover").length == 0 && localStorage.getItem("view_type") == "month" && localStorage.getItem("flag") != null){
+            localStorage.removeItem("flag");
+            $(".popover").hide();
+          }
+
           if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
           element.popover("hide");
           if($(".fc-popover").length == 1){
@@ -203,6 +215,7 @@ $(document).ready(function() {
     },
     dayClick: function(date, jsEvent, view) {
       $("#search-setting").hide();
+      $("#room_selector, #other_dropdown").removeClass("open");
       if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
         $("#modal-form").modal("show");
 
@@ -218,7 +231,6 @@ $(document).ready(function() {
     },
     viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
-
       try {
         setTimeLine();
         setInterval(function(){ setTimeLine() }, clock*1000);
