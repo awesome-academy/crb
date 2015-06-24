@@ -34,7 +34,15 @@ class Schedule < ActiveRecord::Base
                                       .where(" ? <= start_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}
   scope :shared_schedules, ->user_id{joins(:schedule_users).where(" schedule_users.user_id = ?", user_id)}
   scope :filter_by_user, ->user_id{where(user: user_id)}
-  scope :between_time, ->(_start, _end){where(" start_time BETWEEN ? AND ? ", _start, _end) if _start.present? && _end.present?}
+  scope :search_by_time, ->(_start, _end) do
+    if _start.present? && _end.present?
+      where(" start_time BETWEEN ? AND ? ", _start, _end)
+    elsif _start.present? && !_end.present?
+      where(" start_time > ?", _start)
+    elsif !_start.present? && _end.present?
+      where(" start_time < ?", _end)
+    end
+  end
   scope :shared_and_my_schedules, ->user_id{joins("LEFT JOIN schedule_users ON schedules.id = schedule_users.schedule_id")
                                       .where(" schedules.user_id = ? OR schedule_users.user_id = ?", user_id, user_id)}
   scope :filter_by_repeat, ->repeat_id{where repeat: repeat_id}
@@ -48,9 +56,10 @@ class Schedule < ActiveRecord::Base
 
   def self.search options = {}, user_id
     _start, _end = options[:start_date].to_date, options[:end_date].to_date
+    _room = options[:room_id]
     search = Schedule.shared_and_my_schedules(user_id).ransack options
 
-    search.result.between_time(_start, _end).uniq
+    search.result.search_by_time(_start, _end).filter_by_room(_room).uniq
   end
 
   def have_important_changes

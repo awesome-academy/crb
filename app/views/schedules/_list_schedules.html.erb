@@ -5,25 +5,24 @@
     <td><div class="col-md-12"><%= schedule.start_time.strftime("%d/%m/%Y") %></div></td>
     <td><div class="col-md-12"><%= schedule.start_time.strftime("%H:%M") %></div></td>
     <td><div class="col-md-12"><%= schedule.finish_time.strftime("%H:%M") %></div></td>
-    <td><div class="<%= schedule.state %>-event"><%= schedule.state %></div></td>
     <td>
       <div class="col-md-12" data-no-turbolink="true">
         <% if can? :update, schedule %>
-          <%= link_to t("button.edit"), edit_user_schedule_path(current_user, schedule),
-            class: "btn btn-success" %>
+          <%= link_to "", edit_user_schedule_path(current_user, schedule),
+            class: "glyphicon glyphicon-edit index-btn-edit", title: t("button.edit") %>
         <% end %>
 
         <% if can? :destroy, schedule %>
-          <%= link_to t("button.delete"), user_schedule_path(current_user, schedule),
-            method: :delete, class: "btn btn-danger", remote: true,
-            data: {confirm: t("button.confirm")} %>
+          <%= link_to "", user_schedule_path(current_user, schedule),
+            method: :delete, class: "glyphicon glyphicon-trash index-btn-delete", remote: true,
+            data: {confirm: t("button.confirm")}, title: t("button.delete") %>
         <% end %>
 
         <% if schedule.repeat_id.present? %>
           <% if can? :destroy, schedule.repeat %>
-            <%= link_to t("button.delete_repeat"), repeat_path(schedule.repeat_id),
-              method: :delete, class: "btn btn-danger", remote: true,
-              data: {confirm: t("button.confirm")} %>
+            <%= link_to image_tag("btn/delete-repeat.png"), repeat_path(schedule.repeat_id),
+              method: :delete, class: "index-btn-delete-repeat", remote: true,
+              data: {confirm: t("button.confirm")}, title: t("button.delete_repeat") %>
           <% end %>
         <% end %>
       </div>
