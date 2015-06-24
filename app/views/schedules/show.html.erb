@@ -1,15 +1,15 @@
 <% provide :title, t("schedules.show.title") %>
 
 <div class="col-md-12 well">
-  <div class="col-md-12" style="padding-bottom: 20px">  
+  <div class="col-md-12" style="padding-bottom: 20px">
     <label class="col-md-2"><%= t("schedules.form.event_rest") %></label>
     <div class="col-md-10">
       <div class="col-md-12" style="padding-bottom: 20px">
         <div id="countdown"></div>
-      </div>  
+      </div>
     </div>
   </div>
-  
+
   <div class="col-md-12" style="padding-bottom: 20px">
     <label class="col-md-2"><%= t("schedules.form.event_title") %></label>
     <div class="col-md-10">
@@ -77,4 +77,5 @@
   <% if can? :destroy, @schedule %>
     <%= link_to t("button.delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("button.confirm")}, class: "btn btn-danger" %>
   <% end %>
+  <%= link_to t("button.back"), root_path, class: "btn btn-primary" %>
 </div>
