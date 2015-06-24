@@ -46,6 +46,7 @@ class SchedulesController < ApplicationController
   end
 
   def edit
+    @users = User.without_user(current_user.id).pluck :name, :id
   end
 
   def update
