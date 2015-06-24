@@ -30,6 +30,7 @@ en:
     admin: Admin
     back: Back
     confirm: Are you sure?
+    create_account: Create my account
     delete: Delete
     delete_repeat: Delete all repeat
     detail: Detail
@@ -40,6 +41,7 @@ en:
     logout: Log out
     my_events: My events
     more: More...
+    update_account: Update account
     search: Search
     settings: Settings
     back: Back to calendar
@@ -78,18 +80,24 @@ en:
   pages:
     home:
       create_event: Create event
+      edit_account: Edit account
       my_calendar: My Calendar
       other: Other
       schedules_today: Today events
       shared_calendar: Shared Calendar
+      sign_up: Sign up
       sign_up_now: Sign up now!
       title: Home
       welcome_framgia: Welcome to the Framgia Book Reviewing System
     form:
       date: Date
       from: From
+      leave_blank: (Leave blank if you don't want to change it)
       room: Room
+      remember: Remember me
+      require_password: (we need your current password to confirm your changes)
       to: To
+      characters_minimum: characters minimum
 
   placeholder:
     start_date: Start date
