@@ -14,10 +14,10 @@ class Schedule < ActiveRecord::Base
   has_many :members, class_name: "User", through: :schedule_users, foreign_key: :schedule_id
   has_many :schedule_users
 
-  validates :description, presence: true,
-    length: {maximum: Settings.schedule.description.maximum}
+  # validates :description, presence: true,
+    # length: {maximum: Settings.schedule.description.maximum}
   validates :finish_time, presence: true
-  validates :room, presence: true
+  # validates :room, presence: true
   validates :start_time, presence: true
   validates :title, presence: true,
     length: {maximum: Settings.schedule.title.maximum}

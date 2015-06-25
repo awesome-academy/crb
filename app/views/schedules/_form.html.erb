@@ -39,8 +39,8 @@
     <div class="col-md-12">
       <br/>
       <%= f.label t("schedules.form.room") %><br/>
-      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {},
-        {class: "select-room form-control"} %>
+      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]},
+        {include_blank: t("select_room.none")}, {class: "select-room form-control"} %>
     </div>
 
     <div class="col-md-12">
