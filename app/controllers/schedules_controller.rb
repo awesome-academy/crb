@@ -20,6 +20,7 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    @users = User.without_user(current_user.id).pluck :name, :id
     @today_schedules = Schedule.today_schedule
     @schedule.user = current_user
 
@@ -51,6 +52,7 @@ class SchedulesController < ApplicationController
 
   def update
     old_member_ids = @schedule.member_ids
+    @users = User.without_user(current_user.id).pluck :name, :id
 
     if @schedule.update_attributes schedule_params
       new_member_ids = @schedule.member_ids

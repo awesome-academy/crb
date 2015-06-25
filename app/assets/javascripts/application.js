@@ -15,7 +15,19 @@
 //= require validate-avatar
 
 $(document).ready(function() {
+  var form_schedule = $(".new_schedule, .edit_schedule");
+
+  form_schedule.find("input[type=submit]").attr("disabled", "disabled");
+  form_schedule.areYouSure({message: "Are you sure you want to leave? The data you have entered may be not save"});
+  form_schedule.bind("dirty.areYouSure", function(){
+    $(this).find("input[type=submit]").removeAttr("disabled");
+  });
+  form_schedule.bind("clean.areYouSure", function(){
+    $(this).find("input[type=submit]").attr("disabled", "disabled");
+  });
+
   setTimeout(function() {
     $(".hide-flash").fadeOut("normal");
   }, 3000);
+
 });

@@ -22,6 +22,7 @@
 //= require kendo.web.min
 //= require kendo.custom
 //= require repeats
+//= require jquery.are-you-sure
 
 var schedule_start_time, schedule_finish_time;
 
