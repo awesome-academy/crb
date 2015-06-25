@@ -24,6 +24,7 @@ $(document).ready(function() {
 
   $("#adv-search").on("click", function(e) {
     e.stopPropagation();
+    $(".popover").hide();
   });
 
   $("body").on("click", function() {
