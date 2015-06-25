@@ -1,9 +1,7 @@
 function setTimeLine() {
-  var top;
-
-  if ($(".timeline").length === 0 && localStorage.getItem("view_type") != "month") {
+  if ($(".timeline").length === 0) {
     timeline = $("<hr>").addClass("timeline");
-    $(".fc-today").append(timeline);
+    $(".fc-time-grid-container").append(timeline);
   } else {
     timeline = $(".timeline");
   }
@@ -18,12 +16,22 @@ function setTimeLine() {
   } else {
     height = $(".fc-slats").height();
     height_ratio = ((hour - minHour) * 3600 + now.getMinutes() * 60 + now.getSeconds()) / (maxHour - minHour) / 3600;
-    top = height_ratio * height;
-
-    timeline.css({
-      "top": top + "px"
+    setSize();
+    $(window).resize(function(){
+      setSize();
     });
-
     timeline.show();
   }
+}
+
+function setSize() {
+  var left, top, width;
+  width = $(".fc-today").outerWidth();
+  left = $(".fc-today").position().left;
+  top = height_ratio * height;
+  timeline.css({
+    "width": width + "px",
+    "left": left + "px",
+    "top": top + "px"
+  });
 }
