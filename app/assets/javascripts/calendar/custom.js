@@ -188,6 +188,7 @@ $(document).ready(function() {
             content: $(".form-popover").html(),
           });
         };
+
         $("body").on("click", function (e) {
           if($(".fc-more-popover").length == 1){
             localStorage.setItem("flag", true);
@@ -208,6 +209,7 @@ $(document).ready(function() {
             $(this).hide();
           });
         });
+
         $('.fc-content').click(function(){
           $(".popover").hide();
         });
