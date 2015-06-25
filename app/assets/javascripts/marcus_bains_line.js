@@ -1,9 +1,9 @@
 function setTimeLine() {
-  var left, top, width;
+  var top;
 
-  if ($(".timeline").length === 0) {
+  if ($(".timeline").length === 0 && localStorage.getItem("view_type") != "month") {
     timeline = $("<hr>").addClass("timeline");
-    $(".fc-time-grid-container").append(timeline);
+    $(".fc-today").append(timeline);
   } else {
     timeline = $(".timeline");
   }
@@ -18,13 +18,9 @@ function setTimeLine() {
   } else {
     height = $(".fc-slats").height();
     height_ratio = ((hour - minHour) * 3600 + now.getMinutes() * 60 + now.getSeconds()) / (maxHour - minHour) / 3600;
-    width = $(".fc-today").outerWidth();
-    left = $(".fc-today").position().left;
     top = height_ratio * height;
 
     timeline.css({
-      "width": width + "px",
-      "left": left + "px",
       "top": top + "px"
     });
 
