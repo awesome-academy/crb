@@ -294,15 +294,16 @@ h3 {
     background-color: $lighter-gray;
     border-color: $gray;
     .dropdown-menu {
-      min-width: 80px;
+      border-radius: 0px;
+      min-width: 110px;
       li {
         cursor: pointer;
         display: block;
-        padding: 5px 5px 0px 5px;
+        padding: 5px 5px 0px 10px;
       }
     }
     div.dropdown-toggle {
-      min-width: 100px;
+      min-width: 110px;
     }
   }
 
@@ -313,8 +314,8 @@ h3 {
     background-color: $lighter-gray;
   }
   #other_dropdown .dropdown-menu {
-    min-width: 80px;
-    left: -9px;
+    min-width: 74px;
+    border-radius: 0px;
     li {
       padding-left: 10px;
       cursor: pointer;
@@ -439,7 +440,7 @@ footer {
 .color-selector {
   width: 15px;
   height: 15px;
-  margin-right: 5px;
+  margin: 2px 5px 0px 0px;
   float: left;
 }
 
