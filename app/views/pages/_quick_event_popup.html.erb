@@ -1,0 +1,37 @@
+<div class="bubble has-bottom-prong" id="quick-event-popup">
+  <div class="bubblemain">
+    <div id="bubbleClose:e" class="bubbleclose"></div>
+      <div class="cb-root">
+        <table class="cb-table" cellpadding="0" cellspacing="0">
+          <tbody>
+            <%= form_for @schedule, remote: true do |f| %>
+            <tr>
+              <th class="cb-key"><%= t("quick_event.time") %>:</th>
+              <td class="time-quick-event">
+                <%= f.text_field :start_time %>
+                <span><%= t("quick_event.to") %></span>
+                <%= f.text_field :finish_time %>
+              </td>
+            </tr>
+            <tr>
+              <th class="cb-key"><%= t("quick_event.title") %>:</th>
+              <td class="cb-value">
+                <%= f.text_field :title %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="cb-actions">
+                <%= f.submit t("quick_event.create_event"), class: "btn" %>
+                <a href="javascript:clickLink()" id="editLink" class="lk"><%= t("quick_event.edit_event") %> <strong>»</strong></a>
+              </td>
+            </tr>
+            <% end%>
+          </tbody>
+        </table>
+      </div>
+    <div id="prong" class="bottom-prong" style="left: 182px;">
+      <div class="prong-dk"></div>
+      <div class="prong-lt"></div>
+    </div>
+  </div>
+</div>
