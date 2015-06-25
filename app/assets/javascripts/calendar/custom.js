@@ -4,6 +4,11 @@ $(document).ready(function() {
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
   var clock = 5*60;
+  var quick_create_schedule = $("#popup");
+  var schedule_start = $("#schedule_start_time");
+  var schedule_finish = $("#schedule_finish_time");
+  schedule_start.attr("readonly", "readonly");
+  schedule_finish.attr("readonly", "readonly");
 
   var current_user_id = $("body").data("current-user-id");
   var view_type = localStorage.getItem("view_type");
@@ -97,30 +102,32 @@ $(document).ready(function() {
 
       if((view.type != "month") && (start.date() == date.getDate())) {
         if((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))) {
-          $("#modal-form").modal("show");
+          quick_create_schedule.css({
+            display: "block",
+            top: event.pageY - 280,
+            left: event.pageX,
+          });
         } else {
           MyCalendar.fullCalendar("unselect");
+          $("#popup").hide();
         }
 
         var start_event = getTime(start._d);
         var finish_event = getTime(end._d);
 
-        schedule_start_time.max(finish_event);
-        schedule_finish_time.min(start_event);
-
-        schedule_start_time.value(start_event);
-        schedule_finish_time.value(finish_event);
+        schedule_start.val(formatDate(start_event));
+        schedule_finish.val(formatDate(finish_event));
       } else if((view.type != "month") && (start._d > date)) {
-        $("#modal-form").modal("show");
-
+        quick_create_schedule.css({
+          display: "block",
+          top:event.pageY - 280,
+          left: event.pageX,
+        });
         var start_event = getTime(start._d);
         var finish_event = getTime(end._d);
 
-        schedule_start_time.max(finish_event);
-        schedule_finish_time.min(start_event);
-
-        schedule_start_time.value(start_event);
-        schedule_finish_time.value(finish_event);
+        schedule_start.val(formatDate(start_event));
+        schedule_finish.val(formatDate(finish_event));
       } else {
         MyCalendar.fullCalendar("unselect");
       }
@@ -210,11 +217,14 @@ $(document).ready(function() {
           });
         });
 
-        $('.fc-content').click(function(){
+        $(".fc-content").click(function(){
           $(".popover").hide();
         });
         $(".datepicker").click(function(){
           $(".popover").hide();
+        });
+        element.click(function(){
+          $("#popup").hide();
         });
       }
     },
@@ -222,15 +232,18 @@ $(document).ready(function() {
       $("#search-setting").hide();
       $("#room_selector, #other_dropdown").removeClass("open");
       if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
-        $("#modal-form").modal("show");
+        quick_create_schedule.css({
+          display: "block",
+          top:event.pageY - 280,
+          left: event.pageX,
+        });
 
-        var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
+        var timezoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
+        var start_event = new Date(timezoned.setHours(8));
+        var finish_event = new Date(timezoned.setMinutes(30));
 
-        schedule_start_time.value(TimeZoned);
-        schedule_finish_time.value(TimeZoned);
-
-        schedule_start_time.max(schedule_finish_time.value());
-        schedule_finish_time.min(schedule_start_time.value());
+        schedule_start.val(formatDate(start_event));
+        schedule_finish.val(formatDate(finish_event));
       }
       $(".popover").hide();
     },
@@ -252,17 +265,6 @@ $(document).ready(function() {
         $("label.loading").addClass("hidden");
       }
     }
-  });
-
-  $("#modal-form").on("hidden.bs.modal", function(){
-    $(this).find("form")[0].reset();
-    $(".select-members").select2("val", "");
-    $("#error_explanation").remove();
-    MyCalendar.fullCalendar("unselect");
-  });
-
-  $("#modal-form").on("show.bs.modal", function(){
-    $(".popover").hide();
   });
 
   MyMiniCalendar.datepicker({
@@ -321,3 +323,14 @@ $(document).ready(function() {
     MyCalendar.fullCalendar("rerenderEvents");
   }, 900000);
 });
+
+function formatDate(date) {
+  var date_of_month = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  var strTime = hours + ":" + minutes;
+  return strTime + " " + month + "/" + date_of_month + "/" + year;
+};

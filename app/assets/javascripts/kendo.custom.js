@@ -38,7 +38,7 @@ $(document).ready(function() {
     }
   }
 
-  schedule_start_time = $("#schedule_start_time").kendoDateTimePicker({
+  schedule_start_time = $(".schedule_start_time").kendoDateTimePicker({
     min: new Date(min_in_milisec),
     interval: interval,
     change: startChange,
@@ -62,7 +62,7 @@ $(document).ready(function() {
     },
   }).data("kendoDateTimePicker");
 
-  schedule_finish_time = $("#schedule_finish_time").kendoDateTimePicker({
+  schedule_finish_time = $(".schedule_finish_time").kendoDateTimePicker({
     min: new Date(min_in_milisec + interval_in_milisec),
     interval: interval,
     change: endChange,
@@ -89,6 +89,6 @@ $(document).ready(function() {
   schedule_start_time.max(schedule_finish_time.value());
   schedule_finish_time.min(schedule_start_time.value());
 
-  $("#schedule_start_time").attr("readonly", "readonly");
-  $("#schedule_finish_time").attr("readonly", "readonly");
+  $(".schedule_start_time").attr("readonly", "readonly");
+  $(".schedule_finish_time").attr("readonly", "readonly");
 })

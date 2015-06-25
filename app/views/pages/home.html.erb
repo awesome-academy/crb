@@ -42,10 +42,8 @@
   </div>
 <% end %>
 
-<% content_for :modal_form do %>
-  <%= render "shared/modal_form" if current_user %>
-<% end %>
-
 <div class="form-popover hidden"><%= render "popover" %></div>
 
 <div id="time-table" class="hidden"><%= render "time_table" %></div>
+
+<div id="popup" ><%= render "shared/event_short" %></div>
