@@ -125,6 +125,8 @@ en:
       repeat: Repeat
       start_time: Start time
       submit: Submit
+      create_event: Create event
+      time: Time
     index:
       title: Events
       title_my_events: My events!

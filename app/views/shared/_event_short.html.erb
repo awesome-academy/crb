@@ -1,0 +1,15 @@
+<%= form_for @schedule, remote: true do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <%= f.label t("schedules.form.time") %><br/>
+  <div class="quick-create-form">
+    <%= f.text_field :start_time %>
+    <%= t("pages.form.to") %>
+    <%= f.text_field :finish_time %>
+  </div>
+  <br/><br/>
+  <%= f.label t("schedules.form.event_name") %>
+  <%= f.text_field :title, placeholder: t("schedules.form.event_title"), class: "form-control", id: "title-schedule" %>
+  <br/>
+  <%= f.submit t("schedules.form.create_event"), class: "btn btn-primary submit-button" %>&nbsp;&nbsp;
+  <%= link_to t("schedules.edit_event_title"), new_schedule_path, title: :title, start_time: :start_time, finish_time: :finish_time %>
+<% end %>

@@ -13,6 +13,8 @@
 //= require share/countdown_time.js
 //= require_self
 //= require validate-avatar
+//= require kendo.custom
+//= require kendo.web.min
 
 $(document).ready(function() {
   var form_schedule = $(".new_schedule, .edit_schedule");

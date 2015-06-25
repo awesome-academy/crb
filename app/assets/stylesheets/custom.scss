@@ -447,3 +447,23 @@ footer {
   float: right;
   margin-right: 10px;
 }
+
+#popup {
+  width: 400px;
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  background-color: white;
+  padding: 15px;
+  border: 1px solid #ccc;
+  .quick-create-form {
+    display: inline-flex;
+  }
+
+  #schedule_start_time, #schedule_finish_time {
+    border: none;
+    width: 105px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

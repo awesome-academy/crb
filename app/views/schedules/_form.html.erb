@@ -11,14 +11,14 @@
       <div class="col-md-5 start-date">
         <%= f.label t("schedules.form.start_time") %>
         <div>
-          <%= f.text_field :start_time, value: @schedule.start_time,
+          <%= f.text_field :start_time, value: @schedule.start_time, class:"schedule_start_time",
             placeholder: t("schedules.form.start_time"), style: "width: 300px" %>
         </div>
       </div>
       <div class="col-md-5 col-md-offset-2 finish-date">
         <%= f.label t("schedules.form.finish_time") %>
         <div class="input-group date">
-          <%= f.text_field :finish_time, value: @schedule.finish_time,
+          <%= f.text_field :finish_time, value: @schedule.finish_time, class:"schedule_finish_time",
             placeholder: t("schedules.form.finish_time"), style: "width: 300px" %>
         </div>
       </div>
