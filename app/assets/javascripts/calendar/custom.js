@@ -6,8 +6,10 @@ $(document).ready(function() {
 
   var EventPopup = $("#quick-event-popup");
   var PongPopup = $("#prong");
+  var SchedulePopup = $(".form-popover");
+  var PongPopupEven = $("#prong_event");
 
-  var clock = 5*60;
+  var clock = 5 * 60;
 
   var current_user_id = $("body").data("current-user-id");
   var view_type = localStorage.getItem("view_type");
@@ -99,6 +101,7 @@ $(document).ready(function() {
       revertFunc();
     },
     select: function (start, end, jsEvent, view) {
+      SchedulePopup.css({"visibility": "hidden"});
       if (view.type != "month") {
         date = new Date();
 
@@ -164,8 +167,9 @@ $(document).ready(function() {
         }
       }
     },
-    eventRender: function (event, element) {
-      $(".popover").hide();
+
+    eventClick: function( event, jsEvent, view ) {
+      EventPopup.css({"visibility": "hidden"});
 
       if (event.id != undefined) {
         time_start = "From: " + event.start.format("HH:mm");
@@ -207,13 +211,6 @@ $(document).ready(function() {
 
           delete_schedule.attr("href", detail);
           delete_schedule.text("Delete");
-
-          element.popover({
-            placement: "top",
-            html: true,
-            container: "body",
-            content: $(".form-popover").html(),
-          });
         } else {
           edit_schedule.attr("href", null);
           edit_schedule.text("");
@@ -221,14 +218,35 @@ $(document).ready(function() {
           delete_schedule.text("");
           delete_repeat.attr("href", null);
           delete_repeat.text("");
-
-          element.popover({
-            placement: "top",
-            html: true,
-            container: "body",
-            content: $(".form-popover").html(),
-          });
         };
+
+        windowWidth = window.innerWidth;
+        windowHeight = window.innerHeight;
+        popupWidth = SchedulePopup.width();
+        popupHeight = SchedulePopup.height();
+        clientX = jsEvent.clientX;
+        clientY = jsEvent.clientY;
+        _left = 0;
+        _top = 0;
+
+        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
+          _left = windowWidth - popupWidth - 40;
+          _leftPong = clientX + popupWidth - windowWidth;
+          PongPopupEven.css({"left": _leftPong});
+        } else {
+          _left = clientX - popupWidth * 1/2;
+          PongPopupEven.css({"left": 115});
+        }
+
+        if ((clientY - popupHeight - 20) < 5) {
+          _top = clientY - 80;
+          PongPopupEven.removeClass("bottom-prong").addClass("top-prong");
+        } else {
+          _top = clientY- popupHeight - 110;
+          PongPopupEven.removeClass("top-prong").addClass("bottom-prong");
+        }
+
+        SchedulePopup.css({"visibility": "visible", "left": _left, "top": _top});
 
         $("body").on("click", function (e) {
           if($(".fc-more-popover").length == 1){
@@ -236,31 +254,20 @@ $(document).ready(function() {
           }
           if($(".fc-more-popover").length == 0 && localStorage.getItem("view_type") == "month" && localStorage.getItem("flag") != null){
             localStorage.removeItem("flag");
-            $(".popover").hide();
           }
-
-          if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
-          element.popover("hide");
 
           if($(".fc-popover").length == 1){
             $(".fc-icon-x").click(function(){
               element.popover("hide");
             });
           }
-
-          $(".popover").click(function(){
-            $(this).hide();
-          });
-        });
-
-        $('.fc-content').click(function(){
-          $(".popover").hide();
         });
         $(".datepicker").click(function(){
           $(".popover").hide();
         });
       }
     },
+
     dayClick: function(date, jsEvent, view) {
       windowWidth = window.innerWidth;
       windowHeight = window.innerHeight;
@@ -303,12 +310,9 @@ $(document).ready(function() {
         schedule_start_time.max(schedule_finish_time.value());
         schedule_finish_time.min(schedule_start_time.value());
       }
-
-      $(".popover").hide();
     },
     viewRender: function(view, element) {
       EventPopup.css({"visibility": "hidden"});
-
       localStorage.setItem("view_type", view.type);
 
       try {
@@ -354,18 +358,19 @@ $(document).ready(function() {
   $(".fc-prev-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
-    $(".popover").hide();
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   $(".fc-next-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
-    $(".popover").hide();
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   $(".fc-today-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   $("#refresh").click(function(){
