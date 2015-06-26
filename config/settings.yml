@@ -5,6 +5,8 @@ date_format: "%d/%m/%Y"
 time_format: "%H:%M"
 hour_begin_schedule: 7
 hour_end_schedule: 21
+hour_min_schedule: "07:00"
+hour_max_schedule: "22:00"
 per_page: 2
 per_page_list_schedule: 10
 user_roles:

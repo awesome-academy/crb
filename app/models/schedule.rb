@@ -79,6 +79,13 @@ class Schedule < ActiveRecord::Base
         errors.add :start_time, I18n.t("invalid.start_time")
       end
 
+      if start_time.strftime("%H:%M") < Settings.hour_min_schedule ||
+          finish_time.strftime("%H:%M") < Settings.hour_min_schedule ||
+          start_time.strftime("%H:%M") > Settings.hour_max_schedule ||
+          finish_time.strftime("%H:%M") > Settings.hour_max_schedule
+        errors.add :finish_time, I18n.t("invalid.between_time")
+      end
+
       if (start_time.day != finish_time.day) || (finish_time - start_time < Settings.min_time_schedule)
         errors.add :finish_time, I18n.t("invalid.time")
       end
