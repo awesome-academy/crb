@@ -3,7 +3,11 @@ $(document).ready(function() {
   var schedule_query_url = "/api/schedules.json";
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
-  var clock = 5*60;
+
+  var SchedulePopup = $(".form-popover");
+  var PongPopupEven = $("#prong_event");
+
+  var clock = 5 * 60;
 
   var current_user_id = $("body").data("current-user-id");
   var view_type = localStorage.getItem("view_type");
@@ -17,13 +21,15 @@ $(document).ready(function() {
     if(room_id == 0){
       room_id = "";
     }
+
     room_name = $(this).find("span").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
     $("#room_dropdown").html(room_name);
-    if(room_id != ""){
+
+    if (room_id != "") {
       $("#schedule_room_id option").removeAttr("selected");
-      $("#schedule_room_id option[value="+room_id+"]").attr("selected", "selected");
+      $("#schedule_room_id option[value=" + room_id + "]").attr("selected", "selected");
       $("#select2-chosen-1").html(room_name);
     }
   });
@@ -93,60 +99,60 @@ $(document).ready(function() {
       revertFunc();
     },
     select: function (start, end, jsEvent, view) {
-      var date = new Date();
+      SchedulePopup.css({"visibility": "hidden"});
+      if (view.type != "month") {
+        date = new Date();
+        if (start.date() == date.getDate()) {
+          if ((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))) {
+          } else {
+            MyCalendar.fullCalendar("unselect");
+          }
 
-      if((view.type != "month") && (start.date() == date.getDate())) {
-        if((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))) {
-          $("#modal-form").modal("show");
+          start_event = getTime(start._d);
+          finish_event = getTime(end._d);
+
+          schedule_start_time.max(finish_event);
+          schedule_finish_time.min(start_event);
+
+          schedule_start_time.value(start_event);
+          schedule_finish_time.value(finish_event);
+        } else if (start._d > date) {
+
+          start_event = getTime(start._d);
+          finish_event = getTime(end._d);
+
+          schedule_start_time.max(finish_event);
+          schedule_finish_time.min(start_event);
+
+          schedule_start_time.value(start_event);
+          schedule_finish_time.value(finish_event);
         } else {
           MyCalendar.fullCalendar("unselect");
         }
-
-        var start_event = getTime(start._d);
-        var finish_event = getTime(end._d);
-
-        schedule_start_time.max(finish_event);
-        schedule_finish_time.min(start_event);
-
-        schedule_start_time.value(start_event);
-        schedule_finish_time.value(finish_event);
-      } else if((view.type != "month") && (start._d > date)) {
-        $("#modal-form").modal("show");
-
-        var start_event = getTime(start._d);
-        var finish_event = getTime(end._d);
-
-        schedule_start_time.max(finish_event);
-        schedule_finish_time.min(start_event);
-
-        schedule_start_time.value(start_event);
-        schedule_finish_time.value(finish_event);
-      } else {
-        MyCalendar.fullCalendar("unselect");
       }
     },
-    eventRender: function (event, element) {
-      $(".popover").hide();
-      time_start = "From: " + event.start.format("HH:mm");
-      time_end = "To: " + event.end.format("HH:mm");
-      room = "Room: " + event.room
-      detail = "schedules/" + event.id
-      edit = "schedules/" + event.id + "/edit"
-      deleteRepeat = "repeats/" + event.repeat_id
 
-      $(".title-popover").text(event.title);
-      $(".start-time-popover").text(time_start);
-      $(".finish-time-popover").text(time_end);
-      $(".room-popover").text(room);
-      $("#detail-schedule-popover").attr("href", detail);
+    eventClick: function( event, jsEvent, view ) {
+      if (event.id != undefined) {
+        time_start = "From: " + event.start.format("HH:mm");
+        time_end = "To: " + event.end.format("HH:mm");
+        room = "Room: " + event.room
+        detail = "schedules/" + event.id
+        edit = "schedules/" + event.id + "/edit"
+        deleteRepeat = "repeats/" + event.repeat_id
 
-      delete_repeat = $("#delete-repeat-popover");
-      edit_schedule = $("#edit-schedule-popover");
-      delete_schedule = $("#delete-schedule-popover");
+        $(".title-popover").text(event.title);
+        $(".start-time-popover").text(time_start);
+        $(".finish-time-popover").text(time_end);
+        $(".room-popover").text(room);
+        $("#detail-schedule-popover").attr("href", detail);
 
-      if (!event.url) {
-        if(event.user_id == current_user_id) {
-          if(event.repeat_id == null) {
+        delete_repeat = $("#delete-repeat-popover");
+        edit_schedule = $("#edit-schedule-popover");
+        delete_schedule = $("#delete-schedule-popover");
+
+        if (event.user_id == current_user_id) {
+          if (event.repeat_id == null) {
             delete_repeat.attr("href", null);
             delete_repeat.text("");
           } else {
@@ -156,23 +162,17 @@ $(document).ready(function() {
 
           var time_now = new Date();
           var end_time = new Date(event.end);
-          if(time_now > end_time) {
+
+          if (time_now > end_time) {
             edit_schedule.attr("href", null);
             edit_schedule.text("");
-          }else {
+          } else {
             edit_schedule.attr("href", edit);
             edit_schedule.text("Edit");
           }
 
           delete_schedule.attr("href", detail);
           delete_schedule.text("Delete");
-
-          element.popover({
-            placement: "top",
-            html: true,
-            container: "body",
-            content: $(".form-popover").html(),
-          });
         } else {
           edit_schedule.attr("href", null);
           edit_schedule.text("");
@@ -180,14 +180,35 @@ $(document).ready(function() {
           delete_schedule.text("");
           delete_repeat.attr("href", null);
           delete_repeat.text("");
-
-          element.popover({
-            placement: "top",
-            html: true,
-            container: "body",
-            content: $(".form-popover").html(),
-          });
         };
+
+        windowWidth = window.innerWidth;
+        windowHeight = window.innerHeight;
+        popupWidth = SchedulePopup.width();
+        popupHeight = SchedulePopup.height();
+        clientX = jsEvent.clientX;
+        clientY = jsEvent.clientY;
+        _left = 0;
+        _top = 0;
+
+        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
+          _left = windowWidth - popupWidth - 40;
+          _leftPong = clientX + popupWidth - windowWidth;
+          PongPopupEven.css({"left": _leftPong});
+        } else {
+          _left = clientX - popupWidth * 1/2;
+          PongPopupEven.css({"left": 115});
+        }
+
+        if ((clientY - popupHeight - 20) < 5) {
+          _top = clientY - 80;
+          PongPopupEven.removeClass("bottom-prong").addClass("top-prong");
+        } else {
+          _top = clientY- popupHeight - 110;
+          PongPopupEven.removeClass("top-prong").addClass("bottom-prong");
+        }
+
+        SchedulePopup.css({"visibility": "visible", "left": _left, "top": _top});
 
         $("body").on("click", function (e) {
           if($(".fc-more-popover").length == 1){
@@ -195,35 +216,16 @@ $(document).ready(function() {
           }
           if($(".fc-more-popover").length == 0 && localStorage.getItem("view_type") == "month" && localStorage.getItem("flag") != null){
             localStorage.removeItem("flag");
-            $(".popover").hide();
           }
-
-          if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
-          element.popover("hide");
-          if($(".fc-popover").length == 1){
-            $(".fc-icon-x").click(function(){
-              element.popover("hide");
-            });
-          }
-          $(".popover").click(function(){
-            $(this).hide();
-          });
-        });
-
-        $('.fc-content').click(function(){
-          $(".popover").hide();
-        });
-        $(".datepicker").click(function(){
-          $(".popover").hide();
         });
       }
     },
+
     dayClick: function(date, jsEvent, view) {
       $("#search-setting").hide();
       $("#room_selector, #other_dropdown").removeClass("open");
-      if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
-        $("#modal-form").modal("show");
 
+      if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
         var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
 
         schedule_start_time.value(TimeZoned);
@@ -232,8 +234,11 @@ $(document).ready(function() {
         schedule_start_time.max(schedule_finish_time.value());
         schedule_finish_time.min(schedule_start_time.value());
       }
-      $(".popover").hide();
     },
+    viewRender: function(view, element) {
+      SchedulePopup.css({"visibility": "hidden"});
+    },
+
     viewRender: function(view, element) {
       localStorage.setItem("view_type", view.type);
       try {
@@ -262,7 +267,7 @@ $(document).ready(function() {
   });
 
   $("#modal-form").on("show.bs.modal", function(){
-    $(".popover").hide();
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   MyMiniCalendar.datepicker({
@@ -279,18 +284,19 @@ $(document).ready(function() {
   $(".fc-prev-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
-    $(".popover").hide();
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   $(".fc-next-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
-    $(".popover").hide();
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   $(".fc-today-button").click(function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   $("#refresh").click(function(){
