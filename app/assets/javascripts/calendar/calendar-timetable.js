@@ -60,7 +60,9 @@ $(document).ready(function() {
                 html += "<a title=\"Detail\" href=\"/schedules/" + schedule.id + "\"><span class=\"glyphicon glyphicon-share\" aria-hidden=\"true\"></span></a>&nbsp;"
 
                 if(schedule.user_id == current_user_id) {
-                  html += "<a title=\"Edit\" href=\"/users/" + current_user_id + "/schedules/" + schedule.id + "/edit\"><span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></a>&nbsp;";
+                  if(schedule.end > $.now()) {
+                    html += "<a title=\"Edit\" href=\"/users/" + current_user_id + "/schedules/" + schedule.id + "/edit\"><span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></a>&nbsp;";
+                  }
                   html += "<a data-confirm=\"Are you sure?\" title=\"Delete\" data-remote=\"true\" rel=\"nofollow\" data-method=\"delete\" href=\"/users/" + current_user_id + "/schedules/" + schedule.id + "\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></span>";
                 }
               html += "</span>";
