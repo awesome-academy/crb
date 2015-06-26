@@ -4,8 +4,6 @@ $(document).ready(function() {
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
 
-  var EventPopup = $("#quick-event-popup");
-  var PongPopup = $("#prong");
   var SchedulePopup = $(".form-popover");
   var PongPopupEven = $("#prong_event");
 
@@ -20,7 +18,7 @@ $(document).ready(function() {
 
   $("#room_selector ul.dropdown-menu li").click(function(e) {
     room_id = $(this).val();
-    if (room_id == 0) {
+    if(room_id == 0){
       room_id = "";
     }
 
@@ -104,40 +102,8 @@ $(document).ready(function() {
       SchedulePopup.css({"visibility": "hidden"});
       if (view.type != "month") {
         date = new Date();
-
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight;
-        popupWidth = EventPopup.width();
-        popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX;
-        clientY = jsEvent.clientY;
-        selectedElementHeight = $(jsEvent.toElement.parentElement).height();
-        _left = 0;
-
-        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
-          _left = windowWidth - popupWidth - 5;
-          _leftPong = clientX + popupWidth - windowWidth;
-          PongPopup.css({"left": _leftPong});
-        } else {
-          _left = clientX - popupWidth * 1/2;
-          PongPopup.css({"left": 182});
-        }
-
-        _top = clientY - popupHeight - selectedElementHeight;
-
-        if (_top < 5) {
-          _top = clientY - 80 + selectedElementHeight * 1/2;
-          PongPopup.removeClass("bottom-prong").addClass("top-prong");
-        } else {
-          _top = _top - 80 + selectedElementHeight * 1/2;
-          PongPopup.removeClass("top-prong").addClass("bottom-prong");
-        }
-
         if (start.date() == date.getDate()) {
           if ((start.hour() > date.getHours()) || ((start.hour() == date.getHours()) && (start.minute() >= date.getMinutes()))) {
-            // $("#modal-form").modal("show");
-
-            EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
           } else {
             MyCalendar.fullCalendar("unselect");
           }
@@ -151,8 +117,6 @@ $(document).ready(function() {
           schedule_start_time.value(start_event);
           schedule_finish_time.value(finish_event);
         } else if (start._d > date) {
-          // $("#modal-form").modal("show");
-          EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
 
           start_event = getTime(start._d);
           finish_event = getTime(end._d);
@@ -169,8 +133,6 @@ $(document).ready(function() {
     },
 
     eventClick: function( event, jsEvent, view ) {
-      EventPopup.css({"visibility": "hidden"});
-
       if (event.id != undefined) {
         time_start = "From: " + event.start.format("HH:mm");
         time_end = "To: " + event.end.format("HH:mm");
@@ -255,53 +217,15 @@ $(document).ready(function() {
           if($(".fc-more-popover").length == 0 && localStorage.getItem("view_type") == "month" && localStorage.getItem("flag") != null){
             localStorage.removeItem("flag");
           }
-
-          if($(".fc-popover").length == 1){
-            $(".fc-icon-x").click(function(){
-              element.popover("hide");
-            });
-          }
-        });
-        $(".datepicker").click(function(){
-          $(".popover").hide();
         });
       }
     },
 
     dayClick: function(date, jsEvent, view) {
-      windowWidth = window.innerWidth;
-      windowHeight = window.innerHeight;
-      popupWidth = EventPopup.width();
-      popupHeight = EventPopup.height();
-      clientX = jsEvent.clientX;
-      clientY = jsEvent.clientY;
-      selectedElementHeight = $(jsEvent.toElement.parentElement).height();
-      _left = 0;
-
-      if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
-        _left = windowWidth - popupWidth - 5;
-        _leftPong = clientX + popupWidth - windowWidth;
-        PongPopup.css({"left": _leftPong});
-      } else {
-        _left = clientX - popupWidth * 1/2;
-        PongPopup.css({"left": 182});
-      }
-
-      if ((clientY - popupHeight) <= 15) {
-        _top = clientY - 70;
-        PongPopup.removeClass("bottom-prong").addClass("top-prong");
-      } else {
-        _top = clientY - popupHeight - 90;
-        PongPopup.removeClass("top-prong").addClass("bottom-prong");
-      }
-
       $("#search-setting").hide();
       $("#room_selector, #other_dropdown").removeClass("open");
 
       if((view.type == "month") && ((date.format() >= (new Date()).toISOString().slice(0, 10)) || (date._d >= (new Date())))) {
-        // $("#modal-form").modal("show");
-        EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
-
         var TimeZoned = new Date(date.toDate().setTime(date.toDate().getTime() + (date.toDate().getTimezoneOffset() * 60000)));
 
         schedule_start_time.value(TimeZoned);
@@ -312,9 +236,11 @@ $(document).ready(function() {
       }
     },
     viewRender: function(view, element) {
-      EventPopup.css({"visibility": "hidden"});
-      localStorage.setItem("view_type", view.type);
+      SchedulePopup.css({"visibility": "hidden"});
+    },
 
+    viewRender: function(view, element) {
+      localStorage.setItem("view_type", view.type);
       try {
         setTimeLine();
         setInterval(function(){ setTimeLine() }, clock*1000);
@@ -341,7 +267,7 @@ $(document).ready(function() {
   });
 
   $("#modal-form").on("show.bs.modal", function(){
-    $(".popover").hide();
+    SchedulePopup.css({"visibility": "hidden"});
   });
 
   MyMiniCalendar.datepicker({
@@ -400,9 +326,4 @@ $(document).ready(function() {
     MyCalendar.fullCalendar("addEventSource", events);
     MyCalendar.fullCalendar("rerenderEvents");
   }, 900000);
-
-  $(".bubbleclose").bind("click", function(){
-    EventPopup.css({"visibility": "hidden"});
-    MyCalendar.fullCalendar("unselect");
-  });
 });
