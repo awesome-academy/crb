@@ -331,18 +331,6 @@ h3 {
   color: black;
 }
 
-table.table-popover {
-  width: 100%;
-  font-size: 12px;
-  a {
-    padding: 0px 5px;
-  }
-
-  .detail {
-    text-align: left;
-  }
-}
-
 .fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time span {
   display: inline;
 }
@@ -447,4 +435,34 @@ footer {
 #back {
   float: right;
   margin-right: 10px;
+}
+
+.form-popover {
+  z-index: 9669;
+  position: absolute;
+  visibility: hidden;
+  background-color: white;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  top: 0px;
+  left: -250px;
+
+  table.table-popover {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 12px;
+    a {
+      padding: 0px 5px;
+    }
+
+    .detail {
+      text-align: left;
+    }
+  }
+
+  #prong_event {
+    left: 115px
+  }
 }
