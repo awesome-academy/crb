@@ -40,3 +40,7 @@ schedule:
     maximum: 150
   description:
     maximum: 450
+announced_upcoming: "announced_upcoming"
+invited: "invited"
+removed: "removed"
+announced_updated: "announced_updated"
