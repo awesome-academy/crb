@@ -152,3 +152,10 @@ en:
   valid:
     room: There are any event with same your time!
   crb: Conferences Room Book
+
+  quick_event:
+    time: Time
+    title: Title
+    create_event: Create Event
+    edit_event: Edit event
+    to: to

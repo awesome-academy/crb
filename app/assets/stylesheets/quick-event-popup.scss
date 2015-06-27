@@ -1,0 +1,116 @@
+.bubble.has-bottom-prong {
+  margin-bottom: 9px;
+}
+
+.bubble.has-top-prong {
+  margin-top: 9px;
+}
+
+.bubble {
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  background: #fff;
+  border: 1px solid #ccc;
+  position: absolute;
+  visibility: hidden;
+  -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  top: 0;
+  z-index: 9669;
+  width: 400px;
+  left: 0px;
+}
+
+.bubblemain {
+  padding: 16px 28px;
+  position: relative;
+}
+
+.bubbleclose {
+  background: url(http://calendar.google.com/googlecalendar/images/combined_v46_vr.png) -228px -48px;
+  cursor: pointer;
+  height: 13px;
+  right: 16px;
+  top: 16px;
+  width: 13px;
+  position: absolute;
+}
+
+.cb-root {
+  font: 13px/normal Arial,sans-serif;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cb-key {
+  vertical-align: top;
+  text-align: left;
+  white-space: nowrap;
+  font-weight: normal;
+  padding: .4em 1em .4em 0;
+}
+.cb-value {
+  width: 95%;
+  padding: .4em 0;
+}
+.cb-actions {
+  padding-top: .8em;
+}
+
+.cb-root a, .cb-root .lk {
+  font-weight: bold;
+}
+.lk, .lk-button, a.lk, .lk-online, a.lk-online {
+  color: #15c;
+  text-decoration: underline;
+  cursor: pointer;
+  cursor: hand;
+  white-space: nowrap;
+}
+.bottom-prong {
+  bottom: -9px;
+}
+
+.no-prong, .bottom-prong {
+  position: absolute;
+  height: 9px;
+  width: 18px;
+  overflow: hidden;
+}
+.bottom-prong .prong-dk, .bottom-prong .prong-lt {
+  border-bottom-width: 0;
+}
+
+.prong-dk {
+  border: 9px solid;
+  border-color: #ccc transparent;
+}
+.prong-dk, .prong-lt {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.prong-lt {
+  border: 8px solid;
+  border-color: #fff transparent;
+  left: 1px;
+}
+
+.cb-table {
+  .time-quick-event {
+    font-size: 13px;
+    #schedule_start_time, #schedule_finish_time {
+      border: none;
+      margin-right: -72px;
+    }
+  }
+
+  #schedule_title {
+    padding: 0px 61px;
+  }
+
+  .btn {
+    font-size: 13px;
+    margin-right:  10px;
+    padding: none;
+  }
+}
