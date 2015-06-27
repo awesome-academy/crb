@@ -14,6 +14,7 @@ class Ability
         schedule.finish_time > Time.zone.now
       end
       can :manage, Repeat
+      can :manage, Room
     when user.normal?
       can [:read, :update], User, id: user.id
       can [:create, :read], Schedule

@@ -42,6 +42,10 @@ schedule:
     maximum: 150
   description:
     maximum: 450
+  states:
+   - pending
+   - accepted
+   - rejected
 announced_upcoming: "announced_upcoming"
 invited: "invited"
 removed: "removed"

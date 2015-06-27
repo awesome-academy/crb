@@ -22,9 +22,9 @@
               <tr>
                 <td colspan="2" class="cb-actions">
                   <%= f.submit t("quick_event.create_event"), class: "btn" %>
-                  <a href="javascript:clickLink()" id="editLink" class="lk">
+                  <%= link_to new_schedule_path, id: "editLink", class: "lk" do %>
                     <%= t("quick_event.edit_event") %> <strong>»</strong>
-                  </a>
+                  <% end %>
                 </td>
               </tr>
             </tbody>

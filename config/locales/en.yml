@@ -156,6 +156,6 @@ en:
   quick_event:
     time: Time
     title: Title
-    create_event: Create Event
+    create_event: Create event
     edit_event: Edit event
     to: to
