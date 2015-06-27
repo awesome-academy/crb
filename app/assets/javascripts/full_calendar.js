@@ -19,3 +19,4 @@
 //= require calendar/time-table
 //= require schedules
 //= require underscore
+//= require calendar/hidepopover
