@@ -14,7 +14,11 @@ module RailsAdminSchedule
 
       edit do
         field :title
-        field :state
+        field :state, :enum do
+          enum do
+            Settings.schedule.states
+          end
+        end
         field :description
         field :start_time
         field :finish_time

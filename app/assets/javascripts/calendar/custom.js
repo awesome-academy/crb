@@ -306,7 +306,7 @@ $(document).ready(function() {
         schedule_start.val(start);
         schedule_finish.val(end);
 
-        $(this).css("background-color", "#3a87ad");
+        $(this).css("background-color", "rgba(58, 135, 173, .7)");
         EventTimeRange.html(timeRange(date, date, true));
         EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
       } else if (EventPopup.is(":visible")) {

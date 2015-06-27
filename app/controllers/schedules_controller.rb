@@ -15,7 +15,6 @@ class SchedulesController < ApplicationController
   end
 
   def new
-    @today_schedules = Schedule.today_schedule
     @users = User.without_user(current_user.id).pluck :name, :id
   end
 
