@@ -22,6 +22,7 @@ $(document).ready(function() {
     },
     renderHtml: function(events) {
       current_user_id = $("body").data("current-user-id");
+      events = _.sortBy(events, "start");
 
       var schedule_days = _.groupBy(events, function(schedule){return schedule.start.format("LL")});
 
@@ -45,7 +46,7 @@ $(document).ready(function() {
           _class += "event-" + schedule.id;
 
           html += "<td class=\"lv-eventcell lv-time " + _class + "\"" + ">";
-           html += schedule.start.format("HH:mm") + " - " + schedule.end.format("HH:mm");
+           html += schedule.start.format("HH : mm") + " - " + schedule.end.format("HH : mm");
           html += "</td>";
 
           html += "<td class=\"lv-eventcell lv-title " + _class + "\"" +">";
