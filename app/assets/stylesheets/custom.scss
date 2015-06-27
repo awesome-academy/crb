@@ -409,6 +409,54 @@ footer {
   background-color: $lightest-blue-gray;
 }
 
+#dropdown-header {
+  margin-right: 16px;
+  margin-top: 5px !important;
+  z-index: 0 !important;
+}
+
+.gb_u{
+  border-color: transparent;
+  border-bottom-color: #fff;
+  border-style: dashed dashed solid;
+  border-width: 0 8.5px 8.5px;
+  position: absolute;
+  left: 123.5px;
+  top: 48px;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  display:none;
+}
+
+.gb_v {
+  border-color: transparent;
+  border-style: dashed dashed solid;
+  border-width: 0 8.5px 8.5px;
+  position: absolute;
+  left: 122.5px;
+  top: 48px;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  display:none;
+  border-bottom-color: rgba(0,0,0,.2);
+}
+
+.gb_vr {
+  border-color: transparent;
+  border-style: dashed dashed solid;
+  border-width: 0 8.5px 8.5px;
+  position: absolute;
+  left: 124.5px;
+  top: 48px;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  display:none;
+  border-bottom-color: rgba(0,0,0,.2);
+}
+
 .room-selector {
   width: auto;
   float: left;

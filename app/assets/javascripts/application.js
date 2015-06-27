@@ -29,5 +29,4 @@ $(document).ready(function() {
   setTimeout(function() {
     $(".hide-flash").fadeOut("normal");
   }, 3000);
-
 });
