@@ -1,7 +1,7 @@
 <% @schedules.each do |schedule| %>
   <tr id="event_user_<%= schedule.id %>" <%= "class=repeat-#{schedule.repeat_id}" if schedule.repeat_id.present? %>>
     <td><div class="col-md-12"><%= link_to schedule.title, schedule_path(schedule) %></div></td>
-    <td><div class="col-md-12"><%= schedule.room.name %></div></td>
+    <td><div class="col-md-12"><%= schedule.room_name %></div></td>
     <td><div class="col-md-12"><%= schedule.start_time.strftime("%d/%m/%Y") %></div></td>
     <td><div class="col-md-12"><%= schedule.start_time.strftime("%H:%M") %></div></td>
     <td><div class="col-md-12"><%= schedule.finish_time.strftime("%H:%M") %></div></td>
