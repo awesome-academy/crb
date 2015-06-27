@@ -78,7 +78,7 @@ $(document).ready(function() {
     // Adjusts the vertical dimensions of the view to the specified values
     setHeight: function(totalHeight, isAuto) {
       var height = totalHeight - 22;
-      this.scrollerEl.height(height).css('overflow-y', 'scroll');
+      this.scrollerEl.height(height).css("overflow-y", "scroll");
     }
   });
 
