@@ -8,9 +8,9 @@
             <tr>
               <th class="cb-key"><%= t("quick_event.time") %>:</th>
               <td class="time-quick-event">
-                <%= f.text_field :start_time %>
-                <span><%= t("quick_event.to") %></span>
-                <%= f.text_field :finish_time %>
+                <%= f.hidden_field :start_time %>
+                <%= f.hidden_field :finish_time %>
+                <span class="time-range"></span>
               </td>
             </tr>
             <tr>
