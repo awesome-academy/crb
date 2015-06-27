@@ -2,6 +2,7 @@ $("#event_user_<%= @schedule.id %>").remove();
 $(".event-<%= @schedule.id %>").remove();
 $("#calendar").fullCalendar("refetchEvents");
 $(".popover").remove();
+
 $.get( "/api/my_schedules", function(data) {
     $("#my_schedules").html(data);
 });

@@ -14,15 +14,13 @@ class Schedule < ActiveRecord::Base
   has_many :members, class_name: "User", through: :schedule_users, foreign_key: :schedule_id
   has_many :schedule_users
 
-  validates :description, presence: true,
-    length: {maximum: Settings.schedule.description.maximum}
   validates :finish_time, presence: true
-  validates :room, presence: true
   validates :start_time, presence: true
   validates :title, presence: true,
     length: {maximum: Settings.schedule.title.maximum}
   validates :user, presence: true
-  validate :valid_time, :valid_room
+  validate :valid_time
+  validate :valid_room, if: :room_id
 
   scope :with_room, ->(room, id){where(room: room).where.not id: id}
   scope :order_start_time, ->{order start_time: :asc}
@@ -48,10 +46,10 @@ class Schedule < ActiveRecord::Base
   scope :filter_by_repeat, ->repeat_id{where repeat: repeat_id}
   scope :with_ids, ->ids{where id: ids}
 
-  delegate :color, :name, to: :room, prefix: true
+  delegate :color, :name, to: :room, prefix: true, allow_nil: true
 
-  after_commit :announce_upcoming_event, on: :create
-  after_commit :announce_event_after_update, on: :update
+  after_commit :announce_upcoming_event, on: :create, if: :announced_before
+  after_commit :announce_event_after_update, on: :update, if: :announced_before
   after_commit :delete_job, on: :destroy
 
   def self.search options = {}, user_id
