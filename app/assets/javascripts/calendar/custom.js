@@ -5,8 +5,12 @@ $(document).ready(function() {
   var MyMiniCalendar = $("#mini-calendar");
 
   var EventPopup = $("#quick-event-popup");
+  var EventPreviewPopup = $("#event-preview-popup");
   var PongPopup = $("#prong");
   var EventTimeRange = $("#quick-event-popup .time-range");
+  var EventPreviewTimeRange  = $("#event-preview-popup .time-range");
+  var EventPreviewTitle = $("#event-preview-popup .event-title");
+  var EventPreviewDetailLink = $("#event-preview-popup .eb-details-link");
   var lastSelectedDay;
 
   var clock = 5*60;
@@ -159,107 +163,58 @@ $(document).ready(function() {
         EventPopup.css({"visibility": "hidden"});
       }
     },
-    eventRender: function (event, element) {
-      $(".popover").hide();
+    eventClick: function(calEvent, jsEvent, view) {
+      if (calEvent.id != undefined) {
+        EventPopup.css({"visibility": "hidden"});
+        MyCalendar.fullCalendar("unselect");
 
-      if (event.id != undefined) {
-        time_start = "From: " + event.start.format("HH:mm");
-        time_end = "To: " + event.end.format("HH:mm");
-        room = "Room: " + event.room
-        detail = "schedules/" + event.id
+        if (lastSelectedDay != null) {
+         lastSelectedDay.css("backgroundColor", "white");
+        }
+
         edit = "schedules/" + event.id + "/edit"
         deleteRepeat = "repeats/" + event.repeat_id
 
-        $(".title-popover").text(event.title);
-        $(".start-time-popover").text(time_start);
-        $(".finish-time-popover").text(time_end);
-        $(".room-popover").text(room);
-        $("#detail-schedule-popover").attr("href", detail);
+        windowWidth = window.innerWidth;
+        windowHeight = window.innerHeight;
+        popupWidth = EventPreviewPopup.width();
+        popupHeight = EventPreviewPopup.height();
+        clientX = jsEvent.clientX;
+        clientY = jsEvent.clientY;
+        selectedElementHeight = $(jsEvent.toElement.parentElement).height();
+        _left = 0;
+        _top = -70 - jsEvent.offsetY;
+        _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
-        delete_repeat = $("#delete-repeat-popover");
-        edit_schedule = $("#edit-schedule-popover");
-        delete_schedule = $("#delete-schedule-popover");
-
-        if (event.user_id == current_user_id) {
-          if (event.repeat_id == null) {
-            delete_repeat.attr("href", null);
-            delete_repeat.text("");
-          } else {
-            delete_repeat.attr("href", deleteRepeat);
-            delete_repeat.text("Delete all repeat");
-          }
-
-          var time_now = new Date();
-          var end_time = new Date(event.end);
-
-          if (time_now > end_time) {
-            edit_schedule.attr("href", null);
-            edit_schedule.text("");
-          } else {
-            edit_schedule.attr("href", edit);
-            edit_schedule.text("Edit");
-          }
-
-          delete_schedule.attr("href", detail);
-          delete_schedule.text("Delete");
-
-          element.popover({
-            placement: "top",
-            html: true,
-            container: "body",
-            content: $(".form-popover").html(),
-          });
+        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
+          _left = windowWidth - popupWidth - 5;
+          _leftPong = clientX + popupWidth - windowWidth;
         } else {
-          edit_schedule.attr("href", null);
-          edit_schedule.text("");
-          delete_schedule.attr("href", null);
-          delete_schedule.text("");
-          delete_repeat.attr("href", null);
-          delete_repeat.text("");
+          _left = clientX - popupWidth * 1/2;
+        }
 
-          element.popover({
-            placement: "top",
-            html: true,
-            container: "body",
-            content: $(".form-popover").html(),
-          });
-        };
+        if ((clientY - popupHeight) < 15) {
+          _top += clientY;
+          PongPopup.removeClass("bottom-prong").addClass("top-prong");
+        } else {
+          _top += clientY - popupHeight - 20;
+          PongPopup.removeClass("top-prong").addClass("bottom-prong");
+        }
 
-        $("body").on("click", function (e) {
-          if($(".fc-more-popover").length == 1){
-            localStorage.setItem("flag", true);
-          }
-          if($(".fc-more-popover").length == 0 && localStorage.getItem("view_type") == "month" && localStorage.getItem("flag") != null){
-            localStorage.removeItem("flag");
-            $(".popover").hide();
-          }
+        EventPreviewTimeRange.html(timeRange(calEvent.start, calEvent.end, false));
+        EventPreviewTitle.html(calEvent.title);
 
-          if (!element.is(e.target) && element.has(e.target).length == 0 && $(".popover").has(e.target).length == 0)
-          element.popover("hide");
-
-          if($(".fc-popover").length == 1){
-            $(".fc-icon-x").click(function(){
-              element.popover("hide");
-            });
-          }
-
-          $(".popover").click(function(){
-            $(this).hide();
-          });
-        });
-
-        $('.fc-content').click(function(){
-          $(".popover").hide();
-        });
-        $(".datepicker").click(function(){
-          $(".popover").hide();
-        });
+        PongPopup.css({"left": _leftPong});
+        EventPreviewPopup.css({"visibility": "visible", "left": _left, "top": _top});
       }
     },
     dayClick: function(date, jsEvent, view) {
       $(".popover").hide();
       $("#search-setting").hide();
       $("#room_selector, #other_dropdown").removeClass("open");
+
+      EventPreviewPopup.css({"visibility": "hidden"});
+      MyCalendar.fullCalendar("unselect");
 
       if (lastSelectedDay != null) {
         lastSelectedDay.css("backgroundColor", "white");
@@ -315,6 +270,7 @@ $(document).ready(function() {
     },
     viewRender: function(view, element) {
       EventPopup.css({"visibility": "hidden"});
+      EventPreviewPopup.css({"visibility": "hidden"});
 
       localStorage.setItem("view_type", view.type);
 
@@ -393,11 +349,17 @@ $(document).ready(function() {
 
   $(".bubbleclose").bind("click", function() {
     EventPopup.css({"visibility": "hidden"});
+    EventPreviewPopup.css({"visibility": "hidden"});
     MyCalendar.fullCalendar("unselect");
 
     if (lastSelectedDay != null) {
       lastSelectedDay.css("backgroundColor", "white");
     }
+  });
+
+  $(".fc-close").unbind("click", function() {
+    EventPopup.css({"visibility": "hidden"});
+    EventPreviewPopup.css({"visibility": "hidden"});
   });
 });
 

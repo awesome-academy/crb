@@ -14,7 +14,7 @@
   visibility: hidden;
   -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
-  top: 0;
+  top: -400px;
   z-index: 9669;
   width: 400px;
   left: 0px;
@@ -132,4 +132,24 @@
       outline: none;
     }
   }
+}
+
+.eb-footer {
+  margin-top: .5em;
+  padding-top: 1em;
+  border-top: 1px solid #ddd;
+
+  .eb-actions-right {
+    float: right;
+    white-space: nowrap;
+    margin: 0 1px;
+  }
+
+  .eb-actions-left {
+    white-space: nowrap;
+  }
+}
+
+.bubble .lk {
+  text-decoration: none;
 }
