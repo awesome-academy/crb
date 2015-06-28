@@ -1,4 +1,6 @@
 function setTimeLine() {
+  var timeline, height, height_ratio;
+
   if ($(".timeline").length === 0) {
     timeline = $("<hr>").addClass("timeline");
     $(".fc-time-grid-container").append(timeline);
@@ -6,12 +8,12 @@ function setTimeLine() {
     timeline = $(".timeline");
   }
 
-  now = new Date();
-  minHour = 7;
-  maxHour = 22;
-  nowTotalSeconds = (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
-  maxTotalSeconds = (maxHour * 3600);
-  minTotalSeconds = (minHour * 3600);
+  var now = new Date();
+  var minHour = 7;
+  var maxHour = 22;
+  var nowTotalSeconds = (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
+  var maxTotalSeconds = (maxHour * 3600);
+  var minTotalSeconds = (minHour * 3600);
 
   if ($(".fc-today").length === 0 || nowTotalSeconds > maxTotalSeconds || nowTotalSeconds < minTotalSeconds) {
     timeline.hide();
