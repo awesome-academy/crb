@@ -4,30 +4,28 @@ $(document).ready(function() {
   }, 3000);
 });
 
-$(document).on("click",".plus", function(){
-  var class_name = $(this).parent().find("span.glyphicon:first").attr("class");
-  if(class_name === "glyphicon glyphicon-plus-sign") {
-    $(this).parent().find("span.glyphicon:first").attr("class","glyphicon glyphicon-minus-sign");
+$(document).on("click", ".plus", function() {
+  var _span = $(this).parent().find("span.glyphicon:first");
+  var _eventId = $(this).data("event-id");
+
+  if(_span.attr("class") === "glyphicon glyphicon-plus-sign") {
+    _span.attr("class", "icon glyphicon glyphicon-minus-sign");
   } else {
-    $(this).parent().find("span.glyphicon:first").attr("class","glyphicon glyphicon-plus-sign");
+    _span.attr("class", "icon glyphicon glyphicon-plus-sign");
   }
-  $("#event-" + $(this).data("event-id")).slideToggle();
+
+  $("#event-" + _eventId).slideToggle();
 });
 
-$(document).on("click", ".expand", function() {
+$(document).on("click", ".expand, .coll", function(e) {
   var icon = $(".plus").parent().find("span.glyphicon:first");
-  icon.removeClass("glyphicon-plus-sign");
-  icon.addClass("glyphicon-minus-sign");
-  $(".s-detail").slideDown();
-});
+  var detail = $(".s-detail");
 
-$(document).on("click", ".coll", function() {
-  var icon = $(".plus").parent().find("span.glyphicon:first");
-  icon.addClass("glyphicon-plus-sign");
-  icon.removeClass("glyphicon-minus-sign");
-  $(".s-detail").slideUp();
-});
+  if (e.currentTarget.className === "expand") {
+    icon.removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+  } else {
+    icon.removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
+  }
 
-$(document).on("click", ".fc-timetable-button", function() {
-  $(".popover").hide();
+  detail.slideToggle();
 });
