@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
+  layout "fullcalendar"
+  before_action :authenticate_user!
+
   def home
-    @today_schedules = Schedule.today_schedule
+    @rooms = Room.select :id, :name, :color
     @schedule = Schedule.new
   end
 end

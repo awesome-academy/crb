@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title yield(:title) %></title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "full_calendar", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= render "shared/shim" %>
+  </head>
+  <body data-current-user-id="<%= current_user.try :id %>">
+    <%= render "shared/header" %>
+
+    <div class="full-calendar-container">
+      <%= render partial: "shared/flash_messages", flash: flash %>
+      <div class="row">
+        <aside class="col-md-2 aside-fixed">
+          <%= yield :btn_new_schedule %>
+
+          <%= yield :mini_calendar %>
+        </aside>
+        <div class="calendar-fixed">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

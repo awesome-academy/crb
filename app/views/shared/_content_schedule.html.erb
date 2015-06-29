@@ -1,0 +1,18 @@
+<div>
+  <div class="title truncate">
+    <span class="glyphicon glyphicon-calendar medium"></span>
+    <strong>
+      <%= link_to schedule.title, schedule, title: schedule.title %>
+    </strong>
+  </div>
+  <p>
+    <%= t("pages.form.date") %>: <%= schedule.start_time.strftime Settings.date_format %>
+  </p>
+  <p>
+    <%= t("pages.form.from") %>: <%= schedule.start_time.strftime Settings.time_format %>
+    <%= t("pages.form.to") %>: <%= schedule.finish_time.strftime Settings.time_format %>
+  </p>
+  <p class="last">
+    <%= t("pages.form.room") %>: <%= schedule.room_name %>
+  </p>
+</div>

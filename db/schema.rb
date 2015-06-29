@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421070828) do
+ActiveRecord::Schema.define(version: 20150611032136) do
+
+  create_table "repeats", force: :cascade do |t|
+    t.integer  "repeat_type", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "user_id",     limit: 4
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -28,15 +35,17 @@ ActiveRecord::Schema.define(version: 20150421070828) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
+    t.string   "title",            limit: 255
+    t.text     "description",      limit: 65535
     t.datetime "start_time"
     t.datetime "finish_time"
-    t.string   "state",       limit: 255,   default: "pending"
-    t.integer  "user_id",     limit: 4
-    t.integer  "room_id",     limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "state",            limit: 255,   default: "pending"
+    t.integer  "user_id",          limit: 4
+    t.integer  "room_id",          limit: 4
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "repeat_id",        limit: 4
+    t.integer  "announced_before", limit: 4
   end
 
   add_index "schedules", ["room_id"], name: "index_schedules_on_room_id", using: :btree
@@ -46,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150421070828) do
     t.string   "name",                   limit: 255, default: "Default User"
     t.string   "email",                  limit: 255, default: "",             null: false
     t.string   "encrypted_password",     limit: 255, default: "",             null: false
-    t.string   "role",                   limit: 255, default: "normal"
+    t.string   "role",                   limit: 255
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -57,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150421070828) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

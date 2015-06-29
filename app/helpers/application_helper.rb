@@ -1,11 +1,7 @@
 module ApplicationHelper
   def full_title page_title
-    base_title = "Conferences Room Book"
-    if page_title.blank?
-      base_title
-    else
-      "#{page_title} | #{base_title}"
-    end
+    base_title = t("crb")
+    page_title.blank? ? base_title : "#{page_title} | #{base_title}"
   end
 
   def bootstrap_class_for flash_type

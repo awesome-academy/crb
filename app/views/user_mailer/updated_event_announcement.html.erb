@@ -1,0 +1,9 @@
+<h1><%= @subject %></h1>
+<p>Hi, <%= @user.name %></p>
+
+<p>
+  This is announcement of updated event created by: <%= @schedule.user.name %><br>
+  Event updated at <strong><%= @schedule.updated_at.strftime("%H:%M %d/%m/%Y") %></strong>
+</p>
+
+<%= render "event", event: @schedule %>

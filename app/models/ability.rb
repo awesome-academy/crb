@@ -3,14 +3,24 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    if user.is_admin?
-      can :manager, :all
-      can :destroy, User
-    else
-      can :read, :all
+
+    case
+    when user.admin?
+      can :access, :rails_admin
+      can :dashboard
+      can :manage, [User, Repeat, Room]
+      can [:create, :read, :destroy], Schedule
+      can :update, Schedule do |schedule|
+        schedule.finish_time > Time.zone.now
+      end
+    when user.normal?
+      can [:read, :update], User, id: user.id
+      can [:create, :read], Schedule
+      can :destroy, [Schedule, Repeat], user_id: user.id
+      can :update, Schedule do |schedule|
+        schedule.user_id == user.id && schedule.finish_time > Time.zone.now
+      end
     end
-    
-    can :create, Schedule
-    can [:edit, :update, :destroy], Schedule, user_id: user.id
+
   end
 end

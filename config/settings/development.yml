@@ -1,0 +1,11 @@
+users:
+  - name: "Nguyen Binh Dieu"
+    email: "dieu@crb.com"
+  - name: "Pham Van Tung"
+    email: "tung@crb.com"
+  - name: "Nguyen Ngoc Truong"
+    email: "truong@crb.com"
+  - name: "Nguyen Van Linh"
+    email: "linh@crb.com"
+  - name: "Nguyen Thi Ngoc"
+    email: "ngoc@crb.com"

@@ -1,0 +1,14 @@
+<p>
+  Event's title: <%= schedule_sample.title %></br>
+  Room: <%= schedule_sample.room.name %></br>
+  Start time: <%= schedule_sample.start_time.strftime("%H:%M") %></br>
+  Finish time: <%= schedule_sample.finish_time.strftime("%H:%M") %></br>
+  Description: <%= schedule_sample.description %></br>
+  On:</br>
+  <% schedules.each do |schedule| %>
+    Day <%= schedule.start_time.strftime("%d") + ": " %>
+    <%= link_to "For detail", schedule %></br>
+  <% end %>
+  In:</br>
+  <b><%= schedule_sample.start_time.strftime("%m/%Y") %></b>
+</p>
