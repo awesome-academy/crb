@@ -74,10 +74,6 @@ $(document).ready(function() {
     defaultView: view_type === "undefined" ? "month" : view_type,
     defaultDate: new Date(),
     editable: true,
-    businessHours: {
-      start: "7:45:00",
-      end: "16:45:00",
-    },
     eventLimit: true,
     weekends: false,
     height: $(window).height() - $("header").height() - 50,
@@ -214,12 +210,14 @@ $(document).ready(function() {
         var editEventPath = eventPath + "/edit";
 
         if (calEvent.user_id === current_user_id) {
-          EventPreviewActionLink.show();
-          EventPreviewActionLink.attr("href", eventPath);
+          EventPreviewDetailLink.html("Edit event »");
           EventPreviewDetailLink.attr("href", editEventPath);
+          EventPreviewActionLink.attr("href", eventPath);
+          EventPreviewActionLink.show();
         } else {
           EventPreviewActionLink.hide();
           EventPreviewActionLink.attr("href", "javascript:void(0)");
+          EventPreviewDetailLink.html("Detail event »");
           EventPreviewDetailLink.attr("href", eventPath);
         }
 
@@ -286,7 +284,7 @@ $(document).ready(function() {
         EventPopup.css({"visibility": "hidden"});
       }
     },
-    viewRender: function(view, _) {
+    viewRender: function(view, element) {
       EventPopup.css({"visibility": "hidden"});
       EventPreviewPopup.css({"visibility": "hidden"});
 
@@ -297,11 +295,11 @@ $(document).ready(function() {
         setInterval(function(){ setTimeLine(); }, clock*1000);
       } catch (err) {}
     },
-    eventAfterAllRender: function (_, _) {
+    eventAfterAllRender: function (view) {
       MyCalendar.find(".fc-left").append($("#room_selector"));
       MyCalendar.find(".fc-right").append($("#other_dropdown"));
     },
-    loading: function(isLoading, _){
+    loading: function(isLoading, view){
       if (isLoading) {
         $("label.loading").removeClass("hidden");
       } else {
@@ -362,20 +360,16 @@ $(document).ready(function() {
     MyCalendar.fullCalendar("rerenderEvents");
   }, 900000);
 
-  $(".bubbleclose").bind("click", function() {
+  $(document).on("click", ".fc-close, .fc-more, .dropdown-toggle, .bubbleclose", function() {
+    MyCalendar.fullCalendar("unselect");
+
     EventPopup.css({"visibility": "hidden"});
     EventPreviewPopup.css({"visibility": "hidden"});
-    MyCalendar.fullCalendar("unselect");
     EventNewForm[0].reset();
 
     if (lastSelectedDay !== undefined) {
       lastSelectedDay.css("backgroundColor", "white");
     }
-  });
-
-  $(".fc-close").unbind("click", function() {
-    EventPopup.css({"visibility": "hidden"});
-    EventPreviewPopup.css({"visibility": "hidden"});
   });
 });
 
