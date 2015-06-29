@@ -410,9 +410,10 @@ footer {
 }
 
 #dropdown-header {
-  margin-right: 16px;
-  margin-top: 5px !important;
+  margin-right: 18px;
   z-index: 0 !important;
+  border-radius: 5px;
+  top: 50px;
 }
 
 .gb_u{
@@ -420,12 +421,12 @@ footer {
   border-bottom-color: #fff;
   border-style: dashed dashed solid;
   border-width: 0 8.5px 8.5px;
+  right: 46px;
+  top: 49px;
   position: absolute;
-  left: 123.5px;
-  top: 48px;
   z-index: 1;
-  height: 0;
   width: 0;
+  height: 0;
   display:none;
 }
 
@@ -433,28 +434,25 @@ footer {
   border-color: transparent;
   border-style: dashed dashed solid;
   border-width: 0 8.5px 8.5px;
-  position: absolute;
-  left: 122.5px;
+  right: 46px;
   top: 48px;
+  position: absolute;
   z-index: 1;
-  height: 0;
   width: 0;
+  height: 0;
   display:none;
   border-bottom-color: rgba(0,0,0,.2);
 }
 
-.gb_vr {
-  border-color: transparent;
-  border-style: dashed dashed solid;
-  border-width: 0 8.5px 8.5px;
-  position: absolute;
-  left: 124.5px;
-  top: 48px;
-  z-index: 1;
-  height: 0;
-  width: 0;
-  display:none;
-  border-bottom-color: rgba(0,0,0,.2);
+#avatar img{
+  border-radius: 50%;
+  top: 8px;
+}
+
+#name {
+  margin-right: 6px;
+  height: 51px;
+  top: -8px;
 }
 
 .room-selector {
