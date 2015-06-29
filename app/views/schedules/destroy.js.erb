@@ -1,11 +1,12 @@
 $("#event_user_<%= @schedule.id %>").remove();
 $(".event-<%= @schedule.id %>").remove();
 $("#calendar").fullCalendar("refetchEvents");
-$(".popover").remove();
+$("#event-preview-popup").css({"visibility": "hidden"});
 
 $.get( "/api/my_schedules", function(data) {
-    $("#my_schedules").html(data);
+  $("#my_schedules").html(data);
 });
+
 $.get( "/api/shared_schedules", function(data) {
   $("#shared_schedules").html(data);
 });
