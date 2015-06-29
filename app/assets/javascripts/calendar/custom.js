@@ -32,7 +32,7 @@ $(document).ready(function() {
   var date, currentMonth, currentDate, currentHour, currentMinute, startMonth, startDate, startHour, startMinute;
 
   var windowWidth, popupWidth, popupHeight, clientX, clientY, _left, _top, _leftPong, selectedElementHeight;
-  var moment;
+  var moment, rect, offsetY;
 
   var getTime = function getTime(arg) {
    return new Date(arg.setTime(arg.getTime() + (arg.getTimezoneOffset() * 60000)));
@@ -122,6 +122,7 @@ $(document).ready(function() {
       revertFunc();
     },
     select: function (start, end, jsEvent, view) {
+      EventNewForm[0].reset();
       date = new Date();
       currentMonth = date.getMonth();
       currentDate = date.getDate();
@@ -133,14 +134,15 @@ $(document).ready(function() {
       startMinute = start.minute();
 
       if (end.date() === start.date() && (currentMonth < startMonth || (currentDate < startDate || (currentDate === startDate && (currentHour < startHour || (currentHour === startHour && currentMinute < startMinute)))))) {
+        rect  = jsEvent.target.getBoundingClientRect(),
+        offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
+
         windowWidth = window.innerWidth;
         popupWidth = EventPopup.width();
         popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX;
-        clientY = jsEvent.clientY;
-        selectedElementHeight = $(jsEvent.toElement.parentElement).height();
-        _left = 0;
-        _top = -70 - jsEvent.offsetY;
+        clientX = jsEvent.clientX, clientY = jsEvent.clientY;
+        selectedElementHeight = $(jsEvent.target.parentElement).height();
+        _left = 0, _top = -70 - offsetY;
         _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
         if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
@@ -169,23 +171,26 @@ $(document).ready(function() {
         EventPopup.css({"visibility": "hidden"});
       }
     },
-    eventClick: function(calEvent, jsEvent, _) {
+    eventClick: function(calEvent, jsEvent, view) {
+      EventNewForm[0].reset();
+
       if (calEvent.id !== undefined) {
         EventPopup.css({"visibility": "hidden"});
         MyCalendar.fullCalendar("unselect");
 
         if (lastSelectedDay !== undefined) {
-          lastSelectedDay.css("backgroundColor", "white");
+          lastSelectedDay.css("backgroundColor", "");
         }
+
+        rect  = jsEvent.target.getBoundingClientRect(),
+        offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
 
         windowWidth = window.innerWidth;
         popupWidth = EventPreviewPopup.width();
         popupHeight = EventPreviewPopup.height();
-        clientX = jsEvent.clientX;
-        clientY = jsEvent.clientY;
-        selectedElementHeight = $(jsEvent.toElement.parentElement).height();
-        _left = 0;
-        _top = -70 - jsEvent.offsetY;
+        clientX = jsEvent.clientX, clientY = jsEvent.clientY;
+        selectedElementHeight = $(jsEvent.target.parentElement).height();
+        _left = 0, _top = -70 - offsetY;
         _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
         if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
@@ -226,6 +231,7 @@ $(document).ready(function() {
       }
     },
     dayClick: function(_date, jsEvent, view) {
+      EventNewForm[0].reset();
       $("#search-setting").hide();
       $("#room_selector, #other_dropdown").removeClass("open");
 
@@ -233,7 +239,7 @@ $(document).ready(function() {
       MyCalendar.fullCalendar("unselect");
 
       if (lastSelectedDay !== undefined) {
-        lastSelectedDay.css("backgroundColor", "white");
+        lastSelectedDay.css("backgroundColor", "");
       }
 
       date = new Date();
@@ -241,14 +247,15 @@ $(document).ready(function() {
       if (view.type === "month" && (_date._d >= date)) {
         lastSelectedDay = $(this);
 
+        rect  = jsEvent.target.getBoundingClientRect(),
+        offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
+
         windowWidth = window.innerWidth;
         popupWidth = EventPopup.width();
         popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX;
-        clientY = jsEvent.clientY;
+        clientX = jsEvent.clientX, clientY = jsEvent.clientY;
         selectedElementHeight = $(this).height();
-        _top = -90 - jsEvent.offsetY;
-        _left = 0;
+        _left = 0, _top = -90 - offsetY;
         _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
         if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
