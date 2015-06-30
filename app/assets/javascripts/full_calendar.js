@@ -20,3 +20,4 @@
 //= require schedules
 //= require underscore
 //= require header-dropdown
+//= require send_info_to_full_create
