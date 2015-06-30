@@ -2,6 +2,7 @@
   $("#error-messages").html("<%= j(render 'shared/error_messages', object: @schedule) %>");
 <% else %>
   $("#quick-event-popup").css({"visibility": "hidden"});
+  $("form#new_schedule")[0].reset();
 
   $("#calendar").fullCalendar("refetchEvents");
 

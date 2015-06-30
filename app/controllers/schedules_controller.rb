@@ -20,7 +20,6 @@ class SchedulesController < ApplicationController
 
   def create
     @users = User.without_user(current_user.id).pluck :name, :id
-    @today_schedules = Schedule.today_schedule
     @schedule.user = current_user
 
     if @schedule.save
