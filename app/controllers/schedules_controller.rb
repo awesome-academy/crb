@@ -15,6 +15,9 @@ class SchedulesController < ApplicationController
   end
 
   def new
+    @title = params[:title] if params[:title]
+    @start_time = params[:start_time].to_datetime.strftime(Settings.date_time_format) if params[:start_time]
+    @finish_time = params[:finish_time].to_datetime.strftime(Settings.date_time_format) if params[:finish_time]
     @users = User.without_user(current_user.id).pluck :name, :id
   end
 
