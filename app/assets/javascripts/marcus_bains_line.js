@@ -1,5 +1,5 @@
 function setTimeLine() {
-  var timeline, height, height_ratio;
+  var timeline, now, minHour, maxHour, nowTotalSeconds, maxTotalSeconds, minTotalSeconds;
 
   if ($(".timeline").length === 0) {
     timeline = $("<hr>").addClass("timeline");
@@ -8,34 +8,34 @@ function setTimeLine() {
     timeline = $(".timeline");
   }
 
-  var now = new Date();
-  var minHour = 7;
-  var maxHour = 22;
-  var nowTotalSeconds = (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
-  var maxTotalSeconds = (maxHour * 3600);
-  var minTotalSeconds = (minHour * 3600);
+  now = new Date();
+  minHour = 7;
+  maxHour = 22;
+  nowTotalSeconds = (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
+  maxTotalSeconds = (maxHour * 3600);
+  minTotalSeconds = (minHour * 3600);
 
   if ($(".fc-today").length === 0 || nowTotalSeconds > maxTotalSeconds || nowTotalSeconds < minTotalSeconds) {
     timeline.hide();
   } else {
+    var height, height_ratio;
     height = $(".fc-slats").height();
     height_ratio = (nowTotalSeconds - minTotalSeconds) / (maxHour - minHour) / 3600;
-    setSize();
+    setSize(height, height_ratio);
     $(window).resize(function(){
-      setSize();
+      setSize(height, height_ratio);
     });
     timeline.show();
   }
 }
 
-function setSize() {
-  var left, top, width;
+function setSize(height, height_ratio){
+  var width, left;
   width = $(".fc-today").outerWidth();
   left = $(".fc-today").position().left;
-  top = height_ratio * height;
-  timeline.css({
+  $(".timeline").css({
     "width": width + "px",
     "left": left + "px",
-    "top": top + "px"
+    "top": height_ratio * height + "px"
   });
 }
