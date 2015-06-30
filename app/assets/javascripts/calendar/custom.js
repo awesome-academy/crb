@@ -87,6 +87,7 @@ $(document).ready(function() {
       agenda: true
     },
     selectHelper: true,
+    timezone: "local",
     events: function(start, end, timezone, callback) {
       $.ajax({
         url: schedule_query_url,
@@ -303,6 +304,10 @@ $(document).ready(function() {
       } catch (err) {}
     },
     eventAfterAllRender: function (view) {
+      if (lastSelectedDay !== undefined) {
+        lastSelectedDay.css("backgroundColor", "");
+      }
+
       MyCalendar.find(".fc-left").append($("#room_selector"));
       MyCalendar.find(".fc-right").append($("#other_dropdown"));
     },
