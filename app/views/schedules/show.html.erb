@@ -6,7 +6,7 @@
     <div class="col-md-10">
       <div class="col-md-12">
         <div id="countdown"></div>
-        <%= hidden_field_tag "end-date", @schedule.finish_time %>
+        <%= hidden_field_tag "end-date", @schedule.finish_time.strftime(Settings.date_time_format) %>
       </div>
     </div>
   </div>

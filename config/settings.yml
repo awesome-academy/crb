@@ -3,6 +3,7 @@ repeat_types:
   month: "Monthly"
 date_format: "%d/%m/%Y"
 time_format: "%H:%M"
+date_time_format: "%a, %d %b %Y %H:%M:%S"
 hour_begin_schedule: 7
 hour_end_schedule: 21
 hour_min_schedule: "07:00"
