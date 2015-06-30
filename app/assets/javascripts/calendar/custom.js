@@ -7,6 +7,7 @@ $(document).ready(function() {
   var PongPopup = $("#prong");
 
   var EventPopup = $("#quick-event-popup");
+  var EventPopupTitle = $("#quick-event-popup #schedule_title");
   var EventTimeRange = $("#quick-event-popup .time-range");
 
   var EventPreviewPopup = $("#event-preview-popup");
@@ -116,6 +117,7 @@ $(document).ready(function() {
         }
       });
     },
+    slotEventOverlap: false,
     eventResize: function(event, delta, revertFunc) {
       revertFunc();
     },
@@ -167,6 +169,7 @@ $(document).ready(function() {
         EventTimeRange.html(timeRange(start, end, false));
         PongPopup.css({"left": _leftPong});
         EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
+        EventPopupTitle.focus();
       } else {
         MyCalendar.fullCalendar("unselect");
         EventPopup.css({"visibility": "hidden"});
@@ -245,7 +248,7 @@ $(document).ready(function() {
 
       date = new Date();
 
-      if (view.type === "month" && (_date._d >= date)) {
+      if (view.type === "month" && (_date._d > date || (_date._d.toDateString() === date.toDateString()))) {
         lastSelectedDay = $(this);
 
         rect  = jsEvent.target.getBoundingClientRect(),
@@ -288,6 +291,7 @@ $(document).ready(function() {
         $(this).css("background-color", "rgba(58, 135, 173, .3)");
         EventTimeRange.html(timeRange(_date, _date, true));
         EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
+        EventPopupTitle.focus();
       } else if (EventPopup.is(":visible")) {
         EventPopup.css({"visibility": "hidden"});
       }
