@@ -4,6 +4,7 @@
   $("#quick-event-popup").css({"visibility": "hidden"});
   $("form#new_schedule")[0].reset();
 
+  $("#calendar").fullCalendar("unselect");
   $("#calendar").fullCalendar("refetchEvents");
 
   $.get( "/api/my_schedules", function(data) {

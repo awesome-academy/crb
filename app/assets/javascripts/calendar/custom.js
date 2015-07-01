@@ -35,10 +35,6 @@ $(document).ready(function() {
   var windowWidth, popupWidth, popupHeight, clientX, clientY, _left, _top, _leftPong, selectedElementHeight;
   var moment, rect, offsetY;
 
-  var getTime = function getTime(arg) {
-   return new Date(arg.setTime(arg.getTime() + (arg.getTimezoneOffset() * 60000)));
-  }
-
   $("#room_selector ul.dropdown-menu li").click(function() {
     var room_id = $(this).val();
     if (room_id === 0) {room_id = "";}
@@ -137,15 +133,17 @@ $(document).ready(function() {
       startMinute = start.minute();
 
       if (end.date() === start.date() && (currentMonth < startMonth || (currentDate < startDate || (currentDate === startDate && (currentHour < startHour || (currentHour === startHour && currentMinute < startMinute)))))) {
-        rect  = jsEvent.target.getBoundingClientRect(),
+        rect  = jsEvent.target.getBoundingClientRect();
         offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
 
         windowWidth = window.innerWidth;
         popupWidth = EventPopup.width();
         popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX, clientY = jsEvent.clientY;
+        clientX = jsEvent.clientX;
+        clientY = jsEvent.clientY;
         selectedElementHeight = $(jsEvent.target.parentElement).height();
-        _left = 0, _top = -70 - offsetY;
+        _left = 0;
+        _top = -70 - offsetY;
         _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
         if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
@@ -219,14 +217,14 @@ $(document).ready(function() {
         var editEventPath = eventPath + "/edit";
 
         if (calEvent.user_id === current_user_id) {
-          EventPreviewDetailLink.html("Edit event »");
+          EventPreviewDetailLink.html("Edit event &raquo;");
           EventPreviewDetailLink.attr("href", editEventPath);
           EventPreviewActionLink.attr("href", eventPath);
           EventPreviewActionLink.show();
         } else {
           EventPreviewActionLink.hide();
           EventPreviewActionLink.attr("href", "javascript:void(0)");
-          EventPreviewDetailLink.html("Detail event »");
+          EventPreviewDetailLink.html("Detail event &raquo;");
           EventPreviewDetailLink.attr("href", eventPath);
         }
 
@@ -251,13 +249,13 @@ $(document).ready(function() {
       if (view.type === "month" && (_date._d > date || (_date._d.toDateString() === date.toDateString()))) {
         lastSelectedDay = $(this);
 
-        rect  = jsEvent.target.getBoundingClientRect(),
+        rect  = jsEvent.target.getBoundingClientRect();
         offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
 
         windowWidth = window.innerWidth;
         popupWidth = EventPopup.width();
         popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX, clientY = jsEvent.clientY;
+        clientX = jsEvent.clientX; clientY = jsEvent.clientY;
         selectedElementHeight = $(this).height();
         _left = 0, _top = -90 - offsetY;
         _leftPong = (popupWidth - PongPopup.width()) * 1/2;
@@ -316,11 +314,7 @@ $(document).ready(function() {
       MyCalendar.find(".fc-right").append($("#other_dropdown"));
     },
     loading: function(isLoading, view){
-      if (isLoading) {
-        $("label.loading").removeClass("hidden");
-      } else {
-        $("label.loading").addClass("hidden");
-      }
+      $("label.loading").attr("class", isLoading ? "loading" : "loading hidden");
     }
   });
 
@@ -332,21 +326,6 @@ $(document).ready(function() {
   }).on("changeDate", function(ev){
     MyCalendar.fullCalendar("gotoDate", ev.date);
     MyCalendar.fullCalendar("changeView", "agendaDay");
-  });
-
-  $(".fc-prev-button").click(function() {
-    moment = MyCalendar.fullCalendar("getDate");
-    MyMiniCalendar.datepicker("update", moment._d);
-  });
-
-  $(".fc-next-button").click(function() {
-    moment = MyCalendar.fullCalendar("getDate");
-    MyMiniCalendar.datepicker("update", moment._d);
-  });
-
-  $(".fc-today-button").click(function() {
-    moment = MyCalendar.fullCalendar("getDate");
-    MyMiniCalendar.datepicker("update", moment._d);
   });
 
   $("#refresh").click(function(){
@@ -364,7 +343,7 @@ $(document).ready(function() {
   setInterval(function(){
     var events = MyCalendar.fullCalendar("clientEvents");
 
-    $.each(events, function (index, event){
+    $.each(events, function (index, event) {
       var time_now = new Date();
       var end_time = event.end._d;
 
@@ -386,6 +365,11 @@ $(document).ready(function() {
     if (lastSelectedDay !== undefined) {
       lastSelectedDay.css("backgroundColor", "white");
     }
+  });
+
+  $(document).on("click", ".fc-prev-button, .fc-next-button, .fc-today-button", function() {
+    moment = MyCalendar.fullCalendar("getDate");
+    MyMiniCalendar.datepicker("update", moment._d);
   });
 });
 
