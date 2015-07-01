@@ -3,19 +3,14 @@ $(document).ready(function() {
   var schedule_query_url = "/api/schedules.json";
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
-
-  var PongPopup = $("#prong");
-
   var EventPopup = $("#quick-event-popup");
   var EventPopupTitle = $("#quick-event-popup #schedule_title");
   var EventTimeRange = $("#quick-event-popup .time-range");
-
   var EventPreviewPopup = $("#event-preview-popup");
   var EventPreviewTimeRange  = $("#event-preview-popup .time-range");
   var EventPreviewTitle = $("#event-preview-popup .event-title");
   var EventPreviewDetailLink = $("#event-preview-popup .eb-details-link");
   var EventPreviewActionLink = $("#event-preview-popup .eb-action-link");
-
   var EventNewForm = $("form#new_schedule");
 
   var clock = 5*60;
@@ -29,9 +24,8 @@ $(document).ready(function() {
   schedule_finish.attr("readonly", "readonly");
 
   var date, currentMonth, currentDate, currentHour, startMonth, startDate, startHour, endDate;
-
   var windowWidth, popupWidth, popupHeight, clientX, clientY, _left, _top, _leftPong, selectedElementHeight;
-  var events, moment, rect, offsetY, lastSelectedDay;
+  var events, moment, rect, offsetY, lastSelectedDay, ProngPopup, offsetLeft, offsetTop;
 
   $("#room_selector ul.dropdown-menu li").click(function() {
     var room_id = $(this).val();
@@ -138,7 +132,7 @@ $(document).ready(function() {
       if (calEvent.id !== undefined) {
         EventPopup.css({"visibility": "hidden"});
         MyCalendar.fullCalendar("unselect");
-        setElementBackground(lastSelectedDay, "")
+        setElementBackground(lastSelectedDay, "");
         showPreviewEventPopup(jsEvent, calEvent);
       }
     },
@@ -234,6 +228,7 @@ $(document).ready(function() {
   });
 
   function showQuichCreateEventPopup(start, end, jsEvent, dayClick) {
+    ProngPopup = $("#prong");
     getCoodinates(jsEvent, EventPopup);
 
     if (dayClick) {
@@ -252,6 +247,7 @@ $(document).ready(function() {
   }
 
   function showPreviewEventPopup(jsEvent, calEvent) {
+    ProngPopup = $("#prong-preview");
     getCoodinates(jsEvent, EventPreviewPopup);
 
     EventPreviewTimeRange.html(timeRange(calEvent.start, calEvent.end, false));
@@ -288,25 +284,14 @@ $(document).ready(function() {
     popupWidth = target.width(); popupHeight = target.height();
     clientX = jsEvent.clientX; clientY = jsEvent.clientY;
     selectedElementHeight = $(jsEvent.target.parentElement).height();
-    _left = 0; _top = -70 - offsetY;
-    _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
-    if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
-      _left = windowWidth - popupWidth - 5;
-      _leftPong = clientX + popupWidth - windowWidth;
-    } else {
-      _left = clientX - popupWidth * 1/2;
-    }
+    offsetLeft = (clientX + popupWidth * 1/2 + 30) > windowWidth;
+    _leftPong = offsetLeft ? (clientX + popupWidth - windowWidth) : (popupWidth - ProngPopup.width()) * 1/2;
+    _left = offsetLeft ? (windowWidth - popupWidth - 5) : (clientX - popupWidth * 1/2);
 
-    if ((clientY - popupHeight) < 15) {
-      _top += clientY;
-      PongPopup.removeClass("bottom-prong").addClass("top-prong");
-    } else {
-      _top += clientY - popupHeight - 20;
-      PongPopup.removeClass("top-prong").addClass("bottom-prong");
-    }
-
-    PongPopup.css({"left": _leftPong});
+    offsetTop = (clientY - popupHeight) < 15;
+    _top = clientY - (offsetTop ? 70 : (popupHeight + 90)) - offsetY;
+    ProngPopup.attr("class", offsetTop ? "top-prong" : "bottom-prong").css({"left": _leftPong});
   }
 
   function setElementBackground(element, bgColor) {
