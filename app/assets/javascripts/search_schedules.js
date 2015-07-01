@@ -15,7 +15,7 @@ $(document).ready(function() {
     start_date.datepicker().val("");
     finish_date.datepicker().val("");
     $("#search_form_room_id").val("");
-    if (search_setting.css("display") == "none") {
+    if (search_setting.css("display") === "none") {
       search_setting.show();
     } else {
       search_setting.hide();

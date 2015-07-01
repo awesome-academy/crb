@@ -1,7 +1,7 @@
 $(document).ready(function() {
   var now_in_milisec = (new Date()).getTime();
   var interval = 15;
-  var interval_in_milisec= interval * 60 * 1000;
+  var interval_in_milisec = interval * 60 * 1000;
   var min_in_milisec = (parseInt(now_in_milisec / interval_in_milisec) + 1) * interval_in_milisec
 
   var startChange = function startChange() {

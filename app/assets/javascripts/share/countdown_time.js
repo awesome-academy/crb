@@ -1,7 +1,7 @@
 function showRemaining() {
   var endDateElement = $("#end-date");
 
-  if (endDateElement.length != 0) {
+  if (endDateElement.length !== 0) {
     var endDate = new Date(endDateElement.val());
 
     var _second = 1000;
