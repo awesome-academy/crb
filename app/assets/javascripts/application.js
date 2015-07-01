@@ -9,7 +9,9 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
+
 //= require share/custom
+//= require header-dropdown
 //= require share/countdown_time.js
 //= require_self
 //= require validate-avatar

@@ -9,12 +9,12 @@
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <li class="dropdown" id="h-dropdown" >
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-            <%= current_user.name %><b class="caret"></b>
+          <a href="#" id="name" class="dropdown-toggle" data-toggle="dropdown" >
+            <%= current_user.name %>
+            <span id="avatar">
+              <img alt="avatar" src= "<%= current_user.avatar %>" width= "35" height= "35" />
+            </span>
           </a>
-          <div class="gb_v"></div>
-          <div class="gb_vr"></div>
-          <div class="gb_u"></div>
           <ul class="dropdown-menu" id="dropdown-header">
             <% if current_user.admin? %>
               <li><%= link_to t("button.admin"), rails_admin_path %></li>
@@ -32,4 +32,6 @@
       </ul>
     </nav>
   </div>
+  <div class="gb_v"></div>
+  <div class="gb_u"></div>
 </header>

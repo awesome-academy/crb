@@ -51,7 +51,6 @@ $(document).ready(function() {
 
           html += "<td class=\"lv-eventcell lv-title " + _class + "\"" +">";
             html += "<div class=\"s-title\"><a href=\"javascript:void(0)\"><span data-event-id=" + schedule.id + " class=\"plus\"><span class=\"glyphicon glyphicon-plus-sign icon\"></span>" + schedule.title + "</span></a></div>";
-
             html += "<div class=\"s-detail\" id=\"event-" + schedule.id + "\"" + ">";
               html += "<span class=\"s-description\">";
                 html += schedule.description;
