@@ -151,7 +151,7 @@ $(document).ready(function() {
         lastSelectedDay = $(this);
         $(this).css("background-color", "rgba(58, 135, 173, .3)");
 
-        showQuichCreateEventPopup(_date, $.fullCalendar.moment(_date), jsEvent, true)
+        showQuichCreateEventPopup(_date, $.fullCalendar.moment(_date), jsEvent, true);
       } else if (EventPopup.is(":visible")) {
         EventPopup.css({"visibility": "hidden"});
       }

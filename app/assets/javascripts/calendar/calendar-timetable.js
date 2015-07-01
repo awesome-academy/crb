@@ -36,13 +36,13 @@ $(document).ready(function() {
 
           html += "<tr class=\"lv-row\">";
 
-          if(i == 0) {
+          if(i === 0) {
             html += "<th class=\"lv-datecell\" rowspan=" + schedules_group_by_day.length + ">";
             html += _day;
             html += "</th>";
           }
 
-          _class =  (i == schedules_group_by_day.length) ? "last " : "";
+          _class =  (i === schedules_group_by_day.length) ? "last " : "";
           _class += "event-" + schedule.id;
 
           html += "<td class=\"lv-eventcell lv-time " + _class + "\"" + ">";
@@ -60,7 +60,7 @@ $(document).ready(function() {
               html += "<span class=\"s-actions\">";
                 html += "<a title=\"Detail\" href=\"/schedules/" + schedule.id + "\"><span class=\"glyphicon glyphicon-share\" aria-hidden=\"true\"></span></a>&nbsp;"
 
-                if(schedule.user_id == current_user_id) {
+                if(schedule.user_id === current_user_id) {
                   if(schedule.end > $.now()) {
                     html += "<a title=\"Edit\" href=\"/users/" + current_user_id + "/schedules/" + schedule.id + "/edit\"><span class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></span></a>&nbsp;";
                   }
