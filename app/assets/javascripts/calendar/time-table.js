@@ -23,9 +23,9 @@ $(document).on("click", ".expand, .coll", function(e) {
 
   if (e.currentTarget.className === "expand") {
     icon.removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+    detail.slideDown();
   } else {
     icon.removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
+    detail.slideUp();
   }
-
-  detail.slideToggle();
 });

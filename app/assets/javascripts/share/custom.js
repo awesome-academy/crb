@@ -22,6 +22,7 @@
 //= require repeats
 //= require jquery.are-you-sure
 //= require share/notify
+//= require moment
 
 var schedule_start_time, schedule_finish_time;
 

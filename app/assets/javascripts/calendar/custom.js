@@ -18,8 +18,6 @@ $(document).ready(function() {
 
   var EventNewForm = $("form#new_schedule");
 
-  var lastSelectedDay;
-
   var clock = 5*60;
 
   var current_user_id = $("body").data("current-user-id");
@@ -30,10 +28,10 @@ $(document).ready(function() {
   schedule_start.attr("readonly", "readonly");
   schedule_finish.attr("readonly", "readonly");
 
-  var date, currentMonth, currentDate, currentHour, currentMinute, startMonth, startDate, startHour, startMinute;
+  var date, currentMonth, currentDate, currentHour, startMonth, startDate, startHour, endDate;
 
   var windowWidth, popupWidth, popupHeight, clientX, clientY, _left, _top, _leftPong, selectedElementHeight;
-  var moment, rect, offsetY;
+  var events, moment, rect, offsetY, lastSelectedDay;
 
   $("#room_selector ul.dropdown-menu li").click(function() {
     var room_id = $(this).val();
@@ -123,17 +121,11 @@ $(document).ready(function() {
     select: function (start, end, jsEvent, view) {
       EventNewForm[0].reset();
       date = new Date();
-      currentMonth = date.getMonth();
-      currentDate = date.getDate();
-      currentHour = date.getHours();
-      currentMinute = date.getMinutes();
-      startMonth = start.month();
-      startDate = start.date();
-      startHour = start.hour();
-      startMinute = start.minute();
+      currentMonth = date.getMonth(); currentDate = date.getDate(); currentHour = date.getHours();
+      startMonth = start.month(); startDate = start.date(); startHour = start.hour();
       endDate = end.date();
 
-      if ((currentMonth < startMonth || (currentMonth === startMonth && (currentDate < startDate || (currentDate == startDate && currentHour <= startHour)))) && startDate == endDate) {
+      if ((currentMonth < startMonth || (currentMonth === startMonth && (currentDate < startDate || (currentDate === startDate && currentHour <= startHour)))) && startDate === endDate) {
         showQuichCreateEventPopup(start, end, jsEvent, false);
       } else {
         MyCalendar.fullCalendar("unselect");
@@ -165,7 +157,7 @@ $(document).ready(function() {
         lastSelectedDay = $(this);
         $(this).css("background-color", "rgba(58, 135, 173, .3)");
 
-        showQuichCreateEventPopup(_date, _date, jsEvent, true)
+        showQuichCreateEventPopup(_date, $.fullCalendar.moment(_date), jsEvent, true)
       } else if (EventPopup.is(":visible")) {
         EventPopup.css({"visibility": "hidden"});
       }
@@ -214,13 +206,11 @@ $(document).ready(function() {
   });
 
   setInterval(function(){
-    var events = MyCalendar.fullCalendar("clientEvents");
+    events = MyCalendar.fullCalendar("clientEvents");
+    date = new Date();
 
     $.each(events, function (index, event) {
-      var time_now = new Date();
-      var end_time = event.end._d;
-
-      if (end_time < time_now) { event.color = "#B4B4CD"; }
+      if (event.end._d < date) { event.color = "#B4B4CD"; }
     });
 
     MyCalendar.fullCalendar("removeEvents");
@@ -247,18 +237,14 @@ $(document).ready(function() {
     getCoodinates(jsEvent, EventPopup);
 
     if (dayClick) {
-      var _start = new Date(start._d.setHours(7));
-      _start = new Date(_start.setMinutes(0));
-
-      var _end = new Date(end._d.setHours(21));
-      _end = new Date(_end.setMinutes(0));
-
-      schedule_start.val(_start);
-      schedule_finish.val(_end);
-    } else {
-      schedule_start.val(start._d);
-      schedule_finish.val(end._d);
+      start.local().set({hours: 7, minute: 0});
+      end.local().set({hours: 21, minute: 0});
     }
+
+    console.log(start._d + " - " + end._d);
+
+    schedule_start.val(start._d);
+    schedule_finish.val(end._d);
 
     EventTimeRange.html(timeRange(start, end, dayClick));
     EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
@@ -275,15 +261,20 @@ $(document).ready(function() {
     var editEventPath = eventPath + "/edit";
 
     if (calEvent.user_id === current_user_id) {
-      EventPreviewDetailLink.html("Edit event &raquo;");
-      EventPreviewDetailLink.attr("href", editEventPath);
-      EventPreviewActionLink.attr("href", eventPath);
-      EventPreviewActionLink.show();
+      var text, url;
+      date = new Date();
+
+      if (calEvent.end._d <= date) {
+        text = "Detail event &raquo;"; url = eventPath;
+      } else {
+        text = "Edit event &raquo;"; url = editEventPath;
+      }
+
+      EventPreviewDetailLink.attr("href", url).html(text);
+      EventPreviewActionLink.attr("href", eventPath).show();
     } else {
-      EventPreviewActionLink.hide();
-      EventPreviewActionLink.attr("href", "javascript:void(0)");
-      EventPreviewDetailLink.html("Detail event &raquo;");
-      EventPreviewDetailLink.attr("href", eventPath);
+      EventPreviewActionLink.attr("href", "javascript:void(0)").hide();
+      EventPreviewDetailLink.html("Detail event &raquo;").attr("href", eventPath);
     }
 
     EventPreviewPopup.css({"visibility": "visible", "left": _left, "top": _top});
@@ -294,13 +285,10 @@ $(document).ready(function() {
     offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
 
     windowWidth = window.innerWidth;
-    popupWidth = target.width();
-    popupHeight = target.height();
-    clientX = jsEvent.clientX;
-    clientY = jsEvent.clientY;
+    popupWidth = target.width(); popupHeight = target.height();
+    clientX = jsEvent.clientX; clientY = jsEvent.clientY;
     selectedElementHeight = $(jsEvent.target.parentElement).height();
-    _left = 0;
-    _top = -70 - offsetY;
+    _left = 0; _top = -70 - offsetY;
     _leftPong = (popupWidth - PongPopup.width()) * 1/2;
 
     if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
