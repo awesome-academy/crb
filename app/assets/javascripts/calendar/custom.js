@@ -131,43 +131,10 @@ $(document).ready(function() {
       startDate = start.date();
       startHour = start.hour();
       startMinute = start.minute();
+      endDate = end.date();
 
-      if (end.date() === start.date() && (currentMonth < startMonth || (currentDate < startDate || (currentDate === startDate && (currentHour < startHour || (currentHour === startHour && currentMinute < startMinute)))))) {
-        rect  = jsEvent.target.getBoundingClientRect();
-        offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
-
-        windowWidth = window.innerWidth;
-        popupWidth = EventPopup.width();
-        popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX;
-        clientY = jsEvent.clientY;
-        selectedElementHeight = $(jsEvent.target.parentElement).height();
-        _left = 0;
-        _top = -70 - offsetY;
-        _leftPong = (popupWidth - PongPopup.width()) * 1/2;
-
-        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
-          _left = windowWidth - popupWidth - 5;
-          _leftPong = clientX + popupWidth - windowWidth;
-        } else {
-          _left = clientX - popupWidth * 1/2;
-        }
-
-        if ((clientY - popupHeight) < 15) {
-          _top += clientY;
-          PongPopup.removeClass("bottom-prong").addClass("top-prong");
-        } else {
-          _top += clientY - popupHeight - 20;
-          PongPopup.removeClass("top-prong").addClass("bottom-prong");
-        }
-
-        schedule_start.val(start._d);
-        schedule_finish.val(end._d);
-
-        EventTimeRange.html(timeRange(start, end, false));
-        PongPopup.css({"left": _leftPong});
-        EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
-        EventPopupTitle.focus();
+      if ((currentMonth < startMonth || (currentMonth === startMonth && (currentDate < startDate || (currentDate == startDate && currentHour <= startHour)))) && startDate == endDate) {
+        showQuichCreateEventPopup(start, end, jsEvent, false);
       } else {
         MyCalendar.fullCalendar("unselect");
         EventPopup.css({"visibility": "hidden"});
@@ -179,57 +146,8 @@ $(document).ready(function() {
       if (calEvent.id !== undefined) {
         EventPopup.css({"visibility": "hidden"});
         MyCalendar.fullCalendar("unselect");
-
-        if (lastSelectedDay !== undefined) {
-          lastSelectedDay.css("backgroundColor", "");
-        }
-
-        rect  = jsEvent.target.getBoundingClientRect(),
-        offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
-
-        windowWidth = window.innerWidth;
-        popupWidth = EventPreviewPopup.width();
-        popupHeight = EventPreviewPopup.height();
-        clientX = jsEvent.clientX, clientY = jsEvent.clientY;
-        selectedElementHeight = $(jsEvent.target.parentElement).height();
-        _left = 0, _top = -70 - offsetY;
-        _leftPong = (popupWidth - PongPopup.width()) * 1/2;
-
-        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
-          _left = windowWidth - popupWidth - 5;
-          _leftPong = clientX + popupWidth - windowWidth;
-        } else {
-          _left = clientX - popupWidth * 1/2;
-        }
-
-        if ((clientY - popupHeight) < 15) {
-          _top += clientY;
-          PongPopup.removeClass("bottom-prong").addClass("top-prong");
-        } else {
-          _top += clientY - popupHeight - 20;
-          PongPopup.removeClass("top-prong").addClass("bottom-prong");
-        }
-
-        EventPreviewTimeRange.html(timeRange(calEvent.start, calEvent.end, false));
-        EventPreviewTitle.html(calEvent.title);
-
-        var eventPath = "schedules/" + calEvent.id;
-        var editEventPath = eventPath + "/edit";
-
-        if (calEvent.user_id === current_user_id) {
-          EventPreviewDetailLink.html("Edit event &raquo;");
-          EventPreviewDetailLink.attr("href", editEventPath);
-          EventPreviewActionLink.attr("href", eventPath);
-          EventPreviewActionLink.show();
-        } else {
-          EventPreviewActionLink.hide();
-          EventPreviewActionLink.attr("href", "javascript:void(0)");
-          EventPreviewDetailLink.html("Detail event &raquo;");
-          EventPreviewDetailLink.attr("href", eventPath);
-        }
-
-        PongPopup.css({"left": _leftPong});
-        EventPreviewPopup.css({"visibility": "visible", "left": _left, "top": _top});
+        setElementBackground(lastSelectedDay, "")
+        showPreviewEventPopup(jsEvent, calEvent);
       }
     },
     dayClick: function(_date, jsEvent, view) {
@@ -239,57 +157,15 @@ $(document).ready(function() {
 
       EventPreviewPopup.css({"visibility": "hidden"});
       MyCalendar.fullCalendar("unselect");
-
-      if (lastSelectedDay !== undefined) {
-        lastSelectedDay.css("backgroundColor", "");
-      }
+      setElementBackground(lastSelectedDay, "");
 
       date = new Date();
 
       if (view.type === "month" && (_date._d > date || (_date._d.toDateString() === date.toDateString()))) {
         lastSelectedDay = $(this);
-
-        rect  = jsEvent.target.getBoundingClientRect();
-        offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
-
-        windowWidth = window.innerWidth;
-        popupWidth = EventPopup.width();
-        popupHeight = EventPopup.height();
-        clientX = jsEvent.clientX; clientY = jsEvent.clientY;
-        selectedElementHeight = $(this).height();
-        _left = 0, _top = -90 - offsetY;
-        _leftPong = (popupWidth - PongPopup.width()) * 1/2;
-
-        if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
-          _left = windowWidth - popupWidth - 5;
-          _leftPong = clientX + popupWidth - windowWidth;
-        } else {
-          _left = clientX - popupWidth * 1/2;
-        }
-
-        PongPopup.css({"left": _leftPong});
-
-        if ((clientY - popupHeight) < 15) {
-          _top += clientY;
-          PongPopup.removeClass("bottom-prong").addClass("top-prong");
-        } else {
-          _top += clientY - popupHeight;
-          PongPopup.removeClass("top-prong").addClass("bottom-prong");
-        }
-
-        var start = new Date(_date._d.setHours(7));
-        start = new Date(start.setMinutes(0));
-
-        var end = new Date(_date._d.setHours(21));
-        end = new Date(end.setMinutes(0));
-
-        schedule_start.val(start);
-        schedule_finish.val(end);
-
         $(this).css("background-color", "rgba(58, 135, 173, .3)");
-        EventTimeRange.html(timeRange(_date, _date, true));
-        EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
-        EventPopupTitle.focus();
+
+        showQuichCreateEventPopup(_date, _date, jsEvent, true)
       } else if (EventPopup.is(":visible")) {
         EventPopup.css({"visibility": "hidden"});
       }
@@ -306,10 +182,7 @@ $(document).ready(function() {
       } catch (err) {}
     },
     eventAfterAllRender: function (view) {
-      if (lastSelectedDay !== undefined) {
-        lastSelectedDay.css("backgroundColor", "");
-      }
-
+      setElementBackground(lastSelectedDay, "");
       MyCalendar.find(".fc-left").append($("#room_selector"));
       MyCalendar.find(".fc-right").append($("#other_dropdown"));
     },
@@ -362,21 +235,103 @@ $(document).ready(function() {
     EventPreviewPopup.css({"visibility": "hidden"});
     EventNewForm[0].reset();
 
-    if (lastSelectedDay !== undefined) {
-      lastSelectedDay.css("backgroundColor", "white");
-    }
+    setElementBackground(lastSelectedDay, "white");
   });
 
   $(document).on("click", ".fc-prev-button, .fc-next-button, .fc-today-button", function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
   });
-});
 
-function timeRange(startTime, endTime, dayClick) {
-  if (dayClick) {
-    return startTime.format("dddd DD-MM-YYYY");
-  } else {
-    return startTime.format("dddd") + " " + startTime.format("H:mm A") + " To " + endTime.format("H:mm A") + " " + startTime.format("DD-MM-YYYY");
+  function showQuichCreateEventPopup(start, end, jsEvent, dayClick) {
+    getCoodinates(jsEvent, EventPopup);
+
+    if (dayClick) {
+      var _start = new Date(start._d.setHours(7));
+      _start = new Date(_start.setMinutes(0));
+
+      var _end = new Date(end._d.setHours(21));
+      _end = new Date(_end.setMinutes(0));
+
+      schedule_start.val(_start);
+      schedule_finish.val(_end);
+    } else {
+      schedule_start.val(start._d);
+      schedule_finish.val(end._d);
+    }
+
+    EventTimeRange.html(timeRange(start, end, dayClick));
+    EventPopup.css({"visibility": "visible", "left": _left, "top": _top});
+    EventPopupTitle.focus();
   }
-}
+
+  function showPreviewEventPopup(jsEvent, calEvent) {
+    getCoodinates(jsEvent, EventPreviewPopup);
+
+    EventPreviewTimeRange.html(timeRange(calEvent.start, calEvent.end, false));
+    EventPreviewTitle.html(calEvent.title);
+
+    var eventPath = "schedules/" + calEvent.id;
+    var editEventPath = eventPath + "/edit";
+
+    if (calEvent.user_id === current_user_id) {
+      EventPreviewDetailLink.html("Edit event &raquo;");
+      EventPreviewDetailLink.attr("href", editEventPath);
+      EventPreviewActionLink.attr("href", eventPath);
+      EventPreviewActionLink.show();
+    } else {
+      EventPreviewActionLink.hide();
+      EventPreviewActionLink.attr("href", "javascript:void(0)");
+      EventPreviewDetailLink.html("Detail event &raquo;");
+      EventPreviewDetailLink.attr("href", eventPath);
+    }
+
+    EventPreviewPopup.css({"visibility": "visible", "left": _left, "top": _top});
+  }
+
+  function getCoodinates(jsEvent, target) {
+    rect  = jsEvent.target.getBoundingClientRect();
+    offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
+
+    windowWidth = window.innerWidth;
+    popupWidth = target.width();
+    popupHeight = target.height();
+    clientX = jsEvent.clientX;
+    clientY = jsEvent.clientY;
+    selectedElementHeight = $(jsEvent.target.parentElement).height();
+    _left = 0;
+    _top = -70 - offsetY;
+    _leftPong = (popupWidth - PongPopup.width()) * 1/2;
+
+    if ((clientX + popupWidth * 1/2 + 30) > windowWidth) {
+      _left = windowWidth - popupWidth - 5;
+      _leftPong = clientX + popupWidth - windowWidth;
+    } else {
+      _left = clientX - popupWidth * 1/2;
+    }
+
+    if ((clientY - popupHeight) < 15) {
+      _top += clientY;
+      PongPopup.removeClass("bottom-prong").addClass("top-prong");
+    } else {
+      _top += clientY - popupHeight - 20;
+      PongPopup.removeClass("top-prong").addClass("bottom-prong");
+    }
+
+    PongPopup.css({"left": _leftPong});
+  }
+
+  function setElementBackground(element, bgColor) {
+    if (element !== undefined) {
+      element.css("backgroundColor", bgColor);
+    }
+  }
+
+  function timeRange(startTime, endTime, dayClick) {
+    if (dayClick) {
+      return startTime.format("dddd DD-MM-YYYY");
+    } else {
+      return startTime.format("dddd") + " " + startTime.format("H:mm A") + " To " + endTime.format("H:mm A") + " " + startTime.format("DD-MM-YYYY");
+    }
+  }
+});
