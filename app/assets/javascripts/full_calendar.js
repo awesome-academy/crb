@@ -11,7 +11,6 @@
 // about supported directives.
 //= require_self
 //= require share/custom
-//= require moment
 //= require fullcalendar
 //= require marcus_bains_line
 //= require calendar/calendar-timetable
