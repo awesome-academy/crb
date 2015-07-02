@@ -70,6 +70,22 @@ aside {
       width: 100%;
       td {
         padding: 0px;
+        font-size: 12px;
+        &.active.day {
+          color: white;
+        }
+      }
+      th {
+        font-size: 12px;
+        font-weight: normal;
+        &.datepicker-switch {
+          font-size: 13px;
+          font-weight: 500;
+        }
+        &.prev, &.next {
+          background-color: transparent;
+          font-size: 13px;
+        }
       }
     }
 
