@@ -231,6 +231,8 @@ $(document).ready(function() {
     ProngPopup = $("#prong");
     getCoodinates(jsEvent, EventPopup);
 
+    $("#error-messages").html("");
+    
     if (dayClick) {
       start.local().set({hours: 7, minute: 0});
       end.local().set({hours: 21, minute: 0});
@@ -317,5 +319,9 @@ $(document).ready(function() {
     EventPreviewPopup.css({"visibility": "hidden"});
     setElementBackground(lastSelectedDay, "");
     MyCalendar.fullCalendar("unselect");
+  });
+  
+  EventPopupTitle.click(function(){
+    $("#error-messages").html("");
   });
 });
