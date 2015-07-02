@@ -64,7 +64,6 @@ $(document).ready(function() {
     defaultDate: new Date(),
     editable: true,
     eventLimit: true,
-    weekends: false,
     height: $(window).height() - $("header").height() - 50,
     minTime: "07:00:00",
     maxTime: "22:00:00",
