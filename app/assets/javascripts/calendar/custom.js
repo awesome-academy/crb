@@ -185,6 +185,7 @@ $(document).ready(function() {
   }).on("changeDate", function(ev){
     MyCalendar.fullCalendar("gotoDate", ev.date);
     MyCalendar.fullCalendar("changeView", "agendaDay");
+    $("body").trigger("click");
   });
 
   $("#refresh").click(function(){
