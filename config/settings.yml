@@ -1,0 +1,53 @@
+repeat_types:
+  week: "Weekly"
+  month: "Monthly"
+date_format: "%d/%m/%Y"
+time_format: "%H:%M"
+date_time_format: "%a, %d %b %Y %H:%M:%S"
+hour_begin_schedule: 7
+hour_end_schedule: 21
+hour_min_schedule: "07:00"
+hour_max_schedule: "22:00"
+per_page: 2
+per_page_list_schedule: 10
+user_roles:
+  admin: "admin"
+  normal: "normal"
+avatar: [150, 150]
+max_avatar_file_size: 5
+avatar_extension_white_list: ["jpg", "jpeg", "gif", "png"]
+rooms:
+  - name: "Australia 1"
+    color: "#D87093"
+  - name: "Australia 2"
+    color: "#20BA22"
+  - name: "Pacific"
+    color: "#008080"
+  - name: "Atlatic"
+    color: "#456321"
+announced_before:
+  "30 minutes": <%= 30.minutes %>
+  "1 hour":  <%= 1.hour %>
+min_time_schedule: <%= 15.minutes %>
+validate_saturday: 6
+validate_sunday: 0
+important_atrributes: <%= %w(room_id  description start_time finish_time) %>
+kaminari:
+  total_pages: 4
+  window: 0
+room:
+  name:
+    maximum: 150
+schedule:
+  title:
+    maximum: 150
+  description:
+    maximum: 450
+  states:
+   - pending
+   - accepted
+   - rejected
+announced_upcoming: "announced_upcoming"
+invited: "invited"
+removed: "removed"
+announced_updated: "announced_updated"

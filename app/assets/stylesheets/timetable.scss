@@ -1,0 +1,51 @@
+.timetable {
+  border: 1px solid #ccc;
+
+  .lv-datecell {
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    padding: 10px !important;
+    text-align: left !important;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 15%;
+    border-style: none !important;
+  }
+
+  .lv-time {
+    width: 10%;
+  }
+
+  .lv-eventcell {
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-style: none !important;
+    padding: 5px 0 !important;
+  }
+
+  .lv-row {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .s-detail {
+    display: none;
+    .s-actions {
+      float: right;
+      margin-right: 10px;
+    }
+  }
+
+  .icon {
+    margin: 0 10px;
+    font-size: 12px;
+  }
+
+  .s-description{
+    margin-left: 32px;
+  }
+}

@@ -1,24 +1,40 @@
 @import "variables";
 
 header {
+  background-color: $lightest-gray;
+  height: 60px;
+  .child-header{
+    position: relative;
+    top: 8%;
+  }
   #logo {
     float: left;
     margin-right: 10px;
     font-size: 1.7em;
-    color: #fff;
+    color: $light-blue;
     text-transform: uppercase;
     letter-spacing: -1px;
     padding-top: 9px;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 35px;
     &:hover {
-      color: #fff;
+      color: $light-blue;
       text-decoration: none;
     }
   }
 
   ul.nav {
     margin-right: 15px !important;
+  }
+
+  .loading {
+    position: absolute;
+    right: 20px;
+    top: -2px;
+    font-size: 11px;
+    background-color: red;
+    color: white;
+    z-index: 5;
   }
 }
 
@@ -29,6 +45,12 @@ header {
 }
 
 aside {
+  .btn-new-schedule {
+    height: 2.1em;
+    margin-bottom: 1.275em;
+    padding: 3px 12px;
+  }
+
   section.user_info {
     margin-top: 20px;
   }
@@ -36,20 +58,79 @@ aside {
   .containers {
     display: flex;
     overflow: hidden;
-    height: 495px;
-    padding-top: 18px;
     position: relative;
     width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
   }
 
-  .today_schedules {
-    overflow: auto;
-    height: auto;
-    padding: .1rem;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none;
+  #mini-calendar {
+    width: 100%;
+    table.table-condensed {
+      width: 100%;
+      td {
+        padding: 0px;
+      }
+    }
+
+    .table-condensed > thead > tr > th, .table-condensed > thead > tr > td,
+    .table-condensed > tbody > tr > th, .table-condensed > tbody > tr > td,
+    .table-condensed > tfoot > tr > th, .table-condensed > tfoot > tr > td {
+      padding: 0px;
+    }
+  }
+
+  #my_calendar {
+    #my-schedule-content {
+      margin-left: 20px;
+    }
+    .my_schedules {
+      margin-left: 20px;
+    }
+
+    p {
+      margin-bottom: 0px;
+      font-size: 12px;
+      &.last {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  #shared_calendar {
+    #shared-schedule-content {
+      margin-left: 20px;
+    }
+    .my_schedules{
+      margin-left: 20px;
+    }
+
+    p {
+      margin-bottom: 0px;
+      font-size: 12px;
+      &.last {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .title {
+    cursor: pointer;
+    font-size: 13px;
+    &:hover {
+      background-color: $lighter-blue-gray;
+    }
+
+    .small {
+      font-size: 60%;
+    }
+  }
+
+  .truncate {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   section {
@@ -72,11 +153,57 @@ aside {
       margin-top: 0px;
     }
   }
+
+  .next_prev_pagination {
+    .pager {
+      margin: 5px 0 10px 0;
+      li > span {
+        padding: 0px 6px;
+        border: none;
+      }
+    }
+
+
+    #next_pagination  {
+      float: right;
+      padding: 0px 3px;
+      font-size: 12px;
+      a {
+        text-decoration: none;
+      }
+    }
+
+    #prev_pagination {
+      float: left;
+      padding: 0px 3px;
+      font-size: 12px;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
 }
 
 .main-container {
   margin-top: 80px;
-  padding: 10px;
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}
+
+.full-calendar-container {
+  margin-top: 80px;
+  position: relative;
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+
+    .col-md-10 {
+      padding-left: 0px;
+    }
+  }
 }
 
 ul {
@@ -89,58 +216,28 @@ h3 {
 
 .pending-event {
   font-weight: bold;
-  color: #0000FF;
+  color: $blue;
 }
 
 .accepted-event {
   font-weight: bold;
-  color: #006633;
+  color: $dark-green;
 }
 
 .rejected-event {
   font-weight: bold;
-  color: #780000;
+  color: $dark-red;
+}
+
+.finish-date, .start-date {
+  padding: 0px;
 }
 
 #new_schedule {
-  .finish-date {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-  .start-date {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
   .date {
     input:hover {
       cursor: pointer;
     }
-  }
-}
-
-.fc-row {
-  overflow: visible !important;
-}
-
-.fc-rigid {
-  overflow: visible !important;
-}
-
-.table-col th {
-  text-align: center;
-}
-
-#room_selector {
-  height: 2.1em;
-  border-radius: 4px;
-}
-
-#mini-calendar {
-  width: 100%;
-  .table-condensed {
-    width: 100%;
   }
 }
 
@@ -158,14 +255,6 @@ h3 {
   width: 100%;
 }
 
-.col-md-2 {
-  padding-right: 2px;
-}
-
-.col-md-10 {
-  padding-left: 2px;
-}
-
 .popover-content table {
   border-style: hidden;
   td {
@@ -173,6 +262,241 @@ h3 {
   }
 }
 
-.btn.btn-primary {
-  margin-left: 8px;
+#calendar {
+  a.fc-event {
+    border-radius: 0;
+    border-bottom: 1em;
+    border-left: none;
+    border-right: none;
+    border-color: $opalescent !important;
+    border-collapse: collapse;
+
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(255,255,255,0.5);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(255,255,255,0.5);
+    box-shadow: 0px 0px 2px 1px rgba(255,255,255,0.5);
+
+    &:last-child {
+      border-bottom: none !important;
+    }
+  }
+
+  .fc-row {
+    overflow: visible !important;
+  }
+
+  .fc-rigid {
+    overflow: visible !important;
+  }
+
+  .table-col th {
+    text-align: center;
+  }
+
+  #room_selector {
+    height: 2.1em;
+    border-radius: 4px;
+    background-color: $lighter-gray;
+    border-color: $gray;
+    .dropdown-menu {
+      border-radius: 0px;
+      min-width: 110px;
+      li {
+        cursor: pointer;
+        display: block;
+        padding: 5px 5px 0px 10px;
+      }
+    }
+    div.dropdown-toggle {
+      min-width: 110px;
+    }
+  }
+
+  .dropdown-toggle {
+    padding-top: 4px;
+    height: 2.1em;
+    font-size: 1em;
+    background-color: $lighter-gray;
+  }
+  #other_dropdown .dropdown-menu {
+    min-width: 74px;
+    border-radius: 0px;
+    li {
+      padding-left: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: $lighter-blue-gray;
+      }
+    }
+  }
+}
+
+.shared_schedules a:hover, .shared_schedules a:focus {
+  text-decoration: none;
+  color: black;
+}
+
+table.table-popover {
+  width: 100%;
+  font-size: 12px;
+  a {
+    padding: 0px 5px;
+  }
+
+  .detail {
+    text-align: left;
+  }
+}
+
+.fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time span {
+  display: inline;
+}
+
+.fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-draggable.fc-resizable.fc-short .fc-time:before {
+  content: normal;
+}
+
+footer {
+  .footer_for_fullcalendar {
+    text-align: -webkit-center;
+    margin-top: 10px;
+    table {
+      margin: 0 auto;
+    }
+    .square {
+      width: 20px;
+      height: 15px;
+      margin-left: 20px;
+      margin-right:10px;
+    }
+
+    .past-events {
+      background-color: $light-blue-gray;
+    }
+  }
+}
+
+.fc-button {
+  border-radius: 0px !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  &:active {
+    background-color: $dark-gray !important;
+  }
+  &:hover {
+    background-color: $lightest-blue-gray !important;
+  }
+}
+
+.dropdown-toggle {
+  border-color: $gray !important;
+}
+
+.aside-fixed {
+  width: 230px;
+  float: left;
+  position: absolute;
+}
+
+.calendar-fixed {
+  margin: 0px 15px 10px 230px;
+}
+
+.btn, .form-control, .pager li > a, .pager li > span, .select2-choice, .select2-choices, .modal-content, .well, .alert {
+  border-radius: 0px !important;
+}
+
+.alert {
+  margin: 0 15px 10px 15px;
+}
+
+.dropdown-menu li:hover {
+  background-color: $lightest-blue-gray;
+}
+
+#dropdown-header {
+  margin-right: 16px;
+  margin-top: 5px !important;
+  z-index: 0 !important;
+}
+
+.gb_u{
+  border-color: transparent;
+  border-bottom-color: #fff;
+  border-style: dashed dashed solid;
+  border-width: 0 8.5px 8.5px;
+  position: absolute;
+  left: 123.5px;
+  top: 48px;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  display:none;
+}
+
+.gb_v {
+  border-color: transparent;
+  border-style: dashed dashed solid;
+  border-width: 0 8.5px 8.5px;
+  position: absolute;
+  left: 122.5px;
+  top: 48px;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  display:none;
+  border-bottom-color: rgba(0,0,0,.2);
+}
+
+.gb_vr {
+  border-color: transparent;
+  border-style: dashed dashed solid;
+  border-width: 0 8.5px 8.5px;
+  position: absolute;
+  left: 124.5px;
+  top: 48px;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  display:none;
+  border-bottom-color: rgba(0,0,0,.2);
+}
+
+.room-selector {
+  width: auto;
+  float: left;
+  margin-left: 10px;
+}
+
+.left-label {
+  float: left;
+}
+
+.submit-button {
+  margin-left: 15px !important;
+}
+
+.index-btn-edit, .index-btn-delete, .index-btn-delete-repeat {
+  margin-right: 15px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.index-btn-delete-repeat {
+  img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.color-selector {
+  width: 15px;
+  height: 15px;
+  margin: 2px 5px 0px 0px;
+  float: left;
+}
+
+#back {
+  float: right;
+  margin-right: 10px;
 }

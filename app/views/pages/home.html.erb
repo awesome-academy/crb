@@ -1,29 +1,52 @@
-<% provide :title, t('pages.home.title') %>
-
-<% if user_signed_in? %>
-  <% content_for :btn_new_schedule do %>
-    <%= link_to_if(can?(:create, Schedule), t('pages.home.create_event'), new_schedule_path, class: "btn btn-primary"){} %>
-  <% end %>
-  <%= render 'shared/filter_room' %>
-<% end %>
+<% provide :title, t("pages.home.title") %>
 
 <% content_for :mini_calendar do %>
   <% if user_signed_in? %>
     <div class="containers">
-      <div id='mini-calendar'></div>
+      <div id="mini-calendar"></div>
+    </div>
+
+    <div id="my_calendar">
+      <div class="title">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <%= t("pages.home.my_calendar") %>
+      </div>
+
+      <div class="slide_down" id="my_schedules"></div>
+    </div>
+
+    <div id="shared_calendar">
+      <div class="title">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <%= t("pages.home.shared_calendar") %>
+      </div>
+
+      <div class="slide_down" id="shared_schedules"></div>
     </div>
   <% end %>
 <% end %>
 
 <% if user_signed_in? %>
-  <div id='calendar'></div>
+  <div id="calendar"></div>
+
+  <% content_for :btn_new_schedule do %>
+    <%= link_to_if(can?(:create, Schedule), t("pages.home.create_event"), new_schedule_path, class: "btn-new-schedule btn btn-danger"){} %>
+  <% end %>
+
+  <div class="hidden">
+    <%= render "filter_room" %>
+    <%= render "other_option" %>
+  </div>
+
+  <%= render "quick_event_popup" %>
+  <%= render "event_preview_popup" %>
+
+  <div id="time-table" class="hidden">
+    <%= render "time_table" %>
+  </div>
 <% else %>
   <div class="center jumbotron">
-    <h1><%= t('pages.home.welcome_framgia') %></h1>
-    <%= link_to t('pages.home.sign_up_now'), new_user_registration_path, class: "btn btn-lg btn-primary" %>
+    <h1><%= t("pages.home.welcome_framgia") %></h1>
+    <%= link_to t("pages.home.sign_up_now"), new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
-<% end %>
-
-<% content_for :modal_form do %>
-  <%= render 'shared/modal_form' if current_user %>
 <% end %>

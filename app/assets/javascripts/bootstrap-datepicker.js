@@ -730,6 +730,7 @@
     },
 
     click: function(e) {
+      e.stopPropagation();
       e.preventDefault();
       var target = $(e.target).closest('span, td, th');
       if (target.length == 1) {

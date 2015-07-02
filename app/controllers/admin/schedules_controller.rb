@@ -2,7 +2,7 @@ class Admin::SchedulesController < Admin::BaseController
   respond_to :html, :js
 
   def index
-    @schedules = Schedule.paginate page: params[:page], per_page: 10
+    @schedules = Schedule.page(params[:page]).per Settings.per_page_list_schedule
     @today_schedules = Schedule.today_schedule
   end
 
