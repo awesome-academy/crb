@@ -144,7 +144,6 @@ $(document).ready(function() {
       EventPreviewPopup.css({"visibility": "hidden"});
       MyCalendar.fullCalendar("unselect");
       setElementBackground(lastSelectedDay, "");
-
       date = new Date();
 
       if (view.type === "month" && (_date._d > date || (_date._d.toDateString() === date.toDateString()))) {
@@ -218,7 +217,6 @@ $(document).ready(function() {
     EventPopup.css({"visibility": "hidden"});
     EventPreviewPopup.css({"visibility": "hidden"});
     EventNewForm[0].reset();
-
     setElementBackground(lastSelectedDay, "white");
   });
 
@@ -307,4 +305,13 @@ $(document).ready(function() {
       return startTime.format("dddd") + " " + startTime.format("H:mm A") + " To " + endTime.format("H:mm A") + " " + startTime.format("DD-MM-YYYY");
     }
   }
+
+  $(".fc-view-container").on("click", function(e){
+    e.stopPropagation();
+  });
+
+  $(document).on("click", "body", function(e) {
+    EventPopup.css({"visibility": "hidden"});
+    EventPreviewPopup.css({"visibility": "hidden"});
+  });
 });
