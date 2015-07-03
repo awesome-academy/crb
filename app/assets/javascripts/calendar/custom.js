@@ -307,4 +307,15 @@ $(document).ready(function() {
       return startTime.format("dddd") + " " + startTime.format("H:mm A") + " To " + endTime.format("H:mm A") + " " + startTime.format("DD-MM-YYYY");
     }
   }
+
+  $(document).on("click", ".fc-body, #quick-event-popup", function(e){
+    e.stopPropagation();
+  });
+  
+  $(document).on("click", "body", function(e){
+    EventPopup.css({"visibility": "hidden"});
+    EventPreviewPopup.css({"visibility": "hidden"});
+    setElementBackground(lastSelectedDay, "");
+    MyCalendar.fullCalendar("unselect");
+  });
 });
