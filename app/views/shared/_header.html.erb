@@ -1,4 +1,4 @@
-<header class="navbar navbar-fixed-top row">
+<header class="navbar navbar-fixed-top">
   <div class="child-header" data-no-turbolink="true">
     <%= link_to "Room Book System", root_path, id: "logo" %>
     <% if user_signed_in? %>
@@ -8,14 +8,14 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-        <li class="dropdown" id="h-dropdown" >
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-            <%= current_user.name %><b class="caret"></b>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <div class="profile-image">
+              <%= current_user.name %>&nbsp
+              <%= image_tag current_user.avatar.url, width: "35", heigth: "35", class: "img-circle" %>
+            </div>
           </a>
-          <div class="gb_v"></div>
-          <div class="gb_vr"></div>
-          <div class="gb_u"></div>
-          <ul class="dropdown-menu" id="dropdown-header">
+          <ul class="dropdown-menu">
             <% if current_user.admin? %>
               <li><%= link_to t("button.admin"), rails_admin_path %></li>
             <% end %>

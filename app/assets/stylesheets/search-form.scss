@@ -5,6 +5,7 @@
   width: 30%;
   margin: 10px;
   margin-left: 305px;
+  margin-top: 18px;
 }
 
 .dropdown.dropdown-lg .dropdown-menu {
@@ -52,6 +53,19 @@
   z-index: 9999 !important;
 }
 
+.small-field{
+  height: 28px;
+}
+
+.text-medium-field{
+  height: 29px;
+}
+
+.medium-field{
+  height: 29px;
+  line-height: 6px;
+}
+
 #adv-search {
   position: relative;
 }
@@ -59,13 +73,13 @@
 #search-setting {
   position: absolute;
   left: 0;
-  top: 35px;
-  width: 426px;
+  top: 30px;
+  width: 427px;
   height: 150px;
   background: #fff;
   border: 1px solid #ccc;
-  padding: 20px 10px;
-  display: none;
+  padding: 10px 10px;
+  visibility: hidden;
 }
 
 #start_date, #end_date {
@@ -89,4 +103,12 @@
   border-color: $gray;
   border-radius: 0px !important;
   width: 106px !important;
+}
+
+.lb_date{
+  margin-left: 25px;
+}
+
+.form-to{
+  line-height: 50px;
 }
