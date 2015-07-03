@@ -8,7 +8,7 @@ $(document).on("click", ".plus", function() {
   var _span = $(this).parent().find("span.glyphicon:first");
   var _eventId = $(this).data("event-id");
 
-  if(_span.attr("class") === "glyphicon glyphicon-plus-sign") {
+  if(_span.attr("class").indexOf("glyphicon-plus-sign") > 0) {
     _span.attr("class", "icon glyphicon glyphicon-minus-sign");
   } else {
     _span.attr("class", "icon glyphicon glyphicon-plus-sign");

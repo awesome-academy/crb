@@ -73,28 +73,9 @@ class Schedule < ActiveRecord::Base
 
   def valid_time
     unless start_time.blank? || finish_time.blank?
-      if start_time >= finish_time
-        errors.add :start_time, I18n.t("invalid.start_time")
-      end
-
-      if start_time.strftime("%H:%M") < Settings.hour_min_schedule ||
-          finish_time.strftime("%H:%M") < Settings.hour_min_schedule ||
-          start_time.strftime("%H:%M") > Settings.hour_max_schedule ||
-          finish_time.strftime("%H:%M") > Settings.hour_max_schedule
-        errors.add :finish_time, I18n.t("invalid.between_time")
-      end
-
-      if (start_time.day != finish_time.day) || (finish_time - start_time < Settings.min_time_schedule)
-        errors.add :finish_time, I18n.t("invalid.time")
-      end
-
-      if start_time.wday == Settings.validate_saturday || start_time.wday == Settings.validate_sunday
-        errors.add :start_time, I18n.t("invalid.day")
-      end
-
-      if start_time < Time.zone.now
-        errors.add :start_time, I18n.t("invalid.create_in_past")
-      end
+      errors.add :base, I18n.t("invalid.create_in_past") if start_time < Time.zone.now
+      errors.add :base, I18n.t("invalid.between_time") if !cover_in_time?
+      errors.add :base, I18n.t("invalid.time") if valid_min_time_range?
     end
   end
 
@@ -111,5 +92,19 @@ class Schedule < ActiveRecord::Base
   def announce_event_after_update
     delete_job
     announce_upcoming_event
+  end
+
+  def time_range
+    beginning_of_day = start_time.change({hour: Settings.schedule.hour_begin, minute: 0})
+    end_of_day = start_time.change({hour: Settings.schedule.hour_end, minute: 0})
+    (beginning_of_day..end_of_day)
+  end
+
+  def cover_in_time?
+    time_range.cover?(start_time) && time_range.cover?(finish_time)
+  end
+
+  def valid_min_time_range?
+    (finish_time - start_time) < Settings.schedule.min_time
   end
 end
