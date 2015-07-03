@@ -161,3 +161,4 @@ en:
     create_event: Create event
     edit_event: Edit event
     to: to
+    error_msg: "There is something wrong!"
