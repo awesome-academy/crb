@@ -232,13 +232,11 @@ $(document).ready(function() {
     getCoodinates(jsEvent, EventPopup);
 
     $("#error-messages").html("");
-    
+
     if (dayClick) {
       start.local().set({hours: 7, minute: 0});
       end.local().set({hours: 21, minute: 0});
     }
-
-    console.log(start._d + " - " + end._d);
 
     schedule_start.val(start._d);
     schedule_finish.val(end._d);
@@ -280,19 +278,27 @@ $(document).ready(function() {
 
   function getCoodinates(jsEvent, target) {
     rect  = jsEvent.target.getBoundingClientRect();
-    offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
+    var slatsHeight = $(".fc-slats").height();
+    var lastClick = slatsHeight < rect.height;
 
     windowWidth = window.innerWidth;
     popupWidth = target.width(); popupHeight = target.height();
     clientX = jsEvent.clientX; clientY = jsEvent.clientY;
-    selectedElementHeight = $(jsEvent.target.parentElement).height();
 
     offsetLeft = (clientX + popupWidth * 1/2 + 30) > windowWidth;
     _leftPong = offsetLeft ? (clientX + popupWidth - windowWidth) : (popupWidth - ProngPopup.width()) * 1/2;
     _left = offsetLeft ? (windowWidth - popupWidth - 5) : (clientX - popupWidth * 1/2);
 
-    offsetTop = (clientY - popupHeight) < 15;
-    _top = clientY - (offsetTop ? 70 : (popupHeight + 90)) - offsetY;
+    if (lastClick) {
+      offsetY = slatsHeight + rect.top;
+      selectedElementHeight = $(".fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-helper").height();
+      _top = offsetY - popupHeight - 90 - selectedElementHeight;
+    } else {
+      offsetY  = jsEvent.offsetY || (jsEvent.clientY - rect.top);
+      offsetTop = (clientY - popupHeight) < 15;
+      _top = clientY - (offsetTop ? 70 : (popupHeight + 90)) - offsetY;
+    }
+
     ProngPopup.attr("class", offsetTop ? "top-prong" : "bottom-prong").css({"left": _leftPong});
   }
 
@@ -313,14 +319,14 @@ $(document).ready(function() {
   $(document).on("click", ".fc-body, #quick-event-popup", function(e){
     e.stopPropagation();
   });
-  
+
   $(document).on("click", "body", function(e){
     EventPopup.css({"visibility": "hidden"});
     EventPreviewPopup.css({"visibility": "hidden"});
     setElementBackground(lastSelectedDay, "");
     MyCalendar.fullCalendar("unselect");
   });
-  
+
   EventPopupTitle.click(function(){
     $("#error-messages").html("");
   });
