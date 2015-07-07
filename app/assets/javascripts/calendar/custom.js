@@ -115,15 +115,18 @@ $(document).ready(function() {
       EventNewForm[0].reset();
       date = new Date();
       currentMonth = date.getMonth(); currentDate = date.getDate(); currentHour = date.getHours();
+      currentMinute = date.getMinutes();
       startMonth = start.month(); startDate = start.date(); startHour = start.hour();
+      startMinute = start.minute();
       endDate = end.date();
 
-      if ((currentMonth < startMonth || (currentMonth === startMonth && (currentDate < startDate || (currentDate === startDate && currentHour <= startHour)))) && startDate === endDate) {
+      if ((currentMonth < startMonth || (currentMonth === startMonth && (currentDate < startDate || (currentDate === startDate && currentHour < startHour) || (currentHour === startHour && currentMinute <= startMinute)))) && startDate === endDate) {
         showQuichCreateEventPopup(start, end, jsEvent, false);
       } else {
         MyCalendar.fullCalendar("unselect");
         EventPopup.css({"visibility": "hidden"});
       }
+
     },
     eventClick: function(calEvent, jsEvent, view) {
       EventNewForm[0].reset();
@@ -137,7 +140,7 @@ $(document).ready(function() {
     },
     dayClick: function(_date, jsEvent, view) {
       EventNewForm[0].reset();
-      $("#search-setting").hide();
+      $("#search-setting").css({"visibility": "hidden"});
       $("#room_selector, #other_dropdown").removeClass("open");
 
       EventPreviewPopup.css({"visibility": "hidden"});
