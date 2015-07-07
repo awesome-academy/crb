@@ -15,7 +15,7 @@
               <%= image_tag current_user.avatar.url, width: "35", heigth: "35", class: "img-circle" %>
             </div>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu menu-profile">
             <% if current_user.admin? %>
               <li><%= link_to t("button.admin"), rails_admin_path %></li>
             <% end %>

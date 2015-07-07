@@ -1,5 +1,15 @@
 <% provide :title, t("schedules.show.title") %>
 
+<div class="form-actions btn-form" data-no-turbolink="true">
+  <%= link_to "", root_path, class: "btn btn-primary back-btn glyphicon glyphicon-arrow-left", title: t("button.title.back") %>
+  <% if can? :update, @schedule %>
+    <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
+  <% end %>
+  <% if can? :destroy, @schedule %>
+    <%= link_to t("button.delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("button.confirm")}, class: "btn btn-danger" %>
+  <% end %>
+</div>
+
 <div class="col-md-12 well">
   <div class="col-md-12" style="padding-bottom: 20px">
     <label class="col-md-2"><%= t("schedules.form.event_rest") %></label>
@@ -70,14 +80,4 @@
       <% end %>
     </div>
   </div>
-</div>
-
-<div class="form-actions" data-no-turbolink="true">
-  <% if can? :update, @schedule %>
-    <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
-  <% end %>
-  <% if can? :destroy, @schedule %>
-    <%= link_to t("button.delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("button.confirm")}, class: "btn btn-danger" %>
-  <% end %>
-  <%= link_to t("button.back"), root_path, class: "btn btn-primary" %>
 </div>

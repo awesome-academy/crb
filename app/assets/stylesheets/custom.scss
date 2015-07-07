@@ -530,7 +530,7 @@ footer {
   margin-right: 10px;
 }
 
-.dropdown-menu:before {
+.menu-profile:before {
   position: absolute;
   top: -7px;
   left: 120px;
@@ -542,7 +542,7 @@ footer {
   content: '';
 }
 
-.dropdown-menu:after {
+.menu-profile:after {
   position: absolute;
   top: -6px;
   left: 121px;
@@ -555,4 +555,14 @@ footer {
 
 .profile-image{
   height: 30px;
+}
+
+.btn-form{
+  margin: 10px 10px 10px 0px;
+}
+
+.back-btn{
+  width: 69px;
+  height: 34px;
+  margin-bottom: 2px;
 }
