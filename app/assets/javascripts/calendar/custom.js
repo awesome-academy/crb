@@ -143,7 +143,6 @@ $(document).ready(function() {
       $("#search-setting").css({"visibility": "hidden"});
       $("#room_selector, #other_dropdown").removeClass("open");
 
-      EventPreviewPopup.css({"visibility": "hidden"});
       MyCalendar.fullCalendar("unselect");
       setElementBackground(lastSelectedDay, "");
 
@@ -233,6 +232,7 @@ $(document).ready(function() {
   function showQuichCreateEventPopup(start, end, jsEvent, dayClick) {
     ProngPopup = $("#prong");
     getCoodinates(jsEvent, EventPopup);
+    EventPreviewPopup.css({"visibility": "hidden"});
 
     $("#error-messages").html("");
 
