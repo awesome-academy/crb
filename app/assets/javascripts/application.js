@@ -9,18 +9,26 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//
-//= require jquery
-//= require bootstrap-datetimepicker
-//= require jquery.turbolinks
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
-//= require bootstrap-datepicker
-//= require moment
-//= require fullcalendar
-//= require websocket_rails/main
-//= require select2
+//= require share/custom
+//= require share/countdown_time.js
+//= require_self
+//= require validate-avatar
 //= require kendo.web.min
-//= require custom
+//= require kendo.custom
 
+$(document).ready(function() {
+  var form_schedule = $(".new_schedule, .edit_schedule");
+
+  form_schedule.find("input[type=submit]").attr("disabled", "disabled");
+  form_schedule.areYouSure();
+  form_schedule.bind("dirty.areYouSure", function(){
+    $(this).find("input[type=submit]").removeAttr("disabled");
+  });
+  form_schedule.bind("clean.areYouSure", function(){
+    $(this).find("input[type=submit]").attr("disabled", "disabled");
+  });
+
+  setTimeout(function() {
+    $(".hide-flash").fadeOut("normal");
+  }, 3000);
+});

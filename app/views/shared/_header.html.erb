@@ -1,39 +1,35 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <%= link_to "Room Book System", root_path, id: "logo" %>
-  <nav>
-    <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to t('btn_home'), root_path %></li>
+<header class="navbar navbar-fixed-top">
+  <div class="child-header" data-no-turbolink="true">
+    <%= link_to "Room Book System", root_path, id: "logo" %>
+    <% if user_signed_in? %>
+      <div class="search-box"><%= render "shared/search_box" %></div>
+    <% end %>
+    <label class="loading hidden"><%= t("header.loading") %></label>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Events <b class="caret"></b>
+            <div class="profile-image">
+              <%= current_user.name %>&nbsp
+              <%= image_tag current_user.avatar.url, width: "35", heigth: "35", class: "img-circle" %>
+            </div>
           </a>
-          <ul class="dropdown-menu">
-            <% if current_user.is_admin? %>
-              <li><%= link_to t('btn_list_events'), admin_schedules_path %></li>
+          <ul class="dropdown-menu menu-profile">
+            <% if current_user.admin? %>
+              <li><%= link_to t("button.admin"), rails_admin_path %></li>
             <% end %>
-            <li><%= link_to t('btn_my_events'), user_schedules_path(current_user) %></li>
-          </ul>
-        </li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= t('btn_account') %> <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <% if current_user.is_admin? %>
-              <li><%= link_to t('btn_admin'), admin_root_path %></li>
-            <% end %>
-            <li><%= link_to t('btn_settings'), edit_user_registration_path(current_user) %></li>
+            <li><%= link_to t("button.settings"), edit_user_registration_path(current_user) %></li>
             <li class="divider"></li>
             <li>
-              <%= link_to t('btn_logout'), destroy_user_session_path, method: :delete %>
+              <%= link_to t("button.logout"), destroy_user_session_path, method: :delete %>
             </li>
           </ul>
         </li>
       <% else %>
-        <li><%= link_to t('btn_login'), new_user_session_path %></li>
+        <li><%= link_to t("button.login"), new_user_session_path %></li>
       <% end %>
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  </div>
 </header>

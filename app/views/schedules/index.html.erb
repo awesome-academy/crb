@@ -1,34 +1,55 @@
-<% provide :title, t('schedules.index.title') %>
+<% provide :title, t("schedules.index.title") %>
 <% if user_signed_in? %>
   <% content_for :btn_new_schedule do %>
-    <%= link_to_if(can?(:create, Schedule), t('pages.home.create_event'), new_schedule_path, class: "btn btn-primary") %>
+    <%= link_to_if(can?(:create, Schedule), t("pages.home.create_event"), new_schedule_path, class: "btn btn-primary") %>
   <% end %>
 <% end %>
 
-<% content_for :today_schedules do %>
-  <% if user_signed_in? %>
-    <div class="containers">
-      <div class="today_schedules">
-        <h3>Schedules</h3>
-        <ul>
-          <%= render @today_schedules %>
-        </ul>
-      </div>
-    </div>
+<h2>
+  <% if params[:share_schedules] %>
+    <%= t("schedules.index.title_share_events") %>
+  <% elsif params[:search_form] %>
+    <%= t("schedules.index.title_search_events") %>
+  <% else %>
+    <%= t("schedules.index.title_my_events") %>
   <% end %>
-<% end %>
+  <span id="back">
+    <%= link_to t("button.back"), root_path, class: "btn btn-primary" %>
+  </span>
+</h2>
 
-<h2><%= t('schedules.index.title') %></h2>
-
-<table class="table table-striped">
+<table class="table table-hover">
   <tr>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.title') %></div></th>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.room') %></div></th>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.date') %></div></th>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.start') %></div></th>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.finish') %></div></th>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.state') %></div></th>
-    <th><div class="col-md-12"><%= t('schedules.index.listing.action') %></div></th>
+    <th>
+      <div class="col-md-12">
+        <%= t("schedules.index.listing.title") %>
+      </div>
+    </th>
+    <th>
+      <div class="col-md-12">
+        <%= t("schedules.index.listing.room") %>
+      </div>
+    </th>
+    <th>
+      <div class="col-md-12">
+        <%= t("schedules.index.listing.date") %>
+      </div>
+    </th>
+    <th>
+      <div class="col-md-12">
+        <%= t("schedules.index.listing.start") %>
+      </div>
+    </th>
+    <th>
+      <div class="col-md-12">
+        <%= t("schedules.index.listing.finish") %>
+      </div>
+    </th>
+    <th>
+      <div class="col-md-12">
+        <%= t("schedules.index.listing.action") %>
+      </div>
+    </th>
   </tr>
-  <%= render 'list_schedules' %>
+  <%= render "list_schedules" %>
 </table>

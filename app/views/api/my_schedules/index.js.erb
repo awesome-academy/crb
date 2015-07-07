@@ -1,0 +1,2 @@
+$("#my-schedule-content").html("<%= escape_javascript(render partial: "shared/content_schedule", collection: @schedules, as: :schedule) %>");
+$("#my_schedule_pagination_links").html("<%= escape_javascript(render partial: "api/my_schedules/pagination", locals: {schedules: @schedules, params_page: "my_page"}) %>");

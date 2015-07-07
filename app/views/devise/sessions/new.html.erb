@@ -1,18 +1,22 @@
-<% provide :title, "Log in" %>
-<h1>Log in</h1>
-
+<% provide :title, t("button.login") %>
+<h1 class="col-md-6 col-md-offset-3"><%= t("button.login") %></h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <br/>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, class: 'form-control' %>
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-      <%= f.label :remember_me, class: "checkbox inline" do %>
+      <p>
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </p>
+      <p>
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </p>
+      <p>
         <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
-      <% end %>
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+        <span><%= t("pages.form.remember") %></span>
+      </p>
+      <%= f.submit t("button.login"), class: "btn btn-primary" %>
     <% end %>
     <%= render "devise/shared/links" %>
   </div>

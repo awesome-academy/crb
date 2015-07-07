@@ -1,0 +1,35 @@
+<div class="bubble has-bottom-prong" id="event-preview-popup">
+  <div class="bubblemain">
+    <div class="bubbleclose"></div>
+      <div class="cb-root">
+        <table class="cb-table" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <th class="cb-key"><%= t("quick_event.time") %>:</th>
+              <td class="time-quick-event">
+                <span class="time-range"></span>
+              </td>
+            </tr>
+            <tr>
+              <th class="cb-key"><%= t("quick_event.title") %>:</th>
+              <td class="cb-value">
+                <span class="event-title"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="eb-footer">
+          <span class="eb-actions-right">
+            <a href="javascript:void(0);" class="eb-action eb-details-link lk"></a>
+          </span>
+          <span class="eb-actions-left">
+            <a data-confirm="Are you sure?" href="javascript:void(0);" data-method="delete" data-remote="true" class="eb-action-link lk">Xóa</a>
+          </span>
+        </div>
+      </div>
+    <div id="prong-preview" class="bottom-prong" style="left: 182px;">
+      <div class="prong-dk"></div>
+      <div class="prong-lt"></div>
+    </div>
+  </div>
+</div>

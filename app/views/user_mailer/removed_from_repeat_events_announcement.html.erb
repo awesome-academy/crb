@@ -1,0 +1,8 @@
+<h1><%= @subject %></h1>
+<p>Hi, <%= @member.name %></p>
+<% schedule_sample = @schedules.first %>
+<p>
+  This is announcement of removing you from repeat events created by: <%= schedule_sample.user.name %><br>
+</p>
+
+<%= render "repeat_event", schedule_sample: schedule_sample, schedules: @schedules %>

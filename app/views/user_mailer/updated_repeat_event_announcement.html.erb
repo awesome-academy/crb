@@ -1,0 +1,11 @@
+<h1><%= @subject %></h1>
+<p>Hi, <%= @member.name %></p>
+<% schedule_sample = @schedules.first %>
+<p>
+  This is announcement of updated events created by: <%= schedule_sample.user.name %><br>
+  Event updated at <strong><%= schedule_sample.updated_at.strftime("%H:%M %d/%m/%Y") %></strong>
+</p>
+
+<%= render "repeat_event", schedule_sample: schedule_sample, schedules: @schedules %>
+
+<p>Thanks for joining and have a great day!</p>

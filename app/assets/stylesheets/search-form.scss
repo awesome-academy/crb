@@ -1,0 +1,114 @@
+@import "variables";
+
+.search-box {
+  position: absolute;
+  width: 30%;
+  margin: 10px;
+  margin-left: 305px;
+  margin-top: 18px;
+}
+
+.dropdown.dropdown-lg .dropdown-menu {
+  margin-top: -1px;
+  padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+  display: flex !important;
+}
+.btn-group .btn {
+  border-radius: 0;
+  margin-left: -1px;
+}
+.btn-group .btn:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+.form-group .form-control:last-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  #adv-search {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .dropdown.dropdown-lg {
+    position: static !important;
+  }
+  .dropdown.dropdown-lg .dropdown-menu {
+    min-width: 500px;
+  }
+}
+
+.datepicker {
+  z-index: 9999 !important;
+}
+
+.small-field{
+  height: 28px;
+}
+
+.text-medium-field{
+  height: 29px;
+}
+
+.medium-field{
+  height: 29px;
+  line-height: 6px;
+}
+
+#adv-search {
+  position: relative;
+}
+
+#search-setting {
+  position: absolute;
+  left: 0;
+  top: 30px;
+  width: 427px;
+  height: 150px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 10px;
+  visibility: hidden;
+}
+
+#start_date, #end_date {
+  width: 160px;
+  margin: 10px;
+  padding-left: 5px;
+  box-shadow: none;
+}
+
+.search_filter_room {
+  margin-left: 10px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+#search_form_room_id {
+  margin-left: 10px;
+  height: 2.1em;
+  border-radius: 4px;
+  background-color: white;
+  border-color: $gray;
+  border-radius: 0px !important;
+  width: 106px !important;
+}
+
+.lb_date{
+  margin-left: 25px;
+}
+
+.form-to{
+  line-height: 50px;
+}

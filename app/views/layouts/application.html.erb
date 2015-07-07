@@ -5,26 +5,14 @@
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
-    <%= render 'shared/shim' %>
+    <%= render "shared/shim" %>
   </head>
   <body data-current-user-id="<%= current_user.try :id %>">
-    <%= render 'shared/header' %>
+    <%= render "shared/header" %>
 
-    <div class="main-container">
+    <div class="main-container container-fluid">
       <%= render partial: "shared/flash_messages", flash: flash %>
-
-      <div class="row">
-        <aside class="col-md-2">
-          <%= yield :btn_new_schedule %>
-
-          <%= yield :mini_calendar %>
-        </aside>
-
-        <div class="col-md-10">
-          <%= yield %>
-        </div>
-      </div>
+      <%= yield %>
     </div>
-    <%= yield :modal_form %>
   </body>
 </html>

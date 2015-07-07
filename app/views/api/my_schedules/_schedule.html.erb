@@ -1,0 +1,5 @@
+<div id="my-schedule-content">
+  <%= render partial: "shared/content_schedule", collection: schedules, as: :schedule %>
+</div>
+
+<%= render partial: "api/my_schedules/pagination", locals: {schedules: schedules, params_page: "my_page"} unless @schedules.blank? %>

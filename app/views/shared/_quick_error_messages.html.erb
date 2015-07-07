@@ -1,0 +1,5 @@
+<% if object.errors.any? %>
+  <div id="quick_error_explanation" class="quick-error">
+    <span type="text" data-toggle="tooltip" data-placement="bottom" title=" <%= object.errors.full_messages.join(" \n ").html_safe %> "><%= t "quick_event.error_msg" %></span>
+  </div>
+<% end %>

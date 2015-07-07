@@ -1,6 +1,16 @@
 <% if @schedule.errors.any? %>
-  $('#error_message').html("<%= j(render 'shared/error_messages', object: @schedule) %>");
+  $("#error-messages").html("<%= j(render "shared/quick_error_messages", object: @schedule) %>");
 <% else %>
-  $("#modal-form").modal('hide');
-  $('#calendar').fullCalendar( 'refetchEvents' );
+  $("#quick-event-popup").css({"visibility": "hidden"});
+  $("form#new_schedule")[0].reset();
+
+  $("#calendar").fullCalendar("unselect");
+  $("#calendar").fullCalendar("refetchEvents");
+
+  $.get( "/api/my_schedules", function(data) {
+    $("#my_schedules").html(data);
+  });
+  $.get( "/api/shared_schedules", function(data) {
+    $("#shared_schedules").html(data);
+  });
 <% end %>

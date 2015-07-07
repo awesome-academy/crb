@@ -1,0 +1,10 @@
+<h1><%= @subject %></h1>
+<p>Hi, <%= @user.name %></p>
+
+<p>
+  This is announcement of upcoming event created by: <%= @schedule.user.name %>
+</p>
+
+<%= render "event", event: @schedule %>
+
+<strong>Please notice that event is upcoming in <%= time_ago_in_words @schedule.start_time %></strong>

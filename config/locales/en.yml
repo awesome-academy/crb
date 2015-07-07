@@ -20,71 +20,145 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  success_flash: Create new event successfuly!
-  update_flash: Event was updated!
-  delete_flash: Event was deleted!
-  alert_flash: You are not authorized to view that page!
-  valid_room: There are any event with same your time!
-  valid_time: Start time must be less than finish time!
-
-  btn_edit: Edit
-  btn_delete: Delete
-  btn_back: Back
-  are_you_sure: Are you sure?
-  btn_detail: Detail
-  create_by: Create by
-  btn_home: Home
-  btn_list_events: List events
-  btn_my_events: My events
-  btn_settings: Settings
-  btn_admin: Admin
-  btn_logout: Log out
-  btn_login: Login
-  btn_account: Account
-
-  pages:
-    home:
-      title: Home
-      create_event: Create event
-      schedules_today: Today events
-      welcome_framgia: Welcome to the Framgia Book Reviewing System
-      sign_up_now: Sign up now!
-  
-  schedules:
-    form:
-      event_name: Event name
-      event_title: Event's title...
-      start_time: Start time
-      finish_time: Finish time
-      room: Room
-      members: Members
-      description: Description
-      compose_description: Compose description...
-      submit: Submit
-      create_by: Create by
-
-    edit_event_title: Edit event
-
-    index:
-      title: My events!
-      listing:
-        title: Title
-        room: Room
-        date: Date
-        start: Start
-        finish: Finish
-        state: State
-        action: Action
-
-    new:
-      title: New event!
-    show:
-      title: Event detail
-
-  shared:
-    book_room: Book room    
-
   admin:
     dashboards:
       home:
         title: Dashboard
+
+  button:
+    account: Account
+    admin: Admin
+    back: Back
+    confirm: Are you sure?
+    create_account: Create my account
+    delete: Delete
+    delete_repeat: Delete all repeat
+    detail: Detail
+    edit: Edit
+    home: Home
+    list_events: List events
+    login: Login
+    logout: Log out
+    my_events: My events
+    more: More...
+    update_account: Update account
+    search: Search
+    settings: Settings
+    back: Back to calendar
+
+  calendar:
+    collapse_all: Collapse all
+    expand_all: Expand all
+
+  dropdown:
+    all_room: All room
+    title:
+      other: Other
+    options:
+      print: Print
+      refresh: Refresh
+
+  footer:
+    past_events: Past Events
+
+  flash:
+    alert: You are not authorized to view that page!
+    delete: Event was deleted!
+    success: Create new event successfuly!
+    update: Event was updated!
+
+  header:
+    loading: Loading...
+
+  invalid:
+    avatar: "should be less than %{max_avatar_file_size}MB"
+    create_in_past: Can not create schedule with time in the past!
+    day: Can not create schedule for Saturday or Sunday!
+    between_time: Time range must be between 7h - 22h
+    start_time: Start time must be less than finish time!
+    time: Time range is too short!
+
+  pages:
+    home:
+      create_event: Create event
+      edit_account: Edit account
+      my_calendar: My Calendar
+      other: Other
+      schedules_today: Today events
+      shared_calendar: Shared Calendar
+      sign_up: Sign up
+      sign_up_now: Sign up now!
+      title: Home
+      welcome_framgia: Welcome to the Framgia Book Reviewing System
+    form:
+      date: Date
+      from: From
+      leave_blank: (Leave blank if you don't want to change it)
+      room: Room
+      remember: Remember me
+      require_password: (we need your current password to confirm your changes)
+      to: To
+      characters_minimum: characters minimum
+
+  placeholder:
+    start_date: Start date
+    end_date: End date
+    search_schedules: Search schedules
+    none: "None"
+
+  schedules:
+    announce_members_removed_from_event: You were removed from an event
+    announce_members_removed_from_repeat_events: You were removed from repeat events
+    announce_upcoming_event: Upcoming Event Announcement
+    announce_updated_event: Updated Event Announcement
+    edit_event_title: Edit event
+    form:
+      announced_before: Announce members before
+      compose_description: Compose description...
+      create_by: Create by
+      description: Description
+      edit_repeat: Edit all repeat
+      event_name: Event name
+      event_title: Event's title...
+      event_rest: Rest
+      finish_time: Finish time
+      members: Members
+      room: Room
+      repeat: Repeat
+      start_time: Start time
+      submit: Submit
+    index:
+      title: Events
+      title_my_events: My events!
+      title_share_events: My shared events!
+      title_search_events: Search results
+      listing:
+        action: Action
+        date: Date
+        finish: Finish
+        room: Room
+        start: Start
+        state: State
+        title: Title
+    new:
+      title: New event!
+    repeat_schedule_notice_mail: "You are member for events"
+    schedule_notice_mail: "You are member for an event"
+    show:
+      title: Event detail
+
+  shared:
+    book_room: Book room
+    no_room_selected: No room selected
+
+  valid:
+    room: There are any event with same your time!
+  crb: Conferences Room Book
+
+  quick_event:
+    time: Time
+    title: Title
+    create_event: Create event
+    edit_event: Edit event
+    to: to
+    error_msg: "There is something wrong!"
