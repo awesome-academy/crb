@@ -1,8 +1,12 @@
 <% provide :title, t("pages.home.edit_account") %>
-<h2><%= t("button.edit") %> <%= resource_name.to_s.humanize %></h2>
 
-<div class="col-md-8 well">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+
+  <div class="btn-back">
+    <%= link_to image_tag("btn/back.png"), root_path, class: "btn btn-primary back-btn" %>
+    <%= f.submit t("button.update_account"), class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-8 well">
     <%= devise_error_messages! %>
 
     <%= f.label :name %>
@@ -31,7 +35,5 @@
         <%= f.hidden_field :avatar_cache %>
       <% end %>
     </span>
-    <%= f.submit t("button.update_account"), class: "btn btn-primary" %>
-    <span id= "back" ><%= link_to t("button.back"), root_path, class: "btn btn-primary" %></span>
-  <% end %>
-</div>
+  </div>
+<% end %>
