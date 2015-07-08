@@ -5,7 +5,11 @@
   <% end %>
 <% end %>
 
-<h2>
+<h4>
+  <span class="btn-form">
+    <%= link_to "", root_path, class: "btn btn-primary back-btn glyphicon glyphicon-arrow-left", title: t("button.title.back") %>
+  </span>
+
   <% if params[:share_schedules] %>
     <%= t("schedules.index.title_share_events") %>
   <% elsif params[:search_form] %>
@@ -13,10 +17,7 @@
   <% else %>
     <%= t("schedules.index.title_my_events") %>
   <% end %>
-  <span id="back">
-    <%= link_to t("button.back"), root_path, class: "btn btn-primary" %>
-  </span>
-</h2>
+</h4>
 
 <table class="table table-hover">
   <tr>

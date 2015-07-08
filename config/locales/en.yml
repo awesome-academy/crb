@@ -44,7 +44,8 @@ en:
     update_account: Update account
     search: Search
     settings: Settings
-    back: Back to calendar
+    title:
+      back: Back to calendar
 
   calendar:
     collapse_all: Collapse all
