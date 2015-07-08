@@ -11,7 +11,7 @@
               </button>
               <div class="dropdown-menu dropdown-menu-right" role="menu"></div>
             </div>
-            <%= f.submit t("button.search"), class: "btn btn-primary medium-field" %>
+            <%= f.submit t("button.search"), class: "btn btn-primary medium-field btn-search" %>
           </div>
         </div>
 
@@ -44,3 +44,4 @@
     </div>
   </div>
 <% end %>
+<div class="alert alert-warning search-warning"><%= t "flash.warning" %></div>

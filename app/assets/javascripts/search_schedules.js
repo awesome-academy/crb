@@ -16,6 +16,7 @@ $(document).ready(function() {
     finish_date.datepicker().val("");
     $("#search_form_room_id").val("");
     if (search_setting.css("visibility") === "hidden") {
+      $(".search-warning").css({"visibility": "hidden"});
       search_setting.css({"visibility": "visible"});
     } else {
       search_setting.css({"visibility": "hidden"});
@@ -29,5 +30,21 @@ $(document).ready(function() {
 
   $("body").on("click", function() {
     search_setting.css({"visibility": "hidden"});
+    $(".search-warning").css({"visibility": "hidden"});
   });
+
+  $(".btn-search").on("click", function() {
+    var title = $("#search_form_title_cont").val();
+    if(title === ""){
+      $(".search-warning").css({"visibility": "visible"});
+      return false;
+    }
+    else
+      $(".search-warning").css({"visibility": "hidden"});
+  });
+
+  $("#search_form_title_cont").on("click", function() {
+    $(".search-warning").css({"visibility": "hidden"});
+  });
+
 });
