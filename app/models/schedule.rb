@@ -26,7 +26,13 @@ class Schedule < ActiveRecord::Base
   scope :order_start_time, ->{order start_time: :asc}
   scope :filte_timer, ->(start, finish){where(QUERY, start_time: start, finish_time: finish)}
   scope :today_schedule, ->{where("start_time LIKE ?", "%#{Time.now.to_date.to_s}%")}
-  scope :filter_by_room, ->(room_id){where room_id: room_id if room_id.present? && room_id != "all"}
+  scope :filter_by_room, ->(room_id) do
+    if Settings.no_room == room_id
+      where room_id: nil
+    else
+      where room_id: room_id if room_id.present?
+    end
+  end
   scope :my_schedule, ->user_id{where(" ? <= finish_time AND user_id = ?", Time.zone.now, user_id)}
   scope :shared_schedules_future, ->user_id{joins(:schedule_users)
                                       .where(" ? <= finish_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}

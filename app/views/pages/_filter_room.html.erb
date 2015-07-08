@@ -7,6 +7,10 @@
       <div class="color-selector" style="background-color: transparent;"></div>
       <span><%= t("dropdown.all_room") %></span>
     </li>
+    <li value = "-1">
+      <div class="color-selector" style="background-color: #3a87ad"></div>
+      <span><%= t "dropdown.no_room" %></span>
+    </li>
     <% @rooms.each do |room| %>
       <li value="<%= room.id %>">
         <div class="color-selector" style="background-color:<%= room.color %>;"></div>
