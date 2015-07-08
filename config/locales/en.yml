@@ -68,7 +68,7 @@ en:
     delete: Event was deleted!
     success: Create new event successfuly!
     update: Event was updated!
-
+    warning: "Invalid search"
   header:
     loading: Loading...
 

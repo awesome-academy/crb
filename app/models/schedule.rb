@@ -40,11 +40,11 @@ class Schedule < ActiveRecord::Base
   scope :filter_by_user, ->user_id{where(user: user_id)}
   scope :search_by_time, ->(_start, _end) do
     if _start.present? && _end.present?
-      where(" start_time BETWEEN ? AND ? ", _start, _end)
+      where("DATE_FORMAT(start_time,'%Y-%m-%d') BETWEEN ? AND ? ", _start, _end)
     elsif _start.present? && !_end.present?
-      where(" start_time > ?", _start)
+      where("DATE_FORMAT(start_time,'%Y-%m-%d') >= ?", _start)
     elsif !_start.present? && _end.present?
-      where(" start_time < ?", _end)
+      where("DATE_FORMAT(start_time,'%Y-%m-%d') <= ?", _end)
     end
   end
   scope :shared_and_my_schedules, ->user_id{joins("LEFT JOIN schedule_users ON schedules.id = schedule_users.schedule_id")

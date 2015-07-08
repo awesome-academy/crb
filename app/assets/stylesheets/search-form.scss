@@ -112,3 +112,14 @@
 .form-to{
   line-height: 50px;
 }
+
+.search-warning{
+  visibility: hidden;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  z-index: 2;
+  line-height: 2px;
+  left: 240px;
+  color: BLACK;
+}
