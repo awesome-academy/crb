@@ -53,6 +53,7 @@ en:
 
   dropdown:
     all_room: All room
+    no_room: No room
     title:
       other: Other
     options:
