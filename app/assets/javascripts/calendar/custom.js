@@ -66,7 +66,7 @@ $(document).ready(function() {
     eventLimit: true,
     height: $(window).height() - $("header").height() - 50,
     minTime: "07:00:00",
-    maxTime: "22:00:00",
+    maxTime: "21:00:00",
     allDaySlot: false,
     keepOpen: false,
     unselectAuto: false,
