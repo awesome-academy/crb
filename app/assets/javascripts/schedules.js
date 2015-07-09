@@ -19,4 +19,13 @@ $(document).ready(function() {
     icon.attr("class", isValid ? "glyphicon glyphicon-chevron-right" : "glyphicon glyphicon-chevron-down");
     element.slideToggle();
   };
+
+  $("#editLink").on("click", function() {
+    start_time = $("#schedule_start_time").val();
+    finish_time = $("#schedule_finish_time").val();
+    title = $("#schedule_title").val();
+    var json_data = JSON.stringify({start_time: start_time, finish_time: finish_time, title: title}); 
+    var encrypt_data = btoa(json_data);
+    window.location.href = "schedules/new?data="+ encrypt_data;
+  });
 });

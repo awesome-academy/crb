@@ -16,6 +16,7 @@ class SchedulesController < ApplicationController
 
   def new
     @users = User.without_user(current_user.id).pluck :name, :id
+    decode_and_assign_value if params[:data]
   end
 
   def create
@@ -89,5 +90,17 @@ class SchedulesController < ApplicationController
   private
   def schedule_params
     params.require(:schedule).permit :title, :start_time, :finish_time, :description, :room_id, :announced_before, member_ids: []
+  end
+
+  def decode_and_assign_value
+    data = Base64.decode64 params[:data]
+    data = JSON.parse data
+    @schedule.start_time = format_datetime data["start_time"]
+    @schedule.finish_time = format_datetime data["finish_time"]
+    @schedule.title = data["title"]
+  end
+
+  def format_datetime datetime
+    datetime.to_datetime().strftime "%Y-%m-%d %H:%M"
   end
 end
