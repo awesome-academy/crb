@@ -10,7 +10,7 @@ function setTimeLine() {
 
   now = new Date();
   minHour = 7;
-  maxHour = 22;
+  maxHour = 21;
   nowTotalSeconds = (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
   maxTotalSeconds = (maxHour * 3600);
   minTotalSeconds = (minHour * 3600);
