@@ -76,7 +76,7 @@ en:
     avatar: "should be less than %{max_avatar_file_size}MB"
     create_in_past: Can not create schedule with time in the past!
     day: Can not create schedule for Saturday or Sunday!
-    between_time: Time range must be between 7h - 22h
+    between_time: Time range must be between 7h - 21h
     start_time: Start time must be less than finish time!
     time: Time range is too short!
 
