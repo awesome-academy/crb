@@ -1,6 +1,6 @@
 <p>
   Event's title: <%= schedule_sample.title %></br>
-  Room: <%= schedule_sample.room.name %></br>
+  Room: <%= schedule_sample.room_name if schedule_sample.room.present? %></br>
   Start time: <%= schedule_sample.start_time.strftime("%H:%M") %></br>
   Finish time: <%= schedule_sample.finish_time.strftime("%H:%M") %></br>
   Description: <%= schedule_sample.description %></br>
