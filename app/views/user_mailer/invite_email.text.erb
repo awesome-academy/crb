@@ -1,10 +1,10 @@
 Welcome <%= @member.name %> to Conference Room Book
 ===============================================
 
-This is invitation take part to event from: <%= @schedule.user.name%>
+This is invitation take part to event from: <%= @schedule.user.name %>
 
 Event's title: <%= @schedule.title %>
-Room: <%= @schedule.room.name %>
+Room: <%= @schedule.room_name if @schedule.room.present? %>
 Start time: <%= @schedule.start_time %>
 Finish time: <%= @schedule.finish_time %>
 Description: <%= @schedule.description %>
