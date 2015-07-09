@@ -224,7 +224,7 @@ $(document).ready(function() {
     setElementBackground(lastSelectedDay, "white");
   });
 
-  $(document).on("click", ".fc-prev-button, .fc-next-button, .fc-today-button", function() {
+  $(".fc-prev-button, .fc-next-button, .fc-today-button").on("click", function() {
     moment = MyCalendar.fullCalendar("getDate");
     MyMiniCalendar.datepicker("update", moment._d);
   });
