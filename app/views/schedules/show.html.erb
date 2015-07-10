@@ -3,10 +3,10 @@
 <div class="form-actions btn-form" data-no-turbolink="true">
   <%= link_to "", root_path, class: "btn btn-primary back-btn glyphicon glyphicon-arrow-left", title: t("button.title.back") %>
   <% if can? :update, @schedule %>
-    <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary" %>
+    <%= link_to t("button.edit"), edit_schedule_path(@schedule), class: "btn btn-primary btn-submit" %>
   <% end %>
   <% if can? :destroy, @schedule %>
-    <%= link_to t("button.delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("button.confirm")}, class: "btn btn-danger" %>
+    <%= link_to t("button.delete"), schedule_path(@schedule), method: :delete, data: {confirm: t("button.confirm")}, class: "btn btn-danger btn-submit" %>
   <% end %>
 </div>
 

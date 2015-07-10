@@ -562,7 +562,13 @@ footer {
 }
 
 .back-btn{
-  width: 69px;
-  height: 34px;
-  margin-bottom: 2px;
+  width: 4.375em;
+  height: 2.1em;
+  line-height: 15px;
+}
+
+.btn-submit{
+  height: 2.1em;
+  margin-top: 2px;
+  line-height: 15px;
 }

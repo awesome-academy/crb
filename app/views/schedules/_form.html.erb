@@ -1,7 +1,7 @@
 <%= form_for @schedule do |f| %>
   <div class="btn-form">
     <%= link_to "", root_path, class: "btn btn-primary back-btn glyphicon glyphicon-arrow-left", title: t("button.title.back") %>
-    <%= f.submit t("schedules.form.submit"), class: "btn btn-primary" %>
+    <%= f.submit t("schedules.form.submit"), class: "btn btn-primary btn-submit" %>
   </div>
   <%= render "shared/error_messages", object: f.object %>
   <div class="col-md-12 well">
