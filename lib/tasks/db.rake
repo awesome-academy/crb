@@ -10,4 +10,13 @@ namespace :db do
     end
   end
 
+  task create_admin: :environment do
+    puts "Create admin"
+    FactoryGirl.create :user, email: "admin@crb.com", role: Settings.user_roles.admin
+  end
+
+  task create_rooms: :environment do
+    puts "Create 4 rooms"
+    Settings.rooms.each{|item| FactoryGirl.create :room, name: item.name, color: item.color}
+  end
 end
