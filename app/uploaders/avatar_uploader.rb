@@ -5,7 +5,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  process resize_to_limit: Settings.avatar
+  process resize_to_limit: [150, 150]
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
@@ -40,7 +40,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    Settings.avatar_extension_white_list
+    ["jpg", "jpeg", "gif", "png"]
   end
 
   # Override the filename of the uploaded files:

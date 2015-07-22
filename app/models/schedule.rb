@@ -16,8 +16,7 @@ class Schedule < ActiveRecord::Base
 
   validates :finish_time, presence: true
   validates :start_time, presence: true
-  validates :title, presence: true,
-    length: {maximum: Settings.schedule.title.maximum}
+  validates :title, presence: true, length: {maximum: 150}
   validates :user, presence: true
   validate :valid_time
   validate :valid_room, if: :room_id
@@ -37,7 +36,7 @@ class Schedule < ActiveRecord::Base
   scope :shared_schedules_future, ->user_id{joins(:schedule_users)
                                       .where(" ? <= finish_time AND schedule_users.user_id = ?", Time.zone.now, user_id)}
   scope :shared_schedules, ->user_id{joins(:schedule_users).where(" schedule_users.user_id = ?", user_id)}
-  scope :filter_by_user, ->user_id{where(user: user_id)}
+  scope :filter_by_user, ->user_id{where user: user_id}
   scope :search_by_time, ->(_start, _end) do
     if _start.present? && _end.present?
       where("DATE_FORMAT(start_time,'%Y-%m-%d') BETWEEN ? AND ? ", _start, _end)
@@ -67,10 +66,14 @@ class Schedule < ActiveRecord::Base
   end
 
   def have_important_changes
-    (Settings.important_atrributes & self.previous_changes.keys).present?
+    (important_attributes & self.previous_changes.keys).present?
   end
 
   private
+  def important_attributes
+    [:room_id, :description, :start_time, :finish_time]
+  end
+
   def valid_room
     if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0
       errors.add :room, I18n.t("valid.room")
@@ -80,7 +83,7 @@ class Schedule < ActiveRecord::Base
   def valid_time
     unless start_time.blank? || finish_time.blank?
       errors.add :base, I18n.t("invalid.create_in_past") if start_time < Time.zone.now
-      errors.add :base, I18n.t("invalid.between_time") if !cover_in_time?
+      errors.add :base, I18n.t("invalid.between_time") unless cover_in_time?
       errors.add :base, I18n.t("invalid.time") if valid_min_time_range?
     end
   end
@@ -101,8 +104,8 @@ class Schedule < ActiveRecord::Base
   end
 
   def time_range
-    beginning_of_day = start_time.change({hour: Settings.schedule.hour_begin, minute: 0})
-    end_of_day = start_time.change({hour: Settings.schedule.hour_end, minute: 0})
+    beginning_of_day = start_time.change({hour: 7, minute: 0})
+    end_of_day = start_time.change({hour: 21, minute: 0})
     (beginning_of_day..end_of_day)
   end
 

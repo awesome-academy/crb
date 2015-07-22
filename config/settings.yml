@@ -9,9 +9,7 @@ per_page_list_schedule: 10
 user_roles:
   admin: "admin"
   normal: "normal"
-avatar: [150, 150]
 max_avatar_file_size: 5
-avatar_extension_white_list: ["jpg", "jpeg", "gif", "png"]
 rooms:
   - name: "Australia 1"
     color: "#D87093"
@@ -24,21 +22,11 @@ rooms:
 announced_before:
   "30 minutes": <%= 30.minutes %>
   "1 hour":  <%= 1.hour %>
-important_atrributes: <%= %w(room_id  description start_time finish_time) %>
 kaminari:
   total_pages: 4
   window: 0
-room:
-  name:
-    maximum: 150
 schedule:
-  hour_begin: 7
-  hour_end: 21
   min_time: <%= 30.minutes %>
-  title:
-    maximum: 150
-  description:
-    maximum: 450
   states:
    - pending
    - accepted
