@@ -12,9 +12,9 @@ users = []
 Settings.users.each {|user| users << FactoryGirl.create(:user, name: user.name, email: user.email)}
 
 Room.all.each_with_index do |room, i|
-  date_time = DateTime.now + i.days
-  start_time_day = date_time.change({hour: Settings.hour_begin_schedule})
-  end_time_day = date_time.change({hour: Settings.hour_end_schedule})
+  date_time = DateTime.now + (i + 1).days
+  start_time_day = date_time.change({hour: 7})
+  end_time_day = date_time.change({hour: 21})
 
   hour, n = start_time_day, 0
 
