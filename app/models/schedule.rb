@@ -81,11 +81,11 @@ class Schedule < ActiveRecord::Base
   end
 
   def valid_time
-    unless start_time.blank? || finish_time.blank?
-      errors.add :base, I18n.t("invalid.create_in_past") if start_time < Time.zone.now
-      errors.add :base, I18n.t("invalid.between_time") unless cover_in_time?
-      errors.add :base, I18n.t("invalid.time") if valid_min_time_range?
-    end
+    return if start_time.blank? || finish_time.blank?
+
+    errors.add :base, I18n.t("invalid.create_in_past") if start_time < Time.zone.now
+    errors.add :base, I18n.t("invalid.between_time") unless cover_in_time?
+    errors.add :base, I18n.t("invalid.time") if valid_min_time_range?
   end
 
   def announce_upcoming_event
