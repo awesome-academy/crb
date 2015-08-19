@@ -38,6 +38,10 @@ group :development, :test do
   gem "byebug"
   gem "web-console", "~> 2.0"
   gem "rspec-rails", "~> 3.0"
+  gem "cucumber-rails", require: false
+  gem "capybara"
+  gem "database_cleaner"
+  gem "shoulda-matchers", "2.6.2" 
 end
 
 group :production do
