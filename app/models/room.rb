@@ -28,16 +28,18 @@ class Room < ActiveRecord::Base
       @description = event.description || ""
       @creator = Creator.create_with(display_name: event.creator.displayName).
         find_or_create_by email: event.creator.email
-      Schedule.create_with(
-        title: event.summary,
-        description: @description,
-        start_time: event.start.dateTime,
-        finish_time: event.end.dateTime,
-        user_id: user.id,
-        room_id: room.id,
-        google_link: event.htmlLink,
-        creator: @creator
-        ).find_or_create_by google_event_id: event.id
+        unless event.start.date_time.nil?
+          Schedule.create_with(
+            title: event.summary,
+            description: @description,
+            start_time: event.start.date_time,
+            finish_time: event.end.date_time,
+            user_id: user.id,
+            room_id: room.id,
+            google_link: event.htmlLink,
+            creator: @creator
+            ).find_or_create_by google_event_id: event.id
+        end
     end
 
     def update_or_create_google_room google_room
