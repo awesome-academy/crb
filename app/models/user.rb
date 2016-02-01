@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   before_create{self.role ||= Settings.user_roles[:normal]}
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   mount_uploader :avatar, AvatarUploader
 

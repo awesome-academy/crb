@@ -46,6 +46,7 @@ en:
     settings: Settings
     title:
       back: Back to calendar
+    synch_google: "Synch...."
 
   calendar:
     collapse_all: Collapse all
@@ -69,6 +70,7 @@ en:
     success: Create new event successfuly!
     update: Event was updated!
     warning: "Invalid search"
+    not_synch: "Failed to synch from google calendar"
   header:
     loading: Loading...
 
@@ -163,4 +165,10 @@ en:
     create_event: Create event
     edit_event: Edit event
     to: to
-    error_msg: "There is something wrong!"
+    error_msg: There is something wrong!
+    link_google: Go to Google
+    synch_google: Sync Google
+    create_by: Created by
+    room: Room
+    delete: Delete
+    confirm: "Are you sure?"

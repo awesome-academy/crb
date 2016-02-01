@@ -12,6 +12,9 @@ $(document).ready(function() {
   var EventPreviewDetailLink = $("#event-preview-popup .eb-details-link");
   var EventPreviewActionLink = $("#event-preview-popup .eb-action-link");
   var EventNewForm = $("form#new_schedule");
+  var EventLink = $(".link-google");
+  var EventCreateby = $(".event-createby");
+  var EventRoom = $(".event-room");
 
   var clock = 5*60;
 
@@ -28,13 +31,14 @@ $(document).ready(function() {
   var events, moment, rect, offsetY, lastSelectedDay, ProngPopup, offsetLeft, offsetTop;
 
   $("#room_selector ul.dropdown-menu li").click(function() {
+
     var room_id = $(this).val();
     if (room_id === 0) {room_id = "";}
 
     var room_name = $(this).find("span").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
-    $("#room_dropdown").html(room_name);
+    $("#room_dropdown").html(room_name.substr(0,9));
 
     if (room_id !== "") {
       $("#schedule_room_id option").removeAttr("selected");
@@ -93,10 +97,12 @@ $(document).ready(function() {
                 description: schedule.description,
                 start: schedule.start_time,
                 end: schedule.finish_time,
-                user_id: schedule.user_id,
+                user: schedule.user,
                 room: schedule.room_name,
                 color: color,
-                repeat_id: schedule.repeat_id
+                repeat_id: schedule.repeat_id,
+                link: schedule.google_link,
+                creator: schedule.creator
               });
             });
           }
@@ -130,7 +136,6 @@ $(document).ready(function() {
     },
     eventClick: function(calEvent, jsEvent, view) {
       EventNewForm[0].reset();
-
       if (calEvent.id !== undefined) {
         EventPopup.css({"visibility": "hidden"});
         MyCalendar.fullCalendar("unselect");
@@ -255,6 +260,19 @@ $(document).ready(function() {
 
     EventPreviewTimeRange.html(timeRange(calEvent.start, calEvent.end, false));
     EventPreviewTitle.html(calEvent.title);
+
+    EventRoom.html(calEvent.room);
+    if(calEvent.creator){
+      EventCreateby.html(calEvent.creator.email);
+    }else{
+      EventCreateby.html(calEvent.user.email);
+    }
+    if(calEvent.link){
+      EventLink.show();
+      EventLink.attr("href", calEvent.link);
+    }else{
+      EventLink.hide();
+    }
 
     var eventPath = "schedules/" + calEvent.id;
     var editEventPath = eventPath + "/edit";

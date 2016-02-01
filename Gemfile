@@ -30,7 +30,9 @@ gem "kaminari"
 gem "kaminari-bootstrap"
 gem "rails_admin", github: "sferik/rails_admin"
 gem "underscore-rails"
-
+gem "omniauth-google-oauth2"
+gem "google-api-client", require: "google/api_client"
+gem "omniauth"
 group :development, :test do
   gem "faker", "1.4.2"
   gem "factory_girl_rails"
@@ -38,6 +40,7 @@ group :development, :test do
   gem "byebug"
   gem "web-console", "~> 2.0"
   gem "rspec-rails", "~> 3.0"
+  gem "railroady"
 end
 
 group :production do

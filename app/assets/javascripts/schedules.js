@@ -24,8 +24,12 @@ $(document).ready(function() {
     start_time = $("#schedule_start_time").val();
     finish_time = $("#schedule_finish_time").val();
     title = $("#schedule_title").val();
-    var json_data = JSON.stringify({start_time: start_time, finish_time: finish_time, title: title}); 
+    var json_data = JSON.stringify({start_time: start_time, finish_time: finish_time, title: title});
     var encrypt_data = btoa(json_data);
     window.location.href = "schedules/new?data="+ encrypt_data;
+  });
+
+  $("#load").click(function(){
+    $(this).find("span").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate")
   });
 });
