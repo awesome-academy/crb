@@ -10,7 +10,7 @@ module ApplicationHelper
     when :success
       "alert-success"
     when :error
-      "alert-error"
+      "alert-danger"
     when :alert
       "alert-warning"
     when :notice

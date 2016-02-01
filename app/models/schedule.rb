@@ -10,6 +10,7 @@ class Schedule < ActiveRecord::Base
   belongs_to :repeat
   belongs_to :room
   belongs_to :user
+  belongs_to :creator
 
   has_many :members, class_name: "User", through: :schedule_users, foreign_key: :schedule_id
   has_many :schedule_users

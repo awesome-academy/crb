@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611032136) do
+ActiveRecord::Schema.define(version: 20160201035201) do
+
+  create_table "creators", force: :cascade do |t|
+    t.string "email",        limit: 255
+    t.string "display_name", limit: 255
+  end
 
   create_table "repeats", force: :cascade do |t|
     t.integer  "repeat_type", limit: 4
@@ -21,10 +26,11 @@ ActiveRecord::Schema.define(version: 20150611032136) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "color",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",           limit: 255
+    t.string   "color",          limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "google_room_id", limit: 255
   end
 
   create_table "schedule_users", force: :cascade do |t|
@@ -46,6 +52,9 @@ ActiveRecord::Schema.define(version: 20150611032136) do
     t.datetime "updated_at",                                         null: false
     t.integer  "repeat_id",        limit: 4
     t.integer  "announced_before", limit: 4
+    t.string   "google_event_id",  limit: 255
+    t.string   "google_link",      limit: 255
+    t.integer  "creator_id",       limit: 4
   end
 
   add_index "schedules", ["room_id"], name: "index_schedules_on_room_id", using: :btree

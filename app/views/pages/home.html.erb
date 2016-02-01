@@ -27,6 +27,10 @@
 <% end %>
 
 <% if user_signed_in? %>
+  <a href="users/auth/google_oauth2" id="load" class="btn btn-primary">
+    <span></span>
+    <%= t "quick_event.synch_google" %>
+  </a>
   <div id="calendar"></div>
 
   <% content_for :btn_new_schedule do %>
@@ -46,7 +50,7 @@
   </div>
 <% else %>
   <div class="center jumbotron">
-    <h1><%= t("pages.home.welcome_framgia") %></h1>
+    <h1><%= t "pages.home.welcome_framgia" %></h1>
     <%= link_to t("pages.home.sign_up_now"), new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>

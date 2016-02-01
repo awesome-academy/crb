@@ -6,10 +6,12 @@ module ScheduleJson
       start_time: start_time,
       finish_time: finish_time,
       description: description,
-      user_id: user_id,
+      user: user,
       room_name: room_name,
       room_color: room_color,
-      repeat_id: repeat_id
+      repeat_id: repeat_id,
+      google_link: google_link,
+      creator: creator
     }
   end
 end
