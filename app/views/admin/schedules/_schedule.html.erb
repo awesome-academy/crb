@@ -6,10 +6,10 @@
     <div class="col-md-12"><%= schedule.start_time.to_date.to_s %></div>
   </td>
   <td>
-    <div class="col-md-12"><%= schedule.start_time.strftime('%H:%M') %></div>
+    <div class="col-md-12"><%= schedule.start_time.strftime("%H:%M") %></div>
   </td>
   <td>
-    <div class="col-md-12"><%= schedule.finish_time.strftime('%H:%M') %></div>
+    <div class="col-md-12"><%= schedule.finish_time.strftime("%H:%M") %></div>
   </td>
   <td>
     <div class="col-md-12"><%= schedule.user.name %></div>
@@ -19,13 +19,15 @@
   </td>
   <td>
     <div id="schedule_state_<%= schedule.id %>">
-      <% if schedule.state == 'accepted' %>
+      <% if schedule.state == "accepted" %>
         <div class="accepted-event">accepted<div>
-      <% elsif schedule.state == 'rejected' %>
+      <% elsif schedule.state == "rejected" %>
         <div class="rejected-event">rejected<div>
       <% else %>
-        <%= link_to "Accept", admin_schedule_path(id: schedule.id, state: 'accepted'), method: :put, remote: true %>
-        <%= link_to "Reject", admin_schedule_path(id: schedule.id, state: 'rejected'), method: :put, remote: true %>
+        <%= link_to t("schedules.accept"), admin_schedule_path(id: schedule.id, state: "accepted"),
+          method: :put, remote: true %>
+        <%= link_to t("schedules.reject"), admin_schedule_path(id: schedule.id, state: "rejected"),
+          method: :put, remote: true %>
       <% end %>
     </div>
   </td>

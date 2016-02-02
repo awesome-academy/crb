@@ -1,17 +1,17 @@
-<% provide :title, "List event" %>
+<% provide :title, t("schedules.list_event") %>
 
-<h1>Manager Events</h1>
+<h1><%= t "schedules.manage_events" %></h1>
 
 <table class="table table-bordered table-striped">
   <thead>
     <tr class="table-col">
-      <th> Event </th>
-      <th width="100px"> Day </th>
-      <th width="80px"> Start </th>
-      <th width="80px"> Finish </th>
-      <th> User </th>
-      <th width="120px"> Room </th>
-      <th width="80px"> State </th>
+      <th> <%= t "schedules.index.event" %> </th>
+      <th width="100px"> <%= t "schedules.index.listing.day" %> </th>
+      <th width="80px"> <%= t "schedules.index.listing.start" %> </th>
+      <th width="80px"> <%= t "schedules.index.listing.finish" %> </th>
+      <th> <%= t "schedules.index.listing.user" %> </th>
+      <th width="120px"> <%= t "schedules.index.listing.room" %> </th>
+      <th width="80px"> <%= t "schedules.index.listing.state" %> </th>
     </tr>
   </thead>
   <tbody class="schedule-index">

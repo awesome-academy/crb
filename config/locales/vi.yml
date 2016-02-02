@@ -31,6 +31,10 @@ vi:
       sign_up_now: Dang nhap ngay!
 
   schedules:
+    list_event: Danh sach event
+    manage_events: Quan tri Events
+    accept: Chap nhan
+    reject: Tu choi
     form:
       event_name: Ten event
       event_title: Tieu de cua event
@@ -55,6 +59,9 @@ vi:
         finish: Ket thuc
         state: Trang thai
         action: Hanh dong
+        event: Event
+        day: Ngay
+        user: Nguoi dung
 
     new:
       title: Event moi

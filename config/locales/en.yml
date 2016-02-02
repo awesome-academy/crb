@@ -71,8 +71,10 @@ en:
     update: Event was updated!
     warning: "Invalid search"
     not_synch: "Failed to synch from google calendar"
+    error_msg: "The form contains %{num_errors}"
   header:
     loading: Loading...
+    room_book_system: Room Book System
 
   invalid:
     avatar: "should be less than %{max_avatar_file_size}MB"
@@ -116,6 +118,10 @@ en:
     announce_upcoming_event: Upcoming Event Announcement
     announce_updated_event: Updated Event Announcement
     edit_event_title: Edit event
+    list_event: List event
+    manage_events: Manage Events
+    accept: Accept
+    reject: Reject
     form:
       announced_before: Announce members before
       compose_description: Compose description...
@@ -144,6 +150,9 @@ en:
         start: Start
         state: State
         title: Title
+        event: Event
+        day: Day
+        user: User
     new:
       title: New event!
     repeat_schedule_notice_mail: "You are member for events"
