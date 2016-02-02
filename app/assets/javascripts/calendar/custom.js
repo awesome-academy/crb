@@ -277,7 +277,7 @@ $(document).ready(function() {
     var eventPath = "schedules/" + calEvent.id;
     var editEventPath = eventPath + "/edit";
 
-    if (calEvent.user_id === current_user_id) {
+    if (calEvent.user.id === current_user_id) {
       var text, url;
       date = new Date();
 
