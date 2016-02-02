@@ -341,6 +341,10 @@ $(document).ready(function() {
     e.stopPropagation();
   });
 
+  $(document).on("click", "#event-preview-popup", function(e){
+     e.stopPropagation();
+  });
+
   $(document).on("click", "body", function(e){
     EventPopup.css({"visibility": "hidden"});
     EventPreviewPopup.css({"visibility": "hidden"});
