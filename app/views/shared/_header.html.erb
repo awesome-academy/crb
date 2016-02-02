@@ -19,7 +19,7 @@
             <% if current_user.admin? %>
               <li><%= link_to t("button.admin"), rails_admin_path %></li>
             <% end %>
-            <li><%= link_to t("button.settings"), edit_user_registration_path(current_user) %></li>
+            <li><%= link_to t("button.settings"), edit_user_registration_path %></li>
             <li class="divider"></li>
             <li>
               <%= link_to t("button.logout"), destroy_user_session_path, method: :delete %>
