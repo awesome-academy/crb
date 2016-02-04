@@ -19,3 +19,4 @@
 //= require schedules
 //= require underscore
 //= require header-dropdown
+//= require date_format
