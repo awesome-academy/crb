@@ -8,7 +8,7 @@ class Ability
     when user.admin?
       can :access, :rails_admin
       can :dashboard
-      can :manage, [User, Repeat, Room]
+      can :manage, [User, Repeat, Room, Holiday]
       can [:create, :read, :destroy], Schedule
       can :update, Schedule do |schedule|
         schedule.finish_time > Time.zone.now

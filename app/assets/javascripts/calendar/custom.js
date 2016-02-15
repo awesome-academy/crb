@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $(window).trigger("resize");
   var schedule_query_url = "/api/schedules.json";
+  var holiday_query_url = "/api/holidays.json";
   var MyCalendar = $("#calendar");
   var MyMiniCalendar = $("#mini-calendar");
   var EventPopup = $("#quick-event-popup");
@@ -168,6 +169,8 @@ $(document).ready(function() {
 
       localStorage.setItem("view_type", view.type);
 
+      cloneHeaderRow(view);
+
       try {
         setTimeLine();
         setInterval(function(){ setTimeLine(); }, clock*1000);
@@ -177,6 +180,8 @@ $(document).ready(function() {
       setElementBackground(lastSelectedDay, "");
       MyCalendar.find(".fc-left").append($("#room_selector"));
       MyCalendar.find(".fc-right").append($("#other_dropdown"));
+
+      renderHolidays(view);
     },
     loading: function(isLoading, view){
       $("label.loading").attr("class", isLoading ? "loading" : "loading hidden");
@@ -335,6 +340,46 @@ $(document).ready(function() {
     } else {
       return startTime.format("dddd") + " " + startTime.format("H:mm A") + " To " + endTime.format("H:mm A") + " " + startTime.format("DD-MM-YYYY");
     }
+  }
+
+  function cloneHeaderRow(view) {
+    if (view.type != "month" && $(".list-holidays").length == 0){
+      MyCalendar.find(".fc-head").clone().addClass("list-holidays").insertAfter(".fc-head");
+      $(".list-holidays .fc-day-header").each(function(){
+        if (view.type == "agendaDay"){
+          var currentDate = new Date(MyCalendar.fullCalendar("getView").start);
+          $(this).attr("value", dateFormat(currentDate, "mm-dd")).html("&nbsp;");
+        } else {
+          $(this).attr("value", dateFormat(new Date($(this).text()), "mm-dd")).html("&nbsp;");
+        }
+      });
+    }
+  }
+
+  function renderHolidays(view) {
+    var fcStartRange = new Date(MyCalendar.fullCalendar("getView").start);
+    var fcEndRange = new Date(MyCalendar.fullCalendar("getView").end);
+    $.ajax({
+      url: holiday_query_url,
+      type: "GET",
+      data: {start_date_range: fcStartRange, end_date_range: fcEndRange},
+      success: function(response) {
+        if(response.holidays){
+          $.map(response.holidays, function(holiday) {
+            holidayDate = dateFormat(new Date(holiday.date), "mm-dd");
+            if (view.type == "month"){
+              $(".fc-day-number").filter(function(){
+                return dateFormat($(this).data("date"), "mm-dd") == holidayDate;
+              }).addClass("holiday").prepend("<span class='holiday-name-month'>" + holiday.name + "</span>");
+            } else {
+              $(".list-holidays .fc-day-header").filter(function(){
+                return $(this).attr("value") == holidayDate;
+              }).addClass("holiday").text(holiday.name);
+            }
+          });
+        }
+      }
+    });
   }
 
   $(document).on("click", ".fc-body, #quick-event-popup", function(e){

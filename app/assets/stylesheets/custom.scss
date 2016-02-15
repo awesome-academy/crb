@@ -576,15 +576,35 @@ footer {
 
 #load {
   position: absolute;
-  margin-left: 275px;
+  margin-left: 265px;
   padding: 3.6px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.holiday {
+  border: 1px solid #16A765 !important;
+  color: #1d1d1d !important;
+  background-color: #16A765 !important;
+  margin: 2px;
+}
+
+.holiday-name-month {
+  max-height: 20px;
+  max-width: 125px;
+  float: left;
+  overflow: hidden;
 }
 
 .glyphicon-refresh-animate {
   -animation: spin .7s infinite linear;
   -webkit-animation: spin2 .7s infinite linear;
+  -moz-animation: spin3 .7s infinite linear;
+}
+
+@-moz-keyframes spin3 {
+  from { -moz-transform: rotate(0deg);}
+  to { -moz-transform: rotate(360deg);}
 }
 
 @-webkit-keyframes spin2 {
