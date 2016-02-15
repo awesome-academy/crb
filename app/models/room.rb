@@ -8,9 +8,9 @@ class Room < ActiveRecord::Base
 
   class << self
     def update_google_room google_rooms, google_service, user
-      @room = self.find_by name: "ConferenceRoom"
+      @room = self.find_by name: Settings.conference_room
       google_rooms.each do |google_room|
-        if google_room.summary == "ConferenceRoom"
+        if google_room.summary == Settings.conference_room
           update_or_create_google_room google_room
         end
       end
@@ -48,7 +48,7 @@ class Room < ActiveRecord::Base
           color: google_room.backgroundColor
       else
         @room = Room.create(
-          name: "ConferenceRoom",
+          name: Settings.conference_room,
           google_room_id: google_room.id,
           color: google_room.backgroundColor)
       end

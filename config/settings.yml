@@ -40,3 +40,4 @@ calendar: "calendar"
 version: "v3"
 avatar_extension_white_list: ["jpeg", "jpg", "png"]
 error: "error"
+conference_room: "Conference Room"
