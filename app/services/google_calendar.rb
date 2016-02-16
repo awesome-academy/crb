@@ -9,7 +9,7 @@ class GoogleCalendar
       parameters: {
         calendarId: calendar_id,
         singleEvents: true,
-        timeMin: Time.now.utc.iso8601,
+        timeMin: Date.today.to_datetime.utc.iso8601,
         timeMax: 1.months.from_now.to_datetime.utc.iso8601,
         maxResults: 2500
       }

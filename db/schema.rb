@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201035201) do
+ActiveRecord::Schema.define(version: 20160216090618) do
 
   create_table "creators", force: :cascade do |t|
     t.string "email",        limit: 255
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160201035201) do
     t.string   "google_event_id",  limit: 255
     t.string   "google_link",      limit: 255
     t.integer  "creator_id",       limit: 4
+    t.text     "attendee",         limit: 65535
   end
 
   add_index "schedules", ["room_id"], name: "index_schedules_on_room_id", using: :btree
