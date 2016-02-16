@@ -1,5 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
+    @user = User.find_for_google_oauth2 request.env["omniauth.auth"], current_user
+
     @access_token = request.env["omniauth.auth"]["credentials"]["token"]
     session[:access_token] = @access_token
     if session[:access_token]

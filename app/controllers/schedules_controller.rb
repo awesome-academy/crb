@@ -5,7 +5,7 @@ class SchedulesController < ApplicationController
     if params[:share_schedules]
       @schedules = Schedule.shared_schedules current_user.id
     elsif params[:search_form]
-      @schedules = Schedule.search params[:search_form], current_user.id 
+      @schedules = Schedule.search params[:search_form], current_user.id
     else
       @schedules = Schedule.filter_by_user current_user
     end
@@ -24,6 +24,7 @@ class SchedulesController < ApplicationController
     @schedule.user = current_user
 
     if @schedule.save
+      GoogleCalendar.sync_to_google_calendar @schedule
       repeat_type = params[:repeat]
 
       if repeat_type.present?
