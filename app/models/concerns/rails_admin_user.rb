@@ -15,6 +15,7 @@ module RailsAdminUser
       edit do
         field :name
         field :email
+        field :password
         field :role, :enum do
           enum do
             Settings.user_roles.to_h.values
