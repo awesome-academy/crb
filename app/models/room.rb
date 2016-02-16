@@ -25,21 +25,9 @@ class Room < ActiveRecord::Base
     end
 
     def create_schedule_google event, room, user
-      @description = event.description || ""
-      @creator = Creator.create_with(display_name: event.creator.displayName).
-        find_or_create_by email: event.creator.email
-        unless event.start.date_time.nil?
-          Schedule.create_with(
-            title: event.summary,
-            description: @description,
-            start_time: event.start.date_time,
-            finish_time: event.end.date_time,
-            user_id: user.id,
-            room_id: room.id,
-            google_link: event.htmlLink,
-            creator: @creator
-            ).find_or_create_by google_event_id: event.id
-        end
+      unless event.start.date_time.nil?
+        update_or_create_schedule_google event, room, user
+      end
     end
 
     def update_or_create_google_room google_room
@@ -52,6 +40,39 @@ class Room < ActiveRecord::Base
           google_room_id: google_room.id,
           color: google_room.backgroundColor)
       end
+    end
+
+    def update_or_create_schedule_google google_event, room, user
+      @description = google_event.description || ""
+      @creator = Creator.create_with(display_name: google_event.creator.displayName).
+        find_or_create_by email: google_event.creator.email
+      @event = Schedule.find_by google_event_id: google_event.id
+      if @event
+        update_google_event @event, google_event, @description
+      else
+        create_google_event google_event, @description, room,user, @creator
+      end
+    end
+
+    def update_google_event event, google_event, description
+      event.update_attributes(
+        title: google_event.summary,
+        description: description,
+        start_time: google_event.start.date_time,
+        finish_time: google_event.end.date_time)
+    end
+
+    def create_google_event event,description, room, user, creator
+      Schedule.create(
+        title: event.summary,
+        description: description,
+        start_time: event.start.date_time,
+        finish_time: event.end.date_time,
+        user_id: user.id,
+        room_id: room.id,
+        google_link: event.htmlLink,
+        creator: creator,
+        google_event_id: event.id)
     end
   end
 end

@@ -20,7 +20,7 @@ class Schedule < ActiveRecord::Base
   validates :title, presence: true, length: {maximum: 150}
   validates :user, presence: true
   validate :valid_time
-  validate :valid_room, if: :room_id
+  # validate :valid_room, if: :room_id
 
   scope :with_room, ->(room, id){where(room: room).where.not id: id}
   scope :order_start_time, ->{order start_time: :asc}
@@ -75,11 +75,11 @@ class Schedule < ActiveRecord::Base
     [:room_id, :description, :start_time, :finish_time]
   end
 
-  def valid_room
-    if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0
-      errors.add :room, I18n.t("valid.room")
-    end
-  end
+  # def valid_room
+  #   if Schedule.with_room(room_id, id).filte_timer(start_time, finish_time).count > 0
+  #     errors.add :room, I18n.t("valid.room")
+  #   end
+  # end
 
   def valid_time
     return if start_time.blank? || finish_time.blank?

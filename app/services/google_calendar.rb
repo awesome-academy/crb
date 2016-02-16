@@ -6,7 +6,13 @@ class GoogleCalendar
   def gather_calendar_events calendar_id = ""
     response = client.execute(
       api_method: cal_api.events.list,
-      parameters: {calendarId: calendar_id}
+      parameters: {
+        calendarId: calendar_id,
+        singleEvents: true,
+        timeMin: Time.now.utc.iso8601,
+        timeMax: 1.months.from_now.to_datetime.utc.iso8601,
+        maxResults: 2500
+      }
     )
     if response.status == 200
       response.data["items"]
