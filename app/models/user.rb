@@ -23,6 +23,16 @@ class User < ActiveRecord::Base
     define_method("#{user_role}?") {user_role == role}
   end
 
+  class << self
+    def find_for_google_oauth2 access_token, user
+      user.provider = access_token.provider
+      user.uid = access_token.uid
+      user.token = access_token.credentials.token
+      user.save
+      user
+    end
+  end
+
   private
   def avatar_size
     if avatar.size > Settings.max_avatar_file_size.megabytes
