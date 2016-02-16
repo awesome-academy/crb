@@ -3,6 +3,8 @@ class Schedule < ActiveRecord::Base
   include RailsAdminSchedule
   require "sidekiq/api"
 
+  serialize :attendee, JSON
+
   QUERY = "(start_time <= :start_time AND finish_time >= :finish_time)
             OR (start_time > :start_time AND start_time < :finish_time)
             OR (finish_time > :start_time AND finish_time < :finish_time)"
@@ -84,7 +86,6 @@ class Schedule < ActiveRecord::Base
   def valid_time
     return if start_time.blank? || finish_time.blank?
 
-    errors.add :base, I18n.t("invalid.create_in_past") if start_time < Time.zone.now
     errors.add :base, I18n.t("invalid.between_time") unless cover_in_time?
     errors.add :base, I18n.t("invalid.time") if valid_min_time_range?
   end

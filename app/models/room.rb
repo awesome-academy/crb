@@ -59,10 +59,11 @@ class Room < ActiveRecord::Base
         title: google_event.summary,
         description: description,
         start_time: google_event.start.date_time,
-        finish_time: google_event.end.date_time)
+        finish_time: google_event.end.date_time,
+        attendee: google_event.attendees)
     end
 
-    def create_google_event event,description, room, user, creator
+    def create_google_event event, description, room, user, creator
       Schedule.create(
         title: event.summary,
         description: description,
@@ -72,7 +73,8 @@ class Room < ActiveRecord::Base
         room_id: room.id,
         google_link: event.htmlLink,
         creator: creator,
-        google_event_id: event.id)
+        google_event_id: event.id,
+        attendee: event.attendees)
     end
   end
 end
