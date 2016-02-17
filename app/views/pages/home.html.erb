@@ -27,10 +27,12 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <a href="users/auth/google_oauth2" id="load" class="btn btn-primary">
-    <span></span>
-    <%= t "quick_event.synch_google" %>
-  </a>
+  <% if current_user.admin? %>
+    <a href="users/auth/google_oauth2" id="load" class="btn btn-primary">
+      <span></span>
+      <%= t "quick_event.synch_google" %>
+    </a>
+  <% end %>
   <div id="calendar"></div>
 
   <% content_for :btn_new_schedule do %>
