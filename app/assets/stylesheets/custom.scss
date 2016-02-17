@@ -2,7 +2,7 @@
 
 header {
   background-color: $lightest-gray;
-  height: 60px;
+  height: 44px;
   .child-header{
     position: relative;
     bottom: 4%;
@@ -419,6 +419,7 @@ footer {
 
 .dropdown-toggle {
   border-color: $gray !important;
+  height: 44px;
 }
 
 .aside-fixed {
