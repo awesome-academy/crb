@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216090618) do
+ActiveRecord::Schema.define(version: 20160217064137) do
 
   create_table "creators", force: :cascade do |t|
     t.string "email",        limit: 255
     t.string "display_name", limit: 255
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.string  "name",      limit: 255
+    t.date    "date"
+    t.boolean "is_annual", limit: 1,   default: true
   end
 
   create_table "repeats", force: :cascade do |t|
@@ -80,6 +86,8 @@ ActiveRecord::Schema.define(version: 20160216090618) do
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
     t.string   "token",                  limit: 255
+    t.string   "expires_at",             limit: 255
+    t.string   "refresh_token",          limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

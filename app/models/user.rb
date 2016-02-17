@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include RailsAdminUser
+  require "rest-client"
 
   has_many :events, class_name: "Schedule", through: :schedule_users, foreign_key: :user_id
   has_many :repeats, dependent: :destroy
@@ -28,6 +29,8 @@ class User < ActiveRecord::Base
       user.provider = access_token.provider
       user.uid = access_token.uid
       user.token = access_token.credentials.token
+      user.expires_at = access_token.credentials.expires_at
+      user.refresh_token = access_token.credentials.refresh_token
       user.save
       user
     end

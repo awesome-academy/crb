@@ -41,21 +41,26 @@ class GoogleCalendar
         end: {dateTime: schedule.finish_time.to_datetime.rfc3339},
         attendees: attendees
       }
+      if schedule.user.token.present?
+        refresh_token_if_expired schedule.user
+        client = Google::APIClient.new
+        client.authorization = Signet::OAuth2::Client.new(
+          client_id: Rails.application.secrets.client_id,
+          client_secret: Rails.application.secrets.client_secret,
+          access_token: schedule.user.token
+        )
+        service = client.discovered_api Settings.calendar, Settings.version
 
-      client = Google::APIClient.new
-      client.authorization = Signet::OAuth2::Client.new(
-        client_id: Rails.application.secrets.client_id,
-        client_secret: Rails.application.secrets.client_secret,
-        access_token: schedule.user.token
-      )
-      service = client.discovered_api Settings.calendar, Settings.version
+        response = client.execute(
+          api_method: service.events.insert,
+          parameters: {calendarId: Settings.conference_room_calendar_id, sendNotifications: true},
+          body: JSON.dump(event),
+          headers: {"Content-Type" => "application/json"})
 
-      response = client.execute(api_method: service.events.insert,
-        parameters: {calendarId: Settings.conference_room_calendar_id, sendNotifications: true},
-        body: JSON.dump(event),
-        headers: {"Content-Type" => "application/json"})
-
-      update_schedule_info schedule, response
+        update_schedule_info schedule, response
+        return true
+      end
+      false
     end
 
     def update_schedule_info schedule, response
@@ -63,6 +68,25 @@ class GoogleCalendar
         find_or_create_by email: response.data["creator"]["email"]
       schedule.update_attributes(google_link: response.data["htmlLink"],
         google_event_id: response.data["id"], creator: creator)
+    end
+
+    def refresh_token_if_expired user
+      if user_token_expired? user
+        response = RestClient.post(Settings.refresh_token_url,
+          grant_type: "refresh_token", refresh_token: user.refresh_token,
+          client_id: ENV["GOOGLE_CALENDAR_KEY"], client_secret: ENV["GOOGLE_CALENDAR_SECRET"])
+        refresh_hash = JSON.parse response.body
+
+        user.token = refresh_hash["access_token"]
+        user.expires_at = DateTime.now.to_i.seconds + refresh_hash["expires_in"].to_i.seconds
+        user.save
+      end
+    end
+
+    def user_token_expired? user
+      expiry = Time.at(user.expires_at.to_i) if user.expires_at
+      return true if expiry.nil? || expiry < Time.now
+      false
     end
   end
 
