@@ -2,7 +2,6 @@
 
 header {
   background-color: $lightest-gray;
-  height: 44px;
   .child-header{
     position: relative;
     bottom: 4%;
@@ -16,7 +15,7 @@ header {
     letter-spacing: -1px;
     font-weight: bold;
     margin-left: 35px;
-    margin-top: 16px;
+    margin-top: 5.5px;
     &:hover {
       color: $light-blue;
       text-decoration: none;
@@ -420,6 +419,11 @@ footer {
 .dropdown-toggle {
   border-color: $gray !important;
   height: 44px;
+  margin-top: -4px;
+}
+
+#btn-setting{
+  margin-top: 0px;
 }
 
 .aside-fixed {
@@ -557,6 +561,7 @@ footer {
 
 .profile-image{
   height: 30px;
+  margin-top: 0px;
 }
 
 .btn-form{
@@ -603,4 +608,19 @@ a.fc-more{
 @keyframes spin {
   from { transform: scale(1) rotate(0deg);}
   to { transform: scale(1) rotate(360deg);}
+}
+
+.navbar {
+  min-height: 44px;
+  margin-bottom: 12px;
+}
+
+.navbar-nav > li > a {
+  padding-top: 12px;
+  padding-bottom: 15px;
+}
+
+.navbar-right{
+  height: 44px;
+  margin-top: -3px;
 }
