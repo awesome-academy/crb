@@ -15,6 +15,7 @@ $(document).ready(function() {
   var EventLink = $(".link-google");
   var EventCreateby = $(".event-createby");
   var EventRoom = $(".event-room");
+  var Guests = $(".guests");
 
   var clock = 5*60;
 
@@ -102,7 +103,9 @@ $(document).ready(function() {
                 color: color,
                 repeat_id: schedule.repeat_id,
                 link: schedule.google_link,
-                creator: schedule.creator
+                creator: schedule.creator,
+                attendee: schedule.attendee,
+                members: schedule.members
               });
             });
           }
@@ -260,12 +263,37 @@ $(document).ready(function() {
 
     EventPreviewTimeRange.html(timeRange(calEvent.start, calEvent.end, false));
     EventPreviewTitle.html(calEvent.title);
-
     EventRoom.html(calEvent.room);
+
+    members = "";
+    var num = 0;
+    $.each(calEvent.members, function(index, member){
+      members += (member.email + "<br/>");
+      num ++;
+    });
+
+    if(calEvent.attendee){
+      $.each(calEvent.attendee, function(index, attendee){
+        members += (attendee.email + "<br/>");
+        num ++;
+      });
+    }
+    var subMember = members.slice(0, members.search("<br/>"))
+
     if(calEvent.creator){
       EventCreateby.html(calEvent.creator.email);
+      if(num > 1){
+        Guests.html("<b>" + calEvent.creator.email + "</b>" + "<br/>" + subMember + " + " + (num - 1));
+      }else{
+        Guests.html("<b>" + calEvent.creator.email + "</b>" + "<br/>" + members );
+      }
     }else{
       EventCreateby.html(calEvent.user.email);
+      if(num > 1){
+        Guests.html("<b>" + calEvent.user.email + "</b>" + "<br/>" + subMember + " + " + (num - 1));
+      }else{
+        Guests.html("<b>" + calEvent.user.email + "</b>" + "<br/>" + members );
+      }
     }
     if(calEvent.link){
       EventLink.show();
