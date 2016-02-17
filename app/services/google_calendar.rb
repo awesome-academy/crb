@@ -50,10 +50,19 @@ class GoogleCalendar
       )
       service = client.discovered_api Settings.calendar, Settings.version
 
-      client.execute(api_method: service.events.insert,
+      response = client.execute(api_method: service.events.insert,
         parameters: {calendarId: Settings.conference_room_calendar_id, sendNotifications: true},
         body: JSON.dump(event),
         headers: {"Content-Type" => "application/json"})
+
+      update_schedule_info schedule, response
+    end
+
+    def update_schedule_info schedule, response
+      creator = Creator.create_with(display_name: response.data["creator"]["displayName"]).
+        find_or_create_by email: response.data["creator"]["email"]
+      schedule.update_attributes(google_link: response.data["htmlLink"],
+        google_event_id: response.data["id"], creator: creator)
     end
   end
 
