@@ -33,6 +33,7 @@ gem "underscore-rails"
 gem "omniauth-google-oauth2"
 gem "google-api-client", require: "google/api_client"
 gem "omniauth"
+gem "rest-client"
 group :development, :test do
   gem "faker", "1.4.2"
   gem "factory_girl_rails"

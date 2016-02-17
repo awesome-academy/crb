@@ -42,3 +42,4 @@ avatar_extension_white_list: ["jpeg", "jpg", "png"]
 error: "error"
 conference_room: "Conference Room"
 conference_room_calendar_id: "73rhvfqmkc51qant5e7skamn1c@group.calendar.google.com"
+refresh_token_url: "https://accounts.google.com/o/oauth2/token"

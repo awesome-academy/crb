@@ -24,7 +24,6 @@ class SchedulesController < ApplicationController
     @schedule.user = current_user
 
     if @schedule.save
-      GoogleCalendar.sync_to_google_calendar @schedule
       repeat_type = params[:repeat]
 
       if repeat_type.present?
@@ -35,8 +34,12 @@ class SchedulesController < ApplicationController
       end
 
       respond_to do |format|
-        format.html {redirect_to root_path}
-        format.js
+        if GoogleCalendar.sync_to_google_calendar @schedule
+          format.html {redirect_to root_path}
+          format.js
+        else
+          format.js {flash[:error] = t("schedules.synchronize.message.require_login_google")}
+        end
       end
     else
       respond_to do |format|

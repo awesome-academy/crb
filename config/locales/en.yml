@@ -122,6 +122,9 @@ en:
     manage_events: Manage Events
     accept: Accept
     reject: Reject
+    synchronize:
+      message:
+        require_login_google: "You have to click Sync Google button to synchronize with Google Calendar"
     form:
       announced_before: Announce members before
       compose_description: Compose description...
