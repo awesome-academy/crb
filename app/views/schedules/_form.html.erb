@@ -55,6 +55,14 @@
 
     <div class="col-md-12">
       <br/>
+      <%= f.label t("schedules.form.attendee") %><br/>
+      <% @schedule.attendee.each do |value| %>
+        <span class="glyphicon glyphicon-user"></span><%= value["email"] + "*" %><br/>
+      <% end %>
+    </div>
+
+    <div class="col-md-12">
+      <br/>
       <%= f.label t("schedules.form.announced_before"), class: "left-label" %>
       <%= f.select :announced_before, Settings.announced_before.to_a, {}, class: "room-selector form-control" %>
     </div>

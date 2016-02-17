@@ -133,6 +133,7 @@ en:
       event_rest: Rest
       finish_time: Finish time
       members: Members
+      attendee: attendee
       room: Room
       repeat: Repeat
       start_time: Start time
@@ -181,3 +182,4 @@ en:
     room: Room
     delete: Delete
     confirm: "Are you sure?"
+    attendee: "Who"
