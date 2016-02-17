@@ -581,6 +581,13 @@ footer {
   padding-left: 10px;
   padding-right: 10px;
 }
+.fc-view-container *{
+  color: #323232;
+}
+
+a.fc-more{
+  color: blue;
+}
 
 .glyphicon-refresh-animate {
   -animation: spin .7s infinite linear;

@@ -11,17 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216070931) do
+ActiveRecord::Schema.define(version: 20160216090618) do
 
   create_table "creators", force: :cascade do |t|
     t.string "email",        limit: 255
     t.string "display_name", limit: 255
-  end
-
-  create_table "holidays", force: :cascade do |t|
-    t.string  "name",      limit: 255
-    t.date    "date"
-    t.boolean "is_annual", limit: 1,   default: true
   end
 
   create_table "repeats", force: :cascade do |t|
