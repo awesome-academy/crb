@@ -53,13 +53,15 @@
         {class: "select-members form-control", multiple: :multiple} %>
     </div>
 
-    <div class="col-md-12">
-      <br/>
-      <%= f.label t("schedules.form.attendee") %><br/>
-      <% @schedule.attendee.each do |value| %>
-        <span class="glyphicon glyphicon-user"></span><%= value["email"] + "*" %><br/>
-      <% end %>
-    </div>
+    <% if @schedule.attendee %>
+      <div class="col-md-12">
+        <br/>
+        <%= f.label t("schedules.form.attendee") %><br/>
+        <% @schedule.attendee.each do |value| %>
+          <span class="glyphicon glyphicon-user"></span><%= value["email"] + "*" %><br/>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="col-md-12">
       <br/>
