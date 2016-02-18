@@ -125,6 +125,8 @@ en:
     synchronize:
       message:
         require_login_google: "You have to click Sync Google button to synchronize with Google Calendar"
+    messages:
+      no_free_room: "There's no room available in this period"
     form:
       announced_before: Announce members before
       compose_description: Compose description...

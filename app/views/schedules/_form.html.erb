@@ -43,7 +43,20 @@
     <div class="col-md-12">
       <br/>
       <%= f.label t("schedules.form.room") %><br/>
-      <%= f.select :room_id, Room.all.collect{|s| [s.name, s.id]}, {include_blank: t("placeholder.none")}, {class: "select-room form-control"} %>
+
+      <% @rooms.each do |room| %>
+        <label class="room-choice">
+          <%= f.radio_button :room_id, room.id %>
+          <%= room.name %>
+        </label>
+      <% end %>
+    </div>
+
+    <div class="col-md-12 free-room-message" style="display:none">
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <%= t "schedules.messages.no_free_room" %>
+      </div>
     </div>
 
     <div class="col-md-12">
@@ -53,13 +66,15 @@
         {class: "select-members form-control", multiple: :multiple} %>
     </div>
 
-    <div class="col-md-12">
-      <br/>
-      <%= f.label t("schedules.form.attendee") %><br/>
-      <% @schedule.attendee.each do |value| %>
-        <span class="glyphicon glyphicon-user"></span><%= value["email"] + "*" %><br/>
-      <% end %>
-    </div>
+    <% if @schedule.attendee %>
+      <div class="col-md-12">
+        <br/>
+        <%= f.label t("schedules.form.attendee") %><br/>
+        <% @schedule.attendee.each do |value| %>
+          <span class="glyphicon glyphicon-user"></span><%= value["email"] + "*" %><br/>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="col-md-12">
       <br/>

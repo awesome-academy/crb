@@ -35,6 +35,11 @@ vi:
     manage_events: Quan tri Events
     accept: Chap nhan
     reject: Tu choi
+    synchronize:
+      message:
+        require_login_google: "Ban can click vao nut Sync Google de co the thuc hien dong bo"
+    messages:
+      no_free_room: "Khong co phong trong"
     form:
       event_name: Ten event
       event_title: Tieu de cua event
@@ -46,6 +51,7 @@ vi:
       compose_description: Dien noi dung cua event
       submit: Chap nhan
       create_by: Nguoi tao
+
 
     edit_event_title: Chinh sua event
 

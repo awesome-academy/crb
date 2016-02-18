@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  var free_rooms_query_url = "/api/rooms.json";
+
   $(document).on("click", "#my_calendar .title, #shared_calendar .title", function(e) {
     changeState($(e.target.parentElement.children[1]));
   });
@@ -31,5 +33,38 @@ $(document).ready(function() {
 
   $("#load").click(function(){
     $(this).find("span").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate")
+  });
+
+  $("#schedule_start_time, #schedule_finish_time").on("change", function() {
+    var start_time = $("#schedule_start_time").val();
+    var finish_time = $("#schedule_finish_time").val();
+    var $message_free_room = $(".free-room-message");
+    var $submit_btn = $(".btn-submit");
+
+    $message_free_room.hide();
+    $submit_btn.attr("disabled", false);
+
+    if (start_time && finish_time) {
+      $.ajax({
+        url: free_rooms_query_url,
+        type: "GET",
+        data: {start_time: start_time, finish_time: finish_time},
+        success: function(response) {
+          free_rooms = []
+          $.each(response.free_rooms, function(index, room){free_rooms.push(room.id + "")})
+          $(".room-choice input[type=radio]").each(function() {
+            if (free_rooms.indexOf($(this).val()) == -1) {
+              $(this).parent().hide();
+            } else {
+              $(this).parent().show();
+            }
+          });
+          if (free_rooms.length == 0) {
+            $message_free_room.show();
+            $submit_btn.attr("disabled", true);
+          }
+        }
+      });
+    }
   });
 });
