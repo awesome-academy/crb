@@ -83,6 +83,9 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy
+    if @schedule.destroyed?
+      GoogleCalendar.delete_to_google_calendar @schedule
+    end
 
     unless params[:user_id]
       respond_to do |format|
