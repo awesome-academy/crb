@@ -39,7 +39,11 @@ class SchedulesController < ApplicationController
           format.html {redirect_to root_path}
           format.js
         else
-          format.js {flash[:error] = t("schedules.synchronize.message.require_login_google")}
+          format.html {
+            redirect_to root_path
+            flash[:alert] = t "schedules.synchronize.message.require_login_google"
+          }
+          format.js {flash.now[:alert] = t("schedules.synchronize.message.require_login_google")}
         end
       end
     else
@@ -84,7 +88,15 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     if @schedule.destroyed?
-      GoogleCalendar.delete_to_google_calendar @schedule
+      unless GoogleCalendar.delete_to_google_calendar @schedule
+        respond_to do |format|
+          format.html {
+            redirect_to root_path
+            flash[:alert] = t "schedules.synchronize.message.require_login_google"
+          }
+          format.js {flash.now[:alert] = t("schedules.synchronize.message.require_login_google")}
+        end
+      end
     end
 
     unless params[:user_id]
