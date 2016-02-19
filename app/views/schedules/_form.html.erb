@@ -12,14 +12,14 @@
     </div>
     <div class="col-md-12">
       <br/>
-      <div class="col-md-5 start-date">
+      <div class="col-md-4 start-date">
         <%= f.label t("schedules.form.start_time") %>
         <div>
           <%= f.text_field :start_time,
             placeholder: t("schedules.form.start_time"), style: "width: 300px" %>
         </div>
       </div>
-      <div class="col-md-5 col-md-offset-2 finish-date">
+      <div class="col-md-4 finish-date">
         <%= f.label t("schedules.form.finish_time") %>
         <div class="input-group date">
           <%= f.text_field :finish_time,
@@ -30,26 +30,29 @@
 
     <% if @schedule.id.nil? %>
       <div class="col-md-12">
+        <br/>
         <%= f.label t("schedules.form.repeat") %><br/>
         <% Settings.repeat_types.each do |key, value| %>
-          <div class="col-md-1"><%= label_tag value %></div>
-          <div class="col-md-1">
+          <label class="repeat-choice">
             <%= check_box_tag :repeat, key %>
-          </div>
+            <%= value %>
+          </label>
         <% end %>
       </div>
     <% end %>
 
     <div class="col-md-12">
       <br/>
-      <%= f.label t("schedules.form.room") %><br/>
-
-      <% @rooms.each do |room| %>
-        <label class="room-choice">
-          <%= f.radio_button :room_id, room.id %>
-          <%= room.name %>
-        </label>
-      <% end %>
+      <%= f.label t("schedules.form.available_rooms") %><br/>
+      <div class="available-room-block">
+        <% @rooms.each do |room| %>
+          <label class="room-choice">
+            <%= f.radio_button :room_id, room.id %>
+            <%= room.name %>
+          </label>
+          <br/>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-12 free-room-message" style="display:none">
@@ -90,12 +93,13 @@
     </div>
 
     <% if @schedule.id.present? && @schedule.repeat_id.present? %>
-      <div class="col-md-7 row">
+      <div class="col-md-12">
         <br/>
-        <%= f.label t("schedules.form.edit_repeat"), class: "col-md-2" %>
-        <%= check_box_tag :edit_repeat, true, false, class: "col-md-1" %>
+        <label>
+          <%= check_box_tag :edit_repeat, true, false %>
+          <%= t "schedules.form.edit_repeat" %>
+        </label>
       </div>
-
       <%= hidden_field_tag :schedule_id, @schedule.id %>
     <% end %>
   </div>

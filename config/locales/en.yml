@@ -140,6 +140,7 @@ en:
       members: Members
       attendee: attendee
       room: Room
+      available_rooms: Available rooms
       repeat: Repeat
       start_time: Start time
       submit: Submit
