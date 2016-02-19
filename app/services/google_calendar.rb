@@ -23,7 +23,7 @@ class GoogleCalendar
 
   def gather_calendars
     response = client.execute api_method: cal_api.calendar_list.list
-    if response.status == 200
+    if response.status == 200 || response.status == 204
       response.data["items"]
     else
       Array.new
@@ -50,28 +50,35 @@ class GoogleCalendar
           parameters: {calendarId: Settings.conference_room_calendar_id, sendNotifications: true},
           body: JSON.dump(event),
           headers: {"Content-Type" => "application/json"})
-
-        update_schedule_info schedule, response
-        return true
+        return update_schedule_info schedule, response
       end
       false
     end
 
     def delete_to_google_calendar schedule
-      if @schedule.google_event_id.present?
-        client = init_client schedule
-        service = client.discovered_api Settings.calendar, Settings.version
-        client.execute(api_method: service.events.delete,
-        parameters: {calendarId: Settings.conference_room_calendar_id,
-        eventId: schedule.google_event_id})
+      if schedule.user.token.present?
+        if schedule.google_event_id.present?
+          refresh_token_if_expired schedule.user
+          client = init_client schedule
+          service = client.discovered_api Settings.calendar, Settings.version
+          response = client.execute(api_method: service.events.delete,
+            parameters: {calendarId: Settings.conference_room_calendar_id,
+            eventId: schedule.google_event_id})
+          return true if response.status == 200 || response.status == 204
+        end
       end
+      false
     end
 
     def update_schedule_info schedule, response
-      creator = Creator.create_with(display_name: response.data["creator"]["displayName"]).
-        find_or_create_by email: response.data["creator"]["email"]
-      schedule.update_attributes(google_link: response.data["htmlLink"],
-        google_event_id: response.data["id"], creator: creator)
+      if response.status == 200
+        creator = Creator.create_with(display_name: response.data["creator"]["displayName"]).
+          find_or_create_by email: response.data["creator"]["email"]
+        schedule.update_attributes(google_link: response.data["htmlLink"],
+          google_event_id: response.data["id"], creator: creator)
+        return true
+      end
+      false
     end
 
     def refresh_token_if_expired user

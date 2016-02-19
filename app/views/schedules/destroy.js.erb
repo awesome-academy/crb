@@ -10,3 +10,5 @@ $.get( "/api/my_schedules", function(data) {
 $.get( "/api/shared_schedules", function(data) {
   $("#shared_schedules").html(data);
 });
+
+$(".full-calendar-container").prepend('<%= j render "shared/flash_messages" %>')
