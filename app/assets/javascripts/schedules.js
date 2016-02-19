@@ -40,8 +40,10 @@ $(document).ready(function() {
     var finish_time = $("#schedule_finish_time").val();
     var $message_free_room = $(".free-room-message");
     var $submit_btn = $(".btn-submit");
+    var $available_room_block = $(".available-room-block");
 
     $message_free_room.hide();
+    $available_room_block.css("display", "block");
     $submit_btn.attr("disabled", false);
 
     if (start_time && finish_time) {
@@ -54,13 +56,14 @@ $(document).ready(function() {
           $.each(response.free_rooms, function(index, room){free_rooms.push(room.id + "")})
           $(".room-choice input[type=radio]").each(function() {
             if (free_rooms.indexOf($(this).val()) == -1) {
-              $(this).parent().hide();
+              $(this).parent().css("display", "none");
             } else {
-              $(this).parent().show();
+              $(this).parent().css("display", "inline-block");
             }
           });
           if (free_rooms.length == 0) {
             $message_free_room.show();
+            $available_room_block.css("display", "none");
             $submit_btn.attr("disabled", true);
           }
         }

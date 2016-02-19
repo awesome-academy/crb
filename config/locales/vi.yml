@@ -46,6 +46,7 @@ vi:
       start_time: Thoi gian bat dau
       finish_time: Thoi gian ket thuc
       room: Phong
+      available_rooms: Phong trong
       members: Thanh vien
       description: Noi dung
       compose_description: Dien noi dung cua event
