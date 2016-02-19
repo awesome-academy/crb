@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   load_and_authorize_resource
+  before_action :load_rooms, only: [:new, :edit]
 
   def index
     if params[:share_schedules]
@@ -106,5 +107,9 @@ class SchedulesController < ApplicationController
 
   def format_datetime datetime
     datetime.to_datetime().strftime "%Y-%m-%d %H:%M"
+  end
+
+  def load_rooms
+    @rooms = Room.select :id, :name
   end
 end

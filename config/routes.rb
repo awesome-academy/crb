@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     resources :my_schedules, only: :index
     resources :shared_schedules, only: :index
     resources :schedules, only: :index
+    resources :rooms, only: :index
   end
 end

@@ -1,10 +1,19 @@
 class Room < ActiveRecord::Base
   include RailsAdminRoom
 
+  QUERY = "id NOT IN (
+    SELECT r.id FROM rooms r INNER JOIN schedules s ON r.id = s.room_id
+    WHERE (s.start_time >= :start_time AND s.start_time < :finish_time)
+    OR (s.finish_time > :start_time AND s.finish_time <= :finish_time)
+    OR (s.start_time < :start_time AND s.finish_time > :finish_time))"
+
   has_many :schedules, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: true, length: {maximum: 150}
+
+  scope :free_rooms_in_range, -> (start_time, finish_time){where(QUERY,
+    start_time: start_time, finish_time: finish_time)}
 
   class << self
     def update_google_room google_rooms, google_service, user

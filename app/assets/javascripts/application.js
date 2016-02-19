@@ -12,6 +12,7 @@
 //= require share/custom
 //= require share/countdown_time.js
 //= require_self
+//= require schedules
 //= require validate-avatar
 //= require kendo.web.min
 //= require kendo.custom
