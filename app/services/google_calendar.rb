@@ -43,14 +43,8 @@ class GoogleCalendar
       }
       if schedule.user.token.present?
         refresh_token_if_expired schedule.user
-        client = Google::APIClient.new
-        client.authorization = Signet::OAuth2::Client.new(
-          client_id: Rails.application.secrets.client_id,
-          client_secret: Rails.application.secrets.client_secret,
-          access_token: schedule.user.token
-        )
+        client = init_client schedule
         service = client.discovered_api Settings.calendar, Settings.version
-
         response = client.execute(
           api_method: service.events.insert,
           parameters: {calendarId: Settings.conference_room_calendar_id, sendNotifications: true},
@@ -61,6 +55,16 @@ class GoogleCalendar
         return true
       end
       false
+    end
+
+    def delete_to_google_calendar schedule
+      if @schedule.google_event_id.present?
+        client = init_client schedule
+        service = client.discovered_api Settings.calendar, Settings.version
+        client.execute(api_method: service.events.delete,
+        parameters: {calendarId: Settings.conference_room_calendar_id,
+        eventId: schedule.google_event_id})
+      end
     end
 
     def update_schedule_info schedule, response
@@ -87,6 +91,16 @@ class GoogleCalendar
       expiry = Time.at(user.expires_at.to_i) if user.expires_at
       return true if expiry.nil? || expiry < Time.now
       false
+    end
+
+    def init_client schedule
+      client = Google::APIClient.new
+      client.authorization = Signet::OAuth2::Client.new(
+        client_id: Rails.application.secrets.client_id,
+        client_secret: Rails.application.secrets.client_secret,
+        access_token: schedule.user.token
+      )
+      client
     end
   end
 

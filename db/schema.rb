@@ -18,12 +18,6 @@ ActiveRecord::Schema.define(version: 20160217064137) do
     t.string "display_name", limit: 255
   end
 
-  create_table "holidays", force: :cascade do |t|
-    t.string  "name",      limit: 255
-    t.date    "date"
-    t.boolean "is_annual", limit: 1,   default: true
-  end
-
   create_table "repeats", force: :cascade do |t|
     t.integer  "repeat_type", limit: 4
     t.datetime "created_at",            null: false
