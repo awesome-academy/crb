@@ -15,6 +15,7 @@ $(document).ready(function() {
   var EventLink = $(".link-google");
   var EventCreateby = $(".event-createby");
   var EventRoom = $(".event-room");
+  var RoomDropdown = $("#room_dropdown");
   var Guests = $(".guests");
 
   var clock = 5*60;
@@ -39,7 +40,8 @@ $(document).ready(function() {
     var room_name = $(this).find("span").text();
     schedule_query_url = "/api/schedules.json?room_id=" + room_id;
     MyCalendar.fullCalendar("refetchEvents");
-    $("#room_dropdown").html(room_name.substr(0,9));
+    RoomDropdown.html(room_name.substr(0,11));
+    RoomDropdown.attr("value", room_id);
 
     if (room_id !== "") {
       $("#schedule_room_id option").removeAttr("selected");
@@ -121,7 +123,11 @@ $(document).ready(function() {
       revertFunc();
     },
     select: function (start, end, jsEvent, view) {
+      var room_id = RoomDropdown.attr("value");
       EventNewForm[0].reset();
+      if (room_id != 0 && room_id != -1 && room_id != "") {
+        EventNewForm.find("#schedule_room_id").val(room_id);
+      }
       date = new Date();
       currentMonth = date.getMonth(); currentDate = date.getDate(); currentHour = date.getHours();
       currentMinute = date.getMinutes();
