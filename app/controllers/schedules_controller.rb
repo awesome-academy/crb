@@ -109,7 +109,8 @@ class SchedulesController < ApplicationController
 
   private
   def schedule_params
-    params.require(:schedule).permit :title, :start_time, :finish_time, :description, :room_id, :announced_before, member_ids: []
+    params.require(:schedule).permit :title, :start_time, :finish_time,
+      :description, :room_id, :announced_before, :repeat, member_ids: []
   end
 
   def decode_and_assign_value
