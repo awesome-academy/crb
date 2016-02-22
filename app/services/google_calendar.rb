@@ -32,6 +32,7 @@ class GoogleCalendar
 
   class << self
     def sync_to_google_calendar schedule
+      return unless schedule.user.admin?
       attendees = []
       schedule.members.each{|member| attendees << {email: member.email}}
       event = {
@@ -50,12 +51,12 @@ class GoogleCalendar
           parameters: {calendarId: Settings.conference_room_calendar_id, sendNotifications: true},
           body: JSON.dump(event),
           headers: {"Content-Type" => "application/json"})
-        return update_schedule_info schedule, response
+        update_schedule_info schedule, response
       end
-      false
     end
 
     def delete_to_google_calendar schedule
+      return unless schedule.user.admin?
       if schedule.user.token.present?
         if schedule.google_event_id.present?
           refresh_token_if_expired schedule.user
@@ -64,10 +65,8 @@ class GoogleCalendar
           response = client.execute(api_method: service.events.delete,
             parameters: {calendarId: Settings.conference_room_calendar_id,
             eventId: schedule.google_event_id})
-          return true if response.status == 200 || response.status == 204
         end
       end
-      false
     end
 
     def update_schedule_info schedule, response
@@ -76,9 +75,7 @@ class GoogleCalendar
           find_or_create_by email: response.data["creator"]["email"]
         schedule.update_attributes(google_link: response.data["htmlLink"],
           google_event_id: response.data["id"], creator: creator)
-        return true
       end
-      false
     end
 
     def refresh_token_if_expired user

@@ -25,6 +25,7 @@ class SchedulesController < ApplicationController
     @schedule.user = current_user
 
     if @schedule.save
+      GoogleCalendar.sync_to_google_calendar @schedule
       repeat_type = params[:repeat]
 
       if repeat_type.present?
@@ -35,16 +36,8 @@ class SchedulesController < ApplicationController
       end
 
       respond_to do |format|
-        if GoogleCalendar.sync_to_google_calendar @schedule
-          format.html {redirect_to root_path}
-          format.js
-        else
-          format.html {
-            redirect_to root_path
-            flash[:alert] = t "schedules.synchronize.message.require_login_google"
-          }
-          format.js {flash.now[:alert] = t("schedules.synchronize.message.require_login_google")}
-        end
+        format.html {redirect_to root_path}
+        format.js
       end
     else
       respond_to do |format|
@@ -88,15 +81,7 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     if @schedule.destroyed?
-      unless GoogleCalendar.delete_to_google_calendar @schedule
-        respond_to do |format|
-          format.html {
-            redirect_to root_path
-            flash[:alert] = t "schedules.synchronize.message.require_login_google"
-          }
-          format.js {flash.now[:alert] = t("schedules.synchronize.message.require_login_google")}
-        end
-      end
+      GoogleCalendar.delete_to_google_calendar @schedule
     end
 
     unless params[:user_id]
