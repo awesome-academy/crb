@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   load_and_authorize_resource
-  before_action :load_rooms, only: [:new, :edit]
+  before_action :load_rooms, except: [:index, :destroy]
 
   def index
     if params[:share_schedules]
