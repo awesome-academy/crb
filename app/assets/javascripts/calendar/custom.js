@@ -33,7 +33,6 @@ $(document).ready(function() {
   var events, moment, rect, offsetY, lastSelectedDay, ProngPopup, offsetLeft, offsetTop;
 
   $("#room_selector ul.dropdown-menu li").click(function() {
-
     var room_id = $(this).val();
     if (room_id === 0) {room_id = "";}
 
@@ -42,6 +41,7 @@ $(document).ready(function() {
     MyCalendar.fullCalendar("refetchEvents");
     RoomDropdown.html(room_name.substr(0,11));
     RoomDropdown.attr("value", room_id);
+    RoomDropdown.attr("title", room_name);
 
     if (room_id !== "") {
       $("#schedule_room_id option").removeAttr("selected");
